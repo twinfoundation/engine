@@ -1,0 +1,27 @@
+{
+	"language": "en-GB",
+	"ignorePaths": [
+		"**/node_modules/**",
+		"LICENSE",
+		"**/coverage/**",
+		"**/dist/**",
+		"**/docs/reference/**",
+		"**/docs/open-api/**",
+		"**/tests/**",
+		"*.yaml",
+		"package.json",
+		"rollup.config.mjs",
+		"vitest.config.*",
+		"tsconfig.json",
+		"typedoc.json",
+		".eslintrc.cjs",
+		"**/wordlists/**"
+	],
+	"words": ["nameof", "openapi", "Stiftung"],
+	"ignoreRegExpList": [
+		"/from\\s+(['\"]).*\\1/",
+		"/eslint-disable.*/",
+		"/^```shell[\\s\\S]*?```$/gm",
+		"/^```json[\\s\\S]*?```$/gm"
+	]
+}

@@ -1,0 +1,12 @@
+node_modules
+.updatable-packages
+**/dist/es
+**/dist/esm
+**/dist/cjs
+**/dist/types
+**/dist/locales
+coverage
+*.tgz
+**/.tmp
+.env.dev
+vitest.config.ts.timestamp*

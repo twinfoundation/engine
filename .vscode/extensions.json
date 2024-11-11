@@ -1,0 +1,10 @@
+{
+	"recommendations": [
+		"davidanson.vscode-markdownlint",
+		"dbaeumer.vscode-eslint",
+		"rvest.vs-code-prettier-eslint",
+		"streetsidesoftware.code-spell-checker",
+		"redhat.vscode-yaml",
+		"vitest.explorer"
+	]
+}
