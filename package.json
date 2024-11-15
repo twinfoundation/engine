@@ -40,6 +40,7 @@
 	},
 	"workspaces": [
 		"packages/engine-models",
+		"packages/engine-core",
 		"packages/engine-server"
 	],
 	"type": "module"

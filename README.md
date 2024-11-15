@@ -5,6 +5,7 @@ This mono-repository contains the packages to use with engine in TWIN applicatio
 ## Packages
 
 - [engine-models](packages/engine-models/README.md) - Models which define the structure of the engine.
+- [engine-core](packages/engine-core/README.md) - Engine implementation for the core.
 - [engine-server](packages/engine-server/README.md) - Engine implementation for a server.
 
 ## Contributing

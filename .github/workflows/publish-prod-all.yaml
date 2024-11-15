@@ -13,7 +13,7 @@ jobs:
     strategy:
       max-parallel: 1
       matrix:
-        package: [engine-models, engine-server]
+        package: [engine-models, engine-core, engine-server]
 
     steps:
       - name: Checkout

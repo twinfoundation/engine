@@ -4,17 +4,63 @@ Interface describing the engine server methods.
 
 ## Methods
 
-### start()
+### addRestRouteGenerator()
 
-> **start**(`config`): `Promise`\<`void`\>
+> **addRestRouteGenerator**(`type`, `typeConfig`, `generator`): `void`
 
-Start the engine.
+Add a REST route generator.
 
 #### Parameters
 
-• **config**: [`IEngineServerConfig`](IEngineServerConfig.md)
+• **type**: `string`
 
-The configuration for the engine.
+The type to add the generator for.
+
+• **typeConfig**: `undefined` \| [`IEngineCoreTypeConfig`](../type-aliases/IEngineCoreTypeConfig.md)[]
+
+The type config.
+
+• **generator**: [`RestRouteGenerator`](../type-aliases/RestRouteGenerator.md)
+
+The generator to add.
+
+#### Returns
+
+`void`
+
+***
+
+### addSocketRouteGenerator()
+
+> **addSocketRouteGenerator**(`type`, `typeConfig`, `generator`): `void`
+
+Add a socket route generator.
+
+#### Parameters
+
+• **type**: `string`
+
+The type to add the generator for.
+
+• **typeConfig**: `undefined` \| [`IEngineCoreTypeConfig`](../type-aliases/IEngineCoreTypeConfig.md)[]
+
+The type config.
+
+• **generator**: [`SocketRouteGenerator`](../type-aliases/SocketRouteGenerator.md)
+
+The generator to add.
+
+#### Returns
+
+`void`
+
+***
+
+### start()
+
+> **start**(): `Promise`\<`void`\>
+
+Start the engine server.
 
 #### Returns
 
@@ -28,7 +74,7 @@ Nothing.
 
 > **stop**(): `Promise`\<`void`\>
 
-Stop the engine.
+Stop the engine server.
 
 #### Returns
 

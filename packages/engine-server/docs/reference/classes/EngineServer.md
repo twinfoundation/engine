@@ -10,9 +10,23 @@ Server for the engine.
 
 ### new EngineServer()
 
-> **new EngineServer**(): [`EngineServer`](EngineServer.md)
+> **new EngineServer**(`options`): [`EngineServer`](EngineServer.md)
 
 Create a new instance of EngineServer.
+
+#### Parameters
+
+• **options**
+
+The options for the engine.
+
+• **options.engineCore**: `IEngineCore`
+
+The engine core to serve from.
+
+• **options.server?**: `IEngineServerConfig`
+
+The server options for the engine.
 
 #### Returns
 
@@ -26,19 +40,81 @@ Create a new instance of EngineServer.
 
 Runtime name for the class.
 
+***
+
+### \_config
+
+> `protected` `readonly` **\_config**: `IEngineServerConfig`
+
+The server config.
+
 ## Methods
 
-### start()
+### addRestRouteGenerator()
 
-> **start**(`config`): `Promise`\<`void`\>
+> **addRestRouteGenerator**(`type`, `typeConfig`, `generator`): `void`
 
-Start the engine.
+Add a REST route generator.
 
 #### Parameters
 
-• **config**: `IEngineServerConfig`
+• **type**: `string`
 
-The configuration for the engine.
+The type to add the generator for.
+
+• **typeConfig**: `undefined` \| `IEngineCoreTypeConfig`[]
+
+The type config.
+
+• **generator**: `RestRouteGenerator`
+
+The generator to add.
+
+#### Returns
+
+`void`
+
+#### Implementation of
+
+`IEngineServer.addRestRouteGenerator`
+
+***
+
+### addSocketRouteGenerator()
+
+> **addSocketRouteGenerator**(`type`, `typeConfig`, `generator`): `void`
+
+Add a socket route generator.
+
+#### Parameters
+
+• **type**: `string`
+
+The type to add the generator for.
+
+• **typeConfig**: `undefined` \| `IEngineCoreTypeConfig`[]
+
+The type config.
+
+• **generator**: `SocketRouteGenerator`
+
+The generator to add.
+
+#### Returns
+
+`void`
+
+#### Implementation of
+
+`IEngineServer.addSocketRouteGenerator`
+
+***
+
+### start()
+
+> **start**(): `Promise`\<`void`\>
+
+Start the engine server.
 
 #### Returns
 
@@ -56,7 +132,7 @@ Nothing.
 
 > **stop**(): `Promise`\<`void`\>
 
-Stop the engine.
+Stop the engine server.
 
 #### Returns
 

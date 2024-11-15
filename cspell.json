@@ -17,7 +17,19 @@
 		".eslintrc.cjs",
 		"**/wordlists/**"
 	],
-	"words": ["nameof", "openapi", "Stiftung"],
+	"words": [
+		"bech",
+		"cosmosdb",
+		"Fastify",
+		"faucet",
+		"Firestore",
+		"firestoredb",
+		"ipfs",
+		"nameof",
+		"openapi",
+		"scylladb",
+		"Stiftung"
+	],
 	"ignoreRegExpList": [
 		"/from\\s+(['\"]).*\\1/",
 		"/eslint-disable.*/",
