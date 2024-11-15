@@ -7,7 +7,9 @@ import { nameof } from "@twin.org/nameof";
 /**
  * Store state in memory.
  */
-export class MemoryStateStorage implements IEngineStateStorage {
+export class MemoryStateStorage<S extends IEngineState = IEngineState>
+	implements IEngineStateStorage<S>
+{
 	/**
 	 * Runtime name for the class.
 	 */
@@ -23,7 +25,7 @@ export class MemoryStateStorage implements IEngineStateStorage {
 	 * The state object.
 	 * @internal
 	 */
-	private _engineState?: IEngineState;
+	private _engineState?: S;
 
 	/**
 	 * Create a new instance of MemoryStateStorage.
@@ -38,7 +40,7 @@ export class MemoryStateStorage implements IEngineStateStorage {
 	 * @param engineCore The engine core to load the state for.
 	 * @returns The state of the engine or undefined if it doesn't exist.
 	 */
-	public async load(engineCore: IEngineCore): Promise<IEngineState | undefined> {
+	public async load(engineCore: IEngineCore): Promise<S | undefined> {
 		engineCore.logInfo(
 			I18n.formatMessage(`${StringHelper.camelCase(this.CLASS_NAME)}.loading`, {
 				filename: this._engineState
@@ -53,7 +55,7 @@ export class MemoryStateStorage implements IEngineStateStorage {
 	 * @param state The state of the engine to save.
 	 * @returns Nothing.
 	 */
-	public async save(engineCore: IEngineCore, state: IEngineState): Promise<void> {
+	public async save(engineCore: IEngineCore, state: S): Promise<void> {
 		if (!this._readonlyMode) {
 			engineCore.logInfo(I18n.formatMessage(`${StringHelper.camelCase(this.CLASS_NAME)}.saving`));
 			this._engineState = state;

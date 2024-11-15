@@ -6,13 +6,13 @@ import type { IEngineState } from "./IEngineState";
 /**
  * Definition of state storage for engine.
  */
-export interface IEngineStateStorage {
+export interface IEngineStateStorage<S extends IEngineState = IEngineState> {
 	/**
 	 * Method for loading the state.
 	 * @param engineCore The engine core to load the state for.
 	 * @returns The state of the engine or undefined if it doesn't exist.
 	 */
-	load(engineCore: IEngineCore): Promise<IEngineState | undefined>;
+	load(engineCore: IEngineCore): Promise<S | undefined>;
 
 	/**
 	 * Method for saving the state.
@@ -20,5 +20,5 @@ export interface IEngineStateStorage {
 	 * @param state The state of the engine to save.
 	 * @returns Nothing.
 	 */
-	save(engineCore: IEngineCore, state: IEngineState): Promise<void>;
+	save(engineCore: IEngineCore, state: S): Promise<void>;
 }

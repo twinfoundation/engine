@@ -1,6 +1,10 @@
-# Interface: IEngineCoreContext
+# Interface: IEngineCoreContext\<S\>
 
 The context for the engine core.
+
+## Type Parameters
+
+• **S** *extends* [`IEngineState`](IEngineState.md) = [`IEngineState`](IEngineState.md)
 
 ## Properties
 
@@ -14,7 +18,7 @@ The engine core config.
 
 ### state
 
-> **state**: [`IEngineState`](IEngineState.md)
+> **state**: `S`
 
 The engine core state.
 

@@ -14,7 +14,7 @@ The engine core config.
 
 ### stateStorage?
 
-> `optional` **stateStorage**: `IEngineStateStorage`
+> `optional` **stateStorage**: `IEngineStateStorage`\<`IEngineState`\>
 
 The state storage component.
 
@@ -36,9 +36,9 @@ Custom bootstrap method for the engine.
 
 #### Parameters
 
-• **engineCore**: `IEngineCore`
+• **engineCore**: `IEngineCore`\<`IEngineState`\>
 
-• **context**: `IEngineCoreContext`
+• **context**: `IEngineCoreContext`\<`IEngineState`\>
 
 #### Returns
 

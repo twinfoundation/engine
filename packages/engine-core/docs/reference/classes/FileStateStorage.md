@@ -1,16 +1,20 @@
-# Class: FileStateStorage
+# Class: FileStateStorage\<S\>
 
 Store state in a file.
 
+## Type Parameters
+
+• **S** *extends* `IEngineState` = `IEngineState`
+
 ## Implements
 
-- `IEngineStateStorage`
+- `IEngineStateStorage`\<`S`\>
 
 ## Constructors
 
 ### new FileStateStorage()
 
-> **new FileStateStorage**(`filename`, `readonlyMode`): [`FileStateStorage`](FileStateStorage.md)
+> **new FileStateStorage**\<`S`\>(`filename`, `readonlyMode`): [`FileStateStorage`](FileStateStorage.md)\<`S`\>
 
 Create a new instance of FileStateStorage.
 
@@ -26,7 +30,7 @@ Whether the file is in read-only mode.
 
 #### Returns
 
-[`FileStateStorage`](FileStateStorage.md)
+[`FileStateStorage`](FileStateStorage.md)\<`S`\>
 
 ## Properties
 
@@ -40,19 +44,19 @@ Runtime name for the class.
 
 ### load()
 
-> **load**(`engineCore`): `Promise`\<`undefined` \| `IEngineState`\>
+> **load**(`engineCore`): `Promise`\<`undefined` \| `S`\>
 
 Method for loading the state.
 
 #### Parameters
 
-• **engineCore**: `IEngineCore`
+• **engineCore**: `IEngineCore`\<`IEngineState`\>
 
 The engine core to load the state for.
 
 #### Returns
 
-`Promise`\<`undefined` \| `IEngineState`\>
+`Promise`\<`undefined` \| `S`\>
 
 The state of the engine or undefined if it doesn't exist.
 
@@ -70,11 +74,11 @@ Method for saving the state.
 
 #### Parameters
 
-• **engineCore**: `IEngineCore`
+• **engineCore**: `IEngineCore`\<`IEngineState`\>
 
 The engine core to save the state for.
 
-• **state**: `IEngineState`
+• **state**: `S`
 
 The state of the engine to save.
 

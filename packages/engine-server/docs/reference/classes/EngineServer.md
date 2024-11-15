@@ -20,7 +20,7 @@ Create a new instance of EngineServer.
 
 The options for the engine.
 
-• **options.engineCore**: `IEngineCore`
+• **options.engineCore**: `IEngineCore`\<`IEngineState`\>
 
 The engine core to serve from.
 

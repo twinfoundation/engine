@@ -1,6 +1,10 @@
-# Interface: IEngineCore
+# Interface: IEngineCore\<S\>
 
 Interface describing the engine core methods.
+
+## Type Parameters
+
+• **S** *extends* [`IEngineState`](IEngineState.md) = [`IEngineState`](IEngineState.md)
 
 ## Methods
 
@@ -114,13 +118,13 @@ The config for the engine.
 
 ### getState()
 
-> **getState**(): [`IEngineState`](IEngineState.md)
+> **getState**(): `S`
 
 Get the state of the engine.
 
 #### Returns
 
-[`IEngineState`](IEngineState.md)
+`S`
 
 The state of the engine.
 

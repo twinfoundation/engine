@@ -7,7 +7,7 @@ import type { IEngineState } from "./IEngineState";
 /**
  * The context for the engine core.
  */
-export interface IEngineCoreContext {
+export interface IEngineCoreContext<S extends IEngineState = IEngineState> {
 	/**
 	 * The engine core config.
 	 */
@@ -16,7 +16,7 @@ export interface IEngineCoreContext {
 	/**
 	 * The engine core state.
 	 */
-	state: IEngineState;
+	state: S;
 
 	/**
 	 * The state dirty flag, which flags that the state needs saving.

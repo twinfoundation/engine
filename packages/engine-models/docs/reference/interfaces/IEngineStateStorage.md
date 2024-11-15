@@ -1,24 +1,28 @@
-# Interface: IEngineStateStorage
+# Interface: IEngineStateStorage\<S\>
 
 Definition of state storage for engine.
+
+## Type Parameters
+
+• **S** *extends* [`IEngineState`](IEngineState.md) = [`IEngineState`](IEngineState.md)
 
 ## Methods
 
 ### load()
 
-> **load**(`engineCore`): `Promise`\<`undefined` \| [`IEngineState`](IEngineState.md)\>
+> **load**(`engineCore`): `Promise`\<`undefined` \| `S`\>
 
 Method for loading the state.
 
 #### Parameters
 
-• **engineCore**: [`IEngineCore`](IEngineCore.md)
+• **engineCore**: [`IEngineCore`](IEngineCore.md)\<[`IEngineState`](IEngineState.md)\>
 
 The engine core to load the state for.
 
 #### Returns
 
-`Promise`\<`undefined` \| [`IEngineState`](IEngineState.md)\>
+`Promise`\<`undefined` \| `S`\>
 
 The state of the engine or undefined if it doesn't exist.
 
@@ -32,11 +36,11 @@ Method for saving the state.
 
 #### Parameters
 
-• **engineCore**: [`IEngineCore`](IEngineCore.md)
+• **engineCore**: [`IEngineCore`](IEngineCore.md)\<[`IEngineState`](IEngineState.md)\>
 
 The engine core to save the state for.
 
-• **state**: [`IEngineState`](IEngineState.md)
+• **state**: `S`
 
 The state of the engine to save.
 

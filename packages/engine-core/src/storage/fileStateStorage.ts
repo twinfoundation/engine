@@ -8,7 +8,9 @@ import { nameof } from "@twin.org/nameof";
 /**
  * Store state in a file.
  */
-export class FileStateStorage implements IEngineStateStorage {
+export class FileStateStorage<S extends IEngineState = IEngineState>
+	implements IEngineStateStorage<S>
+{
 	/**
 	 * Runtime name for the class.
 	 */
@@ -42,7 +44,7 @@ export class FileStateStorage implements IEngineStateStorage {
 	 * @param engineCore The engine core to load the state for.
 	 * @returns The state of the engine or undefined if it doesn't exist.
 	 */
-	public async load(engineCore: IEngineCore): Promise<IEngineState | undefined> {
+	public async load(engineCore: IEngineCore): Promise<S | undefined> {
 		try {
 			engineCore.logInfo(
 				I18n.formatMessage(`${StringHelper.camelCase(this.CLASS_NAME)}.loading`, {
@@ -51,7 +53,7 @@ export class FileStateStorage implements IEngineStateStorage {
 			);
 			if (await this.fileExists(this._filename)) {
 				const content = await readFile(this._filename, "utf8");
-				return JSON.parse(content.toString()) as IEngineState;
+				return JSON.parse(content.toString()) as S;
 			}
 		} catch (err) {
 			throw new GeneralError(
@@ -69,7 +71,7 @@ export class FileStateStorage implements IEngineStateStorage {
 	 * @param state The state of the engine to save.
 	 * @returns Nothing.
 	 */
-	public async save(engineCore: IEngineCore, state: IEngineState): Promise<void> {
+	public async save(engineCore: IEngineCore, state: S): Promise<void> {
 		if (!this._readonlyMode) {
 			try {
 				engineCore.logInfo(

@@ -1,16 +1,20 @@
-# Class: EngineCore
+# Class: EngineCore\<S\>
 
 Core for the engine.
 
+## Type Parameters
+
+• **S** *extends* `IEngineState` = `IEngineState`
+
 ## Implements
 
-- `IEngineCore`
+- `IEngineCore`\<`S`\>
 
 ## Constructors
 
 ### new EngineCore()
 
-> **new EngineCore**(`options`?): [`EngineCore`](EngineCore.md)
+> **new EngineCore**\<`S`\>(`options`?): [`EngineCore`](EngineCore.md)\<`S`\>
 
 Create a new instance of EngineCore.
 
@@ -22,7 +26,7 @@ The options for the engine.
 
 #### Returns
 
-[`EngineCore`](EngineCore.md)
+[`EngineCore`](EngineCore.md)\<`S`\>
 
 ## Properties
 
@@ -176,13 +180,13 @@ The config for the engine.
 
 ### getState()
 
-> **getState**(): `IEngineState`
+> **getState**(): `S`
 
 Get the state of the engine.
 
 #### Returns
 
-`IEngineState`
+`S`
 
 The state of the engine.
 

@@ -44,7 +44,7 @@ import type { IEngineCoreOptions } from "./models/IEngineCoreOptions";
 /**
  * Core for the engine.
  */
-export class EngineCore implements IEngineCore {
+export class EngineCore<S extends IEngineState = IEngineState> implements IEngineCore<S> {
 	/**
 	 * Name for the engine logger.
 	 */
@@ -59,7 +59,7 @@ export class EngineCore implements IEngineCore {
 	 * The core context.
 	 * @internal
 	 */
-	private readonly _context: IEngineCoreContext;
+	private readonly _context: IEngineCoreContext<S>;
 
 	/**
 	 * The state storage interface.
@@ -116,7 +116,7 @@ export class EngineCore implements IEngineCore {
 			config: options.config,
 			defaultTypes: {},
 			componentInstances: [],
-			state: { bootstrappedComponents: [] },
+			state: { bootstrappedComponents: [] } as unknown as S,
 			stateDirty: false
 		};
 		this._stateStorage = options.stateStorage;
@@ -265,7 +265,7 @@ export class EngineCore implements IEngineCore {
 	 * Get the state of the engine.
 	 * @returns The state of the engine.
 	 */
-	public getState(): IEngineState {
+	public getState(): S {
 		return this._context.state;
 	}
 
@@ -344,9 +344,9 @@ export class EngineCore implements IEngineCore {
 	private async stateLoad(): Promise<boolean> {
 		if (this._stateStorage) {
 			try {
-				this._context.state = (await this._stateStorage.load(this)) ?? {
+				this._context.state = ((await this._stateStorage.load(this)) ?? {
 					bootstrappedComponents: []
-				};
+				}) as unknown as S;
 				this._context.state.bootstrappedComponents ??= [];
 				this._context.stateDirty = false;
 

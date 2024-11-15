@@ -10,7 +10,7 @@ import type { IEngineState } from "./IEngineState";
 /**
  * Interface describing the engine core methods.
  */
-export interface IEngineCore {
+export interface IEngineCore<S extends IEngineState = IEngineState> {
 	/**
 	 * Add a type initialiser.
 	 * @param type The type to add the initialiser for.
@@ -57,7 +57,7 @@ export interface IEngineCore {
 	 * Get the state of the engine.
 	 * @returns The state of the engine.
 	 */
-	getState(): IEngineState;
+	getState(): S;
 
 	/**
 	 * Get the types for the component.

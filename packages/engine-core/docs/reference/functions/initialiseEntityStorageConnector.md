@@ -6,11 +6,11 @@ Initialise the entity storage connector.
 
 ## Parameters
 
-• **engineCore**: `IEngineCore`
+• **engineCore**: `IEngineCore`\<`IEngineState`\>
 
 The engine core.
 
-• **context**: `IEngineCoreContext`
+• **context**: `IEngineCoreContext`\<`IEngineState`\>
 
 The context for the engine.
 
