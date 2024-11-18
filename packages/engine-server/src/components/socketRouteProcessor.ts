@@ -53,7 +53,7 @@ export function initialiseSocketRouteProcessorComponent(
 		component = new LoggingProcessor({
 			loggingConnectorType: context.defaultTypes.loggingConnector,
 			config: {
-				...instanceConfig.options.config
+				...instanceConfig.options?.config
 			}
 		});
 		instanceType = LoggingProcessor.NAMESPACE;

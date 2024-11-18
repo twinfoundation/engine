@@ -88,7 +88,7 @@ export class EngineServer implements IEngineServer {
 	 * The logging connector type.
 	 * @internal
 	 */
-	private readonly _loggingConnectorType?: string;
+	private _loggingConnectorType?: string;
 
 	/**
 	 * Create a new instance of EngineServer.
@@ -106,8 +106,6 @@ export class EngineServer implements IEngineServer {
 		this._socketRouteGenerators = [];
 
 		const coreConfig = this._engineCore.getConfig();
-		const defaults = this._engineCore.getDefaultTypes();
-		this._loggingConnectorType = coreConfig.silent ? undefined : defaults.loggingConnector;
 
 		if (!Is.arrayValue(this._config.restRouteProcessor)) {
 			this._config.restRouteProcessor = [];
@@ -216,6 +214,10 @@ export class EngineServer implements IEngineServer {
 		const mimeTypeProcessors = MimeTypeProcessorFactory.names().map(n =>
 			MimeTypeProcessorFactory.get(n)
 		);
+
+		const coreConfig = this._engineCore.getConfig();
+		const defaults = this._engineCore.getDefaultTypes();
+		this._loggingConnectorType = coreConfig.silent ? undefined : defaults.loggingConnector;
 
 		this._webServer = new FastifyWebServer({
 			loggingConnectorType: this._loggingConnectorType,

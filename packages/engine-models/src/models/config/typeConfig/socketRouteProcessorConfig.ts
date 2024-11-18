@@ -22,9 +22,9 @@ export type SocketRouteProcessorConfig =
 	  }
 	| {
 			type: typeof SocketRouteProcessorType.Logging;
-			options: {
-				loggingConnectorType: string;
-				config: ILoggingProcessorConfig;
+			options?: {
+				loggingConnectorType?: string;
+				config?: ILoggingProcessorConfig;
 			};
 	  }
 	| {
