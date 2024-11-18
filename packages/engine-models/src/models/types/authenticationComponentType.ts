@@ -7,9 +7,9 @@
 // eslint-disable-next-line @typescript-eslint/naming-convention
 export const AuthenticationComponentType = {
 	/**
-	 * Authentication entity storage.
+	 * Entity storage.
 	 */
-	AuthEntityStorage: "authentication-entity-storage"
+	EntityStorage: "entity-storage"
 } as const;
 
 /**

@@ -6,8 +6,8 @@ Authentication component types.
 
 ## Type declaration
 
-### AuthEntityStorage
+### EntityStorage
 
-> `readonly` **AuthEntityStorage**: `"authentication-entity-storage"` = `"authentication-entity-storage"`
+> `readonly` **EntityStorage**: `"entity-storage"` = `"entity-storage"`
 
-Authentication entity storage.
+Entity storage.

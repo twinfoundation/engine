@@ -8,7 +8,7 @@ Authentication component config types.
 
 ### type
 
-> **type**: *typeof* `AuthenticationComponentType.AuthEntityStorage`
+> **type**: *typeof* `AuthenticationComponentType.EntityStorage`
 
 ### options?
 

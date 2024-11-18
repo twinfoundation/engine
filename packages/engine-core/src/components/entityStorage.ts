@@ -1,5 +1,6 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
+import path from "node:path";
 import { ComponentFactory, GeneralError, I18n, Is, StringHelper } from "@twin.org/core";
 import {
 	type EntityStorageComponentConfig,
@@ -81,7 +82,11 @@ export function initialiseEntityStorageConnector(
 	} else if (type === EntityStorageConnectorType.File) {
 		entityStorageConnector = new FileEntityStorageConnector({
 			entitySchema: schema,
-			...entityStorageConfig.options
+			...entityStorageConfig.options,
+			config: {
+				...entityStorageConfig.options.config,
+				directory: path.join(entityStorageConfig.options.config.directory, instanceName)
+			}
 		});
 	} else if (type === EntityStorageConnectorType.AwsDynamoDb) {
 		entityStorageConnector = new DynamoDbEntityStorageConnector({

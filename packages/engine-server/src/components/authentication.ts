@@ -41,7 +41,7 @@ export function initialiseAuthenticationComponent(
 	let component: IAuthenticationComponent;
 	let instanceType: string;
 
-	if (type === AuthenticationComponentType.AuthEntityStorage) {
+	if (type === AuthenticationComponentType.EntityStorage) {
 		initSchemaAuthEntityStorage();
 		initialiseEntityStorageConnector(
 			engineCore,

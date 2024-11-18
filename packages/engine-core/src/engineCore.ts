@@ -389,7 +389,7 @@ export class EngineCore<S extends IEngineState = IEngineState> implements IEngin
 				// First bootstrap the components.
 				for (const instance of this._context.componentInstances) {
 					if (Is.function(instance.component.bootstrap)) {
-						const bootstrapName = `component-${instance.component.CLASS_NAME}-${instance.instanceType}`;
+						const bootstrapName = `${instance.component.CLASS_NAME}-${instance.instanceType}`;
 
 						if (!this._context.state.bootstrappedComponents.includes(bootstrapName)) {
 							this.logInfo(
