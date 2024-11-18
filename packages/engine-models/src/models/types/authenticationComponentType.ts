@@ -9,7 +9,7 @@ export const AuthenticationComponentType = {
 	/**
 	 * Authentication entity storage.
 	 */
-	AuthEntityStorage: "auth-entity-storage"
+	AuthEntityStorage: "authentication-entity-storage"
 } as const;
 
 /**

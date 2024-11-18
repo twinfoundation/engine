@@ -387,40 +387,37 @@ export class EngineCore<S extends IEngineState = IEngineState> implements IEngin
 
 			try {
 				// First bootstrap the components.
-				if (Is.arrayValue(this._context.state?.bootstrappedComponents)) {
-					for (const instance of this._context.componentInstances) {
-						if (Is.function(instance.component.bootstrap)) {
-							const bootstrapName = `component-${instance.component.CLASS_NAME}-${instance.instanceType}`;
+				for (const instance of this._context.componentInstances) {
+					if (Is.function(instance.component.bootstrap)) {
+						const bootstrapName = `component-${instance.component.CLASS_NAME}-${instance.instanceType}`;
 
-							if (!this._context.state.bootstrappedComponents.includes(bootstrapName)) {
-								this.logInfo(
-									I18n.formatMessage("engineCore.bootstrapping", {
-										element: bootstrapName
-									})
-								);
+						if (!this._context.state.bootstrappedComponents.includes(bootstrapName)) {
+							this.logInfo(
+								I18n.formatMessage("engineCore.bootstrapping", {
+									element: bootstrapName
+								})
+							);
 
-								const bootstrapSuccess = await instance.component.bootstrap(
-									EngineCore.LOGGER_TYPE_NAME
-								);
+							const bootstrapSuccess = await instance.component.bootstrap(
+								EngineCore.LOGGER_TYPE_NAME
+							);
 
-								// If the bootstrap method failed then throw an error
-								if (!bootstrapSuccess) {
-									throw new GeneralError(this.CLASS_NAME, "bootstrapFailed", {
-										component: `${instance.component.CLASS_NAME}:${instance.instanceType}`
-									});
-								}
-
-								// Otherwise add the component to the bootstrapped list and set the state as dirty
-								this._context.state.bootstrappedComponents.push(bootstrapName);
-								this._context.stateDirty = true;
+							// If the bootstrap method failed then throw an error
+							if (!bootstrapSuccess) {
+								throw new GeneralError(this.CLASS_NAME, "bootstrapFailed", {
+									component: `${instance.component.CLASS_NAME}:${instance.instanceType}`
+								});
 							}
+
+							// Otherwise add the component to the bootstrapped list and set the state as dirty
+							this._context.state.bootstrappedComponents.push(bootstrapName);
+							this._context.stateDirty = true;
 						}
 					}
-
-					// Now perform any custom bootstrap operations
-					if (canContinue && Is.function(this._customBootstrap)) {
-						await this._customBootstrap(this, this._context);
-					}
+				}
+				// Now perform any custom bootstrap operations
+				if (canContinue && Is.function(this._customBootstrap)) {
+					await this._customBootstrap(this, this._context);
 				}
 			} catch (err) {
 				canContinue = false;

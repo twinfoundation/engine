@@ -79,7 +79,7 @@ export class FileStateStorage<S extends IEngineState = IEngineState>
 						filename: this._filename
 					})
 				);
-				await writeFile(this._filename, JSON.stringify(state), "utf8");
+				await writeFile(this._filename, JSON.stringify(state, null, 2), "utf8");
 			} catch (err) {
 				throw new GeneralError(
 					this.CLASS_NAME,
