@@ -1,6 +1,6 @@
 {
 	"name": "@twin.org/engine-models",
-	"version": "0.0.1-next.7",
+	"version": "0.0.1-next.8",
 	"description": "Models which define the structure of the engine.",
 	"repository": {
 		"type": "git",
@@ -97,7 +97,7 @@
 	},
 	"devDependencies": {
 		"@twin.org/nameof-transformer": "next",
-		"@vitest/coverage-v8": "2.1.1",
+		"@vitest/coverage-v8": "2.1.5",
 		"copyfiles": "2.4.1",
 		"rimraf": "6.0.1",
 		"rollup": "4.27.3",
@@ -107,7 +107,7 @@
 		"typedoc": "0.26.11",
 		"typedoc-plugin-markdown": "4.2.10",
 		"typescript": "5.6.3",
-		"vitest": "2.1.1"
+		"vitest": "2.1.5"
 	},
 	"main": "./dist/cjs/index.cjs",
 	"module": "./dist/esm/index.mjs",

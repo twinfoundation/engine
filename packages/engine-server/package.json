@@ -1,6 +1,6 @@
 {
 	"name": "@twin.org/engine-server",
-	"version": "0.0.1-next.7",
+	"version": "0.0.1-next.8",
 	"description": "Engine implementation for a server.",
 	"repository": {
 		"type": "git",
@@ -58,8 +58,8 @@
 		"@twin.org/crypto": "next",
 		"@twin.org/data-core": "next",
 		"@twin.org/data-schema-org": "next",
-		"@twin.org/engine-core": "0.0.1-next.7",
-		"@twin.org/engine-models": "0.0.1-next.7",
+		"@twin.org/engine-core": "0.0.1-next.8",
+		"@twin.org/engine-models": "0.0.1-next.8",
 		"@twin.org/entity": "next",
 		"@twin.org/entity-storage-connector-cosmosdb": "next",
 		"@twin.org/entity-storage-connector-dynamodb": "next",
@@ -101,7 +101,7 @@
 	"devDependencies": {
 		"@twin.org/nameof-transformer": "next",
 		"@twin.org/ts-to-openapi": "next",
-		"@vitest/coverage-v8": "2.1.1",
+		"@vitest/coverage-v8": "2.1.5",
 		"copyfiles": "2.4.1",
 		"rimraf": "6.0.1",
 		"rollup": "4.27.3",
@@ -111,7 +111,7 @@
 		"typedoc": "0.26.11",
 		"typedoc-plugin-markdown": "4.2.10",
 		"typescript": "5.6.3",
-		"vitest": "2.1.1"
+		"vitest": "2.1.5"
 	},
 	"main": "./dist/cjs/index.cjs",
 	"module": "./dist/esm/index.mjs",
