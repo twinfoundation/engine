@@ -177,12 +177,16 @@ export class EngineServer implements IEngineServer {
 
 	/**
 	 * Start the engine server.
-	 * @returns Nothing.
+	 * @returns True if the start was successful.
 	 */
-	public async start(): Promise<void> {
-		await this._engineCore.start();
+	public async start(): Promise<boolean> {
+		const canContinue = await this._engineCore.start();
 
-		await this.startWebServer();
+		if (canContinue) {
+			await this.startWebServer();
+		}
+
+		return canContinue;
 	}
 
 	/**

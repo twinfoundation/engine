@@ -25,9 +25,9 @@ export interface IEngineCore<S extends IEngineState = IEngineState> {
 
 	/**
 	 * Start the engine core.
-	 * @returns Nothing.
+	 * @returns True if the start was successful.
 	 */
-	start(): Promise<void>;
+	start(): Promise<boolean>;
 
 	/**
 	 * Stop the engine core.

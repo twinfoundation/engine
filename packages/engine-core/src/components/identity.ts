@@ -53,6 +53,7 @@ export function initialiseIdentityConnector(
 			dlt => dlt.type === context.defaultTypes.dltConfig
 		);
 		connector = new IotaIdentityConnector({
+			vaultConnectorType: context.defaultTypes.vaultConnector,
 			...instanceConfig.options,
 			config: {
 				...dltConfig?.options?.config,

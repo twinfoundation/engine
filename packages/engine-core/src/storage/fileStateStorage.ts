@@ -1,6 +1,7 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
-import { readFile, stat, writeFile } from "node:fs/promises";
+import { readFile, mkdir, stat, writeFile } from "node:fs/promises";
+import path from "node:path";
 import { BaseError, GeneralError, Guards, I18n, StringHelper } from "@twin.org/core";
 import type { IEngineCore, IEngineState, IEngineStateStorage } from "@twin.org/engine-models";
 import { nameof } from "@twin.org/nameof";
@@ -79,6 +80,9 @@ export class FileStateStorage<S extends IEngineState = IEngineState>
 						filename: this._filename
 					})
 				);
+				try {
+					await mkdir(path.dirname(this._filename), { recursive: true });
+				} catch {}
 				await writeFile(this._filename, JSON.stringify(state, undefined, "\t"), "utf8");
 			} catch (err) {
 				throw new GeneralError(

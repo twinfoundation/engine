@@ -90,6 +90,12 @@ export class EngineCore<S extends IEngineState = IEngineState> implements IEngin
 	}[];
 
 	/**
+	 * Is the engine started.
+	 * @internal
+	 */
+	private _isStarted: boolean;
+
+	/**
 	 * Method for bootstrapping any data for the engine.
 	 * @internal
 	 */
@@ -120,6 +126,7 @@ export class EngineCore<S extends IEngineState = IEngineState> implements IEngin
 			stateDirty: false
 		};
 		this._stateStorage = options.stateStorage;
+		this._isStarted = false;
 
 		this.addCoreTypeInitialisers();
 	}
@@ -146,9 +153,13 @@ export class EngineCore<S extends IEngineState = IEngineState> implements IEngin
 
 	/**
 	 * Start the engine core.
-	 * @returns Nothing.
+	 * @returns True if the start was successful.
 	 */
-	public async start(): Promise<void> {
+	public async start(): Promise<boolean> {
+		if (this._isStarted) {
+			return false;
+		}
+
 		this.setupEngineLogger();
 		this.logInfo(I18n.formatMessage("engineCore.starting"));
 
@@ -156,12 +167,13 @@ export class EngineCore<S extends IEngineState = IEngineState> implements IEngin
 			this.logInfo(I18n.formatMessage("engineCore.debuggingEnabled"));
 		}
 
-		if (await this.stateLoad()) {
+		let canContinue = await this.stateLoad();
+		if (canContinue) {
 			for (const { type, typeConfig, initialiser } of this._typeInitialisers) {
 				this.initialiseTypeConfig(type, typeConfig, initialiser);
 			}
 
-			const canContinue = await this.bootstrap();
+			canContinue = await this.bootstrap();
 			if (canContinue) {
 				this.logInfo(I18n.formatMessage("engineCore.componentsStarting"));
 
@@ -180,7 +192,13 @@ export class EngineCore<S extends IEngineState = IEngineState> implements IEngin
 				this.logInfo(I18n.formatMessage("engineCore.componentsComplete"));
 			}
 		}
-		this.logInfo(I18n.formatMessage("engineCore.started"));
+
+		if (canContinue) {
+			this.logInfo(I18n.formatMessage("engineCore.started"));
+			this._isStarted = true;
+		}
+
+		return canContinue;
 	}
 
 	/**
@@ -361,17 +379,21 @@ export class EngineCore<S extends IEngineState = IEngineState> implements IEngin
 
 	/**
 	 * Save the state.
+	 * @returns True if the state was saved.
 	 * @internal
 	 */
-	private async stateSave(): Promise<void> {
+	private async stateSave(): Promise<boolean> {
 		if (this._stateStorage && !Is.empty(this._context.state) && this._context.stateDirty) {
 			try {
 				await this._stateStorage.save(this, this._context.state);
 				this._context.stateDirty = false;
+				return true;
 			} catch (err) {
 				this.logError(BaseError.fromError(err));
 			}
+			return false;
 		}
+		return true;
 	}
 
 	/**
@@ -423,7 +445,7 @@ export class EngineCore<S extends IEngineState = IEngineState> implements IEngin
 				canContinue = false;
 				this.logError(BaseError.fromError(err));
 			} finally {
-				await this.stateSave();
+				canContinue = await this.stateSave();
 				if (canContinue) {
 					this.logInfo(I18n.formatMessage("engineCore.bootstrapComplete"));
 				}

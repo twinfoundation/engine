@@ -58,15 +58,15 @@ The generator to add.
 
 ### start()
 
-> **start**(): `Promise`\<`void`\>
+> **start**(): `Promise`\<`boolean`\>
 
 Start the engine server.
 
 #### Returns
 
-`Promise`\<`void`\>
+`Promise`\<`boolean`\>
 
-Nothing.
+True if the start was successful.
 
 ***
 

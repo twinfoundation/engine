@@ -57,6 +57,7 @@ export function initialiseNftConnector(
 		instanceType = EntityStorageNftConnector.NAMESPACE;
 	} else if (type === NftConnectorType.Iota) {
 		connector = new IotaNftConnector({
+			vaultConnectorType: context.defaultTypes.vaultConnector,
 			...instanceConfig.options
 		});
 		instanceType = IotaNftConnector.NAMESPACE;

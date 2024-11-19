@@ -49,6 +49,7 @@ export function initialiseImmutableStorageConnector(
 			dlt => dlt.type === context.defaultTypes.dltConfig
 		);
 		connector = new IotaImmutableStorageConnector({
+			vaultConnectorType: context.defaultTypes.vaultConnector,
 			...instanceConfig.options,
 			config: {
 				...dltConfig?.options?.config,

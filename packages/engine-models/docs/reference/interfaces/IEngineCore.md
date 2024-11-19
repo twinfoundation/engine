@@ -40,15 +40,15 @@ The initialiser to add.
 
 ### start()
 
-> **start**(): `Promise`\<`void`\>
+> **start**(): `Promise`\<`boolean`\>
 
 Start the engine core.
 
 #### Returns
 
-`Promise`\<`void`\>
+`Promise`\<`boolean`\>
 
-Nothing.
+True if the start was successful.
 
 ***
 

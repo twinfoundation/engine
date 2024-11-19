@@ -47,6 +47,8 @@ export function initialiseWalletConnector(
 			dlt => dlt.type === context.defaultTypes.dltConfig
 		);
 		connector = new IotaWalletConnector({
+			vaultConnectorType: context.defaultTypes.vaultConnector,
+			faucetConnectorType: context.defaultTypes.faucetConnector,
 			...instanceConfig.options,
 			config: {
 				...dltConfig?.options?.config,
