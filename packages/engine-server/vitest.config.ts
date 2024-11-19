@@ -23,6 +23,10 @@ export default defineConfig({
 			provider: "v8",
 			reporter: ["text", "lcov"],
 			exclude: ["**/index.ts", "**/models/**/*.ts", "**/tests/**/*.ts"]
+		},
+		server: {
+			deps: { external: [/\/node_modules\//] },
+			sourcemap: false
 		}
 	}
 });

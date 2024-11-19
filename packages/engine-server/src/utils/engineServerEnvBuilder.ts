@@ -7,7 +7,7 @@ import {
 	InformationComponentType,
 	RestRouteProcessorType,
 	SocketRouteProcessorType,
-	type IEngineCore,
+	type IEngineCoreConfig,
 	type IEngineServerConfig
 } from "@twin.org/engine-models";
 import type { HttpMethod } from "@twin.org/web";
@@ -15,14 +15,14 @@ import type { IEngineServerEnvironmentVariables } from "../models/IEngineServerE
 
 /**
  * Handles the configuration of the server.
- * @param coreEngine The core engine.
  * @param envVars The environment variables.
+ * @param coreEngineConfig The core engine config.
  * @param serverInfo The server information.
  * @returns The the config for the core and the server.
  */
 export function buildEngineServerConfiguration(
-	coreEngine: IEngineCore,
 	envVars: IEngineServerEnvironmentVariables,
+	coreEngineConfig: IEngineCoreConfig,
 	serverInfo: IServerInfo
 ): IEngineServerConfig {
 	envVars.adminUsername ??= "admin@node";
@@ -42,8 +42,6 @@ export function buildEngineServerConfiguration(
 			: undefined,
 		corsOrigins: Is.stringValue(envVars.corsOrigins) ? envVars.corsOrigins.split(",") : undefined
 	};
-
-	const coreConfig = coreEngine.getConfig();
 
 	const authProcessorType = envVars.authProcessorType;
 
@@ -65,12 +63,19 @@ export function buildEngineServerConfiguration(
 	serverConfig.restRouteProcessor ??= [];
 	serverConfig.socketRouteProcessor ??= [];
 
-	if (!coreConfig.silent) {
+	serverConfig.restRouteProcessor.push({
+		type: RestRouteProcessorType.NodeIdentity
+	});
+	serverConfig.socketRouteProcessor.push({
+		type: SocketRouteProcessorType.NodeIdentity
+	});
+
+	if (!coreEngineConfig.silent) {
 		serverConfig.restRouteProcessor.push({
 			type: RestRouteProcessorType.Logging,
 			options: {
 				config: {
-					includeBody: coreConfig.debug
+					includeBody: coreEngineConfig.debug
 				}
 			}
 		});
@@ -78,22 +83,16 @@ export function buildEngineServerConfiguration(
 			type: SocketRouteProcessorType.Logging,
 			options: {
 				config: {
-					includeBody: coreConfig.debug
+					includeBody: coreEngineConfig.debug
 				}
 			}
 		});
 	}
 	serverConfig.restRouteProcessor.push({
-		type: RestRouteProcessorType.NodeIdentity
-	});
-	serverConfig.socketRouteProcessor.push({
-		type: SocketRouteProcessorType.NodeIdentity
-	});
-	serverConfig.restRouteProcessor.push({
 		type: RestRouteProcessorType.RestRoute,
 		options: {
 			config: {
-				includeErrorStack: coreConfig.debug
+				includeErrorStack: coreEngineConfig.debug
 			}
 		}
 	});
@@ -101,7 +100,7 @@ export function buildEngineServerConfiguration(
 		type: SocketRouteProcessorType.SocketRoute,
 		options: {
 			config: {
-				includeErrorStack: coreConfig.debug
+				includeErrorStack: coreEngineConfig.debug
 			}
 		}
 	});
@@ -134,5 +133,61 @@ export function buildEngineServerConfiguration(
 		});
 	}
 
+	addRestPaths(coreEngineConfig, serverConfig);
+
 	return serverConfig;
+}
+
+/**
+ * Adds the rest paths to the server config.
+ * @param coreEngineConfig The core engine config.
+ * @param serverConfig The server config.
+ */
+function addRestPaths(
+	coreEngineConfig: IEngineCoreConfig,
+	serverConfig: IEngineServerConfig
+): void {
+	if (Is.arrayValue(serverConfig.informationComponent)) {
+		serverConfig.informationComponent[0].restPath = "";
+	}
+
+	if (Is.arrayValue(serverConfig.authenticationComponent)) {
+		serverConfig.authenticationComponent[0].restPath = "authentication";
+	}
+
+	if (Is.arrayValue(coreEngineConfig.blobStorageComponent)) {
+		coreEngineConfig.blobStorageComponent[0].restPath = "blob";
+	}
+
+	if (Is.arrayValue(coreEngineConfig.loggingComponent)) {
+		coreEngineConfig.loggingComponent[0].restPath = "logging";
+	}
+
+	if (Is.arrayValue(coreEngineConfig.telemetryComponent)) {
+		coreEngineConfig.telemetryComponent[0].restPath = "telemetry";
+	}
+
+	if (Is.arrayValue(coreEngineConfig.identityComponent)) {
+		coreEngineConfig.identityComponent[0].restPath = "identity";
+	}
+
+	if (Is.arrayValue(coreEngineConfig.identityProfileComponent)) {
+		coreEngineConfig.identityProfileComponent[0].restPath = "identity/profile";
+	}
+
+	if (Is.arrayValue(coreEngineConfig.nftComponent)) {
+		coreEngineConfig.nftComponent[0].restPath = "nft";
+	}
+
+	if (Is.arrayValue(coreEngineConfig.attestationComponent)) {
+		coreEngineConfig.attestationComponent[0].restPath = "attestation";
+	}
+
+	if (Is.arrayValue(coreEngineConfig.auditableItemGraphComponent)) {
+		coreEngineConfig.auditableItemGraphComponent[0].restPath = "aig";
+	}
+
+	if (Is.arrayValue(coreEngineConfig.auditableItemStreamComponent)) {
+		coreEngineConfig.auditableItemStreamComponent[0].restPath = "ais";
+	}
 }

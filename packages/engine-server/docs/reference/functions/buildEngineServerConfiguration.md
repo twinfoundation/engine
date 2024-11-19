@@ -1,18 +1,18 @@
 # Function: buildEngineServerConfiguration()
 
-> **buildEngineServerConfiguration**(`coreEngine`, `envVars`, `serverInfo`): `IEngineServerConfig`
+> **buildEngineServerConfiguration**(`envVars`, `coreEngineConfig`, `serverInfo`): `IEngineServerConfig`
 
 Handles the configuration of the server.
 
 ## Parameters
 
-• **coreEngine**: `IEngineCore`\<`IEngineState`\>
-
-The core engine.
-
 • **envVars**: [`IEngineServerEnvironmentVariables`](../interfaces/IEngineServerEnvironmentVariables.md)
 
 The environment variables.
+
+• **coreEngineConfig**: `IEngineCoreConfig`
+
+The core engine config.
 
 • **serverInfo**: `IServerInfo`
 

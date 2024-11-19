@@ -16,13 +16,13 @@ Environment variable helper.
 
 ### envToJson()
 
-> **envToJson**\<`T`\>(`envVars`, `prefix`): `T`
+> `static` **envToJson**\<`T`\>(`envVars`, `prefix`): `T`
 
 Get the environment variable as an object with camel cased names.
 
 #### Type Parameters
 
-• **T** = `unknown`
+• **T** = [`IEngineCoreEnvironmentVariables`](../interfaces/IEngineCoreEnvironmentVariables.md)
 
 #### Parameters
 

@@ -45,6 +45,8 @@ export function buildEngineCoreConfiguration(
 	envVars.attestationAssertionMethodId ??= "attestation-assertion";
 	envVars.immutableProofHashKeyId ??= "immutable-proof-hash";
 	envVars.immutableProofAssertionMethodId ??= "immutable-proof-assertion";
+	envVars.blobStorageEnableEncryption ??= "false";
+	envVars.blobStorageEncryptionKey ??= "blob-encryption";
 
 	const coreConfig: IEngineCoreConfig = {
 		debug: Coerce.boolean(envVars.debug) ?? false,
@@ -52,7 +54,16 @@ export function buildEngineCoreConfiguration(
 		loggingComponent: [{ type: LoggingComponentType.Service }],
 		entityStorageConnector: [],
 		blobStorageConnector: [],
-		blobStorageComponent: [{ type: BlobStorageComponentType.Service }],
+		blobStorageComponent: [
+			{
+				type: BlobStorageComponentType.Service,
+				options: {
+					config: {
+						vaultKeyId: envVars.blobStorageEncryptionKey
+					}
+				}
+			}
+		],
 		backgroundTaskConnector: [],
 		telemetryConnector: [],
 		telemetryComponent: [{ type: TelemetryComponentType.Service }],
@@ -116,11 +127,20 @@ function configureEntityStorageConnectors(
 	envVars: IEngineCoreEnvironmentVariables
 ): void {
 	coreConfig.entityStorageConnector ??= [];
-	coreConfig.entityStorageConnector.push({
-		type: EntityStorageConnectorType.Memory
-	});
 
-	if (Is.stringValue(envVars.storageFileRoot)) {
+	if (
+		(Coerce.boolean(envVars.entityMemoryEnable) ?? false) ||
+		envVars.blobStorageConnectorType === EntityStorageConnectorType.Memory
+	) {
+		coreConfig.entityStorageConnector.push({
+			type: EntityStorageConnectorType.Memory
+		});
+	}
+
+	if (
+		(Coerce.boolean(envVars.entityFileEnable) ?? false) ||
+		envVars.entityStorageConnectorType === EntityStorageConnectorType.File
+	) {
 		coreConfig.entityStorageConnector.push({
 			type: EntityStorageConnectorType.File,
 			options: { config: { directory: envVars.storageFileRoot } }
@@ -206,15 +226,21 @@ function configureBlobStorageConnectors(
 	coreConfig: IEngineCoreConfig,
 	envVars: IEngineCoreEnvironmentVariables
 ): void {
-	envVars.blobStorageEnableEncryption ??= "false";
-	envVars.blobStorageEncryptionKey ??= "blob-encryption";
-
 	coreConfig.blobStorageConnector ??= [];
-	coreConfig.blobStorageConnector.push({
-		type: BlobStorageConnectorType.Memory
-	});
 
-	if (Is.stringValue(envVars.storageFileRoot)) {
+	if (
+		(Coerce.boolean(envVars.blobMemoryEnable) ?? false) ||
+		envVars.blobStorageConnectorType === BlobStorageConnectorType.Memory
+	) {
+		coreConfig.blobStorageConnector.push({
+			type: BlobStorageConnectorType.Memory
+		});
+	}
+
+	if (
+		(Coerce.boolean(envVars.blobFileEnable) ?? false) ||
+		envVars.blobStorageConnectorType === BlobStorageConnectorType.File
+	) {
 		coreConfig.blobStorageConnector.push({
 			type: BlobStorageConnectorType.File,
 			options: {

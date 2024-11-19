@@ -375,7 +375,7 @@ export class EngineServer implements IEngineServer {
 		this.addRestRouteGenerator(
 			"loggingComponent",
 			coreConfig.loggingComponent,
-			generateRestRoutesBlobStorage
+			generateRestRoutesLogging
 		);
 		this.addRestRouteGenerator(
 			"telemetryComponent",
@@ -385,7 +385,7 @@ export class EngineServer implements IEngineServer {
 		this.addRestRouteGenerator(
 			"blobStorageComponent",
 			coreConfig.blobStorageComponent,
-			generateRestRoutesLogging
+			generateRestRoutesBlobStorage
 		);
 		this.addRestRouteGenerator(
 			"identityComponent",

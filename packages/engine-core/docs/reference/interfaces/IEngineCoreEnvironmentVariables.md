@@ -44,6 +44,22 @@ A prefix for all the table in entity-storage, can be empty.
 
 ***
 
+### entityFileEnable
+
+> **entityFileEnable**: `string`
+
+Enable the file entity storage connector.
+
+***
+
+### entityMemoryEnable
+
+> **entityMemoryEnable**: `string`
+
+Enable the memory entity storage connector.
+
+***
+
 ### awsDynamodbAccessKeyId
 
 > **awsDynamodbAccessKeyId**: `string`
@@ -217,6 +233,22 @@ The encryption key for the blob storage.
 > **blobStoragePrefix**: `string`
 
 A prefix for all the blobs in blob-storage, can be empty.
+
+***
+
+### blobFileEnable
+
+> **blobFileEnable**: `string`
+
+Enable the file blob storage connector.
+
+***
+
+### blobMemoryEnable
+
+> **blobMemoryEnable**: `string`
+
+Enable the memory blob storage connector.
 
 ***
 

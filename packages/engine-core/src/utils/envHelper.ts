@@ -1,7 +1,7 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
-// SPDX-License-Identifier: Apache-2.0.
 import { Is, ObjectHelper, StringHelper } from "@twin.org/core";
+import type { IEngineCoreEnvironmentVariables } from "../models/IEngineCoreEnvironmentVariables";
 
 /**
  * Environment variable helper.
@@ -13,7 +13,10 @@ export class EnvHelper {
 	 * @param prefix The prefix of the environment variables.
 	 * @returns The object with camel cased names.
 	 */
-	public envToJson<T = unknown>(envVars: { [id: string]: string | undefined }, prefix: string): T {
+	public static envToJson<T = IEngineCoreEnvironmentVariables>(
+		envVars: { [id: string]: string | undefined },
+		prefix: string
+	): T {
 		const result: { [id: string]: string | undefined } = {};
 
 		for (const envVar in envVars) {

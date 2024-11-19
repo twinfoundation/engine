@@ -31,6 +31,16 @@ export interface IEngineCoreEnvironmentVariables {
 	entityStorageTablePrefix: string;
 
 	/**
+	 * Enable the file entity storage connector.
+	 */
+	entityFileEnable: string;
+
+	/**
+	 * Enable the memory entity storage connector.
+	 */
+	entityMemoryEnable: string;
+
+	/**
 	 * AWS Dynamo DB access key id.
 	 */
 	awsDynamodbAccessKeyId: string;
@@ -139,6 +149,16 @@ export interface IEngineCoreEnvironmentVariables {
 	 * A prefix for all the blobs in blob-storage, can be empty.
 	 */
 	blobStoragePrefix: string;
+
+	/**
+	 * Enable the file blob storage connector.
+	 */
+	blobFileEnable: string;
+
+	/**
+	 * Enable the memory blob storage connector.
+	 */
+	blobMemoryEnable: string;
 
 	/**
 	 * AWS S3 access key id.
