@@ -3,7 +3,7 @@
 /* eslint-disable max-classes-per-file */
 import { ComponentFactory, I18n, ObjectHelper, type IComponent } from "@twin.org/core";
 import { EngineCore } from "@twin.org/engine-core";
-import engineLocales from "@twin.org/engine-core/locales/en.json";
+import engineLocales from "@twin.org/engine-core/locales/en.json" assert { type: "json" };
 import {
 	AttestationComponentType,
 	AttestationConnectorType,
