@@ -1,5 +1,6 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
+import path from "node:path";
 import { S3BlobStorageConnector } from "@twin.org/blob-storage-connector-aws-s3";
 import { AzureBlobStorageConnector } from "@twin.org/blob-storage-connector-azure";
 import { FileBlobStorageConnector } from "@twin.org/blob-storage-connector-file";
@@ -16,7 +17,7 @@ import {
 	initSchema as initSchemaBlobStorage,
 	type BlobStorageEntry
 } from "@twin.org/blob-storage-service";
-import { ComponentFactory, GeneralError, I18n } from "@twin.org/core";
+import { ComponentFactory, GeneralError, I18n, Is } from "@twin.org/core";
 import {
 	BlobStorageComponentType,
 	BlobStorageConnectorType,
@@ -61,7 +62,9 @@ export function initialiseBlobStorageConnector(
 			...instanceConfig.options,
 			config: {
 				...instanceConfig.options.config,
-				directory: `${instanceConfig.options.storagePrefix ?? ""}${instanceConfig.options.config.directory}`
+				directory: Is.stringValue(instanceConfig.options.storagePrefix)
+					? path.join(instanceConfig.options.config.directory, instanceConfig.options.storagePrefix)
+					: instanceConfig.options.config.directory
 			}
 		});
 		instanceType = FileBlobStorageConnector.NAMESPACE;

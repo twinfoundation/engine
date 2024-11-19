@@ -244,7 +244,7 @@ function configureBlobStorageConnectors(
 		coreConfig.blobStorageConnector.push({
 			type: BlobStorageConnectorType.File,
 			options: {
-				config: { directory: envVars.storageFileRoot },
+				config: { directory: path.join(envVars.storageFileRoot, "blob-storage") },
 				storagePrefix: envVars.blobStoragePrefix
 			}
 		});
