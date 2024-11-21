@@ -15,6 +15,7 @@ export type EntityStorageConnectorConfig =
 			type: typeof EntityStorageConnectorType.File;
 			options: {
 				config: IFileEntityStorageConnectorConfig;
+				folderPrefix?: string;
 			};
 	  }
 	| {

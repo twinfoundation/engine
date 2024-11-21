@@ -85,7 +85,10 @@ export function initialiseEntityStorageConnector(
 			...entityStorageConfig.options,
 			config: {
 				...entityStorageConfig.options.config,
-				directory: path.join(entityStorageConfig.options.config.directory, instanceName)
+				directory: path.join(
+					entityStorageConfig.options.config.directory,
+					`${entityStorageConfig.options.folderPrefix ?? ""}${instanceName}`
+				)
 			}
 		});
 	} else if (type === EntityStorageConnectorType.AwsDynamoDb) {

@@ -143,7 +143,10 @@ function configureEntityStorageConnectors(
 	) {
 		coreConfig.entityStorageConnector.push({
 			type: EntityStorageConnectorType.File,
-			options: { config: { directory: envVars.storageFileRoot } }
+			options: {
+				config: { directory: envVars.storageFileRoot },
+				folderPrefix: envVars.entityStorageTablePrefix
+			}
 		});
 	}
 
