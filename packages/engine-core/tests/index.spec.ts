@@ -177,4 +177,47 @@ describe("engine-core", () => {
 		const item = await service.get("test");
 		expect(item?.id).toEqual("test");
 	});
+
+	test("Can clone the engine core", async () => {
+		const engine = new EngineCore({
+			config: {
+				debug: true,
+				loggingConnector: [{ type: LoggingConnectorType.Console }],
+				loggingComponent: [{ type: LoggingComponentType.Service }],
+				entityStorageConnector: [{ type: EntityStorageConnectorType.Memory }],
+				blobStorageConnector: [{ type: BlobStorageConnectorType.Memory }],
+				blobStorageComponent: [{ type: BlobStorageComponentType.Service }],
+				backgroundTaskConnector: [{ type: BackgroundTaskConnectorType.EntityStorage }],
+				telemetryConnector: [{ type: TelemetryConnectorType.EntityStorage }],
+				telemetryComponent: [{ type: TelemetryComponentType.Service }],
+				vaultConnector: [{ type: VaultConnectorType.EntityStorage }],
+				immutableStorageConnector: [{ type: ImmutableStorageConnectorType.EntityStorage }],
+				immutableProofComponent: [{ type: ImmutableProofComponentType.Service }],
+				walletConnector: [{ type: WalletConnectorType.EntityStorage }],
+				faucetConnector: [{ type: FaucetConnectorType.EntityStorage }],
+				identityConnector: [{ type: IdentityConnectorType.EntityStorage }],
+				identityProfileConnector: [{ type: IdentityProfileConnectorType.EntityStorage }],
+				identityComponent: [{ type: IdentityComponentType.Service }],
+				identityProfileComponent: [{ type: IdentityProfileComponentType.Service }],
+				nftConnector: [{ type: NftConnectorType.EntityStorage }],
+				nftComponent: [{ type: NftComponentType.Service }],
+				attestationConnector: [{ type: AttestationConnectorType.EntityStorage }],
+				attestationComponent: [{ type: AttestationComponentType.Service }],
+				auditableItemGraphComponent: [{ type: AuditableItemGraphComponentType.Service }],
+				auditableItemStreamComponent: [{ type: AuditableItemStreamComponentType.Service }]
+			},
+			stateStorage: new MemoryStateStorage()
+		});
+
+		await engine.start();
+
+		const cloneData = engine.getCloneData();
+		const clone = new EngineCore();
+		clone.populateClone(cloneData);
+		await clone.start();
+
+		expect(clone.getConfig()).toEqual(engine.getConfig());
+		expect(clone.getState()).toEqual(engine.getState());
+		expect(clone.getDefaultTypes()).toEqual(engine.getDefaultTypes());
+	});
 });

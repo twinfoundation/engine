@@ -14,7 +14,7 @@ Store state in memory.
 
 ### new MemoryStateStorage()
 
-> **new MemoryStateStorage**\<`S`\>(`readonlyMode`): [`MemoryStateStorage`](MemoryStateStorage.md)\<`S`\>
+> **new MemoryStateStorage**\<`S`\>(`readonlyMode`, `state`?): [`MemoryStateStorage`](MemoryStateStorage.md)\<`S`\>
 
 Create a new instance of MemoryStateStorage.
 
@@ -23,6 +23,10 @@ Create a new instance of MemoryStateStorage.
 • **readonlyMode**: `boolean` = `false`
 
 Whether the file is in read-only mode.
+
+• **state?**: `S`
+
+The initial state.
 
 #### Returns
 

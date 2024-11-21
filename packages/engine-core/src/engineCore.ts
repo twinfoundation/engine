@@ -1,9 +1,10 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
-import { BaseError, ErrorHelper, GeneralError, I18n, Is, type IError } from "@twin.org/core";
+import { BaseError, ErrorHelper, GeneralError, Guards, I18n, Is, type IError } from "@twin.org/core";
 import type {
 	EngineTypeInitialiser,
 	IEngineCore,
+	IEngineCoreClone,
 	IEngineCoreConfig,
 	IEngineCoreContext,
 	IEngineCoreTypeBaseConfig,
@@ -40,6 +41,7 @@ import { initialiseTelemetryComponent, initialiseTelemetryConnector } from "./co
 import { initialiseVaultConnector } from "./components/vault";
 import { initialiseWalletConnector, initialiseWalletStorage } from "./components/wallet";
 import type { IEngineCoreOptions } from "./models/IEngineCoreOptions";
+import { MemoryStateStorage } from "./storage/memoryStateStorage";
 
 /**
  * Core for the engine.
@@ -59,13 +61,13 @@ export class EngineCore<S extends IEngineState = IEngineState> implements IEngin
 	 * The core context.
 	 * @internal
 	 */
-	private readonly _context: IEngineCoreContext<S>;
+	private _context: IEngineCoreContext<S>;
 
 	/**
 	 * The state storage interface.
 	 * @internal
 	 */
-	private readonly _stateStorage?: IEngineStateStorage;
+	private _stateStorage?: IEngineStateStorage;
 
 	/**
 	 * The logging connector for the engine.
@@ -293,6 +295,42 @@ export class EngineCore<S extends IEngineState = IEngineState> implements IEngin
 	 */
 	public getDefaultTypes(): { [type: string]: string } {
 		return this._context.defaultTypes;
+	}
+
+	/**
+	 * Get the data required to create a clone of the engine.
+	 * @returns The clone data.
+	 */
+	public getCloneData(): IEngineCoreClone {
+		const cloneData: IEngineCoreClone = {
+			config: this._context.config,
+			state: this._context.state
+		};
+
+		return cloneData;
+	}
+
+	/**
+	 * Populate the engine from the clone data.
+	 * @param cloneData The clone data to populate from.
+	 */
+	public populateClone(cloneData: IEngineCoreClone): void {
+		Guards.object(this.CLASS_NAME, nameof(cloneData), cloneData);
+		Guards.object(this.CLASS_NAME, nameof(cloneData.config), cloneData.config);
+		Guards.object(this.CLASS_NAME, nameof(cloneData.state), cloneData.state);
+
+		this._context = {
+			config: cloneData.config,
+			defaultTypes: {},
+			componentInstances: [],
+			state: { bootstrappedComponents: [] } as unknown as S,
+			stateDirty: false
+		};
+
+		this.addCoreTypeInitialisers();
+
+		this._stateStorage = new MemoryStateStorage(true, cloneData.state);
+		this._isStarted = false;
 	}
 
 	/**

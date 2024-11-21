@@ -30,9 +30,11 @@ export class MemoryStateStorage<S extends IEngineState = IEngineState>
 	/**
 	 * Create a new instance of MemoryStateStorage.
 	 * @param readonlyMode Whether the file is in read-only mode.
+	 * @param state The initial state.
 	 */
-	constructor(readonlyMode: boolean = false) {
+	constructor(readonlyMode: boolean = false, state?: S) {
 		this._readonlyMode = readonlyMode;
+		this._engineState = state;
 	}
 
 	/**

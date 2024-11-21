@@ -38,6 +38,7 @@ export * from "./models/config/typeConfig/vaultConnectorConfig";
 export * from "./models/config/typeConfig/walletConnectorConfig";
 export * from "./models/engineTypeInitialiser";
 export * from "./models/IEngineCore";
+export * from "./models/IEngineCoreClone";
 export * from "./models/IEngineCoreContext";
 export * from "./models/IEngineServer";
 export * from "./models/IEngineState";
@@ -74,3 +75,4 @@ export * from "./models/types/telemetryComponentType";
 export * from "./models/types/telemetryConnectorType";
 export * from "./models/types/vaultConnectorType";
 export * from "./models/types/walletConnectorType";
+

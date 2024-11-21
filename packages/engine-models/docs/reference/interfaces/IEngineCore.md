@@ -141,3 +141,35 @@ Get the types for the component.
 `object`
 
 The default types.
+
+***
+
+### getCloneData()
+
+> **getCloneData**(): [`IEngineCoreClone`](IEngineCoreClone.md)\<[`IEngineState`](IEngineState.md)\>
+
+Get the data required to create a clone of the engine.
+
+#### Returns
+
+[`IEngineCoreClone`](IEngineCoreClone.md)\<[`IEngineState`](IEngineState.md)\>
+
+The clone data.
+
+***
+
+### populateClone()
+
+> **populateClone**(`cloneData`): `void`
+
+Populate the engine from the clone data.
+
+#### Parameters
+
+• **cloneData**: [`IEngineCoreClone`](IEngineCoreClone.md)\<[`IEngineState`](IEngineState.md)\>
+
+The clone data to populate from.
+
+#### Returns
+
+`void`

@@ -211,3 +211,43 @@ The default types.
 #### Implementation of
 
 `IEngineCore.getDefaultTypes`
+
+***
+
+### getCloneData()
+
+> **getCloneData**(): `IEngineCoreClone`\<`IEngineState`\>
+
+Get the data required to create a clone of the engine.
+
+#### Returns
+
+`IEngineCoreClone`\<`IEngineState`\>
+
+The clone data.
+
+#### Implementation of
+
+`IEngineCore.getCloneData`
+
+***
+
+### populateClone()
+
+> **populateClone**(`cloneData`): `void`
+
+Populate the engine from the clone data.
+
+#### Parameters
+
+• **cloneData**: `IEngineCoreClone`\<`IEngineState`\>
+
+The clone data to populate from.
+
+#### Returns
+
+`void`
+
+#### Implementation of
+
+`IEngineCore.populateClone`

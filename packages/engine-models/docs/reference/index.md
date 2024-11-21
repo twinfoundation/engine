@@ -3,6 +3,7 @@
 ## Interfaces
 
 - [IEngineCore](interfaces/IEngineCore.md)
+- [IEngineCoreClone](interfaces/IEngineCoreClone.md)
 - [IEngineCoreContext](interfaces/IEngineCoreContext.md)
 - [IEngineServer](interfaces/IEngineServer.md)
 - [IEngineState](interfaces/IEngineState.md)

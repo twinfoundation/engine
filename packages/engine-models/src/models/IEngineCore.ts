@@ -5,6 +5,7 @@ import type { IEngineCoreConfig } from "./config/IEngineCoreConfig";
 import type { IEngineCoreTypeBaseConfig } from "./config/IEngineCoreTypeBaseConfig";
 import type { IEngineCoreTypeConfig } from "./config/IEngineCoreTypeConfig";
 import type { EngineTypeInitialiser } from "./engineTypeInitialiser";
+import type { IEngineCoreClone } from "./IEngineCoreClone";
 import type { IEngineState } from "./IEngineState";
 
 /**
@@ -64,4 +65,16 @@ export interface IEngineCore<S extends IEngineState = IEngineState> {
 	 * @returns The default types.
 	 */
 	getDefaultTypes(): { [type: string]: string };
+
+	/**
+	 * Get the data required to create a clone of the engine.
+	 * @returns The clone data.
+	 */
+	getCloneData(): IEngineCoreClone;
+
+	/**
+	 * Populate the engine from the clone data.
+	 * @param cloneData The clone data to populate from.
+	 */
+	populateClone(cloneData: IEngineCoreClone): void;
 }
