@@ -110,7 +110,7 @@ function configureEntityStorageConnectors(
 
 	if (
 		(Coerce.boolean(envVars.entityMemoryEnable) ?? false) ||
-		envVars.blobStorageConnectorType === EntityStorageConnectorType.Memory
+		envVars.entityStorageConnectorType === EntityStorageConnectorType.Memory
 	) {
 		coreConfig.types.entityStorageConnector.push({
 			type: EntityStorageConnectorType.Memory
