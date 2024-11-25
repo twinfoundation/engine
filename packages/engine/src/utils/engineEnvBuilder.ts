@@ -50,31 +50,7 @@ export function buildEngineConfiguration(envVars: IEngineEnvironmentVariables): 
 
 	const coreConfig: IEngineConfig = {
 		debug: Coerce.boolean(envVars.debug) ?? false,
-		types: {
-			loggingConnector: [],
-			loggingComponent: [],
-			entityStorageConnector: [],
-			blobStorageConnector: [],
-			blobStorageComponent: [],
-			backgroundTaskConnector: [],
-			telemetryConnector: [],
-			telemetryComponent: [],
-			vaultConnector: [],
-			walletConnector: [],
-			faucetConnector: [],
-			immutableStorageConnector: [],
-			nftConnector: [],
-			nftComponent: [],
-			identityConnector: [],
-			identityComponent: [],
-			identityProfileConnector: [],
-			identityProfileComponent: [],
-			immutableProofComponent: [],
-			attestationConnector: [],
-			attestationComponent: [],
-			auditableItemGraphComponent: [],
-			auditableItemStreamComponent: [{ type: AuditableItemStreamComponentType.Service }]
-		}
+		types: {}
 	};
 
 	configureEntityStorageConnectors(coreConfig, envVars);
