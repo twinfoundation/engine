@@ -16,7 +16,7 @@ import {
 	IdentityConnectorType,
 	IdentityProfileComponentType,
 	IdentityProfileConnectorType,
-	type IEngineCoreTypesConfig,
+	type IEngineConfig,
 	ImmutableProofComponentType,
 	ImmutableStorageConnectorType,
 	LoggingComponentType,
@@ -35,9 +35,7 @@ import type { IEngineEnvironmentVariables } from "../models/IEngineEnvironmentVa
  * @param envVars The environment variables.
  * @returns The config for the core.
  */
-export function buildEngineConfiguration(
-	envVars: IEngineEnvironmentVariables
-): IEngineCoreTypesConfig {
+export function buildEngineConfiguration(envVars: IEngineEnvironmentVariables): IEngineConfig {
 	envVars.stateFilename ??= "engine-state.json";
 	envVars.storageFileRoot = path.resolve(envVars.storageFileRoot);
 	envVars.stateFilename = path.join(envVars.storageFileRoot, envVars.stateFilename);
@@ -48,7 +46,7 @@ export function buildEngineConfiguration(
 	envVars.blobStorageEnableEncryption ??= "false";
 	envVars.blobStorageEncryptionKey ??= "blob-encryption";
 
-	const coreConfig: IEngineCoreTypesConfig = {
+	const coreConfig: IEngineConfig = {
 		debug: Coerce.boolean(envVars.debug) ?? false,
 		types: {
 			loggingConnector: [],
@@ -125,7 +123,7 @@ export function buildEngineConfiguration(
  * @param envVars The environment variables.
  */
 function configureEntityStorageConnectors(
-	coreConfig: IEngineCoreTypesConfig,
+	coreConfig: IEngineConfig,
 	envVars: IEngineEnvironmentVariables
 ): void {
 	coreConfig.types ??= {};
@@ -229,7 +227,7 @@ function configureEntityStorageConnectors(
  * @param envVars The environment variables.
  */
 function configureBlobStorageConnectors(
-	coreConfig: IEngineCoreTypesConfig,
+	coreConfig: IEngineConfig,
 	envVars: IEngineEnvironmentVariables
 ): void {
 	coreConfig.types.blobStorageConnector ??= [];
@@ -329,10 +327,7 @@ function configureBlobStorageConnectors(
  * @param coreConfig The core config.
  * @param envVars The environment variables.
  */
-function configureLogging(
-	coreConfig: IEngineCoreTypesConfig,
-	envVars: IEngineEnvironmentVariables
-): void {
+function configureLogging(coreConfig: IEngineConfig, envVars: IEngineEnvironmentVariables): void {
 	const loggingConnectors = (envVars.loggingConnector ?? "").split(",");
 	for (const loggingConnector of loggingConnectors) {
 		if (loggingConnector === LoggingConnectorType.Console) {
@@ -368,7 +363,7 @@ function configureLogging(
  * @param envVars The environment variables.
  */
 function configureVaultConnectors(
-	coreConfig: IEngineCoreTypesConfig,
+	coreConfig: IEngineConfig,
 	envVars: IEngineEnvironmentVariables
 ): void {
 	coreConfig.types.vaultConnector ??= [];
@@ -393,7 +388,7 @@ function configureVaultConnectors(
  * @param envVars The environment variables.
  */
 function configureBackgroundTaskConnectors(
-	coreConfig: IEngineCoreTypesConfig,
+	coreConfig: IEngineConfig,
 	envVars: IEngineEnvironmentVariables
 ): void {
 	coreConfig.types.backgroundTaskConnector ??= [];
@@ -411,7 +406,7 @@ function configureBackgroundTaskConnectors(
  * @param envVars The environment variables.
  */
 function configureTelemetryConnectors(
-	coreConfig: IEngineCoreTypesConfig,
+	coreConfig: IEngineConfig,
 	envVars: IEngineEnvironmentVariables
 ): void {
 	coreConfig.types.telemetryConnector ??= [];
@@ -429,7 +424,7 @@ function configureTelemetryConnectors(
  * @param envVars The environment variables.
  */
 function configureFaucetConnectors(
-	coreConfig: IEngineCoreTypesConfig,
+	coreConfig: IEngineConfig,
 	envVars: IEngineEnvironmentVariables
 ): void {
 	coreConfig.types.faucetConnector ??= [];
@@ -461,7 +456,7 @@ function configureFaucetConnectors(
  * @param envVars The environment variables.
  */
 function configureWalletConnectors(
-	coreConfig: IEngineCoreTypesConfig,
+	coreConfig: IEngineConfig,
 	envVars: IEngineEnvironmentVariables
 ): void {
 	coreConfig.types.walletConnector ??= [];
@@ -492,7 +487,7 @@ function configureWalletConnectors(
  * @param envVars The environment variables.
  */
 function configureNftConnectors(
-	coreConfig: IEngineCoreTypesConfig,
+	coreConfig: IEngineConfig,
 	envVars: IEngineEnvironmentVariables
 ): void {
 	coreConfig.types.nftConnector ??= [];
@@ -523,7 +518,7 @@ function configureNftConnectors(
  * @param envVars The environment variables.
  */
 function configureImmutableStorageConnectors(
-	coreConfig: IEngineCoreTypesConfig,
+	coreConfig: IEngineConfig,
 	envVars: IEngineEnvironmentVariables
 ): void {
 	coreConfig.types.immutableStorageConnector ??= [];
@@ -554,7 +549,7 @@ function configureImmutableStorageConnectors(
  * @param envVars The environment variables.
  */
 function configureIdentityConnectors(
-	coreConfig: IEngineCoreTypesConfig,
+	coreConfig: IEngineConfig,
 	envVars: IEngineEnvironmentVariables
 ): void {
 	coreConfig.types.identityConnector ??= [];
@@ -585,7 +580,7 @@ function configureIdentityConnectors(
  * @param envVars The environment variables.
  */
 function configureIdentityProfileConnectors(
-	coreConfig: IEngineCoreTypesConfig,
+	coreConfig: IEngineConfig,
 	envVars: IEngineEnvironmentVariables
 ): void {
 	coreConfig.types.identityProfileConnector ??= [];
@@ -603,7 +598,7 @@ function configureIdentityProfileConnectors(
  * @param envVars The environment variables.
  */
 function configureAttestationConnectors(
-	coreConfig: IEngineCoreTypesConfig,
+	coreConfig: IEngineConfig,
 	envVars: IEngineEnvironmentVariables
 ): void {
 	coreConfig.types.attestationConnector ??= [];

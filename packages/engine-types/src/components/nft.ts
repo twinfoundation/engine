@@ -14,7 +14,7 @@ import { NftService } from "@twin.org/nft-service";
 import { initialiseEntityStorageConnector } from "./entityStorage.js";
 import type { NftComponentConfig } from "../models/config/nftComponentConfig.js";
 import type { NftConnectorConfig } from "../models/config/nftConnectorConfig.js";
-import type { IEngineCoreTypesConfig } from "../models/IEngineCoreTypesConfig.js";
+import type { IEngineConfig } from "../models/IEngineConfig.js";
 import { NftComponentType } from "../models/types/nftComponentType.js";
 import { NftConnectorType } from "../models/types/nftConnectorType.js";
 
@@ -28,8 +28,8 @@ import { NftConnectorType } from "../models/types/nftConnectorType.js";
  * @throws GeneralError if the connector type is unknown.
  */
 export function initialiseNftConnector(
-	engineCore: IEngineCore<IEngineCoreTypesConfig>,
-	context: IEngineCoreContext<IEngineCoreTypesConfig>,
+	engineCore: IEngineCore<IEngineConfig>,
+	context: IEngineCoreContext<IEngineConfig>,
 	instanceConfig: NftConnectorConfig,
 	overrideInstanceType?: string
 ): string | undefined {
@@ -85,8 +85,8 @@ export function initialiseNftConnector(
  * @throws GeneralError if the component type is unknown.
  */
 export function initialiseNftComponent(
-	engineCore: IEngineCore<IEngineCoreTypesConfig>,
-	context: IEngineCoreContext<IEngineCoreTypesConfig>,
+	engineCore: IEngineCore<IEngineConfig>,
+	context: IEngineCoreContext<IEngineConfig>,
 	instanceConfig: NftComponentConfig,
 	overrideInstanceType?: string
 ): string | undefined {

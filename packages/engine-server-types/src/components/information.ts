@@ -5,7 +5,7 @@ import { InformationService } from "@twin.org/api-service";
 import { ComponentFactory, GeneralError, I18n } from "@twin.org/core";
 import type { IEngineCore, IEngineCoreContext } from "@twin.org/engine-models";
 import type { InformationComponentConfig } from "../models/config/informationComponentConfig";
-import type { IEngineServerTypesConfig } from "../models/IEngineServerTypesConfig";
+import type { IEngineServerConfig } from "../models/IEngineServerConfig";
 import { InformationComponentType } from "../models/types/informationComponentType";
 
 /**
@@ -18,8 +18,8 @@ import { InformationComponentType } from "../models/types/informationComponentTy
  * @throws GeneralError if the component type is unknown.
  */
 export function initialiseInformationComponent(
-	engineCore: IEngineCore<IEngineServerTypesConfig>,
-	context: IEngineCoreContext<IEngineServerTypesConfig>,
+	engineCore: IEngineCore<IEngineServerConfig>,
+	context: IEngineCoreContext<IEngineServerConfig>,
 	instanceConfig: InformationComponentConfig,
 	overrideInstanceType?: string
 ): string | undefined {

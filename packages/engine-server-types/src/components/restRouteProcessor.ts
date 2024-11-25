@@ -11,7 +11,7 @@ import {
 import { GeneralError, I18n } from "@twin.org/core";
 import type { IEngineCoreContext, IEngineCore } from "@twin.org/engine-models";
 import type { RestRouteProcessorConfig } from "../models/config/restRouteProcessorConfig";
-import type { IEngineServerTypesConfig } from "../models/IEngineServerTypesConfig";
+import type { IEngineServerConfig } from "../models/IEngineServerConfig";
 import { RestRouteProcessorType } from "../models/types/restRouteProcessorType";
 
 /**
@@ -24,8 +24,8 @@ import { RestRouteProcessorType } from "../models/types/restRouteProcessorType";
  * @throws GeneralError if the component type is unknown.
  */
 export function initialiseRestRouteProcessorComponent(
-	engineCore: IEngineCore<IEngineServerTypesConfig>,
-	context: IEngineCoreContext<IEngineServerTypesConfig>,
+	engineCore: IEngineCore<IEngineServerConfig>,
+	context: IEngineCoreContext<IEngineServerConfig>,
 	instanceConfig: RestRouteProcessorConfig,
 	overrideInstanceType?: string
 ): string | undefined {

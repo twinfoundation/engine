@@ -23,7 +23,7 @@ import { nameof } from "@twin.org/nameof";
 import { initialiseEntityStorageConnector } from "./entityStorage.js";
 import type { BlobStorageComponentConfig } from "../models/config/blobStorageComponentConfig.js";
 import type { BlobStorageConnectorConfig } from "../models/config/blobStorageConnectorConfig.js";
-import type { IEngineCoreTypesConfig } from "../models/IEngineCoreTypesConfig.js";
+import type { IEngineConfig } from "../models/IEngineConfig.js";
 import { BlobStorageComponentType } from "../models/types/blobStorageComponentType.js";
 import { BlobStorageConnectorType } from "../models/types/blobStorageConnectorType.js";
 
@@ -37,8 +37,8 @@ import { BlobStorageConnectorType } from "../models/types/blobStorageConnectorTy
  * @throws GeneralError if the connector type is unknown.
  */
 export function initialiseBlobStorageConnector(
-	engineCore: IEngineCore<IEngineCoreTypesConfig>,
-	context: IEngineCoreContext<IEngineCoreTypesConfig>,
+	engineCore: IEngineCore<IEngineConfig>,
+	context: IEngineCoreContext<IEngineConfig>,
 	instanceConfig: BlobStorageConnectorConfig,
 	overrideInstanceType?: string
 ): string | undefined {
@@ -122,8 +122,8 @@ export function initialiseBlobStorageConnector(
  * @throws GeneralError if the component type is unknown.
  */
 export function initialiseBlobStorageComponent(
-	engineCore: IEngineCore<IEngineCoreTypesConfig>,
-	context: IEngineCoreContext<IEngineCoreTypesConfig>,
+	engineCore: IEngineCore<IEngineConfig>,
+	context: IEngineCoreContext<IEngineConfig>,
 	instanceConfig: BlobStorageComponentConfig,
 	overrideInstanceType?: string
 ): string | undefined {

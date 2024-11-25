@@ -2,7 +2,7 @@
 
 ## Interfaces
 
-- [IEngineServerTypesConfig](interfaces/IEngineServerTypesConfig.md)
+- [IEngineServerConfig](interfaces/IEngineServerConfig.md)
 
 ## Type Aliases
 

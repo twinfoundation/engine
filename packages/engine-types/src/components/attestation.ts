@@ -12,7 +12,7 @@ import { ComponentFactory, GeneralError, I18n } from "@twin.org/core";
 import type { IEngineCore, IEngineCoreContext } from "@twin.org/engine-models";
 import type { AttestationComponentConfig } from "../models/config/attestationComponentConfig";
 import type { AttestationConnectorConfig } from "../models/config/attestationConnectorConfig";
-import type { IEngineCoreTypesConfig } from "../models/IEngineCoreTypesConfig";
+import type { IEngineConfig } from "../models/IEngineConfig";
 import { AttestationComponentType } from "../models/types/attestationComponentType";
 import { AttestationConnectorType } from "../models/types/attestationConnectorType";
 
@@ -26,8 +26,8 @@ import { AttestationConnectorType } from "../models/types/attestationConnectorTy
  * @throws GeneralError if the connector type is unknown.
  */
 export function initialiseAttestationConnector(
-	engineCore: IEngineCore<IEngineCoreTypesConfig>,
-	context: IEngineCoreContext<IEngineCoreTypesConfig>,
+	engineCore: IEngineCore<IEngineConfig>,
+	context: IEngineCoreContext<IEngineConfig>,
 	instanceConfig: AttestationConnectorConfig,
 	overrideInstanceType?: string
 ): string | undefined {
@@ -80,8 +80,8 @@ export function initialiseAttestationConnector(
  * @throws GeneralError if the component type is unknown.
  */
 export function initialiseAttestationComponent(
-	engineCore: IEngineCore<IEngineCoreTypesConfig>,
-	context: IEngineCoreContext<IEngineCoreTypesConfig>,
+	engineCore: IEngineCore<IEngineConfig>,
+	context: IEngineCoreContext<IEngineConfig>,
 	instanceConfig: AttestationComponentConfig,
 	overrideInstanceType?: string
 ): string | undefined {

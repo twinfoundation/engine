@@ -11,7 +11,7 @@ import {
 import { GeneralError, I18n } from "@twin.org/core";
 import type { IEngineCore, IEngineCoreContext } from "@twin.org/engine-models";
 import type { SocketRouteProcessorConfig } from "../models/config/socketRouteProcessorConfig";
-import type { IEngineServerTypesConfig } from "../models/IEngineServerTypesConfig";
+import type { IEngineServerConfig } from "../models/IEngineServerConfig";
 import { SocketRouteProcessorType } from "../models/types/socketRouteProcessorType";
 
 /**
@@ -24,8 +24,8 @@ import { SocketRouteProcessorType } from "../models/types/socketRouteProcessorTy
  * @throws GeneralError if the component type is unknown.
  */
 export function initialiseSocketRouteProcessorComponent(
-	engineCore: IEngineCore<IEngineServerTypesConfig>,
-	context: IEngineCoreContext<IEngineServerTypesConfig>,
+	engineCore: IEngineCore<IEngineServerConfig>,
+	context: IEngineCoreContext<IEngineServerConfig>,
 	instanceConfig: SocketRouteProcessorConfig,
 	overrideInstanceType?: string
 ): string | undefined {

@@ -1,10 +1,10 @@
-# Interface: IEngineServerTypesConfig
+# Interface: IEngineServerConfig
 
 Extended engine server config with known types.
 
 ## Extends
 
-- `IEngineCoreTypesConfig`
+- `IEngineConfig`
 
 ## Properties
 
@@ -22,7 +22,7 @@ false
 
 #### Inherited from
 
-`IEngineCoreTypesConfig.debug`
+`IEngineConfig.debug`
 
 ***
 
@@ -40,7 +40,7 @@ false
 
 #### Inherited from
 
-`IEngineCoreTypesConfig.silent`
+`IEngineConfig.silent`
 
 ***
 
@@ -244,4 +244,4 @@ Authentication component options which can be overridden by individual component
 
 #### Overrides
 
-`IEngineCoreTypesConfig.types`
+`IEngineConfig.types`

@@ -11,7 +11,7 @@ import type { IEngineCoreContext, IEngineCore } from "@twin.org/engine-models";
 import { initialiseEntityStorageConnector } from "@twin.org/engine-types";
 import { nameof } from "@twin.org/nameof";
 import type { AuthenticationComponentConfig } from "../models/config/authenticationComponentConfig";
-import type { IEngineServerTypesConfig } from "../models/IEngineServerTypesConfig";
+import type { IEngineServerConfig } from "../models/IEngineServerConfig";
 import { AuthenticationComponentType } from "../models/types/authenticationComponentType";
 
 /**
@@ -24,8 +24,8 @@ import { AuthenticationComponentType } from "../models/types/authenticationCompo
  * @throws GeneralError if the component type is unknown.
  */
 export function initialiseAuthenticationComponent(
-	engineCore: IEngineCore<IEngineServerTypesConfig>,
-	context: IEngineCoreContext<IEngineServerTypesConfig>,
+	engineCore: IEngineCore<IEngineServerConfig>,
+	context: IEngineCoreContext<IEngineServerConfig>,
 	instanceConfig: AuthenticationComponentConfig,
 	overrideInstanceType?: string
 ): string | undefined {

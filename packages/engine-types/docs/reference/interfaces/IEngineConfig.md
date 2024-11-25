@@ -1,4 +1,4 @@
-# Interface: IEngineCoreTypesConfig
+# Interface: IEngineConfig
 
 Extended engine core config with known types.
 

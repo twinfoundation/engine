@@ -12,7 +12,7 @@ import type { IEngineCore, IEngineCoreContext } from "@twin.org/engine-models";
 import { nameof } from "@twin.org/nameof";
 import { initialiseEntityStorageConnector } from "./entityStorage.js";
 import type { AuditableItemStreamComponentConfig } from "../models/config/auditableItemStreamComponentConfig.js";
-import type { IEngineCoreTypesConfig } from "../models/IEngineCoreTypesConfig.js";
+import type { IEngineConfig } from "../models/IEngineConfig.js";
 import { AuditableItemStreamComponentType } from "../models/types/auditableItemStreamComponentType.js";
 
 /**
@@ -25,8 +25,8 @@ import { AuditableItemStreamComponentType } from "../models/types/auditableItemS
  * @throws GeneralError if the component type is unknown.
  */
 export function initialiseAuditableItemStreamComponent(
-	engineCore: IEngineCore<IEngineCoreTypesConfig>,
-	context: IEngineCoreContext<IEngineCoreTypesConfig>,
+	engineCore: IEngineCore<IEngineConfig>,
+	context: IEngineCoreContext<IEngineConfig>,
 	instanceConfig: AuditableItemStreamComponentConfig,
 	overrideInstanceType?: string
 ): string | undefined {

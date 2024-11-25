@@ -6,7 +6,7 @@ import { EntityStorageFaucetConnector } from "@twin.org/wallet-connector-entity-
 import { IotaFaucetConnector } from "@twin.org/wallet-connector-iota";
 import { FaucetConnectorFactory, type IFaucetConnector } from "@twin.org/wallet-models";
 import type { FaucetConnectorConfig } from "../models/config/faucetConnectorConfig";
-import type { IEngineCoreTypesConfig } from "../models/IEngineCoreTypesConfig";
+import type { IEngineConfig } from "../models/IEngineConfig";
 import { FaucetConnectorType } from "../models/types/faucetConnectorType";
 
 /**
@@ -19,8 +19,8 @@ import { FaucetConnectorType } from "../models/types/faucetConnectorType";
  * @throws GeneralError if the connector type is unknown.
  */
 export function initialiseFaucetConnector(
-	engineCore: IEngineCore<IEngineCoreTypesConfig>,
-	context: IEngineCoreContext<IEngineCoreTypesConfig>,
+	engineCore: IEngineCore<IEngineConfig>,
+	context: IEngineCoreContext<IEngineConfig>,
 	instanceConfig: FaucetConnectorConfig,
 	overrideInstanceType?: string
 ): string | undefined {

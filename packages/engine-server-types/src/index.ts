@@ -10,7 +10,7 @@ export * from "./models/config/informationComponentConfig";
 export * from "./models/config/mimeTypeProcessorConfig";
 export * from "./models/config/restRouteProcessorConfig";
 export * from "./models/config/socketRouteProcessorConfig";
-export * from "./models/IEngineServerTypesConfig";
+export * from "./models/IEngineServerConfig";
 export * from "./models/types/authenticationComponentType";
 export * from "./models/types/informationComponentType";
 export * from "./models/types/mimeTypeProcessorType";

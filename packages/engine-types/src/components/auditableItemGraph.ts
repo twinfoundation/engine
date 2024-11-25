@@ -12,7 +12,7 @@ import type { IEngineCore, IEngineCoreContext } from "@twin.org/engine-models";
 import { nameof } from "@twin.org/nameof";
 import { initialiseEntityStorageConnector } from "./entityStorage.js";
 import type { AuditableItemGraphComponentConfig } from "../models/config/auditableItemGraphComponentConfig.js";
-import type { IEngineCoreTypesConfig } from "../models/IEngineCoreTypesConfig.js";
+import type { IEngineConfig } from "../models/IEngineConfig.js";
 import { AuditableItemGraphComponentType } from "../models/types/auditableItemGraphComponentType.js";
 
 /**
@@ -25,8 +25,8 @@ import { AuditableItemGraphComponentType } from "../models/types/auditableItemGr
  * @throws GeneralError if the component type is unknown.
  */
 export function initialiseAuditableItemGraphComponent(
-	engineCore: IEngineCore<IEngineCoreTypesConfig>,
-	context: IEngineCoreContext<IEngineCoreTypesConfig>,
+	engineCore: IEngineCore<IEngineConfig>,
+	context: IEngineCoreContext<IEngineConfig>,
 	instanceConfig: AuditableItemGraphComponentConfig,
 	overrideInstanceType?: string
 ): string | undefined {

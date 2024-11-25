@@ -2,14 +2,14 @@
 // SPDX-License-Identifier: Apache-2.0.
 import { EngineCore, type IEngineCoreOptions } from "@twin.org/engine-core";
 import type { IEngineCore, IEngineCoreContext, IEngineState } from "@twin.org/engine-models";
-import type { IEngineCoreTypesConfig } from "@twin.org/engine-types";
+import type { IEngineConfig } from "@twin.org/engine-types";
 import { nameof } from "@twin.org/nameof";
 
 /**
  * The engine with built in types.
  */
 export class Engine<
-	C extends IEngineCoreTypesConfig = IEngineCoreTypesConfig,
+	C extends IEngineConfig = IEngineConfig,
 	S extends IEngineState = IEngineState
 > extends EngineCore<C, S> {
 	/**

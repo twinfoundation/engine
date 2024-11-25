@@ -8,7 +8,7 @@ import {
 	InformationComponentType,
 	RestRouteProcessorType,
 	SocketRouteProcessorType,
-	type IEngineServerTypesConfig
+	type IEngineServerConfig
 } from "@twin.org/engine-server-types";
 import type { HttpMethod } from "@twin.org/web";
 import type { IEngineServerEnvironmentVariables } from "../models/IEngineServerEnvironmentVariables";
@@ -24,7 +24,7 @@ export function buildEngineServerConfiguration(
 	envVars: IEngineServerEnvironmentVariables,
 	coreEngineConfig: IEngineCoreConfig,
 	serverInfo: IServerInfo
-): IEngineServerTypesConfig {
+): IEngineServerConfig {
 	envVars.adminUsername ??= "admin@node";
 	envVars.authSigningKeyId ??= "auth-signing";
 
@@ -45,7 +45,7 @@ export function buildEngineServerConfiguration(
 
 	const authProcessorType = envVars.authProcessorType;
 
-	const serverConfig: IEngineServerTypesConfig = {
+	const serverConfig: IEngineServerConfig = {
 		...coreEngineConfig,
 		web: webServerOptions,
 		types: {
@@ -148,8 +148,8 @@ export function buildEngineServerConfiguration(
  * @param serverConfig The server config.
  */
 function addRestPaths(
-	coreEngineConfig: IEngineServerTypesConfig,
-	serverConfig: IEngineServerTypesConfig
+	coreEngineConfig: IEngineServerConfig,
+	serverConfig: IEngineServerConfig
 ): void {
 	if (Is.arrayValue(serverConfig.types.informationComponent)) {
 		serverConfig.types.informationComponent[0].restPath = "";

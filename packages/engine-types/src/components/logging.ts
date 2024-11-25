@@ -19,7 +19,7 @@ import { nameof } from "@twin.org/nameof";
 import { initialiseEntityStorageConnector } from "./entityStorage";
 import type { LoggingComponentConfig } from "../models/config/loggingComponentConfig";
 import type { LoggingConnectorConfig } from "../models/config/loggingConnectorConfig";
-import type { IEngineCoreTypesConfig } from "../models/IEngineCoreTypesConfig";
+import type { IEngineConfig } from "../models/IEngineConfig";
 import { LoggingComponentType } from "../models/types/loggingComponentType";
 import { LoggingConnectorType } from "../models/types/loggingConnectorType";
 
@@ -33,8 +33,8 @@ import { LoggingConnectorType } from "../models/types/loggingConnectorType";
  * @throws GeneralError if the connector type is unknown.
  */
 export function initialiseLoggingConnector(
-	engineCore: IEngineCore<IEngineCoreTypesConfig>,
-	context: IEngineCoreContext<IEngineCoreTypesConfig>,
+	engineCore: IEngineCore<IEngineConfig>,
+	context: IEngineCoreContext<IEngineConfig>,
 	instanceConfig: LoggingConnectorConfig,
 	overrideInstanceType?: string
 ): string | undefined {
@@ -87,8 +87,8 @@ export function initialiseLoggingConnector(
  * @throws GeneralError if the component type is unknown.
  */
 export function initialiseLoggingComponent(
-	engineCore: IEngineCore<IEngineCoreTypesConfig>,
-	context: IEngineCoreContext<IEngineCoreTypesConfig>,
+	engineCore: IEngineCore<IEngineConfig>,
+	context: IEngineCoreContext<IEngineConfig>,
 	instanceConfig: LoggingComponentConfig,
 	overrideInstanceType?: string
 ): string | undefined {

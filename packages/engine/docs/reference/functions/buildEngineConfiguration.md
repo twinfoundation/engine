@@ -1,6 +1,6 @@
 # Function: buildEngineConfiguration()
 
-> **buildEngineConfiguration**(`envVars`): `IEngineCoreTypesConfig`
+> **buildEngineConfiguration**(`envVars`): `IEngineConfig`
 
 Build the engine core configuration from environment variables.
 
@@ -12,6 +12,6 @@ The environment variables.
 
 ## Returns
 
-`IEngineCoreTypesConfig`
+`IEngineConfig`
 
 The config for the core.

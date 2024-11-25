@@ -30,7 +30,7 @@ import type { WalletConnectorConfig } from "./config/walletConnectorConfig";
 /**
  * Extended engine core config with known types.
  */
-export interface IEngineCoreTypesConfig extends IEngineCoreConfig {
+export interface IEngineConfig extends IEngineCoreConfig {
 	/**
 	 * The types to initialise in the engine.
 	 */

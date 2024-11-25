@@ -9,17 +9,14 @@ import {
 import { FastifyWebServer } from "@twin.org/api-server-fastify";
 import { Guards, Is } from "@twin.org/core";
 import type { IEngineCore, IEngineCoreTypeConfig, IEngineServer } from "@twin.org/engine-models";
-import {
-	RestRouteProcessorType,
-	type IEngineServerTypesConfig
-} from "@twin.org/engine-server-types";
+import { RestRouteProcessorType, type IEngineServerConfig } from "@twin.org/engine-server-types";
 import { ModuleHelper } from "@twin.org/modules";
 import { nameof } from "@twin.org/nameof";
 
 /**
  * Server for the engine.
  */
-export class EngineServer<T extends IEngineServerTypesConfig = IEngineServerTypesConfig>
+export class EngineServer<T extends IEngineServerConfig = IEngineServerConfig>
 	implements IEngineServer
 {
 	/**

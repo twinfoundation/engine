@@ -6,11 +6,11 @@ Initialise the socket route processor.
 
 ## Parameters
 
-• **engineCore**: `IEngineCore`\<[`IEngineServerTypesConfig`](../interfaces/IEngineServerTypesConfig.md), `IEngineState`\>
+• **engineCore**: `IEngineCore`\<[`IEngineServerConfig`](../interfaces/IEngineServerConfig.md), `IEngineState`\>
 
 The engine core.
 
-• **context**: `IEngineCoreContext`\<[`IEngineServerTypesConfig`](../interfaces/IEngineServerTypesConfig.md), `IEngineState`\>
+• **context**: `IEngineCoreContext`\<[`IEngineServerConfig`](../interfaces/IEngineServerConfig.md), `IEngineState`\>
 
 The context for the engine.
 

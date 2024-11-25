@@ -15,7 +15,7 @@ import {
 import { nameof } from "@twin.org/nameof";
 import { initialiseEntityStorageConnector } from "./entityStorage.js";
 import type { ImmutableStorageConnectorConfig } from "../models/config/immutableStorageConnectorConfig.js";
-import type { IEngineCoreTypesConfig } from "../models/IEngineCoreTypesConfig.js";
+import type { IEngineConfig } from "../models/IEngineConfig.js";
 import { ImmutableStorageConnectorType } from "../models/types/immutableStorageConnectorType.js";
 
 /**
@@ -28,8 +28,8 @@ import { ImmutableStorageConnectorType } from "../models/types/immutableStorageC
  * @throws GeneralError if the connector type is unknown.
  */
 export function initialiseImmutableStorageConnector(
-	engineCore: IEngineCore<IEngineCoreTypesConfig>,
-	context: IEngineCoreContext<IEngineCoreTypesConfig>,
+	engineCore: IEngineCore<IEngineConfig>,
+	context: IEngineCoreContext<IEngineConfig>,
 	instanceConfig: ImmutableStorageConnectorConfig,
 	overrideInstanceType?: string
 ): string | undefined {

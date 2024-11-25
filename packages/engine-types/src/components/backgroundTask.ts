@@ -14,7 +14,7 @@ import type { IEngineCoreContext, IEngineCore } from "@twin.org/engine-models";
 import { nameof } from "@twin.org/nameof";
 import { initialiseEntityStorageConnector } from "./entityStorage.js";
 import type { BackgroundTaskConnectorConfig } from "../models/config/backgroundTaskConnectorConfig.js";
-import type { IEngineCoreTypesConfig } from "../models/IEngineCoreTypesConfig.js";
+import type { IEngineConfig } from "../models/IEngineConfig.js";
 import { BackgroundTaskConnectorType } from "../models/types/backgroundTaskConnectorType.js";
 
 /**
@@ -27,8 +27,8 @@ import { BackgroundTaskConnectorType } from "../models/types/backgroundTaskConne
  * @throws GeneralError if the connector type is unknown.
  */
 export function initialiseBackgroundTaskConnector(
-	engineCore: IEngineCore<IEngineCoreTypesConfig>,
-	context: IEngineCoreContext<IEngineCoreTypesConfig>,
+	engineCore: IEngineCore<IEngineConfig>,
+	context: IEngineCoreContext<IEngineConfig>,
 	instanceConfig: BackgroundTaskConnectorConfig,
 	overrideInstanceType?: string
 ): string | undefined {

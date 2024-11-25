@@ -18,7 +18,7 @@ import { nameof } from "@twin.org/nameof";
 import { initialiseEntityStorageConnector } from "./entityStorage.js";
 import type { IdentityComponentConfig } from "../models/config/identityComponentConfig.js";
 import type { IdentityConnectorConfig } from "../models/config/identityConnectorConfig.js";
-import type { IEngineCoreTypesConfig } from "../models/IEngineCoreTypesConfig.js";
+import type { IEngineConfig } from "../models/IEngineConfig.js";
 import { IdentityComponentType } from "../models/types/identityComponentType.js";
 import { IdentityConnectorType } from "../models/types/identityConnectorType.js";
 
@@ -32,8 +32,8 @@ import { IdentityConnectorType } from "../models/types/identityConnectorType.js"
  * @throws GeneralError if the connector type is unknown.
  */
 export function initialiseIdentityConnector(
-	engineCore: IEngineCore<IEngineCoreTypesConfig>,
-	context: IEngineCoreContext<IEngineCoreTypesConfig>,
+	engineCore: IEngineCore<IEngineConfig>,
+	context: IEngineCoreContext<IEngineConfig>,
 	instanceConfig: IdentityConnectorConfig,
 	overrideInstanceType?: string
 ): string | undefined {
@@ -95,8 +95,8 @@ export function initialiseIdentityConnector(
  * @throws GeneralError if the component type is unknown.
  */
 export function initialiseIdentityComponent(
-	engineCore: IEngineCore<IEngineCoreTypesConfig>,
-	context: IEngineCoreContext<IEngineCoreTypesConfig>,
+	engineCore: IEngineCore<IEngineConfig>,
+	context: IEngineCoreContext<IEngineConfig>,
 	instanceConfig: IdentityComponentConfig,
 	overrideInstanceType?: string
 ): string | undefined {

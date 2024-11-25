@@ -1,6 +1,6 @@
 # Function: buildEngineServerConfiguration()
 
-> **buildEngineServerConfiguration**(`envVars`, `coreEngineConfig`, `serverInfo`): `IEngineServerTypesConfig`
+> **buildEngineServerConfiguration**(`envVars`, `coreEngineConfig`, `serverInfo`): `IEngineServerConfig`
 
 Handles the configuration of the server.
 
@@ -20,6 +20,6 @@ The server information.
 
 ## Returns
 
-`IEngineServerTypesConfig`
+`IEngineServerConfig`
 
 The the config for the core and the server.

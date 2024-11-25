@@ -16,7 +16,7 @@ import {
 } from "@twin.org/entity-storage-models";
 import { EntityStorageService } from "@twin.org/entity-storage-service";
 import type { EntityStorageComponentConfig } from "../models/config/entityStorageComponentConfig";
-import type { IEngineCoreTypesConfig } from "../models/IEngineCoreTypesConfig";
+import type { IEngineConfig } from "../models/IEngineConfig";
 import { EntityStorageComponentType } from "../models/types/entityStorageComponentType";
 import { EntityStorageConnectorType } from "../models/types/entityStorageConnectorType";
 
@@ -29,8 +29,8 @@ import { EntityStorageConnectorType } from "../models/types/entityStorageConnect
  * @throws GeneralError if the connector type is unknown.
  */
 export function initialiseEntityStorageConnector(
-	engineCore: IEngineCore<IEngineCoreTypesConfig>,
-	context: IEngineCoreContext<IEngineCoreTypesConfig>,
+	engineCore: IEngineCore<IEngineConfig>,
+	context: IEngineCoreContext<IEngineConfig>,
 	typeCustom: string | undefined,
 	schema: string
 ): void {
@@ -149,8 +149,8 @@ export function initialiseEntityStorageConnector(
  * @throws GeneralError if the connector type is unknown.
  */
 export function initialiseEntityStorageComponent(
-	engineCore: IEngineCore<IEngineCoreTypesConfig>,
-	context: IEngineCoreContext<IEngineCoreTypesConfig>,
+	engineCore: IEngineCore<IEngineConfig>,
+	context: IEngineCoreContext<IEngineConfig>,
 	instanceConfig: EntityStorageComponentConfig,
 	overrideInstanceType?: string
 ): string | undefined {

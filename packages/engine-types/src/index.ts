@@ -41,7 +41,7 @@ export * from "./models/config/telemetryComponentConfig";
 export * from "./models/config/telemetryConnectorConfig";
 export * from "./models/config/vaultConnectorConfig";
 export * from "./models/config/walletConnectorConfig";
-export * from "./models/IEngineCoreTypesConfig";
+export * from "./models/IEngineConfig";
 export * from "./models/types/attestationComponentType";
 export * from "./models/types/attestationConnectorType";
 export * from "./models/types/auditableItemGraphComponentType";

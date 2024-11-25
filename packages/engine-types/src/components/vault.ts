@@ -13,7 +13,7 @@ import { HashicorpVaultConnector } from "@twin.org/vault-connector-hashicorp";
 import { VaultConnectorFactory, type IVaultConnector } from "@twin.org/vault-models";
 import { initialiseEntityStorageConnector } from "./entityStorage.js";
 import type { VaultConnectorConfig } from "../models/config/vaultConnectorConfig.js";
-import type { IEngineCoreTypesConfig } from "../models/IEngineCoreTypesConfig.js";
+import type { IEngineConfig } from "../models/IEngineConfig.js";
 import { VaultConnectorType } from "../models/types/vaultConnectorType.js";
 
 /**
@@ -26,8 +26,8 @@ import { VaultConnectorType } from "../models/types/vaultConnectorType.js";
  * @throws GeneralError if the connector type is unknown.
  */
 export function initialiseVaultConnector(
-	engineCore: IEngineCore<IEngineCoreTypesConfig>,
-	context: IEngineCoreContext<IEngineCoreTypesConfig>,
+	engineCore: IEngineCore<IEngineConfig>,
+	context: IEngineCoreContext<IEngineConfig>,
 	instanceConfig: VaultConnectorConfig,
 	overrideInstanceType?: string
 ): string | undefined {

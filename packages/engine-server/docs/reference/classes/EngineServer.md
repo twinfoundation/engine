@@ -4,7 +4,7 @@ Server for the engine.
 
 ## Type Parameters
 
-• **T** *extends* `IEngineServerTypesConfig` = `IEngineServerTypesConfig`
+• **T** *extends* `IEngineServerConfig` = `IEngineServerConfig`
 
 ## Implements
 

@@ -8,7 +8,7 @@ import type { IEngineCoreTypeConfig } from "@twin.org/engine-models";
 import {
 	InformationComponentType,
 	RestRouteProcessorType,
-	type IEngineServerTypesConfig
+	type IEngineServerConfig
 } from "@twin.org/engine-server-types";
 import {
 	AttestationComponentType,
@@ -72,7 +72,7 @@ describe("engine-server", () => {
 	});
 
 	test("Can start engine server with config", async () => {
-		const config: IEngineServerTypesConfig = {
+		const config: IEngineServerConfig = {
 			types: {
 				loggingConnector: [{ type: LoggingConnectorType.Console }],
 				loggingComponent: [{ type: LoggingComponentType.Service }],

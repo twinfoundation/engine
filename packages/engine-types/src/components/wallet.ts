@@ -12,7 +12,7 @@ import { IotaWalletConnector } from "@twin.org/wallet-connector-iota";
 import { WalletConnectorFactory, type IWalletConnector } from "@twin.org/wallet-models";
 import { initialiseEntityStorageConnector } from "./entityStorage.js";
 import type { WalletConnectorConfig } from "../models/config/walletConnectorConfig.js";
-import type { IEngineCoreTypesConfig } from "../models/IEngineCoreTypesConfig.js";
+import type { IEngineConfig } from "../models/IEngineConfig.js";
 import { WalletConnectorType } from "../models/types/walletConnectorType.js";
 
 /**
@@ -25,8 +25,8 @@ import { WalletConnectorType } from "../models/types/walletConnectorType.js";
  * @throws GeneralError if the connector type is unknown.
  */
 export function initialiseWalletConnector(
-	engineCore: IEngineCore<IEngineCoreTypesConfig>,
-	context: IEngineCoreContext<IEngineCoreTypesConfig>,
+	engineCore: IEngineCore<IEngineConfig>,
+	context: IEngineCoreContext<IEngineConfig>,
 	instanceConfig: WalletConnectorConfig,
 	overrideInstanceType?: string
 ): string | undefined {
@@ -87,8 +87,8 @@ export function initialiseWalletConnector(
  * @throws GeneralError if the connector type is unknown.
  */
 export function initialiseWalletStorage(
-	engineCore: IEngineCore<IEngineCoreTypesConfig>,
-	context: IEngineCoreContext<IEngineCoreTypesConfig>,
+	engineCore: IEngineCore<IEngineConfig>,
+	context: IEngineCoreContext<IEngineConfig>,
 	instanceConfig: WalletConnectorConfig,
 	overrideInstanceType?: string
 ): string | undefined {

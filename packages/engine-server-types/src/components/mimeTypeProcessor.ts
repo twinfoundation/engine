@@ -5,7 +5,7 @@ import { JwtMimeTypeProcessor } from "@twin.org/api-processors";
 import { GeneralError, I18n } from "@twin.org/core";
 import type { IEngineCore, IEngineCoreContext } from "@twin.org/engine-models";
 import type { MimeTypeProcessorConfig } from "../models/config/mimeTypeProcessorConfig";
-import type { IEngineServerTypesConfig } from "../models/IEngineServerTypesConfig";
+import type { IEngineServerConfig } from "../models/IEngineServerConfig";
 import { MimeTypeProcessorType } from "../models/types/mimeTypeProcessorType";
 
 /**
@@ -18,8 +18,8 @@ import { MimeTypeProcessorType } from "../models/types/mimeTypeProcessorType";
  * @throws GeneralError if the component type is unknown.
  */
 export function initialiseMimeTypeProcessorComponent(
-	engineCore: IEngineCore<IEngineServerTypesConfig>,
-	context: IEngineCoreContext<IEngineServerTypesConfig>,
+	engineCore: IEngineCore<IEngineServerConfig>,
+	context: IEngineCoreContext<IEngineServerConfig>,
 	instanceConfig: MimeTypeProcessorConfig,
 	overrideInstanceType?: string
 ): string | undefined {

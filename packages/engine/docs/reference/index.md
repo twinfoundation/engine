@@ -3,7 +3,6 @@
 ## Classes
 
 - [Engine](classes/Engine.md)
-- [EnvHelper](classes/EnvHelper.md)
 
 ## Interfaces
 

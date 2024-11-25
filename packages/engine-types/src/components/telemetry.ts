@@ -18,7 +18,7 @@ import { TelemetryService } from "@twin.org/telemetry-service";
 import { initialiseEntityStorageConnector } from "./entityStorage.js";
 import type { TelemetryComponentConfig } from "../models/config/telemetryComponentConfig.js";
 import type { TelemetryConnectorConfig } from "../models/config/telemetryConnectorConfig.js";
-import type { IEngineCoreTypesConfig } from "../models/IEngineCoreTypesConfig.js";
+import type { IEngineConfig } from "../models/IEngineConfig.js";
 import { TelemetryComponentType } from "../models/types/telemetryComponentType.js";
 import { TelemetryConnectorType } from "../models/types/telemetryConnectorType.js";
 
@@ -32,8 +32,8 @@ import { TelemetryConnectorType } from "../models/types/telemetryConnectorType.j
  * @throws GeneralError if the connector type is unknown.
  */
 export function initialiseTelemetryConnector(
-	engineCore: IEngineCore<IEngineCoreTypesConfig>,
-	context: IEngineCoreContext<IEngineCoreTypesConfig>,
+	engineCore: IEngineCore<IEngineConfig>,
+	context: IEngineCoreContext<IEngineConfig>,
 	instanceConfig: TelemetryConnectorConfig,
 	overrideInstanceType?: string
 ): string | undefined {
@@ -89,8 +89,8 @@ export function initialiseTelemetryConnector(
  * @throws GeneralError if the component type is unknown.
  */
 export function initialiseTelemetryComponent(
-	engineCore: IEngineCore<IEngineCoreTypesConfig>,
-	context: IEngineCoreContext<IEngineCoreTypesConfig>,
+	engineCore: IEngineCore<IEngineConfig>,
+	context: IEngineCoreContext<IEngineConfig>,
 	instanceConfig: TelemetryComponentConfig,
 	overrideInstanceType?: string
 ): string | undefined {

@@ -2,7 +2,7 @@
 
 ## Interfaces
 
-- [IEngineCoreTypesConfig](interfaces/IEngineCoreTypesConfig.md)
+- [IEngineConfig](interfaces/IEngineConfig.md)
 
 ## Type Aliases
 

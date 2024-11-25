@@ -1,6 +1,6 @@
 {
 	"name": "@twin.org/engine-types",
-	"version": "0.0.1-next.14",
+	"version": "0.0.1-next.15",
 	"description": "Types to use in an engine.",
 	"repository": {
 		"type": "git",
@@ -48,7 +48,7 @@
 		"@twin.org/blob-storage-models": "next",
 		"@twin.org/blob-storage-service": "next",
 		"@twin.org/core": "next",
-		"@twin.org/engine-models": "0.0.1-next.14",
+		"@twin.org/engine-models": "0.0.1-next.15",
 		"@twin.org/entity-storage-connector-cosmosdb": "next",
 		"@twin.org/entity-storage-connector-dynamodb": "next",
 		"@twin.org/entity-storage-connector-file": "next",

@@ -8,7 +8,7 @@ The engine with built in types.
 
 ## Type Parameters
 
-• **C** *extends* `IEngineCoreTypesConfig` = `IEngineCoreTypesConfig`
+• **C** *extends* `IEngineConfig` = `IEngineConfig`
 
 • **S** *extends* `IEngineState` = `IEngineState`
 

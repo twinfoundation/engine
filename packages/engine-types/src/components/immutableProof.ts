@@ -11,7 +11,7 @@ import {
 import { nameof } from "@twin.org/nameof";
 import { initialiseEntityStorageConnector } from "./entityStorage.js";
 import type { ImmutableProofComponentConfig } from "../models/config/immutableProofComponentConfig.js";
-import type { IEngineCoreTypesConfig } from "../models/IEngineCoreTypesConfig.js";
+import type { IEngineConfig } from "../models/IEngineConfig.js";
 import { ImmutableProofComponentType } from "../models/types/immutableProofComponentType.js";
 
 /**
@@ -24,8 +24,8 @@ import { ImmutableProofComponentType } from "../models/types/immutableProofCompo
  * @throws GeneralError if the component type is unknown.
  */
 export function initialiseImmutableProofComponent(
-	engineCore: IEngineCore<IEngineCoreTypesConfig>,
-	context: IEngineCoreContext<IEngineCoreTypesConfig>,
+	engineCore: IEngineCore<IEngineConfig>,
+	context: IEngineCoreContext<IEngineConfig>,
 	instanceConfig: ImmutableProofComponentConfig,
 	overrideInstanceType?: string
 ): string | undefined {
