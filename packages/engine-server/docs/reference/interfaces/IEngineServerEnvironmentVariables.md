@@ -4,72 +4,72 @@ The engine server environment variables.
 
 ## Properties
 
-### adminUsername
+### adminUsername?
 
-> **adminUsername**: `string`
+> `optional` **adminUsername**: `string`
 
 The name of the admin user.
 
 ***
 
-### port
+### port?
 
-> **port**: `string`
+> `optional` **port**: `string`
 
 The port to serve the API from.
 
 ***
 
-### host
+### host?
 
-> **host**: `string`
+> `optional` **host**: `string`
 
 The host to serve the API from.
 
 ***
 
-### corsOrigins
+### corsOrigins?
 
-> **corsOrigins**: `string`
+> `optional` **corsOrigins**: `string`
 
 The CORS origins to allow, defaults to *.
 
 ***
 
-### httpMethods
+### httpMethods?
 
-> **httpMethods**: `string`
+> `optional` **httpMethods**: `string`
 
 The CORS methods to allow, defaults to GET, POST, PUT, DELETE, OPTIONS.
 
 ***
 
-### httpAllowedHeaders
+### httpAllowedHeaders?
 
-> **httpAllowedHeaders**: `string`
+> `optional` **httpAllowedHeaders**: `string`
 
 The CORS headers to allow.
 
 ***
 
-### httpExposedHeaders
+### httpExposedHeaders?
 
-> **httpExposedHeaders**: `string`
+> `optional` **httpExposedHeaders**: `string`
 
 The CORS headers to expose.
 
 ***
 
-### authProcessorType
+### authProcessorType?
 
-> **authProcessorType**: `string`
+> `optional` **authProcessorType**: `string`
 
 The type of auth processor to use on the API: entity-storage.
 
 ***
 
-### authSigningKeyId
+### authSigningKeyId?
 
-> **authSigningKeyId**: `string`
+> `optional` **authSigningKeyId**: `string`
 
 The id of the key in the vault to use for signing in auth operations.

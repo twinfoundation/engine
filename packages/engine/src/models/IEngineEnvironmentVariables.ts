@@ -8,325 +8,325 @@ export interface IEngineEnvironmentVariables {
 	/**
 	 * Start the engine in debug mode.
 	 */
-	debug: string;
+	debug?: string;
 
 	/**
 	 * The root directory for storing items like state file.
 	 */
-	storageFileRoot: string;
+	storageFileRoot?: string;
 
 	/**
 	 * The name of the state file.
 	 */
-	stateFilename: string;
+	stateFilename?: string;
 
 	/**
 	 * The type of the default entity storage: file, memory, aws-dynamodb, azure-cosmosdb, gcp-firestoredb, scylladb.
 	 */
-	entityStorageConnectorType: string;
+	entityStorageConnectorType?: string;
 
 	/**
 	 * A prefix for all the table in entity-storage, can be empty.
 	 */
-	entityStorageTablePrefix: string;
+	entityStorageTablePrefix?: string;
 
 	/**
 	 * Enable the file entity storage connector.
 	 */
-	entityFileEnable: string;
+	entityFileEnable?: string;
 
 	/**
 	 * Enable the memory entity storage connector.
 	 */
-	entityMemoryEnable: string;
+	entityMemoryEnable?: string;
 
 	/**
 	 * AWS Dynamo DB access key id.
 	 */
-	awsDynamodbAccessKeyId: string;
+	awsDynamodbAccessKeyId?: string;
 
 	/**
 	 * AWS Dynamo DB Endpoint if running local instance.
 	 */
-	awsDynamodbEndpoint: string;
+	awsDynamodbEndpoint?: string;
 
 	/**
 	 * AWS Dynamo DB region.
 	 */
-	awsDynamodbRegion: string;
+	awsDynamodbRegion?: string;
 
 	/**
 	 * AWS Dynamo DB secret access key.
 	 */
-	awsDynamodbSecretAccessKey: string;
+	awsDynamodbSecretAccessKey?: string;
 
 	/**
 	 * Azure Cosmos DB key.
 	 */
-	azureCosmosdbKey: string;
+	azureCosmosdbKey?: string;
 
 	/**
 	 * Azure Cosmos DB container id.
 	 */
-	azureCosmosdbContainerId: string;
+	azureCosmosdbContainerId?: string;
 
 	/**
 	 * Azure Cosmos DB database id.
 	 */
-	azureCosmosdbDatabaseId: string;
+	azureCosmosdbDatabaseId?: string;
 
 	/**
 	 * Azure Cosmos DB endpoint.
 	 */
-	azureCosmosdbEndpoint: string;
+	azureCosmosdbEndpoint?: string;
 
 	/**
 	 * GCP Firestore collection name.
 	 */
-	gcpFirestoreCollectionName: string;
+	gcpFirestoreCollectionName?: string;
 
 	/**
 	 * GCP Firestore credentials.
 	 */
-	gcpFirestoreCredentials: string;
+	gcpFirestoreCredentials?: string;
 
 	/**
 	 * GCP Firestore database id.
 	 */
-	gcpFirestoreDatabaseId: string;
+	gcpFirestoreDatabaseId?: string;
 
 	/**
 	 * GCP Firestore endpoint.
 	 */
-	gcpFirestoreApiEndpoint: string;
+	gcpFirestoreApiEndpoint?: string;
 
 	/**
 	 * GCP Firestore project id.
 	 */
-	gcpFirestoreProjectId: string;
+	gcpFirestoreProjectId?: string;
 
 	/**
 	 * ScyllaDB hosts as comma separated string.
 	 */
-	scylladbHosts: string;
+	scylladbHosts?: string;
 
 	/**
 	 * ScyllaDB keyspace.
 	 */
-	scylladbKeyspace: string;
+	scylladbKeyspace?: string;
 
 	/**
 	 * ScyllaDB local data center.
 	 */
-	scylladbLocalDataCenter: string;
+	scylladbLocalDataCenter?: string;
 
 	/**
 	 * The security token for accessing IPFS API.
 	 */
-	ipfsBearerToken: string;
+	ipfsBearerToken?: string;
 
 	/**
 	 * The url for accessing IPFS API.
 	 */
-	ipfsApiUrl: string;
+	ipfsApiUrl?: string;
 
 	/**
 	 * The type of the default blob storage: memory, file, ipfs, aws-s3, azure-storage, gcp-storage.
 	 */
-	blobStorageConnectorType: string;
+	blobStorageConnectorType?: string;
 
 	/**
 	 * Enable encryption for the blob storage.
 	 */
-	blobStorageEnableEncryption: string;
+	blobStorageEnableEncryption?: string;
 
 	/**
 	 * The encryption key for the blob storage.
 	 */
-	blobStorageEncryptionKey: string;
+	blobStorageEncryptionKey?: string;
 
 	/**
 	 * A prefix for all the blobs in blob-storage, can be empty.
 	 */
-	blobStoragePrefix: string;
+	blobStoragePrefix?: string;
 
 	/**
 	 * Enable the file blob storage connector.
 	 */
-	blobFileEnable: string;
+	blobFileEnable?: string;
 
 	/**
 	 * Enable the memory blob storage connector.
 	 */
-	blobMemoryEnable: string;
+	blobMemoryEnable?: string;
 
 	/**
 	 * AWS S3 access key id.
 	 */
-	awsS3AccessKeyId: string;
+	awsS3AccessKeyId?: string;
 
 	/**
 	 * AWS S3 bucket name.
 	 */
-	awsS3BucketName: string;
+	awsS3BucketName?: string;
 
 	/**
 	 * AWS S3 endpoint.
 	 */
-	awsS3Endpoint: string;
+	awsS3Endpoint?: string;
 
 	/**
 	 * AWS S3 region.
 	 */
-	awsS3Region: string;
+	awsS3Region?: string;
 
 	/**
 	 * AWS S3 secret access key.
 	 */
-	awsS3SecretAccessKey: string;
+	awsS3SecretAccessKey?: string;
 
 	/**
 	 * Azure Storage account key.
 	 */
-	azureStorageAccountKey: string;
+	azureStorageAccountKey?: string;
 
 	/**
 	 * Azure Storage account name.
 	 */
-	azureStorageAccountName: string;
+	azureStorageAccountName?: string;
 
 	/**
 	 * Azure Storage container.
 	 */
-	azureStorageContainerName: string;
+	azureStorageContainerName?: string;
 
 	/**
 	 * Azure Storage endpoint.
 	 */
-	azureStorageEndpoint: string;
+	azureStorageEndpoint?: string;
 
 	/**
 	 * GCP Storage bucket.
 	 */
-	gcpStorageBucketName: string;
+	gcpStorageBucketName?: string;
 
 	/**
 	 * GCP Storage credentials.
 	 */
-	gcpStorageCredentials: string;
+	gcpStorageCredentials?: string;
 
 	/**
 	 * GCP Storage endpoint.
 	 */
-	gcpStorageEndpoint: string;
+	gcpStorageEndpoint?: string;
 
 	/**
 	 * GCP Storage project id.
 	 */
-	gcpStorageProjectId: string;
+	gcpStorageProjectId?: string;
 
 	/**
 	 * The type of the default vault connector: entity-storage, hashicorp.
 	 */
-	vaultConnector: string;
+	vaultConnector?: string;
 
 	/**
 	 * Hashicorp Vault token.
 	 */
-	hashicorpVaultToken: string;
+	hashicorpVaultToken?: string;
 
 	/**
 	 * Hashicorp Vault endpoint.
 	 */
-	hashicorpVaultEndpoint: string;
+	hashicorpVaultEndpoint?: string;
 
 	/**
 	 * The type of background task connector, can be a comma separated list: console, entity-storage.
 	 */
-	loggingConnector: string;
+	loggingConnector?: string;
 
 	/**
 	 * The type of background task connector: entity-storage.
 	 */
-	backgroundTaskConnector: string;
+	backgroundTaskConnector?: string;
 
 	/**
 	 * The type of telemetry connector: entity-storage.
 	 */
-	telemetryConnector: string;
+	telemetryConnector?: string;
 
 	/**
 	 * The type of faucet connector: entity-storage, iota.
 	 */
-	faucetConnector: string;
+	faucetConnector?: string;
 
 	/**
 	 * The type of wallet connector: entity-storage, iota.
 	 */
-	walletConnector: string;
+	walletConnector?: string;
 
 	/**
 	 * The type of NFT connector: entity-storage, iota.
 	 */
-	nftConnector: string;
+	nftConnector?: string;
 
 	/**
 	 * The type of identity connector: entity-storage, iota.
 	 */
-	identityConnector: string;
+	identityConnector?: string;
 
 	/**
 	 * The type of immutable storage connector: entity-storage, iota.
 	 */
-	immutableStorageConnector: string;
+	immutableStorageConnector?: string;
 
 	/**
 	 * IOTA Faucet Endpoint.
 	 */
-	iotaFaucetEndpoint: string;
+	iotaFaucetEndpoint?: string;
 
 	/**
 	 * IOTA Node Endpoint.
 	 */
-	iotaNodeEndpoint: string;
+	iotaNodeEndpoint?: string;
 
 	/**
 	 * IOTA Bech32 HRP
 	 */
-	iotaBech32Hrp: string;
+	iotaBech32Hrp?: string;
 
 	/**
 	 * IOTA coin type.
 	 */
-	iotaCoinType: string;
+	iotaCoinType?: string;
 
 	/**
 	 * IOTA Explorer Endpoint.
 	 */
-	iotaExplorerEndpoint: string;
+	iotaExplorerEndpoint?: string;
 
 	/**
 	 * The type of identity profile connector: entity-storage.
 	 */
-	identityProfileConnector: string;
+	identityProfileConnector?: string;
 
 	/**
 	 * The identity assertion method id to use with immutable proofs.
 	 */
-	immutableProofAssertionMethodId: string;
+	immutableProofAssertionMethodId?: string;
 
 	/**
 	 * The hash key from the vault to use with immutable proofs.
 	 */
-	immutableProofHashKeyId: string;
+	immutableProofHashKeyId?: string;
 
 	/**
 	 * The type of attestation connector: entity-storage, iota.
 	 */
-	attestationConnector: string;
+	attestationConnector?: string;
 
 	/**
 	 * The identity assertion method id to use with attestation.
 	 */
-	attestationAssertionMethodId: string;
+	attestationAssertionMethodId?: string;
 }

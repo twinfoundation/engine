@@ -36,9 +36,11 @@ import type { IEngineEnvironmentVariables } from "../models/IEngineEnvironmentVa
  * @returns The config for the core.
  */
 export function buildEngineConfiguration(envVars: IEngineEnvironmentVariables): IEngineConfig {
-	envVars.stateFilename ??= "engine-state.json";
-	envVars.storageFileRoot = path.resolve(envVars.storageFileRoot);
-	envVars.stateFilename = path.join(envVars.storageFileRoot, envVars.stateFilename);
+	if (Is.stringValue(envVars.storageFileRoot)) {
+		envVars.stateFilename ??= "engine-state.json";
+		envVars.storageFileRoot = path.resolve(envVars.storageFileRoot);
+		envVars.stateFilename = path.join(envVars.storageFileRoot, envVars.stateFilename);
+	}
 
 	envVars.attestationAssertionMethodId ??= "attestation-assertion";
 	envVars.immutableProofHashKeyId ??= "immutable-proof-hash";
@@ -50,50 +52,27 @@ export function buildEngineConfiguration(envVars: IEngineEnvironmentVariables): 
 		debug: Coerce.boolean(envVars.debug) ?? false,
 		types: {
 			loggingConnector: [],
-			loggingComponent: [{ type: LoggingComponentType.Service }],
+			loggingComponent: [],
 			entityStorageConnector: [],
 			blobStorageConnector: [],
-			blobStorageComponent: [
-				{
-					type: BlobStorageComponentType.Service,
-					options: {
-						config: {
-							vaultKeyId: envVars.blobStorageEncryptionKey
-						}
-					}
-				}
-			],
+			blobStorageComponent: [],
 			backgroundTaskConnector: [],
 			telemetryConnector: [],
-			telemetryComponent: [{ type: TelemetryComponentType.Service }],
+			telemetryComponent: [],
 			vaultConnector: [],
 			walletConnector: [],
 			faucetConnector: [],
 			immutableStorageConnector: [],
 			nftConnector: [],
-			nftComponent: [{ type: NftComponentType.Service }],
+			nftComponent: [],
 			identityConnector: [],
-			identityComponent: [{ type: IdentityComponentType.Service }],
+			identityComponent: [],
 			identityProfileConnector: [],
-			identityProfileComponent: [{ type: IdentityProfileComponentType.Service }],
-			immutableProofComponent: [
-				{
-					type: ImmutableProofComponentType.Service,
-					options: {
-						config: {
-							assertionMethodId: envVars.immutableProofAssertionMethodId,
-							proofHashKeyId: envVars.immutableProofHashKeyId
-						}
-					}
-				}
-			],
+			identityProfileComponent: [],
+			immutableProofComponent: [],
 			attestationConnector: [],
-			attestationComponent: [
-				{
-					type: AttestationComponentType.Service
-				}
-			],
-			auditableItemGraphComponent: [{ type: AuditableItemGraphComponentType.Service }],
+			attestationComponent: [],
+			auditableItemGraphComponent: [],
 			auditableItemStreamComponent: [{ type: AuditableItemStreamComponentType.Service }]
 		}
 	};
@@ -145,7 +124,7 @@ function configureEntityStorageConnectors(
 		coreConfig.types.entityStorageConnector.push({
 			type: EntityStorageConnectorType.File,
 			options: {
-				config: { directory: envVars.storageFileRoot },
+				config: { directory: envVars.storageFileRoot ?? "" },
 				folderPrefix: envVars.entityStorageTablePrefix
 			}
 		});
@@ -156,10 +135,10 @@ function configureEntityStorageConnectors(
 			type: EntityStorageConnectorType.AwsDynamoDb,
 			options: {
 				config: {
-					region: envVars.awsDynamodbRegion,
-					accessKeyId: envVars.awsDynamodbAccessKeyId,
-					secretAccessKey: envVars.awsDynamodbSecretAccessKey,
-					endpoint: envVars.awsDynamodbEndpoint
+					region: envVars.awsDynamodbRegion ?? "",
+					accessKeyId: envVars.awsDynamodbAccessKeyId ?? "",
+					secretAccessKey: envVars.awsDynamodbSecretAccessKey ?? "",
+					endpoint: envVars.awsDynamodbEndpoint ?? ""
 				},
 				tablePrefix: envVars.entityStorageTablePrefix
 			}
@@ -171,10 +150,10 @@ function configureEntityStorageConnectors(
 			type: EntityStorageConnectorType.AzureCosmosDb,
 			options: {
 				config: {
-					endpoint: envVars.azureCosmosdbEndpoint,
-					key: envVars.azureCosmosdbKey,
-					databaseId: envVars.azureCosmosdbDatabaseId,
-					containerId: envVars.azureCosmosdbContainerId
+					endpoint: envVars.azureCosmosdbEndpoint ?? "",
+					key: envVars.azureCosmosdbKey ?? "",
+					databaseId: envVars.azureCosmosdbDatabaseId ?? "",
+					containerId: envVars.azureCosmosdbContainerId ?? ""
 				},
 				tablePrefix: envVars.entityStorageTablePrefix
 			}
@@ -186,11 +165,11 @@ function configureEntityStorageConnectors(
 			type: EntityStorageConnectorType.GcpFirestoreDb,
 			options: {
 				config: {
-					projectId: envVars.gcpFirestoreProjectId,
-					credentials: envVars.gcpFirestoreCredentials,
-					databaseId: envVars.gcpFirestoreDatabaseId,
-					collectionName: envVars.gcpFirestoreCollectionName,
-					endpoint: envVars.gcpFirestoreApiEndpoint
+					projectId: envVars.gcpFirestoreProjectId ?? "",
+					credentials: envVars.gcpFirestoreCredentials ?? "",
+					databaseId: envVars.gcpFirestoreDatabaseId ?? "",
+					collectionName: envVars.gcpFirestoreCollectionName ?? "",
+					endpoint: envVars.gcpFirestoreApiEndpoint ?? ""
 				},
 				tablePrefix: envVars.entityStorageTablePrefix
 			}
@@ -202,9 +181,9 @@ function configureEntityStorageConnectors(
 			type: EntityStorageConnectorType.ScyllaDb,
 			options: {
 				config: {
-					hosts: envVars.scylladbHosts.split(","),
-					localDataCenter: envVars.scylladbLocalDataCenter,
-					keyspace: envVars.scylladbKeyspace
+					hosts: envVars.scylladbHosts.split(",") ?? "",
+					localDataCenter: envVars.scylladbLocalDataCenter ?? "",
+					keyspace: envVars.scylladbKeyspace ?? ""
 				},
 				tablePrefix: envVars.entityStorageTablePrefix
 			}
@@ -248,7 +227,11 @@ function configureBlobStorageConnectors(
 		coreConfig.types.blobStorageConnector.push({
 			type: BlobStorageConnectorType.File,
 			options: {
-				config: { directory: path.join(envVars.storageFileRoot, "blob-storage") },
+				config: {
+					directory: Is.stringValue(envVars.storageFileRoot)
+						? path.join(envVars.storageFileRoot, "blob-storage")
+						: ""
+				},
 				storagePrefix: envVars.blobStoragePrefix
 			}
 		});
@@ -271,11 +254,11 @@ function configureBlobStorageConnectors(
 			type: BlobStorageConnectorType.AwsS3,
 			options: {
 				config: {
-					region: envVars.awsS3Region,
-					bucketName: envVars.awsS3BucketName,
-					accessKeyId: envVars.awsS3AccessKeyId,
-					secretAccessKey: envVars.awsS3SecretAccessKey,
-					endpoint: envVars.awsS3Endpoint
+					region: envVars.awsS3Region ?? "",
+					bucketName: envVars.awsS3BucketName ?? "",
+					accessKeyId: envVars.awsS3AccessKeyId ?? "",
+					secretAccessKey: envVars.awsS3SecretAccessKey ?? "",
+					endpoint: envVars.awsS3Endpoint ?? ""
 				},
 				storagePrefix: envVars.blobStoragePrefix
 			}
@@ -287,10 +270,10 @@ function configureBlobStorageConnectors(
 			type: BlobStorageConnectorType.AzureStorage,
 			options: {
 				config: {
-					accountName: envVars.azureStorageAccountName,
-					accountKey: envVars.azureStorageAccountKey,
-					containerName: envVars.azureStorageContainerName,
-					endpoint: envVars.azureStorageEndpoint
+					accountName: envVars.azureStorageAccountName ?? "",
+					accountKey: envVars.azureStorageAccountKey ?? "",
+					containerName: envVars.azureStorageContainerName ?? "",
+					endpoint: envVars.azureStorageEndpoint ?? ""
 				},
 				storagePrefix: envVars.blobStoragePrefix
 			}
@@ -302,9 +285,9 @@ function configureBlobStorageConnectors(
 			type: BlobStorageConnectorType.GcpStorage,
 			options: {
 				config: {
-					projectId: envVars.gcpStorageProjectId,
-					credentials: envVars.gcpStorageCredentials,
-					bucketName: envVars.gcpStorageBucketName,
+					projectId: envVars.gcpStorageProjectId ?? "",
+					credentials: envVars.gcpStorageCredentials ?? "",
+					bucketName: envVars.gcpStorageBucketName ?? "",
 					apiEndpoint: envVars.gcpFirestoreApiEndpoint
 				},
 				storagePrefix: envVars.blobStoragePrefix
@@ -319,6 +302,18 @@ function configureBlobStorageConnectors(
 				config.isDefault = true;
 			}
 		}
+	}
+
+	if (coreConfig.types.blobStorageConnector.length > 0) {
+		coreConfig.types.blobStorageComponent ??= [];
+		coreConfig.types.blobStorageComponent.push({
+			type: BlobStorageComponentType.Service,
+			options: {
+				config: {
+					vaultKeyId: envVars.blobStorageEncryptionKey
+				}
+			}
+		});
 	}
 }
 
@@ -355,6 +350,11 @@ function configureLogging(coreConfig: IEngineConfig, envVars: IEngineEnvironment
 			}
 		});
 	}
+
+	if (loggingConnectors.length > 0) {
+		coreConfig.types.loggingComponent ??= [];
+		coreConfig.types.loggingComponent.push({ type: LoggingComponentType.Service });
+	}
 }
 
 /**
@@ -376,7 +376,10 @@ function configureVaultConnectors(
 		coreConfig.types.vaultConnector.push({
 			type: VaultConnectorType.Hashicorp,
 			options: {
-				config: { endpoint: envVars.hashicorpVaultEndpoint, token: envVars.hashicorpVaultToken }
+				config: {
+					endpoint: envVars.hashicorpVaultEndpoint ?? "",
+					token: envVars.hashicorpVaultToken ?? ""
+				}
 			}
 		});
 	}
@@ -416,6 +419,11 @@ function configureTelemetryConnectors(
 			type: TelemetryConnectorType.EntityStorage
 		});
 	}
+
+	if (coreConfig.types.telemetryConnector.length > 0) {
+		coreConfig.types.telemetryComponents ??= [];
+		coreConfig.types.telemetryComponents.push({ type: TelemetryComponentType.Service });
+	}
 }
 
 /**
@@ -438,9 +446,9 @@ function configureFaucetConnectors(
 			type: FaucetConnectorType.Iota,
 			options: {
 				config: {
-					endpoint: envVars.iotaFaucetEndpoint,
+					endpoint: envVars.iotaFaucetEndpoint ?? "",
 					clientOptions: {
-						nodes: [envVars.iotaNodeEndpoint]
+						nodes: [envVars.iotaNodeEndpoint ?? ""]
 					},
 					bech32Hrp: envVars.iotaBech32Hrp,
 					coinType: Coerce.number(envVars.iotaCoinType)
@@ -471,7 +479,7 @@ function configureWalletConnectors(
 			options: {
 				config: {
 					clientOptions: {
-						nodes: [envVars.iotaNodeEndpoint]
+						nodes: [envVars.iotaNodeEndpoint ?? ""]
 					},
 					bech32Hrp: envVars.iotaBech32Hrp,
 					coinType: Coerce.number(envVars.iotaCoinType)
@@ -502,13 +510,18 @@ function configureNftConnectors(
 			options: {
 				config: {
 					clientOptions: {
-						nodes: [envVars.iotaNodeEndpoint]
+						nodes: [envVars.iotaNodeEndpoint ?? ""]
 					},
 					bech32Hrp: envVars.iotaBech32Hrp,
 					coinType: Coerce.number(envVars.iotaCoinType)
 				}
 			}
 		});
+	}
+
+	if (coreConfig.types.nftConnector.length > 0) {
+		coreConfig.types.nftComponent ??= [];
+		coreConfig.types.nftComponent.push({ type: NftComponentType.Service });
 	}
 }
 
@@ -533,12 +546,35 @@ function configureImmutableStorageConnectors(
 			options: {
 				config: {
 					clientOptions: {
-						nodes: [envVars.iotaNodeEndpoint]
+						nodes: [envVars.iotaNodeEndpoint ?? ""]
 					},
 					bech32Hrp: envVars.iotaBech32Hrp,
 					coinType: Coerce.number(envVars.iotaCoinType)
 				}
 			}
+		});
+	}
+
+	if (coreConfig.types.immutableStorageConnector.length > 0) {
+		coreConfig.types.immutableProofComponent ??= [];
+		coreConfig.types.immutableProofComponent.push({
+			type: ImmutableProofComponentType.Service,
+			options: {
+				config: {
+					assertionMethodId: envVars.immutableProofAssertionMethodId,
+					proofHashKeyId: envVars.immutableProofHashKeyId
+				}
+			}
+		});
+
+		coreConfig.types.auditableItemGraphComponent ??= [];
+		coreConfig.types.auditableItemGraphComponent.push({
+			type: AuditableItemGraphComponentType.Service
+		});
+
+		coreConfig.types.auditableItemStreamComponent ??= [];
+		coreConfig.types.auditableItemStreamComponent.push({
+			type: AuditableItemStreamComponentType.Service
 		});
 	}
 }
@@ -564,13 +600,18 @@ function configureIdentityConnectors(
 			options: {
 				config: {
 					clientOptions: {
-						nodes: [envVars.iotaNodeEndpoint]
+						nodes: [envVars.iotaNodeEndpoint ?? ""]
 					},
 					bech32Hrp: envVars.iotaBech32Hrp,
 					coinType: Coerce.number(envVars.iotaCoinType)
 				}
 			}
 		});
+	}
+
+	if (coreConfig.types.identityConnector.length > 0) {
+		coreConfig.types.identityComponent ??= [];
+		coreConfig.types.identityComponent.push({ type: IdentityComponentType.Service });
 	}
 }
 
@@ -589,6 +630,11 @@ function configureIdentityProfileConnectors(
 		coreConfig.types.identityProfileConnector.push({
 			type: IdentityProfileConnectorType.EntityStorage
 		});
+	}
+
+	if (coreConfig.types.identityProfileConnector.length > 0) {
+		coreConfig.types.identityProfileComponent ??= [];
+		coreConfig.types.identityProfileComponent.push({ type: IdentityProfileComponentType.Service });
 	}
 }
 
@@ -610,6 +656,13 @@ function configureAttestationConnectors(
 	} else if (envVars.attestationConnector === AttestationConnectorType.Iota) {
 		coreConfig.types.attestationConnector.push({
 			type: AttestationConnectorType.Iota
+		});
+	}
+
+	if (coreConfig.types.attestationConnector.length > 0) {
+		coreConfig.types.attestationComponent ??= [];
+		coreConfig.types.attestationComponent.push({
+			type: AttestationComponentType.Service
 		});
 	}
 }

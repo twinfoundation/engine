@@ -68,6 +68,14 @@ describe("engine", () => {
 		expect(engine).toBeDefined();
 	});
 
+	test("Can start engine with empty config", async () => {
+		const engine = new Engine({ config: { types: {} } });
+		await engine.start();
+		await engine.stop();
+
+		expect(engine).toBeDefined();
+	});
+
 	test("Can start engine with config", async () => {
 		let calledCustomBootstrap = false;
 
@@ -108,6 +116,19 @@ describe("engine", () => {
 		await engine.start();
 		await engine.stop();
 
+		expect(ComponentFactory.names()).toEqual([
+			"logging",
+			"telemetry",
+			"blob",
+			"did",
+			"identity-profile",
+			"nft",
+			"immutable-proof",
+			"attestation",
+			"aig",
+			"ais"
+		]);
+
 		expect(engine).toBeDefined();
 		expect(calledCustomBootstrap).toBeDefined();
 	});
@@ -132,9 +153,7 @@ describe("engine", () => {
 		});
 		await engine.start();
 		await engine.stop();
-		expect(engine).toBeDefined();
-		const componentNames = ComponentFactory.names();
-		expect(componentNames).toEqual(["test-entity"]);
+		expect(ComponentFactory.names()).toEqual(["test-entity"]);
 	});
 
 	test("Can start engine with custom entity storage and custom store", async () => {
@@ -173,9 +192,7 @@ describe("engine", () => {
 		await engine.start();
 		await engine.stop();
 
-		expect(engine).toBeDefined();
-		const componentNames = ComponentFactory.names();
-		expect(componentNames).toEqual(["test-entity"]);
+		expect(ComponentFactory.names()).toEqual(["test-entity"]);
 
 		const service = ComponentFactory.get<IEntityStorageComponent<TestEntity>>("test-entity");
 		await service.set({ id: "test" });

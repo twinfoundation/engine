@@ -4,520 +4,520 @@ The engine core environment variables.
 
 ## Properties
 
-### debug
+### debug?
 
-> **debug**: `string`
+> `optional` **debug**: `string`
 
 Start the engine in debug mode.
 
 ***
 
-### storageFileRoot
+### storageFileRoot?
 
-> **storageFileRoot**: `string`
+> `optional` **storageFileRoot**: `string`
 
 The root directory for storing items like state file.
 
 ***
 
-### stateFilename
+### stateFilename?
 
-> **stateFilename**: `string`
+> `optional` **stateFilename**: `string`
 
 The name of the state file.
 
 ***
 
-### entityStorageConnectorType
+### entityStorageConnectorType?
 
-> **entityStorageConnectorType**: `string`
+> `optional` **entityStorageConnectorType**: `string`
 
 The type of the default entity storage: file, memory, aws-dynamodb, azure-cosmosdb, gcp-firestoredb, scylladb.
 
 ***
 
-### entityStorageTablePrefix
+### entityStorageTablePrefix?
 
-> **entityStorageTablePrefix**: `string`
+> `optional` **entityStorageTablePrefix**: `string`
 
 A prefix for all the table in entity-storage, can be empty.
 
 ***
 
-### entityFileEnable
+### entityFileEnable?
 
-> **entityFileEnable**: `string`
+> `optional` **entityFileEnable**: `string`
 
 Enable the file entity storage connector.
 
 ***
 
-### entityMemoryEnable
+### entityMemoryEnable?
 
-> **entityMemoryEnable**: `string`
+> `optional` **entityMemoryEnable**: `string`
 
 Enable the memory entity storage connector.
 
 ***
 
-### awsDynamodbAccessKeyId
+### awsDynamodbAccessKeyId?
 
-> **awsDynamodbAccessKeyId**: `string`
+> `optional` **awsDynamodbAccessKeyId**: `string`
 
 AWS Dynamo DB access key id.
 
 ***
 
-### awsDynamodbEndpoint
+### awsDynamodbEndpoint?
 
-> **awsDynamodbEndpoint**: `string`
+> `optional` **awsDynamodbEndpoint**: `string`
 
 AWS Dynamo DB Endpoint if running local instance.
 
 ***
 
-### awsDynamodbRegion
+### awsDynamodbRegion?
 
-> **awsDynamodbRegion**: `string`
+> `optional` **awsDynamodbRegion**: `string`
 
 AWS Dynamo DB region.
 
 ***
 
-### awsDynamodbSecretAccessKey
+### awsDynamodbSecretAccessKey?
 
-> **awsDynamodbSecretAccessKey**: `string`
+> `optional` **awsDynamodbSecretAccessKey**: `string`
 
 AWS Dynamo DB secret access key.
 
 ***
 
-### azureCosmosdbKey
+### azureCosmosdbKey?
 
-> **azureCosmosdbKey**: `string`
+> `optional` **azureCosmosdbKey**: `string`
 
 Azure Cosmos DB key.
 
 ***
 
-### azureCosmosdbContainerId
+### azureCosmosdbContainerId?
 
-> **azureCosmosdbContainerId**: `string`
+> `optional` **azureCosmosdbContainerId**: `string`
 
 Azure Cosmos DB container id.
 
 ***
 
-### azureCosmosdbDatabaseId
+### azureCosmosdbDatabaseId?
 
-> **azureCosmosdbDatabaseId**: `string`
+> `optional` **azureCosmosdbDatabaseId**: `string`
 
 Azure Cosmos DB database id.
 
 ***
 
-### azureCosmosdbEndpoint
+### azureCosmosdbEndpoint?
 
-> **azureCosmosdbEndpoint**: `string`
+> `optional` **azureCosmosdbEndpoint**: `string`
 
 Azure Cosmos DB endpoint.
 
 ***
 
-### gcpFirestoreCollectionName
+### gcpFirestoreCollectionName?
 
-> **gcpFirestoreCollectionName**: `string`
+> `optional` **gcpFirestoreCollectionName**: `string`
 
 GCP Firestore collection name.
 
 ***
 
-### gcpFirestoreCredentials
+### gcpFirestoreCredentials?
 
-> **gcpFirestoreCredentials**: `string`
+> `optional` **gcpFirestoreCredentials**: `string`
 
 GCP Firestore credentials.
 
 ***
 
-### gcpFirestoreDatabaseId
+### gcpFirestoreDatabaseId?
 
-> **gcpFirestoreDatabaseId**: `string`
+> `optional` **gcpFirestoreDatabaseId**: `string`
 
 GCP Firestore database id.
 
 ***
 
-### gcpFirestoreApiEndpoint
+### gcpFirestoreApiEndpoint?
 
-> **gcpFirestoreApiEndpoint**: `string`
+> `optional` **gcpFirestoreApiEndpoint**: `string`
 
 GCP Firestore endpoint.
 
 ***
 
-### gcpFirestoreProjectId
+### gcpFirestoreProjectId?
 
-> **gcpFirestoreProjectId**: `string`
+> `optional` **gcpFirestoreProjectId**: `string`
 
 GCP Firestore project id.
 
 ***
 
-### scylladbHosts
+### scylladbHosts?
 
-> **scylladbHosts**: `string`
+> `optional` **scylladbHosts**: `string`
 
 ScyllaDB hosts as comma separated string.
 
 ***
 
-### scylladbKeyspace
+### scylladbKeyspace?
 
-> **scylladbKeyspace**: `string`
+> `optional` **scylladbKeyspace**: `string`
 
 ScyllaDB keyspace.
 
 ***
 
-### scylladbLocalDataCenter
+### scylladbLocalDataCenter?
 
-> **scylladbLocalDataCenter**: `string`
+> `optional` **scylladbLocalDataCenter**: `string`
 
 ScyllaDB local data center.
 
 ***
 
-### ipfsBearerToken
+### ipfsBearerToken?
 
-> **ipfsBearerToken**: `string`
+> `optional` **ipfsBearerToken**: `string`
 
 The security token for accessing IPFS API.
 
 ***
 
-### ipfsApiUrl
+### ipfsApiUrl?
 
-> **ipfsApiUrl**: `string`
+> `optional` **ipfsApiUrl**: `string`
 
 The url for accessing IPFS API.
 
 ***
 
-### blobStorageConnectorType
+### blobStorageConnectorType?
 
-> **blobStorageConnectorType**: `string`
+> `optional` **blobStorageConnectorType**: `string`
 
 The type of the default blob storage: memory, file, ipfs, aws-s3, azure-storage, gcp-storage.
 
 ***
 
-### blobStorageEnableEncryption
+### blobStorageEnableEncryption?
 
-> **blobStorageEnableEncryption**: `string`
+> `optional` **blobStorageEnableEncryption**: `string`
 
 Enable encryption for the blob storage.
 
 ***
 
-### blobStorageEncryptionKey
+### blobStorageEncryptionKey?
 
-> **blobStorageEncryptionKey**: `string`
+> `optional` **blobStorageEncryptionKey**: `string`
 
 The encryption key for the blob storage.
 
 ***
 
-### blobStoragePrefix
+### blobStoragePrefix?
 
-> **blobStoragePrefix**: `string`
+> `optional` **blobStoragePrefix**: `string`
 
 A prefix for all the blobs in blob-storage, can be empty.
 
 ***
 
-### blobFileEnable
+### blobFileEnable?
 
-> **blobFileEnable**: `string`
+> `optional` **blobFileEnable**: `string`
 
 Enable the file blob storage connector.
 
 ***
 
-### blobMemoryEnable
+### blobMemoryEnable?
 
-> **blobMemoryEnable**: `string`
+> `optional` **blobMemoryEnable**: `string`
 
 Enable the memory blob storage connector.
 
 ***
 
-### awsS3AccessKeyId
+### awsS3AccessKeyId?
 
-> **awsS3AccessKeyId**: `string`
+> `optional` **awsS3AccessKeyId**: `string`
 
 AWS S3 access key id.
 
 ***
 
-### awsS3BucketName
+### awsS3BucketName?
 
-> **awsS3BucketName**: `string`
+> `optional` **awsS3BucketName**: `string`
 
 AWS S3 bucket name.
 
 ***
 
-### awsS3Endpoint
+### awsS3Endpoint?
 
-> **awsS3Endpoint**: `string`
+> `optional` **awsS3Endpoint**: `string`
 
 AWS S3 endpoint.
 
 ***
 
-### awsS3Region
+### awsS3Region?
 
-> **awsS3Region**: `string`
+> `optional` **awsS3Region**: `string`
 
 AWS S3 region.
 
 ***
 
-### awsS3SecretAccessKey
+### awsS3SecretAccessKey?
 
-> **awsS3SecretAccessKey**: `string`
+> `optional` **awsS3SecretAccessKey**: `string`
 
 AWS S3 secret access key.
 
 ***
 
-### azureStorageAccountKey
+### azureStorageAccountKey?
 
-> **azureStorageAccountKey**: `string`
+> `optional` **azureStorageAccountKey**: `string`
 
 Azure Storage account key.
 
 ***
 
-### azureStorageAccountName
+### azureStorageAccountName?
 
-> **azureStorageAccountName**: `string`
+> `optional` **azureStorageAccountName**: `string`
 
 Azure Storage account name.
 
 ***
 
-### azureStorageContainerName
+### azureStorageContainerName?
 
-> **azureStorageContainerName**: `string`
+> `optional` **azureStorageContainerName**: `string`
 
 Azure Storage container.
 
 ***
 
-### azureStorageEndpoint
+### azureStorageEndpoint?
 
-> **azureStorageEndpoint**: `string`
+> `optional` **azureStorageEndpoint**: `string`
 
 Azure Storage endpoint.
 
 ***
 
-### gcpStorageBucketName
+### gcpStorageBucketName?
 
-> **gcpStorageBucketName**: `string`
+> `optional` **gcpStorageBucketName**: `string`
 
 GCP Storage bucket.
 
 ***
 
-### gcpStorageCredentials
+### gcpStorageCredentials?
 
-> **gcpStorageCredentials**: `string`
+> `optional` **gcpStorageCredentials**: `string`
 
 GCP Storage credentials.
 
 ***
 
-### gcpStorageEndpoint
+### gcpStorageEndpoint?
 
-> **gcpStorageEndpoint**: `string`
+> `optional` **gcpStorageEndpoint**: `string`
 
 GCP Storage endpoint.
 
 ***
 
-### gcpStorageProjectId
+### gcpStorageProjectId?
 
-> **gcpStorageProjectId**: `string`
+> `optional` **gcpStorageProjectId**: `string`
 
 GCP Storage project id.
 
 ***
 
-### vaultConnector
+### vaultConnector?
 
-> **vaultConnector**: `string`
+> `optional` **vaultConnector**: `string`
 
 The type of the default vault connector: entity-storage, hashicorp.
 
 ***
 
-### hashicorpVaultToken
+### hashicorpVaultToken?
 
-> **hashicorpVaultToken**: `string`
+> `optional` **hashicorpVaultToken**: `string`
 
 Hashicorp Vault token.
 
 ***
 
-### hashicorpVaultEndpoint
+### hashicorpVaultEndpoint?
 
-> **hashicorpVaultEndpoint**: `string`
+> `optional` **hashicorpVaultEndpoint**: `string`
 
 Hashicorp Vault endpoint.
 
 ***
 
-### loggingConnector
+### loggingConnector?
 
-> **loggingConnector**: `string`
+> `optional` **loggingConnector**: `string`
 
 The type of background task connector, can be a comma separated list: console, entity-storage.
 
 ***
 
-### backgroundTaskConnector
+### backgroundTaskConnector?
 
-> **backgroundTaskConnector**: `string`
+> `optional` **backgroundTaskConnector**: `string`
 
 The type of background task connector: entity-storage.
 
 ***
 
-### telemetryConnector
+### telemetryConnector?
 
-> **telemetryConnector**: `string`
+> `optional` **telemetryConnector**: `string`
 
 The type of telemetry connector: entity-storage.
 
 ***
 
-### faucetConnector
+### faucetConnector?
 
-> **faucetConnector**: `string`
+> `optional` **faucetConnector**: `string`
 
 The type of faucet connector: entity-storage, iota.
 
 ***
 
-### walletConnector
+### walletConnector?
 
-> **walletConnector**: `string`
+> `optional` **walletConnector**: `string`
 
 The type of wallet connector: entity-storage, iota.
 
 ***
 
-### nftConnector
+### nftConnector?
 
-> **nftConnector**: `string`
+> `optional` **nftConnector**: `string`
 
 The type of NFT connector: entity-storage, iota.
 
 ***
 
-### identityConnector
+### identityConnector?
 
-> **identityConnector**: `string`
+> `optional` **identityConnector**: `string`
 
 The type of identity connector: entity-storage, iota.
 
 ***
 
-### immutableStorageConnector
+### immutableStorageConnector?
 
-> **immutableStorageConnector**: `string`
+> `optional` **immutableStorageConnector**: `string`
 
 The type of immutable storage connector: entity-storage, iota.
 
 ***
 
-### iotaFaucetEndpoint
+### iotaFaucetEndpoint?
 
-> **iotaFaucetEndpoint**: `string`
+> `optional` **iotaFaucetEndpoint**: `string`
 
 IOTA Faucet Endpoint.
 
 ***
 
-### iotaNodeEndpoint
+### iotaNodeEndpoint?
 
-> **iotaNodeEndpoint**: `string`
+> `optional` **iotaNodeEndpoint**: `string`
 
 IOTA Node Endpoint.
 
 ***
 
-### iotaBech32Hrp
+### iotaBech32Hrp?
 
-> **iotaBech32Hrp**: `string`
+> `optional` **iotaBech32Hrp**: `string`
 
 IOTA Bech32 HRP
 
 ***
 
-### iotaCoinType
+### iotaCoinType?
 
-> **iotaCoinType**: `string`
+> `optional` **iotaCoinType**: `string`
 
 IOTA coin type.
 
 ***
 
-### iotaExplorerEndpoint
+### iotaExplorerEndpoint?
 
-> **iotaExplorerEndpoint**: `string`
+> `optional` **iotaExplorerEndpoint**: `string`
 
 IOTA Explorer Endpoint.
 
 ***
 
-### identityProfileConnector
+### identityProfileConnector?
 
-> **identityProfileConnector**: `string`
+> `optional` **identityProfileConnector**: `string`
 
 The type of identity profile connector: entity-storage.
 
 ***
 
-### immutableProofAssertionMethodId
+### immutableProofAssertionMethodId?
 
-> **immutableProofAssertionMethodId**: `string`
+> `optional` **immutableProofAssertionMethodId**: `string`
 
 The identity assertion method id to use with immutable proofs.
 
 ***
 
-### immutableProofHashKeyId
+### immutableProofHashKeyId?
 
-> **immutableProofHashKeyId**: `string`
+> `optional` **immutableProofHashKeyId**: `string`
 
 The hash key from the vault to use with immutable proofs.
 
 ***
 
-### attestationConnector
+### attestationConnector?
 
-> **attestationConnector**: `string`
+> `optional` **attestationConnector**: `string`
 
 The type of attestation connector: entity-storage, iota.
 
 ***
 
-### attestationAssertionMethodId
+### attestationAssertionMethodId?
 
-> **attestationAssertionMethodId**: `string`
+> `optional` **attestationAssertionMethodId**: `string`
 
 The identity assertion method id to use with attestation.

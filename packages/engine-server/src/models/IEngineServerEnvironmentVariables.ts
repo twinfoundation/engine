@@ -8,45 +8,45 @@ export interface IEngineServerEnvironmentVariables {
 	/**
 	 * The name of the admin user.
 	 */
-	adminUsername: string;
+	adminUsername?: string;
 
 	/**
 	 * The port to serve the API from.
 	 */
-	port: string;
+	port?: string;
 
 	/**
 	 * The host to serve the API from.
 	 */
-	host: string;
+	host?: string;
 
 	/**
 	 * The CORS origins to allow, defaults to *.
 	 */
-	corsOrigins: string;
+	corsOrigins?: string;
 
 	/**
 	 * The CORS methods to allow, defaults to GET, POST, PUT, DELETE, OPTIONS.
 	 */
-	httpMethods: string;
+	httpMethods?: string;
 
 	/**
 	 * The CORS headers to allow.
 	 */
-	httpAllowedHeaders: string;
+	httpAllowedHeaders?: string;
 
 	/**
 	 * The CORS headers to expose.
 	 */
-	httpExposedHeaders: string;
+	httpExposedHeaders?: string;
 
 	/**
 	 * The type of auth processor to use on the API: entity-storage.
 	 */
-	authProcessorType: string;
+	authProcessorType?: string;
 
 	/**
 	 * The id of the key in the vault to use for signing in auth operations.
 	 */
-	authSigningKeyId: string;
+	authSigningKeyId?: string;
 }
