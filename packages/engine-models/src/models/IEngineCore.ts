@@ -2,26 +2,29 @@
 // SPDX-License-Identifier: Apache-2.0.
 import type { IError } from "@twin.org/core";
 import type { IEngineCoreConfig } from "./config/IEngineCoreConfig";
-import type { IEngineCoreTypeBaseConfig } from "./config/IEngineCoreTypeBaseConfig";
 import type { IEngineCoreTypeConfig } from "./config/IEngineCoreTypeConfig";
-import type { EngineTypeInitialiser } from "./engineTypeInitialiser";
 import type { IEngineCoreClone } from "./IEngineCoreClone";
 import type { IEngineState } from "./IEngineState";
 
 /**
  * Interface describing the engine core methods.
  */
-export interface IEngineCore<S extends IEngineState = IEngineState> {
+export interface IEngineCore<
+	C extends IEngineCoreConfig = IEngineCoreConfig,
+	S extends IEngineState = IEngineState
+> {
 	/**
 	 * Add a type initialiser.
 	 * @param type The type to add the initialiser for.
 	 * @param typeConfig The type config.
-	 * @param initialiser The initialiser to add.
+	 * @param module The name of the module which contains the initialiser method.
+	 * @param method The name of the method to call.
 	 */
-	addTypeInitialiser<T extends IEngineCoreTypeBaseConfig>(
+	addTypeInitialiser(
 		type: string,
 		typeConfig: IEngineCoreTypeConfig[] | undefined,
-		initialiser: EngineTypeInitialiser<T>
+		module: string,
+		method: string
 	): void;
 
 	/**
@@ -52,7 +55,7 @@ export interface IEngineCore<S extends IEngineState = IEngineState> {
 	 * Get the config for the engine.
 	 * @returns The config for the engine.
 	 */
-	getConfig(): IEngineCoreConfig;
+	getConfig(): C;
 
 	/**
 	 * Get the state of the engine.
@@ -70,11 +73,11 @@ export interface IEngineCore<S extends IEngineState = IEngineState> {
 	 * Get the data required to create a clone of the engine.
 	 * @returns The clone data.
 	 */
-	getCloneData(): IEngineCoreClone;
+	getCloneData(): IEngineCoreClone<C, S>;
 
 	/**
 	 * Populate the engine from the clone data.
 	 * @param cloneData The clone data to populate from.
 	 */
-	populateClone(cloneData: IEngineCoreClone): void;
+	populateClone(cloneData: IEngineCoreClone<C, S>): void;
 }

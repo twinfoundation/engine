@@ -2,14 +2,14 @@
 // SPDX-License-Identifier: Apache-2.0.
 import type { IServerInfo, IWebServerOptions } from "@twin.org/api-models";
 import { Coerce, Is } from "@twin.org/core";
+import type { IEngineCoreConfig } from "@twin.org/engine-models";
 import {
 	AuthenticationComponentType,
 	InformationComponentType,
 	RestRouteProcessorType,
 	SocketRouteProcessorType,
-	type IEngineCoreConfig,
-	type IEngineServerConfig
-} from "@twin.org/engine-models";
+	type IEngineServerTypesConfig
+} from "@twin.org/engine-server-types";
 import type { HttpMethod } from "@twin.org/web";
 import type { IEngineServerEnvironmentVariables } from "../models/IEngineServerEnvironmentVariables";
 
@@ -24,7 +24,7 @@ export function buildEngineServerConfiguration(
 	envVars: IEngineServerEnvironmentVariables,
 	coreEngineConfig: IEngineCoreConfig,
 	serverInfo: IServerInfo
-): IEngineServerConfig {
+): IEngineServerTypesConfig {
 	envVars.adminUsername ??= "admin@node";
 	envVars.authSigningKeyId ??= "auth-signing";
 
@@ -45,33 +45,37 @@ export function buildEngineServerConfiguration(
 
 	const authProcessorType = envVars.authProcessorType;
 
-	const serverConfig: IEngineServerConfig = {
+	const serverConfig: IEngineServerTypesConfig = {
+		...coreEngineConfig,
 		web: webServerOptions,
-		informationComponent: [
-			{
-				type: InformationComponentType.Service,
-				options: {
-					config: {
-						serverInfo
+		types: {
+			...coreEngineConfig.types,
+			informationComponent: [
+				{
+					type: InformationComponentType.Service,
+					options: {
+						config: {
+							serverInfo
+						}
 					}
 				}
-			}
-		],
-		restRouteProcessor: []
+			],
+			restRouteProcessor: []
+		}
 	};
 
-	serverConfig.restRouteProcessor ??= [];
-	serverConfig.socketRouteProcessor ??= [];
+	serverConfig.types.restRouteProcessor ??= [];
+	serverConfig.types.socketRouteProcessor ??= [];
 
-	serverConfig.restRouteProcessor.push({
+	serverConfig.types.restRouteProcessor.push({
 		type: RestRouteProcessorType.NodeIdentity
 	});
-	serverConfig.socketRouteProcessor.push({
+	serverConfig.types.socketRouteProcessor.push({
 		type: SocketRouteProcessorType.NodeIdentity
 	});
 
 	if (!coreEngineConfig.silent) {
-		serverConfig.restRouteProcessor.push({
+		serverConfig.types.restRouteProcessor.push({
 			type: RestRouteProcessorType.Logging,
 			options: {
 				config: {
@@ -79,7 +83,7 @@ export function buildEngineServerConfiguration(
 				}
 			}
 		});
-		serverConfig.socketRouteProcessor.push({
+		serverConfig.types.socketRouteProcessor.push({
 			type: SocketRouteProcessorType.Logging,
 			options: {
 				config: {
@@ -88,7 +92,7 @@ export function buildEngineServerConfiguration(
 			}
 		});
 	}
-	serverConfig.restRouteProcessor.push({
+	serverConfig.types.restRouteProcessor.push({
 		type: RestRouteProcessorType.RestRoute,
 		options: {
 			config: {
@@ -96,7 +100,7 @@ export function buildEngineServerConfiguration(
 			}
 		}
 	});
-	serverConfig.socketRouteProcessor.push({
+	serverConfig.types.socketRouteProcessor.push({
 		type: SocketRouteProcessorType.SocketRoute,
 		options: {
 			config: {
@@ -106,8 +110,8 @@ export function buildEngineServerConfiguration(
 	});
 
 	if (authProcessorType === AuthenticationComponentType.EntityStorage) {
-		serverConfig.authenticationComponent ??= [];
-		serverConfig.authenticationComponent.push({
+		serverConfig.types.authenticationComponent ??= [];
+		serverConfig.types.authenticationComponent.push({
 			type: AuthenticationComponentType.EntityStorage,
 			options: {
 				config: {
@@ -115,7 +119,7 @@ export function buildEngineServerConfiguration(
 				}
 			}
 		});
-		serverConfig.restRouteProcessor.push({
+		serverConfig.types.restRouteProcessor.push({
 			type: RestRouteProcessorType.AuthHeader,
 			options: {
 				config: {
@@ -123,7 +127,7 @@ export function buildEngineServerConfiguration(
 				}
 			}
 		});
-		serverConfig.socketRouteProcessor.push({
+		serverConfig.types.socketRouteProcessor.push({
 			type: SocketRouteProcessorType.AuthHeader,
 			options: {
 				config: {
@@ -144,50 +148,50 @@ export function buildEngineServerConfiguration(
  * @param serverConfig The server config.
  */
 function addRestPaths(
-	coreEngineConfig: IEngineCoreConfig,
-	serverConfig: IEngineServerConfig
+	coreEngineConfig: IEngineServerTypesConfig,
+	serverConfig: IEngineServerTypesConfig
 ): void {
-	if (Is.arrayValue(serverConfig.informationComponent)) {
-		serverConfig.informationComponent[0].restPath = "";
+	if (Is.arrayValue(serverConfig.types.informationComponent)) {
+		serverConfig.types.informationComponent[0].restPath = "";
 	}
 
-	if (Is.arrayValue(serverConfig.authenticationComponent)) {
-		serverConfig.authenticationComponent[0].restPath = "authentication";
+	if (Is.arrayValue(serverConfig.types.authenticationComponent)) {
+		serverConfig.types.authenticationComponent[0].restPath = "authentication";
 	}
 
-	if (Is.arrayValue(coreEngineConfig.blobStorageComponent)) {
-		coreEngineConfig.blobStorageComponent[0].restPath = "blob";
+	if (Is.arrayValue(coreEngineConfig.types.blobStorageComponent)) {
+		coreEngineConfig.types.blobStorageComponent[0].restPath = "blob";
 	}
 
-	if (Is.arrayValue(coreEngineConfig.loggingComponent)) {
-		coreEngineConfig.loggingComponent[0].restPath = "logging";
+	if (Is.arrayValue(coreEngineConfig.types.loggingComponent)) {
+		coreEngineConfig.types.loggingComponent[0].restPath = "logging";
 	}
 
-	if (Is.arrayValue(coreEngineConfig.telemetryComponent)) {
-		coreEngineConfig.telemetryComponent[0].restPath = "telemetry";
+	if (Is.arrayValue(coreEngineConfig.types.telemetryComponent)) {
+		coreEngineConfig.types.telemetryComponent[0].restPath = "telemetry";
 	}
 
-	if (Is.arrayValue(coreEngineConfig.identityComponent)) {
-		coreEngineConfig.identityComponent[0].restPath = "identity";
+	if (Is.arrayValue(coreEngineConfig.types.identityComponent)) {
+		coreEngineConfig.types.identityComponent[0].restPath = "identity";
 	}
 
-	if (Is.arrayValue(coreEngineConfig.identityProfileComponent)) {
-		coreEngineConfig.identityProfileComponent[0].restPath = "identity/profile";
+	if (Is.arrayValue(coreEngineConfig.types.identityProfileComponent)) {
+		coreEngineConfig.types.identityProfileComponent[0].restPath = "identity/profile";
 	}
 
-	if (Is.arrayValue(coreEngineConfig.nftComponent)) {
-		coreEngineConfig.nftComponent[0].restPath = "nft";
+	if (Is.arrayValue(coreEngineConfig.types.nftComponent)) {
+		coreEngineConfig.types.nftComponent[0].restPath = "nft";
 	}
 
-	if (Is.arrayValue(coreEngineConfig.attestationComponent)) {
-		coreEngineConfig.attestationComponent[0].restPath = "attestation";
+	if (Is.arrayValue(coreEngineConfig.types.attestationComponent)) {
+		coreEngineConfig.types.attestationComponent[0].restPath = "attestation";
 	}
 
-	if (Is.arrayValue(coreEngineConfig.auditableItemGraphComponent)) {
-		coreEngineConfig.auditableItemGraphComponent[0].restPath = "aig";
+	if (Is.arrayValue(coreEngineConfig.types.auditableItemGraphComponent)) {
+		coreEngineConfig.types.auditableItemGraphComponent[0].restPath = "aig";
 	}
 
-	if (Is.arrayValue(coreEngineConfig.auditableItemStreamComponent)) {
-		coreEngineConfig.auditableItemStreamComponent[0].restPath = "ais";
+	if (Is.arrayValue(coreEngineConfig.types.auditableItemStreamComponent)) {
+		coreEngineConfig.types.auditableItemStreamComponent[0].restPath = "ais";
 	}
 }

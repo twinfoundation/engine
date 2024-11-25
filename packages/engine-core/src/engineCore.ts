@@ -1,6 +1,14 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
-import { BaseError, ErrorHelper, GeneralError, Guards, I18n, Is, type IError } from "@twin.org/core";
+import {
+	BaseError,
+	ErrorHelper,
+	GeneralError,
+	Guards,
+	I18n,
+	Is,
+	type IError
+} from "@twin.org/core";
 import type {
 	EngineTypeInitialiser,
 	IEngineCore,
@@ -14,39 +22,19 @@ import type {
 } from "@twin.org/engine-models";
 import { ConsoleLoggingConnector } from "@twin.org/logging-connector-console";
 import { LoggingConnectorFactory, type ILoggingConnector } from "@twin.org/logging-models";
+import { ModuleHelper } from "@twin.org/modules";
 import { nameof } from "@twin.org/nameof";
-import {
-	initialiseAttestationComponent,
-	initialiseAttestationConnector
-} from "./components/attestation";
-import { initialiseAuditableItemGraphComponent } from "./components/auditableItemGraph";
-import { initialiseAuditableItemStreamComponent } from "./components/auditableItemStream";
-import { initialiseBackgroundTaskConnector } from "./components/backgroundTask";
-import {
-	initialiseBlobStorageComponent,
-	initialiseBlobStorageConnector
-} from "./components/blobStorage";
-import { initialiseEntityStorageComponent } from "./components/entityStorage";
-import { initialiseFaucetConnector } from "./components/faucet";
-import { initialiseIdentityComponent, initialiseIdentityConnector } from "./components/identity";
-import {
-	initialiseIdentityProfileComponent,
-	initialiseIdentityProfileConnector
-} from "./components/identityProfile";
-import { initialiseImmutableProofComponent } from "./components/immutableProof";
-import { initialiseImmutableStorageConnector } from "./components/immutableStorage";
-import { initialiseLoggingComponent, initialiseLoggingConnector } from "./components/logging";
-import { initialiseNftComponent, initialiseNftConnector } from "./components/nft";
-import { initialiseTelemetryComponent, initialiseTelemetryConnector } from "./components/telemetry";
-import { initialiseVaultConnector } from "./components/vault";
-import { initialiseWalletConnector, initialiseWalletStorage } from "./components/wallet";
 import type { IEngineCoreOptions } from "./models/IEngineCoreOptions";
 import { MemoryStateStorage } from "./storage/memoryStateStorage";
 
 /**
  * Core for the engine.
  */
-export class EngineCore<S extends IEngineState = IEngineState> implements IEngineCore<S> {
+export class EngineCore<
+	C extends IEngineCoreConfig = IEngineCoreConfig,
+	S extends IEngineState = IEngineState
+> implements IEngineCore<C, S>
+{
 	/**
 	 * Name for the engine logger.
 	 */
@@ -59,15 +47,14 @@ export class EngineCore<S extends IEngineState = IEngineState> implements IEngin
 
 	/**
 	 * The core context.
-	 * @internal
 	 */
-	private _context: IEngineCoreContext<S>;
+	protected _context: IEngineCoreContext<C, S>;
 
 	/**
 	 * The state storage interface.
 	 * @internal
 	 */
-	private _stateStorage?: IEngineStateStorage;
+	private _stateStorage?: IEngineStateStorage<S>;
 
 	/**
 	 * The logging connector for the engine.
@@ -82,13 +69,20 @@ export class EngineCore<S extends IEngineState = IEngineState> implements IEngin
 	private readonly _skipBootstrap?: boolean;
 
 	/**
+	 * The logger type name to use.
+	 * @internal
+	 */
+	private readonly _loggerTypeName: string;
+
+	/**
 	 * The type initialisers.
 	 * @internal
 	 */
-	private readonly _typeInitialisers: {
+	private _typeInitialisers: {
 		type: string;
 		typeConfig: IEngineCoreTypeConfig[];
-		initialiser: EngineTypeInitialiser<IEngineCoreTypeBaseConfig>;
+		module: string;
+		method: string;
 	}[];
 
 	/**
@@ -98,26 +92,38 @@ export class EngineCore<S extends IEngineState = IEngineState> implements IEngin
 	private _isStarted: boolean;
 
 	/**
+	 * Add type initialisers to the engine.
+	 * @internal
+	 */
+	private readonly _populateTypeInitialisers?: (
+		engineCore: IEngineCore<C, S>,
+		context: IEngineCoreContext<C, S>
+	) => void;
+
+	/**
 	 * Method for bootstrapping any data for the engine.
 	 * @internal
 	 */
 	private readonly _customBootstrap?: (
-		engineCore: IEngineCore,
-		context: IEngineCoreContext
+		engineCore: IEngineCore<C, S>,
+		context: IEngineCoreContext<C, S>
 	) => Promise<void>;
 
 	/**
 	 * Create a new instance of EngineCore.
 	 * @param options The options for the engine.
 	 */
-	constructor(options?: IEngineCoreOptions) {
+	constructor(options?: IEngineCoreOptions<C, S>) {
 		options = options ?? {};
-		options.config = options.config ?? {};
+		options.config = options.config ?? ({} as C);
 		options.config.debug = options.config.debug ?? false;
 		options.config.silent = options.config.silent ?? false;
+		options.config.types ??= {};
 
 		this._skipBootstrap = options.skipBootstrap ?? false;
+		this._populateTypeInitialisers = options.populateTypeInitialisers;
 		this._customBootstrap = options.customBootstrap;
+		this._loggerTypeName = options.loggerTypeName ?? EngineCore.LOGGER_TYPE_NAME;
 		this._typeInitialisers = [];
 
 		this._context = {
@@ -130,25 +136,30 @@ export class EngineCore<S extends IEngineState = IEngineState> implements IEngin
 		this._stateStorage = options.stateStorage;
 		this._isStarted = false;
 
-		this.addCoreTypeInitialisers();
+		if (Is.function(this._populateTypeInitialisers)) {
+			this._populateTypeInitialisers(this, this._context);
+		}
 	}
 
 	/**
 	 * Add a type initialiser.
 	 * @param type The type to add the initialiser for.
 	 * @param typeConfig The type config.
-	 * @param initialiser The initialiser to add.
+	 * @param module The name of the module which contains the initialiser method.
+	 * @param method The name of the method to call.
 	 */
-	public addTypeInitialiser<V extends IEngineCoreTypeBaseConfig>(
+	public addTypeInitialiser(
 		type: string,
 		typeConfig: IEngineCoreTypeConfig[] | undefined,
-		initialiser: EngineTypeInitialiser<V>
+		module: string,
+		method: string
 	): void {
 		if (!Is.empty(typeConfig)) {
 			this._typeInitialisers.push({
 				type,
 				typeConfig,
-				initialiser: initialiser as EngineTypeInitialiser<IEngineCoreTypeBaseConfig>
+				module,
+				method
 			});
 		}
 	}
@@ -171,8 +182,8 @@ export class EngineCore<S extends IEngineState = IEngineState> implements IEngin
 
 		let canContinue = await this.stateLoad();
 		if (canContinue) {
-			for (const { type, typeConfig, initialiser } of this._typeInitialisers) {
-				this.initialiseTypeConfig(type, typeConfig, initialiser);
+			for (const { type, typeConfig, module, method } of this._typeInitialisers) {
+				await this.initialiseTypeConfig(type, typeConfig, module, method);
 			}
 
 			canContinue = await this.bootstrap();
@@ -184,10 +195,7 @@ export class EngineCore<S extends IEngineState = IEngineState> implements IEngin
 						this.logInfo(
 							I18n.formatMessage("engineCore.componentStarting", { element: instance.instanceType })
 						);
-						await instance.component.start(
-							this._context.state.nodeIdentity,
-							EngineCore.LOGGER_TYPE_NAME
-						);
+						await instance.component.start(this._context.state.nodeIdentity, this._loggerTypeName);
 					}
 				}
 
@@ -218,10 +226,7 @@ export class EngineCore<S extends IEngineState = IEngineState> implements IEngin
 				);
 
 				try {
-					await instance.component.stop(
-						this._context.state.nodeIdentity,
-						EngineCore.LOGGER_TYPE_NAME
-					);
+					await instance.component.stop(this._context.state.nodeIdentity, this._loggerTypeName);
 				} catch (err) {
 					this.logError(
 						new GeneralError(
@@ -277,7 +282,7 @@ export class EngineCore<S extends IEngineState = IEngineState> implements IEngin
 	 * Get the config for the engine.
 	 * @returns The config for the engine.
 	 */
-	public getConfig(): IEngineCoreConfig {
+	public getConfig(): C {
 		return this._context.config;
 	}
 
@@ -301,10 +306,11 @@ export class EngineCore<S extends IEngineState = IEngineState> implements IEngin
 	 * Get the data required to create a clone of the engine.
 	 * @returns The clone data.
 	 */
-	public getCloneData(): IEngineCoreClone {
-		const cloneData: IEngineCoreClone = {
+	public getCloneData(): IEngineCoreClone<C, S> {
+		const cloneData: IEngineCoreClone<C, S> = {
 			config: this._context.config,
-			state: this._context.state
+			state: this._context.state,
+			typeInitialisers: this._typeInitialisers
 		};
 
 		return cloneData;
@@ -314,10 +320,11 @@ export class EngineCore<S extends IEngineState = IEngineState> implements IEngin
 	 * Populate the engine from the clone data.
 	 * @param cloneData The clone data to populate from.
 	 */
-	public populateClone(cloneData: IEngineCoreClone): void {
+	public populateClone(cloneData: IEngineCoreClone<C, S>): void {
 		Guards.object(this.CLASS_NAME, nameof(cloneData), cloneData);
 		Guards.object(this.CLASS_NAME, nameof(cloneData.config), cloneData.config);
 		Guards.object(this.CLASS_NAME, nameof(cloneData.state), cloneData.state);
+		Guards.array(this.CLASS_NAME, nameof(cloneData.typeInitialisers), cloneData.typeInitialisers);
 
 		this._context = {
 			config: cloneData.config,
@@ -327,7 +334,7 @@ export class EngineCore<S extends IEngineState = IEngineState> implements IEngin
 			stateDirty: false
 		};
 
-		this.addCoreTypeInitialisers();
+		this._typeInitialisers = cloneData.typeInitialisers;
 
 		this._stateStorage = new MemoryStateStorage(true, cloneData.state);
 		this._isStarted = false;
@@ -339,17 +346,18 @@ export class EngineCore<S extends IEngineState = IEngineState> implements IEngin
 	 * @param instanceMethod The function to initialise the instance.
 	 * @internal
 	 */
-	private initialiseTypeConfig<Y extends IEngineCoreTypeBaseConfig>(
+	private async initialiseTypeConfig<Y extends IEngineCoreTypeBaseConfig>(
 		typeKey: string,
 		typeConfig: IEngineCoreTypeConfig<Y>[],
-		instanceMethod: (
-			engineCore: IEngineCore,
-			context: IEngineCoreContext,
-			instanceConfig: Y,
-			overrideInstanceType?: string
-		) => string | undefined
-	): void {
+		module: string,
+		method: string
+	): Promise<void> {
 		if (Is.arrayValue(typeConfig)) {
+			const instanceMethod = await ModuleHelper.getModuleEntry<EngineTypeInitialiser>(
+				module,
+				method
+			);
+
 			for (let i = 0; i < typeConfig.length; i++) {
 				const instanceType = instanceMethod(
 					this,
@@ -381,14 +389,14 @@ export class EngineCore<S extends IEngineState = IEngineState> implements IEngin
 			});
 
 			this._context.componentInstances.push({
-				instanceType: EngineCore.LOGGER_TYPE_NAME,
+				instanceType: this._loggerTypeName,
 				component: engineLogger
 			});
 
-			LoggingConnectorFactory.register(EngineCore.LOGGER_TYPE_NAME, () => engineLogger);
+			LoggingConnectorFactory.register(this._loggerTypeName, () => engineLogger);
 
 			this._engineLoggingConnector = engineLogger;
-			this._context.defaultTypes.loggingConnector = EngineCore.LOGGER_TYPE_NAME;
+			this._context.defaultTypes.loggingConnector = this._loggerTypeName;
 		}
 	}
 
@@ -458,9 +466,7 @@ export class EngineCore<S extends IEngineState = IEngineState> implements IEngin
 								})
 							);
 
-							const bootstrapSuccess = await instance.component.bootstrap(
-								EngineCore.LOGGER_TYPE_NAME
-							);
+							const bootstrapSuccess = await instance.component.bootstrap(this._loggerTypeName);
 
 							// If the bootstrap method failed then throw an error
 							if (!bootstrapSuccess) {
@@ -491,145 +497,5 @@ export class EngineCore<S extends IEngineState = IEngineState> implements IEngin
 		}
 
 		return canContinue;
-	}
-
-	/**
-	 * Add the core type initializers.
-	 * @internal
-	 */
-	private addCoreTypeInitialisers(): void {
-		this.addTypeInitialiser(
-			"loggingConnector",
-			this._context.config.loggingConnector,
-			initialiseLoggingConnector
-		);
-		this.addTypeInitialiser(
-			"loggingComponent",
-			this._context.config.loggingComponent,
-			initialiseLoggingComponent
-		);
-
-		this.addTypeInitialiser(
-			"backgroundTaskConnector",
-			this._context.config.backgroundTaskConnector,
-			initialiseBackgroundTaskConnector
-		);
-
-		this.addTypeInitialiser(
-			"telemetryConnector",
-			this._context.config.telemetryConnector,
-			initialiseTelemetryConnector
-		);
-		this.addTypeInitialiser(
-			"telemetryComponent",
-			this._context.config.telemetryComponent,
-			initialiseTelemetryComponent
-		);
-
-		this.addTypeInitialiser(
-			"entityStorageComponent",
-			this._context.config.entityStorageComponent,
-			initialiseEntityStorageComponent
-		);
-
-		this.addTypeInitialiser(
-			"vaultConnector",
-			this._context.config.vaultConnector,
-			initialiseVaultConnector
-		);
-
-		this.addTypeInitialiser(
-			"blobStorageConnector",
-			this._context.config.blobStorageConnector,
-			initialiseBlobStorageConnector
-		);
-		this.addTypeInitialiser(
-			"blobStorageComponent",
-			this._context.config.blobStorageComponent,
-			initialiseBlobStorageComponent
-		);
-
-		this.addTypeInitialiser(
-			"immutableStorageConnector",
-			this._context.config.immutableStorageConnector,
-			initialiseImmutableStorageConnector
-		);
-
-		this.addTypeInitialiser(
-			"walletConnector",
-			this._context.config.walletConnector,
-			initialiseWalletStorage
-		);
-		this.addTypeInitialiser(
-			"faucetConnector",
-			this._context.config.faucetConnector,
-			initialiseFaucetConnector
-		);
-		this.addTypeInitialiser(
-			"walletConnector",
-			this._context.config.walletConnector,
-			initialiseWalletConnector
-		);
-
-		this.addTypeInitialiser(
-			"identityConnector",
-			this._context.config.identityConnector,
-			initialiseIdentityConnector
-		);
-		this.addTypeInitialiser(
-			"identityComponent",
-			this._context.config.identityComponent,
-			initialiseIdentityComponent
-		);
-
-		this.addTypeInitialiser(
-			"identityProfileConnector",
-			this._context.config.identityProfileConnector,
-			initialiseIdentityProfileConnector
-		);
-		this.addTypeInitialiser(
-			"identityProfileComponent",
-			this._context.config.identityProfileComponent,
-			initialiseIdentityProfileComponent
-		);
-
-		this.addTypeInitialiser(
-			"nftConnector",
-			this._context.config.nftConnector,
-			initialiseNftConnector
-		);
-		this.addTypeInitialiser(
-			"nftComponent",
-			this._context.config.nftComponent,
-			initialiseNftComponent
-		);
-
-		this.addTypeInitialiser(
-			"immutableProofComponent",
-			this._context.config.immutableProofComponent,
-			initialiseImmutableProofComponent
-		);
-
-		this.addTypeInitialiser(
-			"attestationConnector",
-			this._context.config.attestationConnector,
-			initialiseAttestationConnector
-		);
-		this.addTypeInitialiser(
-			"attestationComponent",
-			this._context.config.attestationComponent,
-			initialiseAttestationComponent
-		);
-
-		this.addTypeInitialiser(
-			"auditableItemGraphComponent",
-			this._context.config.auditableItemGraphComponent,
-			initialiseAuditableItemGraphComponent
-		);
-		this.addTypeInitialiser(
-			"auditableItemStreamComponent",
-			this._context.config.auditableItemStreamComponent,
-			initialiseAuditableItemStreamComponent
-		);
 	}
 }

@@ -1,9 +1,15 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
-/* eslint-disable max-classes-per-file */
-import { ComponentFactory, I18n, ObjectHelper, type IComponent } from "@twin.org/core";
-import { EngineCore } from "@twin.org/engine-core";
+import path from "node:path";
+import { ComponentFactory, I18n, ObjectHelper } from "@twin.org/core";
+import { Engine } from "@twin.org/engine";
 import engineLocales from "@twin.org/engine-core/locales/en.json";
+import type { IEngineCoreTypeConfig } from "@twin.org/engine-models";
+import {
+	InformationComponentType,
+	RestRouteProcessorType,
+	type IEngineServerTypesConfig
+} from "@twin.org/engine-server-types";
 import {
 	AttestationComponentType,
 	AttestationConnectorType,
@@ -19,44 +25,22 @@ import {
 	IdentityConnectorType,
 	IdentityProfileComponentType,
 	IdentityProfileConnectorType,
-	type IEngineCoreTypeBaseConfig,
-	type IEngineCoreTypeConfig,
 	ImmutableProofComponentType,
 	ImmutableStorageConnectorType,
-	InformationComponentType,
 	LoggingComponentType,
 	LoggingConnectorType,
 	NftComponentType,
 	NftConnectorType,
-	RestRouteProcessorType,
 	TelemetryComponentType,
 	TelemetryConnectorType,
 	VaultConnectorType,
 	WalletConnectorType
-} from "@twin.org/engine-models";
+} from "@twin.org/engine-types";
 import { entity, EntitySchemaFactory, EntitySchemaHelper, property } from "@twin.org/entity";
 import type { IEntityStorageComponent } from "@twin.org/entity-storage-models";
 import { nameof } from "@twin.org/nameof";
 import packageLocales from "../locales/en.json";
 import { EngineServer } from "../src/engineServer";
-
-/**
- * Test component.
- */
-class TestComponent implements IComponent {
-	public readonly CLASS_NAME = "TestComponent";
-
-	public value: number;
-
-	/**
-	 * Create a new instance of TestComponent.
-	 * @param options The options for the component.
-	 * @param options.value The value.
-	 */
-	constructor(options: { value: number }) {
-		this.value = options.value;
-	}
-}
 
 /**
  * Class representing information for a test entity.
@@ -80,16 +64,16 @@ describe("engine-server", () => {
 	});
 
 	test("Can start engine server with no config", async () => {
-		const engineCore = new EngineCore();
-		const engineServer = new EngineServer({ engineCore });
+		const engine = new Engine();
+		const engineServer = new EngineServer({ engineCore: engine });
 		await engineServer.start();
 		await engineServer.stop();
 		expect(engineServer).toBeDefined();
 	});
 
 	test("Can start engine server with config", async () => {
-		const engineCore = new EngineCore({
-			config: {
+		const config: IEngineServerTypesConfig = {
+			types: {
 				loggingConnector: [{ type: LoggingConnectorType.Console }],
 				loggingComponent: [{ type: LoggingComponentType.Service }],
 				entityStorageConnector: [{ type: EntityStorageConnectorType.Memory }],
@@ -112,12 +96,7 @@ describe("engine-server", () => {
 				attestationConnector: [{ type: AttestationConnectorType.EntityStorage }],
 				attestationComponent: [{ type: AttestationComponentType.Service }],
 				auditableItemGraphComponent: [{ type: AuditableItemGraphComponentType.Service }],
-				auditableItemStreamComponent: [{ type: AuditableItemStreamComponentType.Service }]
-			}
-		});
-		const engineServer = new EngineServer({
-			engineCore,
-			server: {
+				auditableItemStreamComponent: [{ type: AuditableItemStreamComponentType.Service }],
 				informationComponent: [
 					{
 						type: InformationComponentType.Service,
@@ -138,6 +117,12 @@ describe("engine-server", () => {
 					}
 				]
 			}
+		};
+		const engine = new Engine({
+			config
+		});
+		const engineServer = new EngineServer({
+			engineCore: engine
 		});
 		await engineServer.start();
 
@@ -152,27 +137,29 @@ describe("engine-server", () => {
 	});
 
 	test("Can start engine server with custom rest path", async () => {
-		const engineCore = new EngineCore({
-			config: { silent: true }
+		const engine = new Engine({
+			config: {
+				silent: true,
+				types: {
+					informationComponent: [
+						{
+							type: InformationComponentType.Service,
+							options: {
+								config: {
+									serverInfo: {
+										name: "foo",
+										version: "1"
+									}
+								}
+							},
+							restPath: "/foo"
+						}
+					]
+				}
+			}
 		});
 		const engineServer = new EngineServer({
-			engineCore,
-			server: {
-				informationComponent: [
-					{
-						type: InformationComponentType.Service,
-						options: {
-							config: {
-								serverInfo: {
-									name: "foo",
-									version: "1"
-								}
-							}
-						},
-						restPath: "/foo"
-					}
-				]
-			}
+			engineCore: engine
 		});
 		await engineServer.start();
 
@@ -191,49 +178,24 @@ describe("engine-server", () => {
 			{ type: "test-type", restPath: "test", options: { value: 1234 } }
 		];
 
-		const engineCore = new EngineCore();
+		const engine = new Engine();
 
-		engineCore.addTypeInitialiser(
+		engine.addTypeInitialiser(
 			"test-type",
 			customTypeConfig,
-			(
-				core,
-				context,
-				instanceConfig: IEngineCoreTypeBaseConfig<{ value: number }>,
-				overrideInstanceType?: string
-			) => {
-				ComponentFactory.register(
-					"test-component",
-					() => new TestComponent(instanceConfig.options ?? { value: 4567 })
-				);
-				return overrideInstanceType ?? "test-component";
-			}
+			`file://${path.join(__dirname, "testComponent.js")}`,
+			"testTypeInitialiser"
 		);
 
 		const engineServer = new EngineServer({
-			engineCore
+			engineCore: engine
 		});
 
 		engineServer.addRestRouteGenerator(
 			"test-type",
 			customTypeConfig,
-			(baseRouteName: string, componentName: string) => [
-				{
-					operationId: "test-op",
-					summary: "value endpoint",
-					tag: "bar",
-					method: "GET",
-					path: `${baseRouteName}/value`,
-					handler: async (httpRequestContext, request) => {
-						const component = ComponentFactory.get<TestComponent>(componentName);
-						return {
-							body: {
-								value: component.value
-							}
-						};
-					}
-				}
-			]
+			`file://${path.join(__dirname, "testComponent.js")}`,
+			"generateRestRoutes"
 		);
 
 		await engineServer.start();
@@ -252,29 +214,32 @@ describe("engine-server", () => {
 			EntitySchemaHelper.getSchema(TestEntity)
 		);
 
-		const engineCore = new EngineCore({
+		const engine = new Engine({
 			config: {
 				debug: true,
-				entityStorageConnector: [
-					{
-						type: EntityStorageConnectorType.Memory,
-						overrideInstanceType: "test-entity"
-					}
-				],
-				entityStorageComponent: [
-					{
-						type: EntityStorageComponentType.Service,
-						options: {
-							entityStorageType: nameof<TestEntity>(),
-							config: { includeNodeIdentity: false, includeUserIdentity: false }
-						},
-						restPath: "foo"
-					}
-				]
+				types: {
+					entityStorageConnector: [
+						{
+							type: EntityStorageConnectorType.Memory,
+							overrideInstanceType: "test-entity"
+						}
+					],
+					entityStorageComponent: [
+						{
+							type: EntityStorageComponentType.Service,
+							options: {
+								entityStorageType: nameof<TestEntity>(),
+								config: { includeNodeIdentity: false, includeUserIdentity: false }
+							},
+							restPath: "foo"
+						}
+					]
+				}
 			}
 		});
+
 		const engineServer = new EngineServer({
-			engineCore
+			engineCore: engine
 		});
 
 		await engineServer.start();

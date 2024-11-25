@@ -1,6 +1,5 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
-import { generateRestRoutesAuthentication } from "@twin.org/api-auth-entity-storage-service";
 import type { IRestRoute, ISocketRoute, IWebServer } from "@twin.org/api-models";
 import {
 	MimeTypeProcessorFactory,
@@ -8,55 +7,31 @@ import {
 	SocketRouteProcessorFactory
 } from "@twin.org/api-models";
 import { FastifyWebServer } from "@twin.org/api-server-fastify";
-import { generateRestRoutesInformation } from "@twin.org/api-service";
-import { generateRestRoutesAttestation } from "@twin.org/attestation-service";
-import { generateRestRoutesAuditableItemGraph } from "@twin.org/auditable-item-graph-service";
-import { generateRestRoutesAuditableItemStream } from "@twin.org/auditable-item-stream-service";
-import { generateRestRoutesBlobStorage } from "@twin.org/blob-storage-service";
 import { Guards, Is } from "@twin.org/core";
+import type { IEngineCore, IEngineCoreTypeConfig, IEngineServer } from "@twin.org/engine-models";
 import {
-	type IEngineCore,
-	type IEngineCoreTypeConfig,
-	type IEngineServer,
-	type IEngineServerConfig,
-	type RestRouteGenerator,
 	RestRouteProcessorType,
-	type SocketRouteGenerator
-} from "@twin.org/engine-models";
-import { generateRestRoutesEntityStorage } from "@twin.org/entity-storage-service";
-import {
-	generateRestRoutesIdentity,
-	generateRestRoutesIdentityProfile
-} from "@twin.org/identity-service";
-import { generateRestRoutesLogging } from "@twin.org/logging-service";
+	type IEngineServerTypesConfig
+} from "@twin.org/engine-server-types";
+import { ModuleHelper } from "@twin.org/modules";
 import { nameof } from "@twin.org/nameof";
-import { generateRestRoutesNft } from "@twin.org/nft-service";
-import { generateRestRoutesTelemetry } from "@twin.org/telemetry-service";
-import { initialiseAuthenticationComponent } from "./components/authentication";
-import { initialiseInformationComponent } from "./components/information";
-import { initialiseMimeTypeProcessorComponent } from "./components/mimeTypeProcessor";
-import { initialiseRestRouteProcessorComponent } from "./components/restRouteProcessor";
-import { initialiseSocketRouteProcessorComponent } from "./components/socketRouteProcessor";
 
 /**
  * Server for the engine.
  */
-export class EngineServer implements IEngineServer {
+export class EngineServer<T extends IEngineServerTypesConfig = IEngineServerTypesConfig>
+	implements IEngineServer
+{
 	/**
 	 * Runtime name for the class.
 	 */
 	public readonly CLASS_NAME: string = nameof<EngineServer>();
 
 	/**
-	 * The server config.
-	 */
-	protected readonly _config: IEngineServerConfig;
-
-	/**
 	 * The engine.
 	 * @internal
 	 */
-	private readonly _engineCore: IEngineCore;
+	private readonly _engineCore: IEngineCore<T>;
 
 	/**
 	 * The REST route generators.
@@ -65,7 +40,8 @@ export class EngineServer implements IEngineServer {
 	private readonly _restRouteGenerators: {
 		type: string;
 		typeConfig: IEngineCoreTypeConfig[];
-		generator: RestRouteGenerator;
+		module: string;
+		method: string;
 	}[];
 
 	/**
@@ -75,7 +51,8 @@ export class EngineServer implements IEngineServer {
 	private readonly _socketRouteGenerators: {
 		type: string;
 		typeConfig: IEngineCoreTypeConfig[];
-		generator: SocketRouteGenerator;
+		module: string;
+		method: string;
 	}[];
 
 	/**
@@ -93,25 +70,23 @@ export class EngineServer implements IEngineServer {
 	/**
 	 * Create a new instance of EngineServer.
 	 * @param options The options for the engine.
-	 * @param options.server The server options for the engine.
 	 * @param options.engineCore The engine core to serve from.
 	 */
-	constructor(options: { engineCore: IEngineCore; server?: IEngineServerConfig }) {
+	constructor(options: { engineCore: IEngineCore<T> }) {
 		Guards.object(this.CLASS_NAME, nameof(options), options);
 		Guards.object(this.CLASS_NAME, nameof(options.engineCore), options.engineCore);
 
-		this._config = options?.server ?? {};
 		this._engineCore = options.engineCore;
 		this._restRouteGenerators = [];
 		this._socketRouteGenerators = [];
 
 		const coreConfig = this._engineCore.getConfig();
 
-		if (!Is.arrayValue(this._config.restRouteProcessor)) {
-			this._config.restRouteProcessor = [];
+		if (!Is.arrayValue(coreConfig.types.restRouteProcessor)) {
+			coreConfig.types.restRouteProcessor = [];
 
 			if (!coreConfig.silent) {
-				this._config.restRouteProcessor.push({
+				coreConfig.types.restRouteProcessor.push({
 					type: RestRouteProcessorType.Logging,
 					options: {
 						config: {
@@ -120,7 +95,7 @@ export class EngineServer implements IEngineServer {
 					}
 				});
 			}
-			this._config.restRouteProcessor.push({
+			coreConfig.types.restRouteProcessor.push({
 				type: RestRouteProcessorType.RestRoute,
 				options: {
 					config: {
@@ -139,18 +114,21 @@ export class EngineServer implements IEngineServer {
 	 * Add a REST route generator.
 	 * @param type The type to add the generator for.
 	 * @param typeConfig The type config.
-	 * @param generator The generator to add.
+	 * @param module The module containing the generator.
+	 * @param method The method to call on the module.
 	 */
 	public addRestRouteGenerator(
 		type: string,
 		typeConfig: IEngineCoreTypeConfig[] | undefined,
-		generator: RestRouteGenerator
+		module: string,
+		method: string
 	): void {
 		if (!Is.empty(typeConfig)) {
 			this._restRouteGenerators.push({
 				type,
 				typeConfig,
-				generator
+				module,
+				method
 			});
 		}
 	}
@@ -159,18 +137,21 @@ export class EngineServer implements IEngineServer {
 	 * Add a socket route generator.
 	 * @param type The type to add the generator for.
 	 * @param typeConfig The type config.
-	 * @param generator The generator to add.
+	 * @param module The module containing the generator.
+	 * @param method The method to call on the module.
 	 */
 	public addSocketRouteGenerator(
 		type: string,
 		typeConfig: IEngineCoreTypeConfig[] | undefined,
-		generator: SocketRouteGenerator
+		module: string,
+		method: string
 	): void {
 		if (!Is.empty(typeConfig)) {
 			this._socketRouteGenerators.push({
 				type,
 				typeConfig,
-				generator
+				module,
+				method
 			});
 		}
 	}
@@ -207,8 +188,8 @@ export class EngineServer implements IEngineServer {
 	 * @internal
 	 */
 	private async startWebServer(): Promise<void> {
-		const restRoutes = this.buildRestRoutes();
-		const socketRoutes = this.buildSocketRoutes();
+		const restRoutes = await this.buildRestRoutes();
+		const socketRoutes = await this.buildSocketRoutes();
 		const restRouteProcessors = RestRouteProcessorFactory.names().map(n =>
 			RestRouteProcessorFactory.get(n)
 		);
@@ -233,7 +214,7 @@ export class EngineServer implements IEngineServer {
 			restRoutes,
 			socketRouteProcessors,
 			socketRoutes,
-			this._config.web
+			coreConfig.web
 		);
 		await this._webServer.start();
 	}
@@ -243,11 +224,11 @@ export class EngineServer implements IEngineServer {
 	 * @returns The REST routes for the application.
 	 * @internal
 	 */
-	private buildRestRoutes(): IRestRoute[] {
+	private async buildRestRoutes(): Promise<IRestRoute[]> {
 		const routes: IRestRoute[] = [];
 
-		for (const { type, typeConfig, generator } of this._restRouteGenerators) {
-			this.initialiseRestTypeRoute(routes, type, typeConfig, generator);
+		for (const { type, typeConfig, module, method } of this._restRouteGenerators) {
+			await this.initialiseRestTypeRoute(routes, type, typeConfig, module, method);
 		}
 
 		return routes;
@@ -258,11 +239,11 @@ export class EngineServer implements IEngineServer {
 	 * @returns The socket routes for the application.
 	 * @internal
 	 */
-	private buildSocketRoutes(): ISocketRoute[] {
+	private async buildSocketRoutes(): Promise<ISocketRoute[]> {
 		const routes: ISocketRoute[] = [];
 
-		for (const { type, typeConfig, generator } of this._socketRouteGenerators) {
-			this.initialiseSocketTypeRoute(routes, type, typeConfig, generator);
+		for (const { type, typeConfig, module, method } of this._socketRouteGenerators) {
+			await this.initialiseSocketTypeRoute(routes, type, typeConfig, module, method);
 		}
 
 		return routes;
@@ -276,14 +257,19 @@ export class EngineServer implements IEngineServer {
 	 * @param generateRoutes The function to generate the routes.
 	 * @internal
 	 */
-	private initialiseRestTypeRoute(
+	private async initialiseRestTypeRoute(
 		routes: IRestRoute[],
 		typeKey: string,
 		typeConfig: IEngineCoreTypeConfig[] | undefined,
-		generateRoutes: (baseRouteName: string, componentName: string) => IRestRoute[]
-	): void {
+		module: string,
+		method: string
+	): Promise<void> {
 		if (Is.arrayValue(typeConfig)) {
 			const defaultEngineTypes = this._engineCore.getDefaultTypes();
+
+			const generateRoutes = await ModuleHelper.getModuleEntry<
+				(baseRouteName: string, componentName: string) => IRestRoute[]
+			>(module, method);
 
 			for (let i = 0; i < typeConfig.length; i++) {
 				const restPath = typeConfig[i].restPath;
@@ -302,17 +288,23 @@ export class EngineServer implements IEngineServer {
 	 * @param routes The routes to add to.
 	 * @param typeKey The key for the default types.
 	 * @param typeConfig The type config.
-	 * @param generateRoutes The function to generate the routes.
+	 * @param module The module containing the generator.
+	 * @param method The method to call on the module.
 	 * @internal
 	 */
-	private initialiseSocketTypeRoute(
+	private async initialiseSocketTypeRoute(
 		routes: ISocketRoute[],
 		typeKey: string,
 		typeConfig: IEngineCoreTypeConfig[] | undefined,
-		generateRoutes: (baseRouteName: string, componentName: string) => ISocketRoute[]
-	): void {
+		module: string,
+		method: string
+	): Promise<void> {
 		if (Is.arrayValue(typeConfig)) {
 			const defaultEngineTypes = this._engineCore.getDefaultTypes();
+
+			const generateRoutes = await ModuleHelper.getModuleEntry<
+				(baseRouteName: string, componentName: string) => ISocketRoute[]
+			>(module, method);
 
 			for (let i = 0; i < typeConfig.length; i++) {
 				const socketPath = typeConfig[i].socketPath;
@@ -331,30 +323,37 @@ export class EngineServer implements IEngineServer {
 	 * @internal
 	 */
 	private addServerTypeInitialisers(): void {
+		const coreConfig = this._engineCore.getConfig();
+
 		this._engineCore.addTypeInitialiser(
 			"authenticationComponent",
-			this._config.authenticationComponent,
-			initialiseAuthenticationComponent
+			coreConfig.types.authenticationComponent,
+			"@twin.org/engine-server-types",
+			"initialiseAuthenticationComponent"
 		);
 		this._engineCore.addTypeInitialiser(
 			"informationComponent",
-			this._config.informationComponent,
-			initialiseInformationComponent
+			coreConfig.types.informationComponent,
+			"@twin.org/engine-server-types",
+			"initialiseInformationComponent"
 		);
 		this._engineCore.addTypeInitialiser(
 			"restRouteProcessor",
-			this._config.restRouteProcessor,
-			initialiseRestRouteProcessorComponent
+			coreConfig.types.restRouteProcessor,
+			"@twin.org/engine-server-types",
+			"initialiseRestRouteProcessorComponent"
 		);
 		this._engineCore.addTypeInitialiser(
 			"socketRouteProcessor",
-			this._config.socketRouteProcessor,
-			initialiseSocketRouteProcessorComponent
+			coreConfig.types.socketRouteProcessor,
+			"@twin.org/engine-server-types",
+			"initialiseSocketRouteProcessorComponent"
 		);
 		this._engineCore.addTypeInitialiser(
 			"mimeTypeProcessor",
-			this._config.mimeTypeProcessor,
-			initialiseMimeTypeProcessorComponent
+			coreConfig.types.mimeTypeProcessor,
+			"@twin.org/engine-server-types",
+			"initialiseMimeTypeProcessorComponent"
 		);
 	}
 
@@ -363,64 +362,81 @@ export class EngineServer implements IEngineServer {
 	 * @internal
 	 */
 	private addServerRestRouteGenerators(): void {
+		const coreConfig = this._engineCore.getConfig();
+
 		this.addRestRouteGenerator(
 			"informationComponent",
-			this._config.informationComponent,
-			generateRestRoutesInformation
+			coreConfig.types.informationComponent,
+			"@twin.org/api-service",
+			"generateRestRoutesInformation"
 		);
 
 		this.addRestRouteGenerator(
 			"authenticationComponent",
-			this._config.authenticationComponent,
-			generateRestRoutesAuthentication
+			coreConfig.types.authenticationComponent,
+			"@twin.org/api-auth-entity-storage-service",
+			"generateRestRoutesAuthentication"
 		);
 
-		const coreConfig = this._engineCore.getConfig();
 		this.addRestRouteGenerator(
 			"loggingComponent",
-			coreConfig.loggingComponent,
-			generateRestRoutesLogging
+			coreConfig.types.loggingComponent,
+			"@twin.org/logging-service",
+			"generateRestRoutesLogging"
 		);
 		this.addRestRouteGenerator(
 			"telemetryComponent",
-			coreConfig.telemetryComponent,
-			generateRestRoutesTelemetry
+			coreConfig.types.telemetryComponent,
+			"@twin.org/telemetry-service",
+			"generateRestRoutesTelemetry"
 		);
 		this.addRestRouteGenerator(
 			"blobStorageComponent",
-			coreConfig.blobStorageComponent,
-			generateRestRoutesBlobStorage
+			coreConfig.types.blobStorageComponent,
+			"@twin.org/blob-storage-service",
+			"generateRestRoutesBlobStorage"
 		);
 		this.addRestRouteGenerator(
 			"identityComponent",
-			coreConfig.identityComponent,
-			generateRestRoutesIdentity
+			coreConfig.types.identityComponent,
+			"@twin.org/identity-service",
+			"generateRestRoutesIdentity"
 		);
 		this.addRestRouteGenerator(
 			"identityProfileComponent",
-			coreConfig.identityProfileComponent,
-			generateRestRoutesIdentityProfile
+			coreConfig.types.identityProfileComponent,
+			"@twin.org/identity-service",
+			"generateRestRoutesIdentityProfile"
 		);
-		this.addRestRouteGenerator("nftComponent", coreConfig.nftComponent, generateRestRoutesNft);
+		this.addRestRouteGenerator(
+			"nftComponent",
+			coreConfig.types.nftComponent,
+			"@twin.org/nft-service",
+			"generateRestRoutesNft"
+		);
 		this.addRestRouteGenerator(
 			"attestationComponent",
-			coreConfig.attestationComponent,
-			generateRestRoutesAttestation
+			coreConfig.types.attestationComponent,
+			"@twin.org/attestation-service",
+			"generateRestRoutesAttestation"
 		);
 		this.addRestRouteGenerator(
 			"auditableItemGraphComponent",
-			coreConfig.auditableItemGraphComponent,
-			generateRestRoutesAuditableItemGraph
+			coreConfig.types.auditableItemGraphComponent,
+			"@twin.org/auditable-item-graph-service",
+			"generateRestRoutesAuditableItemGraph"
 		);
 		this.addRestRouteGenerator(
 			"auditableItemStreamComponent",
-			coreConfig.auditableItemStreamComponent,
-			generateRestRoutesAuditableItemStream
+			coreConfig.types.auditableItemStreamComponent,
+			"@twin.org/auditable-item-stream-service",
+			"generateRestRoutesAuditableItemStream"
 		);
 		this.addRestRouteGenerator(
 			"entityStorageComponent",
-			coreConfig.entityStorageComponent,
-			generateRestRoutesEntityStorage
+			coreConfig.types.entityStorageComponent,
+			"@twin.org/entity-storage-service",
+			"generateRestRoutesEntityStorage"
 		);
 	}
 

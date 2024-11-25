@@ -1,8 +1,6 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
 import type { IEngineCoreTypeConfig } from "./config/IEngineCoreTypeConfig";
-import type { RestRouteGenerator } from "./restRouteGenerator";
-import type { SocketRouteGenerator } from "./socketRouteGenerator";
 
 /**
  * Interface describing the engine server methods.
@@ -12,24 +10,28 @@ export interface IEngineServer {
 	 * Add a REST route generator.
 	 * @param type The type to add the generator for.
 	 * @param typeConfig The type config.
-	 * @param generator The generator to add.
+	 * @param module The module containing the generator.
+	 * @param method The method to call on the module.
 	 */
 	addRestRouteGenerator(
 		type: string,
 		typeConfig: IEngineCoreTypeConfig[] | undefined,
-		generator: RestRouteGenerator
+		module: string,
+		method: string
 	): void;
 
 	/**
 	 * Add a socket route generator.
 	 * @param type The type to add the generator for.
 	 * @param typeConfig The type config.
-	 * @param generator The generator to add.
+	 * @param module The module containing the generator.
+	 * @param method The method to call on the module.
 	 */
 	addSocketRouteGenerator(
 		type: string,
 		typeConfig: IEngineCoreTypeConfig[] | undefined,
-		generator: SocketRouteGenerator
+		module: string,
+		method: string
 	): void;
 
 	/**

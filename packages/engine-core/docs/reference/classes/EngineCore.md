@@ -1,32 +1,34 @@
-# Class: EngineCore\<S\>
+# Class: EngineCore\<C, S\>
 
 Core for the engine.
 
 ## Type Parameters
 
+• **C** *extends* `IEngineCoreConfig` = `IEngineCoreConfig`
+
 • **S** *extends* `IEngineState` = `IEngineState`
 
 ## Implements
 
-- `IEngineCore`\<`S`\>
+- `IEngineCore`\<`C`, `S`\>
 
 ## Constructors
 
 ### new EngineCore()
 
-> **new EngineCore**\<`S`\>(`options`?): [`EngineCore`](EngineCore.md)\<`S`\>
+> **new EngineCore**\<`C`, `S`\>(`options`?): [`EngineCore`](EngineCore.md)\<`C`, `S`\>
 
 Create a new instance of EngineCore.
 
 #### Parameters
 
-• **options?**: [`IEngineCoreOptions`](../interfaces/IEngineCoreOptions.md)
+• **options?**: [`IEngineCoreOptions`](../interfaces/IEngineCoreOptions.md)\<`C`, `S`\>
 
 The options for the engine.
 
 #### Returns
 
-[`EngineCore`](EngineCore.md)\<`S`\>
+[`EngineCore`](EngineCore.md)\<`C`, `S`\>
 
 ## Properties
 
@@ -44,17 +46,21 @@ Name for the engine logger.
 
 Runtime name for the class.
 
+***
+
+### \_context
+
+> `protected` **\_context**: `IEngineCoreContext`\<`C`, `S`\>
+
+The core context.
+
 ## Methods
 
 ### addTypeInitialiser()
 
-> **addTypeInitialiser**\<`V`\>(`type`, `typeConfig`, `initialiser`): `void`
+> **addTypeInitialiser**(`type`, `typeConfig`, `module`, `method`): `void`
 
 Add a type initialiser.
-
-#### Type Parameters
-
-• **V** *extends* `IEngineCoreTypeBaseConfig`\<`unknown`\>
 
 #### Parameters
 
@@ -66,9 +72,13 @@ The type to add the initialiser for.
 
 The type config.
 
-• **initialiser**: `EngineTypeInitialiser`\<`V`\>
+• **module**: `string`
 
-The initialiser to add.
+The name of the module which contains the initialiser method.
+
+• **method**: `string`
+
+The name of the method to call.
 
 #### Returns
 
@@ -162,13 +172,13 @@ The error to log.
 
 ### getConfig()
 
-> **getConfig**(): `IEngineCoreConfig`
+> **getConfig**(): `C`
 
 Get the config for the engine.
 
 #### Returns
 
-`IEngineCoreConfig`
+`C`
 
 The config for the engine.
 
@@ -216,13 +226,13 @@ The default types.
 
 ### getCloneData()
 
-> **getCloneData**(): `IEngineCoreClone`\<`IEngineState`\>
+> **getCloneData**(): `IEngineCoreClone`\<`C`, `S`\>
 
 Get the data required to create a clone of the engine.
 
 #### Returns
 
-`IEngineCoreClone`\<`IEngineState`\>
+`IEngineCoreClone`\<`C`, `S`\>
 
 The clone data.
 
@@ -240,7 +250,7 @@ Populate the engine from the clone data.
 
 #### Parameters
 
-• **cloneData**: `IEngineCoreClone`\<`IEngineState`\>
+• **cloneData**: `IEngineCoreClone`\<`C`, `S`\>
 
 The clone data to populate from.
 

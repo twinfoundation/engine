@@ -1,6 +1,6 @@
 {
 	"name": "@twin.org/engine",
-	"version": "0.0.1-next.13",
+	"version": "0.0.1-next.14",
 	"description": "Engine",
 	"repository": {
 		"type": "git",
@@ -41,6 +41,9 @@
 	"workspaces": [
 		"packages/engine-models",
 		"packages/engine-core",
+		"packages/engine-types",
+		"packages/engine-server-types",
+		"packages/engine",
 		"packages/engine-server"
 	],
 	"type": "module"

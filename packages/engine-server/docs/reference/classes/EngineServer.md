@@ -1,6 +1,10 @@
-# Class: EngineServer
+# Class: EngineServer\<T\>
 
 Server for the engine.
+
+## Type Parameters
+
+• **T** *extends* `IEngineServerTypesConfig` = `IEngineServerTypesConfig`
 
 ## Implements
 
@@ -10,7 +14,7 @@ Server for the engine.
 
 ### new EngineServer()
 
-> **new EngineServer**(`options`): [`EngineServer`](EngineServer.md)
+> **new EngineServer**\<`T`\>(`options`): [`EngineServer`](EngineServer.md)\<`T`\>
 
 Create a new instance of EngineServer.
 
@@ -20,17 +24,13 @@ Create a new instance of EngineServer.
 
 The options for the engine.
 
-• **options.engineCore**: `IEngineCore`\<`IEngineState`\>
+• **options.engineCore**: `IEngineCore`\<`T`, `IEngineState`\>
 
 The engine core to serve from.
 
-• **options.server?**: `IEngineServerConfig`
-
-The server options for the engine.
-
 #### Returns
 
-[`EngineServer`](EngineServer.md)
+[`EngineServer`](EngineServer.md)\<`T`\>
 
 ## Properties
 
@@ -40,19 +40,11 @@ The server options for the engine.
 
 Runtime name for the class.
 
-***
-
-### \_config
-
-> `protected` `readonly` **\_config**: `IEngineServerConfig`
-
-The server config.
-
 ## Methods
 
 ### addRestRouteGenerator()
 
-> **addRestRouteGenerator**(`type`, `typeConfig`, `generator`): `void`
+> **addRestRouteGenerator**(`type`, `typeConfig`, `module`, `method`): `void`
 
 Add a REST route generator.
 
@@ -66,9 +58,13 @@ The type to add the generator for.
 
 The type config.
 
-• **generator**: `RestRouteGenerator`
+• **module**: `string`
 
-The generator to add.
+The module containing the generator.
+
+• **method**: `string`
+
+The method to call on the module.
 
 #### Returns
 
@@ -82,7 +78,7 @@ The generator to add.
 
 ### addSocketRouteGenerator()
 
-> **addSocketRouteGenerator**(`type`, `typeConfig`, `generator`): `void`
+> **addSocketRouteGenerator**(`type`, `typeConfig`, `module`, `method`): `void`
 
 Add a socket route generator.
 
@@ -96,9 +92,13 @@ The type to add the generator for.
 
 The type config.
 
-• **generator**: `SocketRouteGenerator`
+• **module**: `string`
 
-The generator to add.
+The module containing the generator.
+
+• **method**: `string`
+
+The method to call on the module.
 
 #### Returns
 

@@ -50,7 +50,7 @@ Method for loading the state.
 
 #### Parameters
 
-• **engineCore**: `IEngineCore`\<`IEngineState`\>
+• **engineCore**: `IEngineCore`\<`IEngineCoreConfig`, `IEngineState`\>
 
 The engine core to load the state for.
 
@@ -74,7 +74,7 @@ Method for saving the state.
 
 #### Parameters
 
-• **engineCore**: `IEngineCore`\<`IEngineState`\>
+• **engineCore**: `IEngineCore`\<`IEngineCoreConfig`, `IEngineState`\>
 
 The engine core to save the state for.
 

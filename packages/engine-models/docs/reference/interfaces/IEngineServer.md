@@ -6,7 +6,7 @@ Interface describing the engine server methods.
 
 ### addRestRouteGenerator()
 
-> **addRestRouteGenerator**(`type`, `typeConfig`, `generator`): `void`
+> **addRestRouteGenerator**(`type`, `typeConfig`, `module`, `method`): `void`
 
 Add a REST route generator.
 
@@ -20,9 +20,13 @@ The type to add the generator for.
 
 The type config.
 
-• **generator**: [`RestRouteGenerator`](../type-aliases/RestRouteGenerator.md)
+• **module**: `string`
 
-The generator to add.
+The module containing the generator.
+
+• **method**: `string`
+
+The method to call on the module.
 
 #### Returns
 
@@ -32,7 +36,7 @@ The generator to add.
 
 ### addSocketRouteGenerator()
 
-> **addSocketRouteGenerator**(`type`, `typeConfig`, `generator`): `void`
+> **addSocketRouteGenerator**(`type`, `typeConfig`, `module`, `method`): `void`
 
 Add a socket route generator.
 
@@ -46,9 +50,13 @@ The type to add the generator for.
 
 The type config.
 
-• **generator**: [`SocketRouteGenerator`](../type-aliases/SocketRouteGenerator.md)
+• **module**: `string`
 
-The generator to add.
+The module containing the generator.
+
+• **method**: `string`
+
+The method to call on the module.
 
 #### Returns
 

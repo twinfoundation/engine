@@ -16,7 +16,7 @@ Method for loading the state.
 
 #### Parameters
 
-• **engineCore**: [`IEngineCore`](IEngineCore.md)\<[`IEngineState`](IEngineState.md)\>
+• **engineCore**: [`IEngineCore`](IEngineCore.md)\<[`IEngineCoreConfig`](IEngineCoreConfig.md), [`IEngineState`](IEngineState.md)\>
 
 The engine core to load the state for.
 
@@ -36,7 +36,7 @@ Method for saving the state.
 
 #### Parameters
 
-• **engineCore**: [`IEngineCore`](IEngineCore.md)\<[`IEngineState`](IEngineState.md)\>
+• **engineCore**: [`IEngineCore`](IEngineCore.md)\<[`IEngineCoreConfig`](IEngineCoreConfig.md), [`IEngineState`](IEngineState.md)\>
 
 The engine core to save the state for.
 

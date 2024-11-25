@@ -1,8 +1,10 @@
-# Interface: IEngineCore\<S\>
+# Interface: IEngineCore\<C, S\>
 
 Interface describing the engine core methods.
 
 ## Type Parameters
+
+• **C** *extends* [`IEngineCoreConfig`](IEngineCoreConfig.md) = [`IEngineCoreConfig`](IEngineCoreConfig.md)
 
 • **S** *extends* [`IEngineState`](IEngineState.md) = [`IEngineState`](IEngineState.md)
 
@@ -10,13 +12,9 @@ Interface describing the engine core methods.
 
 ### addTypeInitialiser()
 
-> **addTypeInitialiser**\<`T`\>(`type`, `typeConfig`, `initialiser`): `void`
+> **addTypeInitialiser**(`type`, `typeConfig`, `module`, `method`): `void`
 
 Add a type initialiser.
-
-#### Type Parameters
-
-• **T** *extends* [`IEngineCoreTypeBaseConfig`](IEngineCoreTypeBaseConfig.md)\<`unknown`\>
 
 #### Parameters
 
@@ -28,9 +26,13 @@ The type to add the initialiser for.
 
 The type config.
 
-• **initialiser**: [`EngineTypeInitialiser`](../type-aliases/EngineTypeInitialiser.md)\<`T`\>
+• **module**: `string`
 
-The initialiser to add.
+The name of the module which contains the initialiser method.
+
+• **method**: `string`
+
+The name of the method to call.
 
 #### Returns
 
@@ -104,13 +106,13 @@ The error to log.
 
 ### getConfig()
 
-> **getConfig**(): [`IEngineCoreConfig`](IEngineCoreConfig.md)
+> **getConfig**(): `C`
 
 Get the config for the engine.
 
 #### Returns
 
-[`IEngineCoreConfig`](IEngineCoreConfig.md)
+`C`
 
 The config for the engine.
 
@@ -146,13 +148,13 @@ The default types.
 
 ### getCloneData()
 
-> **getCloneData**(): [`IEngineCoreClone`](IEngineCoreClone.md)\<[`IEngineState`](IEngineState.md)\>
+> **getCloneData**(): [`IEngineCoreClone`](IEngineCoreClone.md)\<`C`, `S`\>
 
 Get the data required to create a clone of the engine.
 
 #### Returns
 
-[`IEngineCoreClone`](IEngineCoreClone.md)\<[`IEngineState`](IEngineState.md)\>
+[`IEngineCoreClone`](IEngineCoreClone.md)\<`C`, `S`\>
 
 The clone data.
 
@@ -166,7 +168,7 @@ Populate the engine from the clone data.
 
 #### Parameters
 
-• **cloneData**: [`IEngineCoreClone`](IEngineCoreClone.md)\<[`IEngineState`](IEngineState.md)\>
+• **cloneData**: [`IEngineCoreClone`](IEngineCoreClone.md)\<`C`, `S`\>
 
 The clone data to populate from.
 

@@ -7,11 +7,14 @@ import type { IEngineState } from "./IEngineState";
 /**
  * The context for the engine core.
  */
-export interface IEngineCoreContext<S extends IEngineState = IEngineState> {
+export interface IEngineCoreContext<
+	C extends IEngineCoreConfig = IEngineCoreConfig,
+	S extends IEngineState = IEngineState
+> {
 	/**
 	 * The engine core config.
 	 */
-	config: IEngineCoreConfig;
+	config: C;
 
 	/**
 	 * The engine core state.
