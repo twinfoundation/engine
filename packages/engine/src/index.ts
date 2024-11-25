@@ -3,4 +3,3 @@
 export * from "./engine";
 export * from "./models/IEngineEnvironmentVariables";
 export * from "./utils/engineEnvBuilder";
-export * from "./utils/envHelper";
