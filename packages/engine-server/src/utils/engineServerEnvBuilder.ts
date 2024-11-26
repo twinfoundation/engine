@@ -25,7 +25,6 @@ export function buildEngineServerConfiguration(
 	coreEngineConfig: IEngineCoreConfig,
 	serverInfo: IServerInfo
 ): IEngineServerConfig {
-	envVars.adminUsername ??= "admin@node";
 	envVars.authSigningKeyId ??= "auth-signing";
 
 	const webServerOptions: IWebServerOptions = {

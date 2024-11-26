@@ -4,14 +4,6 @@ The engine server environment variables.
 
 ## Properties
 
-### adminUsername?
-
-> `optional` **adminUsername**: `string`
-
-The name of the admin user.
-
-***
-
 ### port?
 
 > `optional` **port**: `string`

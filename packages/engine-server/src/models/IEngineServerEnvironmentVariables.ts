@@ -6,11 +6,6 @@
  */
 export interface IEngineServerEnvironmentVariables {
 	/**
-	 * The name of the admin user.
-	 */
-	adminUsername?: string;
-
-	/**
 	 * The port to serve the API from.
 	 */
 	port?: string;
