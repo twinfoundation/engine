@@ -489,9 +489,10 @@ export class EngineCore<
 				canContinue = false;
 				this.logError(BaseError.fromError(err));
 			} finally {
-				canContinue = await this.stateSave();
-				if (canContinue) {
+				if (await this.stateSave()) {
 					this.logInfo(I18n.formatMessage("engineCore.bootstrapComplete"));
+				} else {
+					canContinue = false;
 				}
 			}
 		}
