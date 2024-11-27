@@ -20,6 +20,7 @@ import type {
 	IEngineState,
 	IEngineStateStorage
 } from "@twin.org/engine-models";
+import { EntitySchemaFactory, type IEntitySchema } from "@twin.org/entity";
 import { ConsoleLoggingConnector } from "@twin.org/logging-connector-console";
 import { LoggingConnectorFactory, type ILoggingConnector } from "@twin.org/logging-models";
 import { ModuleHelper } from "@twin.org/modules";
@@ -307,10 +308,20 @@ export class EngineCore<
 	 * @returns The clone data.
 	 */
 	public getCloneData(): IEngineCoreClone<C, S> {
+		const entitySchemas: {
+			[schema: string]: IEntitySchema;
+		} = {};
+
+		const entitySchemaNames = EntitySchemaFactory.names();
+		for (const schemaName of entitySchemaNames) {
+			entitySchemas[schemaName] = EntitySchemaFactory.get(schemaName);
+		}
+
 		const cloneData: IEngineCoreClone<C, S> = {
 			config: this._context.config,
 			state: this._context.state,
-			typeInitialisers: this._typeInitialisers
+			typeInitialisers: this._typeInitialisers,
+			entitySchemas
 		};
 
 		return cloneData;
@@ -335,6 +346,10 @@ export class EngineCore<
 		};
 
 		this._typeInitialisers = cloneData.typeInitialisers;
+
+		for (const schemaName of Object.keys(cloneData.entitySchemas)) {
+			EntitySchemaFactory.register(schemaName, () => cloneData.entitySchemas[schemaName]);
+		}
 
 		this._stateStorage = new MemoryStateStorage(true, cloneData.state);
 		this._isStarted = false;

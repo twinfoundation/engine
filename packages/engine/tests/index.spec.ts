@@ -129,6 +129,29 @@ describe("engine", () => {
 			"ais"
 		]);
 
+		expect(EntitySchemaFactory.names()).toEqual([
+			"BackgroundTask",
+			"TelemetryMetric",
+			"TelemetryMetricValue",
+			"VaultKey",
+			"VaultSecret",
+			"BlobStorageEntry",
+			"ImmutableItem",
+			"WalletAddress",
+			"IdentityDocument",
+			"IdentityProfile",
+			"Nft",
+			"ImmutableProof",
+			"AuditableItemGraphVertex",
+			"AuditableItemGraphAlias",
+			"AuditableItemGraphResource",
+			"AuditableItemGraphEdge",
+			"AuditableItemGraphChangeset",
+			"AuditableItemGraphPatch",
+			"AuditableItemStream",
+			"AuditableItemStreamEntry"
+		]);
+
 		expect(engine).toBeDefined();
 		expect(calledCustomBootstrap).toBeDefined();
 	});
@@ -154,6 +177,29 @@ describe("engine", () => {
 		await engine.start();
 		await engine.stop();
 		expect(ComponentFactory.names()).toEqual(["test-entity"]);
+		expect(EntitySchemaFactory.names()).toEqual([
+			"BackgroundTask",
+			"TelemetryMetric",
+			"TelemetryMetricValue",
+			"VaultKey",
+			"VaultSecret",
+			"BlobStorageEntry",
+			"ImmutableItem",
+			"WalletAddress",
+			"IdentityDocument",
+			"IdentityProfile",
+			"Nft",
+			"ImmutableProof",
+			"AuditableItemGraphVertex",
+			"AuditableItemGraphAlias",
+			"AuditableItemGraphResource",
+			"AuditableItemGraphEdge",
+			"AuditableItemGraphChangeset",
+			"AuditableItemGraphPatch",
+			"AuditableItemStream",
+			"AuditableItemStreamEntry",
+			"TestEntity"
+		]);
 	});
 
 	test("Can start engine with custom entity storage and custom store", async () => {
@@ -193,6 +239,29 @@ describe("engine", () => {
 		await engine.stop();
 
 		expect(ComponentFactory.names()).toEqual(["test-entity"]);
+		expect(EntitySchemaFactory.names()).toEqual([
+			"BackgroundTask",
+			"TelemetryMetric",
+			"TelemetryMetricValue",
+			"VaultKey",
+			"VaultSecret",
+			"BlobStorageEntry",
+			"ImmutableItem",
+			"WalletAddress",
+			"IdentityDocument",
+			"IdentityProfile",
+			"Nft",
+			"ImmutableProof",
+			"AuditableItemGraphVertex",
+			"AuditableItemGraphAlias",
+			"AuditableItemGraphResource",
+			"AuditableItemGraphEdge",
+			"AuditableItemGraphChangeset",
+			"AuditableItemGraphPatch",
+			"AuditableItemStream",
+			"AuditableItemStreamEntry",
+			"TestEntity"
+		]);
 
 		const service = ComponentFactory.get<IEntityStorageComponent<TestEntity>>("test-entity");
 		await service.set({ id: "test" });

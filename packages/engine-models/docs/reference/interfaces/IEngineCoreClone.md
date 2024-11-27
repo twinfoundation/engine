@@ -31,3 +31,15 @@ The state of the engine.
 > **typeInitialisers**: `object`[]
 
 The type initialisers for the engine.
+
+***
+
+### entitySchemas
+
+> **entitySchemas**: `object`
+
+The entity schemas for the engine.
+
+#### Index Signature
+
+ \[`schema`: `string`\]: `IEntitySchema`
