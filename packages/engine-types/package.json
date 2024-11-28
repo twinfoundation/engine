@@ -1,6 +1,6 @@
 {
 	"name": "@twin.org/engine-types",
-	"version": "0.0.1-next.24",
+	"version": "0.0.1-next.25",
 	"description": "Types to use in an engine.",
 	"repository": {
 		"type": "git",
@@ -29,6 +29,16 @@
 		"prepare": "ts-patch install -s"
 	},
 	"dependencies": {
+		"@twin.org/core": "next",
+		"@twin.org/crypto": "next",
+		"@twin.org/data-core": "next",
+		"@twin.org/data-schema-org": "next",
+		"@twin.org/engine-models": "0.0.1-next.25",
+		"@twin.org/entity": "next",
+		"@twin.org/modules": "next",
+		"@twin.org/nameof": "next"
+	},
+	"peerDependencies": {
 		"@twin.org/attestation-models": "next",
 		"@twin.org/attestation-connector-entity-storage": "next",
 		"@twin.org/attestation-connector-iota": "next",
@@ -47,8 +57,6 @@
 		"@twin.org/blob-storage-connector-memory": "next",
 		"@twin.org/blob-storage-models": "next",
 		"@twin.org/blob-storage-service": "next",
-		"@twin.org/core": "next",
-		"@twin.org/engine-models": "0.0.1-next.24",
 		"@twin.org/entity-storage-connector-cosmosdb": "next",
 		"@twin.org/entity-storage-connector-dynamodb": "next",
 		"@twin.org/entity-storage-connector-file": "next",
@@ -70,7 +78,6 @@
 		"@twin.org/logging-connector-console": "next",
 		"@twin.org/logging-connector-entity-storage": "next",
 		"@twin.org/logging-service": "next",
-		"@twin.org/nameof": "next",
 		"@twin.org/nft-models": "next",
 		"@twin.org/nft-connector-entity-storage": "next",
 		"@twin.org/nft-connector-iota": "next",

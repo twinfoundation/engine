@@ -1,6 +1,6 @@
 {
 	"name": "@twin.org/engine-server-types",
-	"version": "0.0.1-next.24",
+	"version": "0.0.1-next.25",
 	"description": "Server types to use in an engine server.",
 	"repository": {
 		"type": "git",
@@ -29,15 +29,19 @@
 		"prepare": "ts-patch install -s"
 	},
 	"dependencies": {
+		"@twin.org/core": "next",
+		"@twin.org/engine-models": "0.0.1-next.25",
+		"@twin.org/engine-types": "0.0.1-next.25",
+		"@twin.org/entity": "next",
+		"@twin.org/nameof": "next"
+	},
+	"peerDependencies": {
 		"@twin.org/api-auth-entity-storage-service": "next",
+		"@twin.org/api-core": "next",
 		"@twin.org/api-models": "next",
 		"@twin.org/api-processors": "next",
 		"@twin.org/api-service": "next",
-		"@twin.org/core": "next",
-		"@twin.org/engine-models": "0.0.1-next.24",
-		"@twin.org/engine-types": "0.0.1-next.24",
-		"@twin.org/entity": "next",
-		"@twin.org/nameof": "next"
+		"@twin.org/api-server-fastify": "next"
 	},
 	"devDependencies": {
 		"@twin.org/nameof-transformer": "next",
