@@ -418,6 +418,12 @@ export class EngineServer<T extends IEngineServerConfig = IEngineServerConfig>
 			"generateRestRoutesAttestation"
 		);
 		this.addRestRouteGenerator(
+			"immutableProofComponent",
+			coreConfig.types.immutableProofComponent,
+			"@twin.org/immutable-proof-service",
+			"generateRestRoutesImmutableProof"
+		);
+		this.addRestRouteGenerator(
 			"auditableItemGraphComponent",
 			coreConfig.types.auditableItemGraphComponent,
 			"@twin.org/auditable-item-graph-service",

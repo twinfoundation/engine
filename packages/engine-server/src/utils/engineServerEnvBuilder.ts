@@ -154,43 +154,80 @@ function addRestPaths(
 		serverConfig.types.informationComponent[0].restPath = "";
 	}
 
-	if (Is.arrayValue(serverConfig.types.authenticationComponent)) {
+	if (
+		Is.arrayValue(serverConfig.types.authenticationComponent) &&
+		!Is.stringValue(serverConfig.types.authenticationComponent[0])
+	) {
 		serverConfig.types.authenticationComponent[0].restPath = "authentication";
 	}
 
-	if (Is.arrayValue(coreEngineConfig.types.blobStorageComponent)) {
+	if (
+		Is.arrayValue(coreEngineConfig.types.blobStorageComponent) &&
+		!Is.stringValue(coreEngineConfig.types.blobStorageComponent[0])
+	) {
 		coreEngineConfig.types.blobStorageComponent[0].restPath = "blob";
 	}
 
-	if (Is.arrayValue(coreEngineConfig.types.loggingComponent)) {
+	if (
+		Is.arrayValue(coreEngineConfig.types.loggingComponent) &&
+		!Is.stringValue(coreEngineConfig.types.loggingComponent[0])
+	) {
 		coreEngineConfig.types.loggingComponent[0].restPath = "logging";
 	}
 
-	if (Is.arrayValue(coreEngineConfig.types.telemetryComponent)) {
+	if (
+		Is.arrayValue(coreEngineConfig.types.telemetryComponent) &&
+		!Is.stringValue(coreEngineConfig.types.telemetryComponent[0])
+	) {
 		coreEngineConfig.types.telemetryComponent[0].restPath = "telemetry";
 	}
 
-	if (Is.arrayValue(coreEngineConfig.types.identityComponent)) {
+	if (
+		Is.arrayValue(coreEngineConfig.types.identityComponent) &&
+		!Is.stringValue(coreEngineConfig.types.identityComponent[0])
+	) {
 		coreEngineConfig.types.identityComponent[0].restPath = "identity";
 	}
 
-	if (Is.arrayValue(coreEngineConfig.types.identityProfileComponent)) {
+	if (
+		Is.arrayValue(coreEngineConfig.types.identityProfileComponent) &&
+		!Is.stringValue(coreEngineConfig.types.identityProfileComponent[0])
+	) {
 		coreEngineConfig.types.identityProfileComponent[0].restPath = "identity/profile";
 	}
 
-	if (Is.arrayValue(coreEngineConfig.types.nftComponent)) {
+	if (
+		Is.arrayValue(coreEngineConfig.types.nftComponent) &&
+		!Is.stringValue(coreEngineConfig.types.nftComponent[0])
+	) {
 		coreEngineConfig.types.nftComponent[0].restPath = "nft";
 	}
 
-	if (Is.arrayValue(coreEngineConfig.types.attestationComponent)) {
+	if (
+		Is.arrayValue(coreEngineConfig.types.immutableProofComponent) &&
+		!Is.stringValue(coreEngineConfig.types.immutableProofComponent[0])
+	) {
+		coreEngineConfig.types.immutableProofComponent[0].restPath = "immutable-proof";
+	}
+
+	if (
+		Is.arrayValue(coreEngineConfig.types.attestationComponent) &&
+		!Is.stringValue(coreEngineConfig.types.attestationComponent[0])
+	) {
 		coreEngineConfig.types.attestationComponent[0].restPath = "attestation";
 	}
 
-	if (Is.arrayValue(coreEngineConfig.types.auditableItemGraphComponent)) {
+	if (
+		Is.arrayValue(coreEngineConfig.types.auditableItemGraphComponent) &&
+		!Is.stringValue(coreEngineConfig.types.auditableItemGraphComponent[0])
+	) {
 		coreEngineConfig.types.auditableItemGraphComponent[0].restPath = "aig";
 	}
 
-	if (Is.arrayValue(coreEngineConfig.types.auditableItemStreamComponent)) {
+	if (
+		Is.arrayValue(coreEngineConfig.types.auditableItemStreamComponent) &&
+		!Is.stringValue(coreEngineConfig.types.auditableItemStreamComponent[0])
+	) {
 		coreEngineConfig.types.auditableItemStreamComponent[0].restPath = "ais";
 	}
 }
