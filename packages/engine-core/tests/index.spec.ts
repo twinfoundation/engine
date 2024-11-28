@@ -22,7 +22,8 @@ describe("engine-core", () => {
 
 		const engine = new EngineCore({
 			config: {
-				debug: true
+				debug: true,
+				types: {}
 			},
 			stateStorage: new MemoryStateStorage(),
 			customBootstrap: async () => {

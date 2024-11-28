@@ -1,7 +1,7 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
 import { mkdir, rmdir } from "node:fs/promises";
-import { ComponentFactory, I18n } from "@twin.org/core";
+import { ComponentFactory, Factory, I18n } from "@twin.org/core";
 import { MemoryStateStorage } from "@twin.org/engine-core";
 import {
 	AttestationComponentType,
@@ -18,6 +18,7 @@ import {
 	IdentityConnectorType,
 	IdentityProfileComponentType,
 	IdentityProfileConnectorType,
+	type IEngineConfig,
 	ImmutableProofComponentType,
 	ImmutableStorageConnectorType,
 	LoggingComponentType,
@@ -304,10 +305,63 @@ describe("engine", () => {
 		});
 
 		await engine.start();
+		await engine.stop();
+
+		Factory.clearFactories();
 
 		const cloneData = engine.getCloneData();
 		const clone = new Engine();
 		clone.populateClone(cloneData);
+		await clone.start();
+
+		expect(clone.getConfig()).toEqual(engine.getConfig());
+		expect(clone.getState()).toEqual(engine.getState());
+		expect(clone.getDefaultTypes()).toEqual(engine.getDefaultTypes());
+	});
+
+	test("Can clone the engine and silence it", async () => {
+		const config: IEngineConfig = {
+			debug: true,
+			silent: false,
+			types: {
+				loggingConnector: [{ type: LoggingConnectorType.Console }],
+				loggingComponent: [{ type: LoggingComponentType.Service }],
+				entityStorageConnector: [{ type: EntityStorageConnectorType.Memory }],
+				blobStorageConnector: [{ type: BlobStorageConnectorType.Memory }],
+				blobStorageComponent: [{ type: BlobStorageComponentType.Service }],
+				backgroundTaskConnector: [{ type: BackgroundTaskConnectorType.EntityStorage }],
+				telemetryConnector: [{ type: TelemetryConnectorType.EntityStorage }],
+				telemetryComponent: [{ type: TelemetryComponentType.Service }],
+				vaultConnector: [{ type: VaultConnectorType.EntityStorage }],
+				immutableStorageConnector: [{ type: ImmutableStorageConnectorType.EntityStorage }],
+				immutableProofComponent: [{ type: ImmutableProofComponentType.Service }],
+				walletConnector: [{ type: WalletConnectorType.EntityStorage }],
+				faucetConnector: [{ type: FaucetConnectorType.EntityStorage }],
+				identityConnector: [{ type: IdentityConnectorType.EntityStorage }],
+				identityProfileConnector: [{ type: IdentityProfileConnectorType.EntityStorage }],
+				identityComponent: [{ type: IdentityComponentType.Service }],
+				identityProfileComponent: [{ type: IdentityProfileComponentType.Service }],
+				nftConnector: [{ type: NftConnectorType.EntityStorage }],
+				nftComponent: [{ type: NftComponentType.Service }],
+				attestationConnector: [{ type: AttestationConnectorType.EntityStorage }],
+				attestationComponent: [{ type: AttestationComponentType.Service }],
+				auditableItemGraphComponent: [{ type: AuditableItemGraphComponentType.Service }],
+				auditableItemStreamComponent: [{ type: AuditableItemStreamComponentType.Service }]
+			}
+		};
+		const engine = new Engine({
+			config,
+			stateStorage: new MemoryStateStorage()
+		});
+
+		await engine.start();
+		await engine.stop();
+
+		Factory.clearFactories();
+
+		const cloneData = engine.getCloneData();
+		const clone = new Engine();
+		clone.populateClone(cloneData, true);
 		await clone.start();
 
 		expect(clone.getConfig()).toEqual(engine.getConfig());

@@ -36,4 +36,9 @@ export interface IEngineCoreClone<
 	 * The entity schemas for the engine.
 	 */
 	entitySchemas: { [schema: string]: IEntitySchema };
+
+	/**
+	 * The logger type name.
+	 */
+	loggerTypeName: string;
 }

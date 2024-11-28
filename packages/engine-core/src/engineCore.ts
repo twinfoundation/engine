@@ -22,7 +22,11 @@ import type {
 } from "@twin.org/engine-models";
 import { EntitySchemaFactory, type IEntitySchema } from "@twin.org/entity";
 import { ConsoleLoggingConnector } from "@twin.org/logging-connector-console";
-import { LoggingConnectorFactory, type ILoggingConnector } from "@twin.org/logging-models";
+import {
+	LoggingConnectorFactory,
+	SilentLoggingConnector,
+	type ILoggingConnector
+} from "@twin.org/logging-models";
 import { ModuleHelper } from "@twin.org/modules";
 import { nameof } from "@twin.org/nameof";
 import type { IEngineCoreOptions } from "./models/IEngineCoreOptions";
@@ -67,13 +71,13 @@ export class EngineCore<
 	 * Skip the bootstrap process.
 	 * @internal
 	 */
-	private readonly _skipBootstrap?: boolean;
+	private _skipBootstrap?: boolean;
 
 	/**
 	 * The logger type name to use.
 	 * @internal
 	 */
-	private readonly _loggerTypeName: string;
+	private _loggerTypeName: string;
 
 	/**
 	 * The type initialisers.
@@ -321,7 +325,8 @@ export class EngineCore<
 			config: this._context.config,
 			state: this._context.state,
 			typeInitialisers: this._typeInitialisers,
-			entitySchemas
+			entitySchemas,
+			loggerTypeName: this._loggerTypeName
 		};
 
 		return cloneData;
@@ -330,12 +335,20 @@ export class EngineCore<
 	/**
 	 * Populate the engine from the clone data.
 	 * @param cloneData The clone data to populate from.
+	 * @param silent Should the clone be silent.
 	 */
-	public populateClone(cloneData: IEngineCoreClone<C, S>): void {
+	public populateClone(cloneData: IEngineCoreClone<C, S>, silent?: boolean): void {
 		Guards.object(this.CLASS_NAME, nameof(cloneData), cloneData);
 		Guards.object(this.CLASS_NAME, nameof(cloneData.config), cloneData.config);
 		Guards.object(this.CLASS_NAME, nameof(cloneData.state), cloneData.state);
 		Guards.array(this.CLASS_NAME, nameof(cloneData.typeInitialisers), cloneData.typeInitialisers);
+
+		this._loggerTypeName = cloneData.loggerTypeName;
+		this._skipBootstrap = true;
+
+		if (silent ?? false) {
+			cloneData.config.silent = true;
+		}
 
 		this._context = {
 			config: cloneData.config,
@@ -395,24 +408,25 @@ export class EngineCore<
 	 * @internal
 	 */
 	private setupEngineLogger(): void {
-		if (!this._context.config.silent) {
-			const engineLogger = new ConsoleLoggingConnector({
-				config: {
-					translateMessages: true,
-					hideGroups: true
-				}
-			});
+		const silent = this._context.config.silent ?? false;
+		const engineLogger = silent
+			? new SilentLoggingConnector()
+			: new ConsoleLoggingConnector({
+					config: {
+						translateMessages: true,
+						hideGroups: true
+					}
+				});
 
-			this._context.componentInstances.push({
-				instanceType: this._loggerTypeName,
-				component: engineLogger
-			});
+		this._context.componentInstances.push({
+			instanceType: this._loggerTypeName,
+			component: engineLogger
+		});
 
-			LoggingConnectorFactory.register(this._loggerTypeName, () => engineLogger);
+		LoggingConnectorFactory.register(this._loggerTypeName, () => engineLogger);
 
-			this._engineLoggingConnector = engineLogger;
-			this._context.defaultTypes.loggingConnector = this._loggerTypeName;
-		}
+		this._engineLoggingConnector = engineLogger;
+		this._context.defaultTypes.loggingConnector = this._loggerTypeName;
 	}
 
 	/**

@@ -260,7 +260,7 @@ The clone data.
 
 ### populateClone()
 
-> **populateClone**(`cloneData`): `void`
+> **populateClone**(`cloneData`, `silent`?): `void`
 
 Populate the engine from the clone data.
 
@@ -269,6 +269,10 @@ Populate the engine from the clone data.
 • **cloneData**: `IEngineCoreClone`\<`C`, `S`\>
 
 The clone data to populate from.
+
+• **silent?**: `boolean`
+
+Should the clone be silent.
 
 #### Returns
 
