@@ -44,6 +44,7 @@
 		"@twin.org/nameof-transformer": "next",
 		"@twin.org/nameof-vitest-plugin": "next",
 		"@twin.org/ts-to-openapi": "next",
+		"@types/node": "22.9.1",
 		"@vitest/coverage-v8": "2.1.5",
 		"copyfiles": "2.4.1",
 		"rimraf": "6.0.1",
