@@ -1,6 +1,6 @@
 {
 	"name": "@twin.org/engine-types",
-	"version": "0.0.1-next.25",
+	"version": "0.0.1-next.26",
 	"description": "Types to use in an engine.",
 	"repository": {
 		"type": "git",
@@ -33,7 +33,7 @@
 		"@twin.org/crypto": "next",
 		"@twin.org/data-core": "next",
 		"@twin.org/data-schema-org": "next",
-		"@twin.org/engine-models": "0.0.1-next.25",
+		"@twin.org/engine-models": "0.0.1-next.26",
 		"@twin.org/entity": "next",
 		"@twin.org/modules": "next",
 		"@twin.org/nameof": "next"
@@ -65,6 +65,9 @@
 		"@twin.org/entity-storage-connector-scylladb": "next",
 		"@twin.org/entity-storage-models": "next",
 		"@twin.org/entity-storage-service": "next",
+		"@twin.org/event-bus-models": "next",
+		"@twin.org/event-bus-service": "next",
+		"@twin.org/event-bus-connector-local": "next",
 		"@twin.org/identity-models": "next",
 		"@twin.org/identity-connector-entity-storage": "next",
 		"@twin.org/identity-connector-iota": "next",

@@ -53,6 +53,19 @@ export class Engine<
 		);
 
 		this.addTypeInitialiser(
+			"eventBusConnector",
+			this._context.config.types.eventBusConnector,
+			"@twin.org/engine-types",
+			"initialiseEventBusConnector"
+		);
+		this.addTypeInitialiser(
+			"eventBusComponent",
+			this._context.config.types.eventBusComponent,
+			"@twin.org/engine-types",
+			"initialiseEventBusComponent"
+		);
+
+		this.addTypeInitialiser(
 			"telemetryConnector",
 			this._context.config.types.telemetryConnector,
 			"@twin.org/engine-types",

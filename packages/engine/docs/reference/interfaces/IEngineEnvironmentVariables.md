@@ -396,6 +396,22 @@ The type of background task connector: entity-storage.
 
 ***
 
+### eventBusConnector?
+
+> `optional` **eventBusConnector**: `string`
+
+The type of event bus connector: local.
+
+***
+
+### eventBusComponent?
+
+> `optional` **eventBusComponent**: `string`
+
+The type of event bus component: service.
+
+***
+
 ### telemetryConnector?
 
 > `optional` **telemetryConnector**: `string`

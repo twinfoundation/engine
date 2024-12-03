@@ -8,6 +8,7 @@ import type { IEngineCoreTypeConfig } from "@twin.org/engine-models";
 import {
 	InformationComponentType,
 	RestRouteProcessorType,
+	SocketRouteProcessorType,
 	type IEngineServerConfig
 } from "@twin.org/engine-server-types";
 import {
@@ -20,6 +21,8 @@ import {
 	BlobStorageConnectorType,
 	EntityStorageComponentType,
 	EntityStorageConnectorType,
+	EventBusComponentType,
+	EventBusConnectorType,
 	FaucetConnectorType,
 	IdentityComponentType,
 	IdentityConnectorType,
@@ -80,6 +83,8 @@ describe("engine-server", () => {
 				blobStorageConnector: [{ type: BlobStorageConnectorType.Memory }],
 				blobStorageComponent: [{ type: BlobStorageComponentType.Service }],
 				backgroundTaskConnector: [{ type: BackgroundTaskConnectorType.EntityStorage }],
+				eventBusConnector: [{ type: EventBusConnectorType.Local }],
+				eventBusComponent: [{ type: EventBusComponentType.Service }],
 				telemetryConnector: [{ type: TelemetryConnectorType.EntityStorage }],
 				telemetryComponent: [{ type: TelemetryComponentType.Service }],
 				vaultConnector: [{ type: VaultConnectorType.EntityStorage }],
@@ -114,6 +119,11 @@ describe("engine-server", () => {
 				restRouteProcessor: [
 					{
 						type: RestRouteProcessorType.RestRoute
+					}
+				],
+				socketRouteProcessor: [
+					{
+						type: SocketRouteProcessorType.SocketRoute
 					}
 				]
 			}

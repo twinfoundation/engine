@@ -11,6 +11,8 @@ import {
 	BlobStorageComponentType,
 	BlobStorageConnectorType,
 	EntityStorageConnectorType,
+	EventBusConnectorType,
+	EventBusComponentType,
 	FaucetConnectorType,
 	IdentityComponentType,
 	IdentityConnectorType,
@@ -57,8 +59,9 @@ export function buildEngineConfiguration(envVars: IEngineEnvironmentVariables): 
 	configureBlobStorageConnectors(coreConfig, envVars);
 	configureVaultConnectors(coreConfig, envVars);
 
-	configureLogging(coreConfig, envVars);
+	configureLoggingConnectors(coreConfig, envVars);
 	configureBackgroundTaskConnectors(coreConfig, envVars);
+	configureEventBusConnectors(coreConfig, envVars);
 	configureTelemetryConnectors(coreConfig, envVars);
 
 	configureFaucetConnectors(coreConfig, envVars);
@@ -298,7 +301,10 @@ function configureBlobStorageConnectors(
  * @param coreConfig The core config.
  * @param envVars The environment variables.
  */
-function configureLogging(coreConfig: IEngineConfig, envVars: IEngineEnvironmentVariables): void {
+function configureLoggingConnectors(
+	coreConfig: IEngineConfig,
+	envVars: IEngineEnvironmentVariables
+): void {
 	const loggingConnectors = (envVars.loggingConnector ?? "").split(",");
 	for (const loggingConnector of loggingConnectors) {
 		if (loggingConnector === LoggingConnectorType.Console) {
@@ -376,6 +382,29 @@ function configureBackgroundTaskConnectors(
 		coreConfig.types.backgroundTaskConnector.push({
 			type: BackgroundTaskConnectorType.EntityStorage
 		});
+	}
+}
+
+/**
+ * Configures the event bud connectors for the core.
+ * @param coreConfig The core config.
+ * @param envVars The environment variables.
+ */
+function configureEventBusConnectors(
+	coreConfig: IEngineConfig,
+	envVars: IEngineEnvironmentVariables
+): void {
+	coreConfig.types.eventBusConnector ??= [];
+
+	if (envVars.eventBusConnector === EventBusConnectorType.Local) {
+		coreConfig.types.eventBusConnector.push({
+			type: EventBusConnectorType.Local
+		});
+	}
+
+	if (coreConfig.types.eventBusConnector.length > 0) {
+		coreConfig.types.eventBusComponent ??= [];
+		coreConfig.types.eventBusComponent.push({ type: EventBusComponentType.Service });
 	}
 }
 

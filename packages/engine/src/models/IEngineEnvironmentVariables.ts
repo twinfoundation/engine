@@ -251,6 +251,16 @@ export interface IEngineEnvironmentVariables {
 	backgroundTaskConnector?: string;
 
 	/**
+	 * The type of event bus connector: local.
+	 */
+	eventBusConnector?: string;
+
+	/**
+	 * The type of event bus component: service.
+	 */
+	eventBusComponent?: string;
+
+	/**
 	 * The type of telemetry connector: entity-storage.
 	 */
 	telemetryConnector?: string;

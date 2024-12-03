@@ -9,7 +9,11 @@ import {
 import { FastifyWebServer } from "@twin.org/api-server-fastify";
 import { Guards, Is } from "@twin.org/core";
 import type { IEngineCore, IEngineCoreTypeConfig, IEngineServer } from "@twin.org/engine-models";
-import { RestRouteProcessorType, type IEngineServerConfig } from "@twin.org/engine-server-types";
+import {
+	RestRouteProcessorType,
+	SocketRouteProcessorType,
+	type IEngineServerConfig
+} from "@twin.org/engine-server-types";
 import { ModuleHelper } from "@twin.org/modules";
 import { nameof } from "@twin.org/nameof";
 
@@ -94,6 +98,29 @@ export class EngineServer<T extends IEngineServerConfig = IEngineServerConfig>
 			}
 			coreConfig.types.restRouteProcessor.push({
 				type: RestRouteProcessorType.RestRoute,
+				options: {
+					config: {
+						includeErrorStack: coreConfig.debug
+					}
+				}
+			});
+		}
+
+		if (!Is.arrayValue(coreConfig.types.socketRouteProcessor)) {
+			coreConfig.types.socketRouteProcessor = [];
+
+			if (!coreConfig.silent) {
+				coreConfig.types.socketRouteProcessor.push({
+					type: SocketRouteProcessorType.Logging,
+					options: {
+						config: {
+							includeBody: coreConfig.debug
+						}
+					}
+				});
+			}
+			coreConfig.types.socketRouteProcessor.push({
+				type: SocketRouteProcessorType.SocketRoute,
 				options: {
 					config: {
 						includeErrorStack: coreConfig.debug
@@ -448,7 +475,13 @@ export class EngineServer<T extends IEngineServerConfig = IEngineServerConfig>
 	 * @internal
 	 */
 	private addServerSocketRouteGenerators(): void {
-		// const coreConfig = this._engineCore.getConfig();
-		// this.addSocketRouteGenerator("eventBusComponent", coreConfig.eventBusComponent, generateSocketRoutesEventBus);
+		const coreConfig = this._engineCore.getConfig();
+
+		this.addSocketRouteGenerator(
+			"eventBusComponent",
+			coreConfig.types.eventBusComponent,
+			"@twin.org/event-bus-service",
+			"generateSocketRoutesEventBus"
+		);
 	}
 }
