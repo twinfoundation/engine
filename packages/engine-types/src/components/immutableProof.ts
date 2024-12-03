@@ -54,6 +54,7 @@ export function initialiseImmutableProofComponent(
 			immutableStorageType: context.defaultTypes.immutableStorageConnector,
 			identityConnectorType: context.defaultTypes.identityConnector,
 			backgroundTaskConnectorType: context.defaultTypes.backgroundTaskConnector,
+			eventBusComponentType: context.defaultTypes.eventBusComponent,
 			...instanceConfig.options
 		});
 		instanceType = ImmutableProofService.NAMESPACE;

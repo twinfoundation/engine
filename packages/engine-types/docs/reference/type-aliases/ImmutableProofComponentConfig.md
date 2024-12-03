@@ -34,6 +34,10 @@ Immutable proof component config types.
 
 > `optional` **backgroundTaskConnectorType**: `string`
 
+### options.eventBusComponentType?
+
+> `optional` **eventBusComponentType**: `string`
+
 ### options.config?
 
 > `optional` **config**: `IImmutableProofServiceConfig`

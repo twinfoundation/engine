@@ -13,6 +13,7 @@ export type AuditableItemGraphComponentConfig = {
 		immutableProofComponentType?: string;
 		vertexEntityStorageType?: string;
 		changesetEntityStorageType?: string;
+		eventBusComponentType?: string;
 		config?: IAuditableItemGraphServiceConfig;
 	};
 };

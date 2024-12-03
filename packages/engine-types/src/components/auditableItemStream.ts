@@ -58,6 +58,7 @@ export function initialiseAuditableItemStreamComponent(
 
 		component = new AuditableItemStreamService({
 			immutableProofComponentType: context.defaultTypes.immutableProofComponent,
+			eventBusComponentType: context.defaultTypes.eventBusComponent,
 			...instanceConfig.options
 		});
 		instanceType = AuditableItemStreamService.NAMESPACE;

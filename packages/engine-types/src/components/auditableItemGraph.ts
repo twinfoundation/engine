@@ -58,6 +58,7 @@ export function initialiseAuditableItemGraphComponent(
 
 		component = new AuditableItemGraphService({
 			immutableProofComponentType: context.defaultTypes.immutableProofComponent,
+			eventBusComponentType: context.defaultTypes.eventBusComponent,
 			...instanceConfig.options
 		});
 		instanceType = AuditableItemGraphService.NAMESPACE;

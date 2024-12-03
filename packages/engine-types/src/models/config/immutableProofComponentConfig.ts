@@ -15,6 +15,7 @@ export type ImmutableProofComponentConfig = {
 		immutableStorageType?: string;
 		identityConnectorType?: string;
 		backgroundTaskConnectorType?: string;
+		eventBusComponentType?: string;
 		config?: IImmutableProofServiceConfig;
 	};
 };

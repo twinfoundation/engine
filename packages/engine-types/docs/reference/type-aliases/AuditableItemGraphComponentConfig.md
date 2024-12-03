@@ -26,6 +26,10 @@ Auditable item graph component config types.
 
 > `optional` **changesetEntityStorageType**: `string`
 
+### options.eventBusComponentType?
+
+> `optional` **eventBusComponentType**: `string`
+
 ### options.config?
 
 > `optional` **config**: `IAuditableItemGraphServiceConfig`

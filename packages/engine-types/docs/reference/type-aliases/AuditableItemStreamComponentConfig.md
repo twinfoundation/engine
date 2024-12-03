@@ -26,6 +26,10 @@ Auditable item stream component config types.
 
 > `optional` **streamEntryEntityStorageType**: `string`
 
+### options.eventBusComponentType?
+
+> `optional` **eventBusComponentType**: `string`
+
 ### options.config?
 
 > `optional` **config**: `IAuditableItemStreamServiceConfig`

@@ -13,6 +13,7 @@ export type AuditableItemStreamComponentConfig = {
 		immutableProofComponentType?: string;
 		streamEntityStorageType?: string;
 		streamEntryEntityStorageType?: string;
+		eventBusComponentType?: string;
 		config?: IAuditableItemStreamServiceConfig;
 	};
 };
