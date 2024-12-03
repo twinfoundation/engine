@@ -58,8 +58,7 @@ export function buildEngineServerConfiguration(
 						}
 					}
 				}
-			],
-			restRouteProcessor: []
+			]
 		}
 	};
 
@@ -137,6 +136,7 @@ export function buildEngineServerConfiguration(
 	}
 
 	addRestPaths(coreEngineConfig, serverConfig);
+	addSocketPaths(coreEngineConfig, serverConfig);
 
 	return serverConfig;
 }
@@ -156,78 +156,95 @@ function addRestPaths(
 
 	if (
 		Is.arrayValue(serverConfig.types.authenticationComponent) &&
-		!Is.stringValue(serverConfig.types.authenticationComponent[0])
+		!Is.stringValue(serverConfig.types.authenticationComponent[0].restPath)
 	) {
 		serverConfig.types.authenticationComponent[0].restPath = "authentication";
 	}
 
 	if (
 		Is.arrayValue(coreEngineConfig.types.blobStorageComponent) &&
-		!Is.stringValue(coreEngineConfig.types.blobStorageComponent[0])
+		!Is.stringValue(coreEngineConfig.types.blobStorageComponent[0].restPath)
 	) {
 		coreEngineConfig.types.blobStorageComponent[0].restPath = "blob";
 	}
 
 	if (
 		Is.arrayValue(coreEngineConfig.types.loggingComponent) &&
-		!Is.stringValue(coreEngineConfig.types.loggingComponent[0])
+		!Is.stringValue(coreEngineConfig.types.loggingComponent[0].restPath)
 	) {
 		coreEngineConfig.types.loggingComponent[0].restPath = "logging";
 	}
 
 	if (
 		Is.arrayValue(coreEngineConfig.types.telemetryComponent) &&
-		!Is.stringValue(coreEngineConfig.types.telemetryComponent[0])
+		!Is.stringValue(coreEngineConfig.types.telemetryComponent[0].restPath)
 	) {
 		coreEngineConfig.types.telemetryComponent[0].restPath = "telemetry";
 	}
 
 	if (
 		Is.arrayValue(coreEngineConfig.types.identityComponent) &&
-		!Is.stringValue(coreEngineConfig.types.identityComponent[0])
+		!Is.stringValue(coreEngineConfig.types.identityComponent[0].restPath)
 	) {
 		coreEngineConfig.types.identityComponent[0].restPath = "identity";
 	}
 
 	if (
 		Is.arrayValue(coreEngineConfig.types.identityProfileComponent) &&
-		!Is.stringValue(coreEngineConfig.types.identityProfileComponent[0])
+		!Is.stringValue(coreEngineConfig.types.identityProfileComponent[0].restPath)
 	) {
 		coreEngineConfig.types.identityProfileComponent[0].restPath = "identity/profile";
 	}
 
 	if (
 		Is.arrayValue(coreEngineConfig.types.nftComponent) &&
-		!Is.stringValue(coreEngineConfig.types.nftComponent[0])
+		!Is.stringValue(coreEngineConfig.types.nftComponent[0].restPath)
 	) {
 		coreEngineConfig.types.nftComponent[0].restPath = "nft";
 	}
 
 	if (
 		Is.arrayValue(coreEngineConfig.types.immutableProofComponent) &&
-		!Is.stringValue(coreEngineConfig.types.immutableProofComponent[0])
+		!Is.stringValue(coreEngineConfig.types.immutableProofComponent[0].restPath)
 	) {
 		coreEngineConfig.types.immutableProofComponent[0].restPath = "immutable-proof";
 	}
 
 	if (
 		Is.arrayValue(coreEngineConfig.types.attestationComponent) &&
-		!Is.stringValue(coreEngineConfig.types.attestationComponent[0])
+		!Is.stringValue(coreEngineConfig.types.attestationComponent[0].restPath)
 	) {
 		coreEngineConfig.types.attestationComponent[0].restPath = "attestation";
 	}
 
 	if (
 		Is.arrayValue(coreEngineConfig.types.auditableItemGraphComponent) &&
-		!Is.stringValue(coreEngineConfig.types.auditableItemGraphComponent[0])
+		!Is.stringValue(coreEngineConfig.types.auditableItemGraphComponent[0].restPath)
 	) {
 		coreEngineConfig.types.auditableItemGraphComponent[0].restPath = "aig";
 	}
 
 	if (
 		Is.arrayValue(coreEngineConfig.types.auditableItemStreamComponent) &&
-		!Is.stringValue(coreEngineConfig.types.auditableItemStreamComponent[0])
+		!Is.stringValue(coreEngineConfig.types.auditableItemStreamComponent[0].restPath)
 	) {
 		coreEngineConfig.types.auditableItemStreamComponent[0].restPath = "ais";
+	}
+}
+
+/**
+ * Adds the socket paths to the server config.
+ * @param coreEngineConfig The core engine config.
+ * @param serverConfig The server config.
+ */
+function addSocketPaths(
+	coreEngineConfig: IEngineServerConfig,
+	serverConfig: IEngineServerConfig
+): void {
+	if (
+		Is.arrayValue(coreEngineConfig.types.eventBusComponent) &&
+		!Is.stringValue(coreEngineConfig.types.eventBusComponent[0].socketPath)
+	) {
+		coreEngineConfig.types.eventBusComponent[0].socketPath = "event-bus";
 	}
 }

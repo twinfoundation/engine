@@ -11,6 +11,8 @@ import type { BlobStorageConnectorConfig } from "./config/blobStorageConnectorCo
 import type { DltConfig } from "./config/dltConfig";
 import type { EntityStorageComponentConfig } from "./config/entityStorageComponentConfig";
 import type { EntityStorageConnectorConfig } from "./config/entityStorageConnectorConfig";
+import type { EventBusComponentConfig } from "./config/eventBusComponentConfig";
+import type { EventBusConnectorConfig } from "./config/eventBusConnectorConfig";
 import type { FaucetConnectorConfig } from "./config/faucetConnectorConfig";
 import type { IdentityComponentConfig } from "./config/identityComponentConfig";
 import type { IdentityConnectorConfig } from "./config/identityConnectorConfig";
@@ -81,6 +83,16 @@ export interface IEngineConfig extends IEngineCoreConfig {
 		 * Background task connector options which can be overridden by individual components by specifying types other than default.
 		 */
 		backgroundTaskConnector?: IEngineCoreTypeConfig<BackgroundTaskConnectorConfig>[];
+
+		/**
+		 * Event bus connector options which can be overridden by individual components by specifying types other than default.
+		 */
+		eventBusConnector?: IEngineCoreTypeConfig<EventBusConnectorConfig>[];
+
+		/**
+		 * Event bus component options which can be overridden by individual components by specifying types other than default.
+		 */
+		eventBusComponent?: IEngineCoreTypeConfig<EventBusComponentConfig>[];
 
 		/**
 		 * Vault connector options which can be overridden by individual components by specifying types other than default.
