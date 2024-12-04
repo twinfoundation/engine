@@ -14,4 +14,13 @@ export interface IEngineState {
 	 * The ids of the bootstrapped components.
 	 */
 	bootstrappedComponents: string[];
+
+	/**
+	 * The component states.
+	 */
+	componentStates: {
+		[component: string]: {
+			[id: string]: unknown;
+		};
+	};
 }

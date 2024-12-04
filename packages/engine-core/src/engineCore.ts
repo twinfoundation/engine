@@ -6,8 +6,10 @@ import {
 	GeneralError,
 	Guards,
 	I18n,
+	type IComponent,
 	Is,
-	type IError
+	type IError,
+	ObjectHelper
 } from "@twin.org/core";
 import type {
 	EngineTypeInitialiser,
@@ -135,7 +137,7 @@ export class EngineCore<
 			config: options.config,
 			defaultTypes: {},
 			componentInstances: [],
-			state: { bootstrappedComponents: [] } as unknown as S,
+			state: { bootstrappedComponents: [], componentStates: {} } as unknown as S,
 			stateDirty: false
 		};
 		this._stateStorage = options.stateStorage;
@@ -185,32 +187,59 @@ export class EngineCore<
 			this.logInfo(I18n.formatMessage("engineCore.debuggingEnabled"));
 		}
 
-		let canContinue = await this.stateLoad();
-		if (canContinue) {
-			for (const { type, typeConfig, module, method } of this._typeInitialisers) {
-				await this.initialiseTypeConfig(type, typeConfig, module, method);
-			}
+		let canContinue;
+		try {
+			canContinue = await this.stateLoad();
 
-			canContinue = await this.bootstrap();
 			if (canContinue) {
+				for (const { type, typeConfig, module, method } of this._typeInitialisers) {
+					await this.initialiseTypeConfig(type, typeConfig, module, method);
+				}
+
+				await this.bootstrap();
+
 				this.logInfo(I18n.formatMessage("engineCore.componentsStarting"));
 
 				for (const instance of this._context.componentInstances) {
 					if (Is.function(instance.component.start)) {
+						const instanceName = this.getInstanceName(instance);
+
 						this.logInfo(
-							I18n.formatMessage("engineCore.componentStarting", { element: instance.instanceType })
+							I18n.formatMessage("engineCore.componentStarting", {
+								element: instance.instanceType
+							})
 						);
-						await instance.component.start(this._context.state.nodeIdentity, this._loggerTypeName);
+
+						const componentState: {
+							[id: string]: unknown;
+						} = this._context.state.componentStates[instanceName] ?? {};
+						const lastState = ObjectHelper.clone(componentState);
+
+						await instance.component.start(
+							this._context.state.nodeIdentity,
+							this._loggerTypeName,
+							componentState
+						);
+
+						if (!ObjectHelper.equal(lastState, componentState)) {
+							this._context.state.componentStates[instanceName] = componentState;
+							this._context.stateDirty = true;
+						}
 					}
 				}
 
 				this.logInfo(I18n.formatMessage("engineCore.componentsComplete"));
 			}
-		}
 
-		if (canContinue) {
 			this.logInfo(I18n.formatMessage("engineCore.started"));
 			this._isStarted = true;
+		} catch (err) {
+			canContinue = false;
+			this.logError(BaseError.fromError(err));
+		} finally {
+			if (!(await this.stateSave())) {
+				canContinue = false;
+			}
 		}
 
 		return canContinue;
@@ -226,12 +255,28 @@ export class EngineCore<
 
 		for (const instance of this._context.componentInstances) {
 			if (Is.function(instance.component.stop)) {
+				const instanceName = this.getInstanceName(instance);
+
+				const componentState: {
+					[id: string]: unknown;
+				} = this._context.state.componentStates[instanceName] ?? {};
+				const lastState = ObjectHelper.clone(componentState);
+
 				this.logInfo(
 					I18n.formatMessage("engineCore.componentStopping", { element: instance.instanceType })
 				);
 
 				try {
-					await instance.component.stop(this._context.state.nodeIdentity, this._loggerTypeName);
+					await instance.component.stop(
+						this._context.state.nodeIdentity,
+						this._loggerTypeName,
+						componentState
+					);
+
+					if (!ObjectHelper.equal(lastState, componentState)) {
+						this._context.state.componentStates[instanceName] = componentState;
+						this._context.stateDirty = true;
+					}
 				} catch (err) {
 					this.logError(
 						new GeneralError(
@@ -246,6 +291,9 @@ export class EngineCore<
 				}
 			}
 		}
+
+		await this.stateSave();
+
 		this.logInfo(I18n.formatMessage("engineCore.componentsStopped"));
 		this.logInfo(I18n.formatMessage("engineCore.stopped"));
 	}
@@ -354,7 +402,7 @@ export class EngineCore<
 			config: cloneData.config,
 			defaultTypes: {},
 			componentInstances: [],
-			state: { bootstrappedComponents: [] } as unknown as S,
+			state: { bootstrappedComponents: [], componentStates: {} } as unknown as S,
 			stateDirty: false
 		};
 
@@ -438,9 +486,11 @@ export class EngineCore<
 		if (this._stateStorage) {
 			try {
 				this._context.state = ((await this._stateStorage.load(this)) ?? {
-					bootstrappedComponents: []
+					bootstrappedComponents: [],
+					componentStates: {}
 				}) as unknown as S;
 				this._context.state.bootstrappedComponents ??= [];
+				this._context.state.componentStates ??= {};
 				this._context.stateDirty = false;
 
 				return true;
@@ -473,59 +523,68 @@ export class EngineCore<
 
 	/**
 	 * Bootstrap the engine.
-	 * @returns True if the engine can continue.
 	 * @internal
 	 */
-	private async bootstrap(): Promise<boolean> {
-		let canContinue = true;
-
+	private async bootstrap(): Promise<void> {
 		if (!this._skipBootstrap) {
 			this.logInfo(I18n.formatMessage("engineCore.bootstrapStarted"));
 
-			try {
-				// First bootstrap the components.
-				for (const instance of this._context.componentInstances) {
-					if (Is.function(instance.component.bootstrap)) {
-						const bootstrapName = `${instance.component.CLASS_NAME}-${instance.instanceType}`;
+			// First bootstrap the components.
+			for (const instance of this._context.componentInstances) {
+				if (Is.function(instance.component.bootstrap)) {
+					const instanceName = this.getInstanceName(instance);
 
-						if (!this._context.state.bootstrappedComponents.includes(bootstrapName)) {
-							this.logInfo(
-								I18n.formatMessage("engineCore.bootstrapping", {
-									element: bootstrapName
-								})
-							);
+					if (!this._context.state.bootstrappedComponents.includes(instanceName)) {
+						this.logInfo(
+							I18n.formatMessage("engineCore.bootstrapping", {
+								element: instanceName
+							})
+						);
 
-							const bootstrapSuccess = await instance.component.bootstrap(this._loggerTypeName);
+						const componentState: {
+							[id: string]: unknown;
+						} = this._context.state.componentStates[instanceName] ?? {};
+						const lastState = ObjectHelper.clone(componentState);
 
-							// If the bootstrap method failed then throw an error
-							if (!bootstrapSuccess) {
-								throw new GeneralError(this.CLASS_NAME, "bootstrapFailed", {
-									component: `${instance.component.CLASS_NAME}:${instance.instanceType}`
-								});
-							}
+						const bootstrapSuccess = await instance.component.bootstrap(
+							this._loggerTypeName,
+							componentState
+						);
 
-							// Otherwise add the component to the bootstrapped list and set the state as dirty
-							this._context.state.bootstrappedComponents.push(bootstrapName);
-							this._context.stateDirty = true;
+						// If the bootstrap method failed then throw an error
+						if (!bootstrapSuccess) {
+							throw new GeneralError(this.CLASS_NAME, "bootstrapFailed", {
+								component: `${instance.component.CLASS_NAME}:${instance.instanceType}`
+							});
 						}
+
+						// Otherwise add the component to the bootstrapped list and set the state as dirty
+						this._context.state.bootstrappedComponents.push(instanceName);
+						if (!ObjectHelper.equal(lastState, componentState)) {
+							this._context.state.componentStates[instanceName] = componentState;
+						}
+						this._context.stateDirty = true;
 					}
 				}
-				// Now perform any custom bootstrap operations
-				if (canContinue && Is.function(this._customBootstrap)) {
-					await this._customBootstrap(this, this._context);
-				}
-			} catch (err) {
-				canContinue = false;
-				this.logError(BaseError.fromError(err));
-			} finally {
-				if (await this.stateSave()) {
-					this.logInfo(I18n.formatMessage("engineCore.bootstrapComplete"));
-				} else {
-					canContinue = false;
-				}
 			}
-		}
+			// Now perform any custom bootstrap operations
+			if (Is.function(this._customBootstrap)) {
+				await this._customBootstrap(this, this._context);
+			}
 
-		return canContinue;
+			this.logInfo(I18n.formatMessage("engineCore.bootstrapComplete"));
+		}
+	}
+
+	/**
+	 * Get the instance name.
+	 * @param instance The instance to get the name for.
+	 * @param instance.instanceType The instance type.
+	 * @param instance.component The component.
+	 * @returns The instance name.
+	 * @internal
+	 */
+	private getInstanceName(instance: { instanceType: string; component: IComponent }): string {
+		return `${instance.component.CLASS_NAME}-${instance.instanceType}`;
 	}
 }

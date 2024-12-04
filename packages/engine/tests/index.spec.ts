@@ -118,6 +118,7 @@ describe("engine", () => {
 				calledCustomBootstrap = true;
 			}
 		});
+
 		await engine.start();
 		await engine.stop();
 
@@ -180,8 +181,10 @@ describe("engine", () => {
 				}
 			}
 		});
+
 		await engine.start();
 		await engine.stop();
+
 		expect(ComponentFactory.names()).toEqual(["test-entity"]);
 		expect(EntitySchemaFactory.names()).toEqual([
 			"BackgroundTask",
