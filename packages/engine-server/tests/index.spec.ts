@@ -32,6 +32,10 @@ import {
 	ImmutableStorageConnectorType,
 	LoggingComponentType,
 	LoggingConnectorType,
+	MessagingComponentType,
+	MessagingEmailConnectorType,
+	MessagingPushNotificationConnectorType,
+	MessagingSmsConnectorType,
 	NftComponentType,
 	NftConnectorType,
 	TelemetryComponentType,
@@ -87,6 +91,12 @@ describe("engine-server", () => {
 				eventBusComponent: [{ type: EventBusComponentType.Service }],
 				telemetryConnector: [{ type: TelemetryConnectorType.EntityStorage }],
 				telemetryComponent: [{ type: TelemetryComponentType.Service }],
+				messagingEmailConnector: [{ type: MessagingEmailConnectorType.EntityStorage }],
+					messagingSmsConnector: [{ type: MessagingSmsConnectorType.EntityStorage }],
+					messagingPushNotificationConnector: [
+						{ type: MessagingPushNotificationConnectorType.EntityStorage }
+					],
+					messagingComponent: [{ type: MessagingComponentType.Service }],
 				vaultConnector: [{ type: VaultConnectorType.EntityStorage }],
 				immutableStorageConnector: [{ type: ImmutableStorageConnectorType.EntityStorage }],
 				immutableProofComponent: [{ type: ImmutableProofComponentType.Service }],
