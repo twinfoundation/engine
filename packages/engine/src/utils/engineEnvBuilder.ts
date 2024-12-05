@@ -11,8 +11,8 @@ import {
 	BlobStorageComponentType,
 	BlobStorageConnectorType,
 	EntityStorageConnectorType,
-	EventBusConnectorType,
 	EventBusComponentType,
+	EventBusConnectorType,
 	FaucetConnectorType,
 	IdentityComponentType,
 	IdentityConnectorType,
@@ -23,6 +23,10 @@ import {
 	ImmutableStorageConnectorType,
 	LoggingComponentType,
 	LoggingConnectorType,
+	MessagingComponentType,
+	MessagingEmailConnectorType,
+	MessagingPushNotificationConnectorType,
+	MessagingSmsConnectorType,
 	NftComponentType,
 	NftConnectorType,
 	TelemetryComponentType,
@@ -63,6 +67,7 @@ export function buildEngineConfiguration(envVars: IEngineEnvironmentVariables): 
 	configureBackgroundTaskConnectors(coreConfig, envVars);
 	configureEventBusConnectors(coreConfig, envVars);
 	configureTelemetryConnectors(coreConfig, envVars);
+	configureMessagingConnectors(coreConfig, envVars);
 
 	configureFaucetConnectors(coreConfig, envVars);
 	configureWalletConnectors(coreConfig, envVars);
@@ -428,6 +433,91 @@ function configureTelemetryConnectors(
 	if (coreConfig.types.telemetryConnector.length > 0) {
 		coreConfig.types.telemetryComponents ??= [];
 		coreConfig.types.telemetryComponents.push({ type: TelemetryComponentType.Service });
+	}
+}
+
+/**
+ * Configures the messaging connectors for the core.
+ * @param coreConfig The core config.
+ * @param envVars The environment variables.
+ */
+function configureMessagingConnectors(
+	coreConfig: IEngineConfig,
+	envVars: IEngineEnvironmentVariables
+): void {
+	coreConfig.types.messagingEmailConnector ??= [];
+	coreConfig.types.messagingSmsConnector ??= [];
+	coreConfig.types.messagingPushNotificationConnector ??= [];
+
+	if (envVars.messagingEmailConnector === MessagingEmailConnectorType.EntityStorage) {
+		coreConfig.types.messagingEmailConnector.push({
+			type: MessagingEmailConnectorType.EntityStorage
+		});
+	} else if (envVars.messagingEmailConnector === MessagingEmailConnectorType.Aws) {
+		coreConfig.types.messagingEmailConnector.push({
+			type: MessagingEmailConnectorType.Aws,
+			options: {
+				config: {
+					region: envVars.awsS3Region ?? "",
+					accessKeyId: envVars.awsS3AccessKeyId ?? "",
+					secretAccessKey: envVars.awsS3SecretAccessKey ?? "",
+					endpoint: envVars.awsS3Endpoint ?? ""
+				}
+			}
+		});
+	}
+
+	if (envVars.messagingSmsConnector === MessagingSmsConnectorType.EntityStorage) {
+		coreConfig.types.messagingSmsConnector.push({
+			type: MessagingSmsConnectorType.EntityStorage
+		});
+	} else if (envVars.messagingSmsConnector === MessagingSmsConnectorType.Aws) {
+		coreConfig.types.messagingSmsConnector.push({
+			type: MessagingSmsConnectorType.Aws,
+			options: {
+				config: {
+					region: envVars.awsS3Region ?? "",
+					accessKeyId: envVars.awsS3AccessKeyId ?? "",
+					secretAccessKey: envVars.awsS3SecretAccessKey ?? "",
+					endpoint: envVars.awsS3Endpoint ?? ""
+				}
+			}
+		});
+	}
+
+	if (
+		envVars.messagingPushNotificationConnector ===
+		MessagingPushNotificationConnectorType.EntityStorage
+	) {
+		coreConfig.types.messagingPushNotificationConnector.push({
+			type: MessagingPushNotificationConnectorType.EntityStorage
+		});
+	} else if (
+		envVars.messagingPushNotificationConnector === MessagingPushNotificationConnectorType.Aws
+	) {
+		coreConfig.types.messagingPushNotificationConnector.push({
+			type: MessagingPushNotificationConnectorType.Aws,
+			options: {
+				config: {
+					region: envVars.awsS3Region ?? "",
+					accessKeyId: envVars.awsS3AccessKeyId ?? "",
+					secretAccessKey: envVars.awsS3SecretAccessKey ?? "",
+					endpoint: envVars.awsS3Endpoint ?? "",
+					applicationsSettings: Is.json(envVars.awsMessagingPushNotificationApplications)
+						? JSON.parse(envVars.awsMessagingPushNotificationApplications)
+						: []
+				}
+			}
+		});
+	}
+
+	if (
+		coreConfig.types.messagingEmailConnector.length > 0 ||
+		coreConfig.types.messagingSmsConnector.length > 0 ||
+		coreConfig.types.messagingPushNotificationConnector.length > 0
+	) {
+		coreConfig.types.messagingComponent ??= [];
+		coreConfig.types.messagingComponent.push({ type: MessagingComponentType.Service });
 	}
 }
 

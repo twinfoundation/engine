@@ -79,6 +79,31 @@ export class Engine<
 		);
 
 		this.addTypeInitialiser(
+			"messagingEmailConnector",
+			this._context.config.types.messagingEmailConnector,
+			"@twin.org/engine-types",
+			"initialiseMessagingEmailConnector"
+		);
+		this.addTypeInitialiser(
+			"messagingSmsConnector",
+			this._context.config.types.messagingSmsConnector,
+			"@twin.org/engine-types",
+			"initialiseMessagingSmsConnector"
+		);
+		this.addTypeInitialiser(
+			"messagingPushNotificationConnector",
+			this._context.config.types.messagingPushNotificationConnector,
+			"@twin.org/engine-types",
+			"initialiseMessagingPushNotificationConnector"
+		);
+		this.addTypeInitialiser(
+			"messagingComponent",
+			this._context.config.types.messagingComponent,
+			"@twin.org/engine-types",
+			"initialiseMessagingComponent"
+		);
+
+		this.addTypeInitialiser(
 			"entityStorageComponent",
 			this._context.config.types.entityStorageComponent,
 			"@twin.org/engine-types",

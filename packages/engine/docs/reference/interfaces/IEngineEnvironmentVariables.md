@@ -412,6 +412,46 @@ The type of event bus component: service.
 
 ***
 
+### messagingEmailConnector?
+
+> `optional` **messagingEmailConnector**: `string`
+
+The type of messaging email connector: entity-storage, aws.
+
+***
+
+### messagingSmsConnector?
+
+> `optional` **messagingSmsConnector**: `string`
+
+The type of messaging sms connector: entity-storage, aws.
+
+***
+
+### messagingPushNotificationConnector?
+
+> `optional` **messagingPushNotificationConnector**: `string`
+
+The type of messaging push notification connector: entity-storage, aws.
+
+***
+
+### awsMessagingPushNotificationApplications?
+
+> `optional` **awsMessagingPushNotificationApplications**: `string`
+
+The applications for the push notifications JSON stringified array of IAwsApplicationSettings.
+
+***
+
+### messagingComponent?
+
+> `optional` **messagingComponent**: `string`
+
+The type of messaging component: service.
+
+***
+
 ### telemetryConnector?
 
 > `optional` **telemetryConnector**: `string`

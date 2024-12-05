@@ -1,7 +1,7 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
 import path from "node:path";
-import { ComponentFactory, I18n, ObjectHelper } from "@twin.org/core";
+import { ComponentFactory, Factory, I18n, ObjectHelper } from "@twin.org/core";
 import { Engine } from "@twin.org/engine";
 import engineLocales from "@twin.org/engine-core/locales/en.json";
 import type { IEngineCoreTypeConfig } from "@twin.org/engine-models";
@@ -63,7 +63,7 @@ describe("engine-server", () => {
 	});
 
 	beforeEach(async () => {
-		ComponentFactory.clear();
+		Factory.clearFactories();
 	});
 
 	test("Can start engine server with no config", async () => {

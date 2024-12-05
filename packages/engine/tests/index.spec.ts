@@ -13,6 +13,8 @@ import {
 	BlobStorageConnectorType,
 	EntityStorageComponentType,
 	EntityStorageConnectorType,
+	EventBusComponentType,
+	EventBusConnectorType,
 	FaucetConnectorType,
 	IdentityComponentType,
 	IdentityConnectorType,
@@ -21,10 +23,12 @@ import {
 	type IEngineConfig,
 	ImmutableProofComponentType,
 	ImmutableStorageConnectorType,
-	EventBusComponentType,
-	EventBusConnectorType,
 	LoggingComponentType,
 	LoggingConnectorType,
+	MessagingComponentType,
+	MessagingEmailConnectorType,
+	MessagingPushNotificationConnectorType,
+	MessagingSmsConnectorType,
 	NftComponentType,
 	NftConnectorType,
 	TelemetryComponentType,
@@ -55,7 +59,7 @@ describe("engine", () => {
 	});
 
 	beforeEach(async () => {
-		ComponentFactory.clear();
+		Factory.clearFactories();
 		await mkdir("tests/.tmp", { recursive: true });
 	});
 
@@ -96,6 +100,12 @@ describe("engine", () => {
 					eventBusComponent: [{ type: EventBusComponentType.Service }],
 					telemetryConnector: [{ type: TelemetryConnectorType.EntityStorage }],
 					telemetryComponent: [{ type: TelemetryComponentType.Service }],
+					messagingEmailConnector: [{ type: MessagingEmailConnectorType.EntityStorage }],
+					messagingSmsConnector: [{ type: MessagingSmsConnectorType.EntityStorage }],
+					messagingPushNotificationConnector: [
+						{ type: MessagingPushNotificationConnectorType.EntityStorage }
+					],
+					messagingComponent: [{ type: MessagingComponentType.Service }],
 					vaultConnector: [{ type: VaultConnectorType.EntityStorage }],
 					immutableStorageConnector: [{ type: ImmutableStorageConnectorType.EntityStorage }],
 					immutableProofComponent: [{ type: ImmutableProofComponentType.Service }],
@@ -126,6 +136,7 @@ describe("engine", () => {
 			"logging",
 			"event-bus",
 			"telemetry",
+			"messaging",
 			"blob",
 			"did",
 			"identity-profile",
@@ -140,6 +151,11 @@ describe("engine", () => {
 			"BackgroundTask",
 			"TelemetryMetric",
 			"TelemetryMetricValue",
+			"EmailEntry",
+			"SmsEntry",
+			"PushNotificationDeviceEntry",
+			"PushNotificationMessageEntry",
+			"TemplateEntry",
 			"VaultKey",
 			"VaultSecret",
 			"BlobStorageEntry",
@@ -186,29 +202,7 @@ describe("engine", () => {
 		await engine.stop();
 
 		expect(ComponentFactory.names()).toEqual(["test-entity"]);
-		expect(EntitySchemaFactory.names()).toEqual([
-			"BackgroundTask",
-			"TelemetryMetric",
-			"TelemetryMetricValue",
-			"VaultKey",
-			"VaultSecret",
-			"BlobStorageEntry",
-			"ImmutableItem",
-			"WalletAddress",
-			"IdentityDocument",
-			"IdentityProfile",
-			"Nft",
-			"ImmutableProof",
-			"AuditableItemGraphVertex",
-			"AuditableItemGraphAlias",
-			"AuditableItemGraphResource",
-			"AuditableItemGraphEdge",
-			"AuditableItemGraphChangeset",
-			"AuditableItemGraphPatch",
-			"AuditableItemStream",
-			"AuditableItemStreamEntry",
-			"TestEntity"
-		]);
+		expect(EntitySchemaFactory.names()).toEqual(["TestEntity"]);
 	});
 
 	test("Can start engine with custom entity storage and custom store", async () => {
@@ -248,29 +242,7 @@ describe("engine", () => {
 		await engine.stop();
 
 		expect(ComponentFactory.names()).toEqual(["test-entity"]);
-		expect(EntitySchemaFactory.names()).toEqual([
-			"BackgroundTask",
-			"TelemetryMetric",
-			"TelemetryMetricValue",
-			"VaultKey",
-			"VaultSecret",
-			"BlobStorageEntry",
-			"ImmutableItem",
-			"WalletAddress",
-			"IdentityDocument",
-			"IdentityProfile",
-			"Nft",
-			"ImmutableProof",
-			"AuditableItemGraphVertex",
-			"AuditableItemGraphAlias",
-			"AuditableItemGraphResource",
-			"AuditableItemGraphEdge",
-			"AuditableItemGraphChangeset",
-			"AuditableItemGraphPatch",
-			"AuditableItemStream",
-			"AuditableItemStreamEntry",
-			"TestEntity"
-		]);
+		expect(EntitySchemaFactory.names()).toEqual(["TestEntity"]);
 
 		const service = ComponentFactory.get<IEntityStorageComponent<TestEntity>>("test-entity");
 		await service.set({ id: "test" });
@@ -294,6 +266,12 @@ describe("engine", () => {
 					eventBusComponent: [{ type: EventBusComponentType.Service }],
 					telemetryConnector: [{ type: TelemetryConnectorType.EntityStorage }],
 					telemetryComponent: [{ type: TelemetryComponentType.Service }],
+					messagingEmailConnector: [{ type: MessagingEmailConnectorType.EntityStorage }],
+					messagingSmsConnector: [{ type: MessagingSmsConnectorType.EntityStorage }],
+					messagingPushNotificationConnector: [
+						{ type: MessagingPushNotificationConnectorType.EntityStorage }
+					],
+					messagingComponent: [{ type: MessagingComponentType.Service }],
 					vaultConnector: [{ type: VaultConnectorType.EntityStorage }],
 					immutableStorageConnector: [{ type: ImmutableStorageConnectorType.EntityStorage }],
 					immutableProofComponent: [{ type: ImmutableProofComponentType.Service }],
@@ -344,6 +322,12 @@ describe("engine", () => {
 				eventBusComponent: [{ type: EventBusComponentType.Service }],
 				telemetryConnector: [{ type: TelemetryConnectorType.EntityStorage }],
 				telemetryComponent: [{ type: TelemetryComponentType.Service }],
+				messagingEmailConnector: [{ type: MessagingEmailConnectorType.EntityStorage }],
+				messagingSmsConnector: [{ type: MessagingSmsConnectorType.EntityStorage }],
+				messagingPushNotificationConnector: [
+					{ type: MessagingPushNotificationConnectorType.EntityStorage }
+				],
+				messagingComponent: [{ type: MessagingComponentType.Service }],
 				vaultConnector: [{ type: VaultConnectorType.EntityStorage }],
 				immutableStorageConnector: [{ type: ImmutableStorageConnectorType.EntityStorage }],
 				immutableProofComponent: [{ type: ImmutableProofComponentType.Service }],

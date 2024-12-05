@@ -108,6 +108,30 @@ Telemetry connector options which can be overridden by individual components by 
 
 Telemetry component options which can be overridden by individual components by specifying types other than default.
 
+##### messagingEmailConnector?
+
+> `optional` **messagingEmailConnector**: `IEngineCoreTypeConfig`\<`MessagingEmailConnectorConfig`\>[]
+
+Messaging email connector options which can be overridden by individual components by specifying types other than default.
+
+##### messagingSmsConnector?
+
+> `optional` **messagingSmsConnector**: `IEngineCoreTypeConfig`\<`MessagingSmsConnectorConfig`\>[]
+
+Messaging SMS connector options which can be overridden by individual components by specifying types other than default.
+
+##### messagingPushNotificationConnector?
+
+> `optional` **messagingPushNotificationConnector**: `IEngineCoreTypeConfig`\<`MessagingPushNotificationConnectorConfig`\>[]
+
+Messaging push notification connector options which can be overridden by individual components by specifying types other than default.
+
+##### messagingComponent?
+
+> `optional` **messagingComponent**: `IEngineCoreTypeConfig`\<`MessagingComponentConfig`\>[]
+
+Messaging component options which can be overridden by individual components by specifying types other than default.
+
 ##### backgroundTaskConnector?
 
 > `optional` **backgroundTaskConnector**: `IEngineCoreTypeConfig`\<`BackgroundTaskConnectorConfig`\>[]

@@ -22,6 +22,10 @@ import type { ImmutableProofComponentConfig } from "./config/immutableProofCompo
 import type { ImmutableStorageConnectorConfig } from "./config/immutableStorageConnectorConfig";
 import type { LoggingComponentConfig } from "./config/loggingComponentConfig";
 import type { LoggingConnectorConfig } from "./config/loggingConnectorConfig";
+import type { MessagingComponentConfig } from "./config/messagingComponentConfig";
+import type { MessagingEmailConnectorConfig } from "./config/messagingEmailConnectorConfig";
+import type { MessagingPushNotificationConnectorConfig } from "./config/messagingPushNotificationConnectorConfig";
+import type { MessagingSmsConnectorConfig } from "./config/messagingSmsConnectorConfig";
 import type { NftComponentConfig } from "./config/nftComponentConfig";
 import type { NftConnectorConfig } from "./config/nftConnectorConfig";
 import type { TelemetryComponentConfig } from "./config/telemetryComponentConfig";
@@ -78,6 +82,26 @@ export interface IEngineConfig extends IEngineCoreConfig {
 		 * Telemetry component options which can be overridden by individual components by specifying types other than default.
 		 */
 		telemetryComponent?: IEngineCoreTypeConfig<TelemetryComponentConfig>[];
+
+		/**
+		 * Messaging email connector options which can be overridden by individual components by specifying types other than default.
+		 */
+		messagingEmailConnector?: IEngineCoreTypeConfig<MessagingEmailConnectorConfig>[];
+
+		/**
+		 * Messaging SMS connector options which can be overridden by individual components by specifying types other than default.
+		 */
+		messagingSmsConnector?: IEngineCoreTypeConfig<MessagingSmsConnectorConfig>[];
+
+		/**
+		 * Messaging push notification connector options which can be overridden by individual components by specifying types other than default.
+		 */
+		messagingPushNotificationConnector?: IEngineCoreTypeConfig<MessagingPushNotificationConnectorConfig>[];
+
+		/**
+		 * Messaging component options which can be overridden by individual components by specifying types other than default.
+		 */
+		messagingComponent?: IEngineCoreTypeConfig<MessagingComponentConfig>[];
 
 		/**
 		 * Background task connector options which can be overridden by individual components by specifying types other than default.

@@ -261,6 +261,31 @@ export interface IEngineEnvironmentVariables {
 	eventBusComponent?: string;
 
 	/**
+	 * The type of messaging email connector: entity-storage, aws.
+	 */
+	messagingEmailConnector?: string;
+
+	/**
+	 * The type of messaging sms connector: entity-storage, aws.
+	 */
+	messagingSmsConnector?: string;
+
+	/**
+	 * The type of messaging push notification connector: entity-storage, aws.
+	 */
+	messagingPushNotificationConnector?: string;
+
+	/**
+	 * The applications for the push notifications JSON stringified array of IAwsApplicationSettings.
+	 */
+	awsMessagingPushNotificationApplications?: string;
+
+	/**
+	 * The type of messaging component: service.
+	 */
+	messagingComponent?: string;
+
+	/**
 	 * The type of telemetry connector: entity-storage.
 	 */
 	telemetryConnector?: string;
