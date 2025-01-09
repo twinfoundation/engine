@@ -22,7 +22,9 @@ Create a new instance of Engine.
 
 #### Parameters
 
-• **options?**: `IEngineCoreOptions`\<`C`, `S`\>
+##### options?
+
+`IEngineCoreOptions`\<`C`, `S`\>
 
 The options for the engine.
 
@@ -80,19 +82,27 @@ Add a type initialiser.
 
 #### Parameters
 
-• **type**: `string`
+##### type
+
+`string`
 
 The type to add the initialiser for.
 
-• **typeConfig**: `undefined` \| `IEngineCoreTypeConfig`[]
+##### typeConfig
 
 The type config.
 
-• **module**: `string`
+`undefined` | `IEngineCoreTypeConfig`[]
+
+##### module
+
+`string`
 
 The name of the module which contains the initialiser method.
 
-• **method**: `string`
+##### method
+
+`string`
 
 The name of the method to call.
 
@@ -150,7 +160,9 @@ Log info.
 
 #### Parameters
 
-• **message**: `string`
+##### message
+
+`string`
 
 The message to log.
 
@@ -172,7 +184,9 @@ Log error.
 
 #### Parameters
 
-• **error**: `IError`
+##### error
+
+`IError`
 
 The error to log.
 
@@ -266,11 +280,15 @@ Populate the engine from the clone data.
 
 #### Parameters
 
-• **cloneData**: `IEngineCoreClone`\<`C`, `S`\>
+##### cloneData
+
+`IEngineCoreClone`\<`C`, `S`\>
 
 The clone data to populate from.
 
-• **silent?**: `boolean`
+##### silent?
+
+`boolean`
 
 Should the clone be silent.
 

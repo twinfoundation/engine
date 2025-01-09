@@ -16,4 +16,4 @@ Configuration for the engine core type.
 
 ## Type Parameters
 
-• **T** *extends* [`IEngineCoreTypeBaseConfig`](../interfaces/IEngineCoreTypeBaseConfig.md) = `object`
+• **T** *extends* [`IEngineCoreTypeBaseConfig`](../interfaces/IEngineCoreTypeBaseConfig.md) = \{ `type`: `string`; \}

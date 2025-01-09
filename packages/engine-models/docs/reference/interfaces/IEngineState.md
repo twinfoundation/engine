@@ -28,4 +28,4 @@ The component states.
 
 #### Index Signature
 
- \[`component`: `string`\]: `object`
+\[`component`: `string`\]: `object`

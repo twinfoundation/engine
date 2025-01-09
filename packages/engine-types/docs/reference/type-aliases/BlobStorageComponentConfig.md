@@ -8,20 +8,8 @@ Blob storage component config types.
 
 ### type
 
-> **type**: *typeof* `BlobStorageComponentType.Service`
+> **type**: *typeof* [`Service`](../variables/BlobStorageComponentType.md#service)
 
 ### options?
 
-> `optional` **options**: `object`
-
-### options.entryEntityStorageType?
-
-> `optional` **entryEntityStorageType**: `string`
-
-### options.vaultConnectorType?
-
-> `optional` **vaultConnectorType**: `string`
-
-### options.config?
-
-> `optional` **config**: `IBlobStorageServiceConfig`
+> `optional` **options**: `IBlobStorageServiceConstructorOptions`

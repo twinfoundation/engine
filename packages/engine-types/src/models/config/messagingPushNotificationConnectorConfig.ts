@@ -1,6 +1,7 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
-import type { IAwsPushNotificationConnectorConfig } from "@twin.org/messaging-connector-aws";
+import type { IAwsMessagingPushNotificationConnectorConstructorOptions } from "@twin.org/messaging-connector-aws";
+import type { IEntityStorageMessagingPushNotificationConnectorConstructorOptions } from "@twin.org/messaging-connector-entity-storage";
 import type { MessagingPushNotificationConnectorType } from "../types/messagingPushNotificationConnectorType";
 
 /**
@@ -10,16 +11,9 @@ import type { MessagingPushNotificationConnectorType } from "../types/messagingP
 export type MessagingPushNotificationConnectorConfig =
 	| {
 			type: typeof MessagingPushNotificationConnectorType.EntityStorage;
-			options?: {
-				loggingConnectorType?: string;
-				messagingDeviceEntryStorageConnectorType?: string;
-				messagingMessageEntryStorageConnectorType?: string;
-			};
+			options?: IEntityStorageMessagingPushNotificationConnectorConstructorOptions;
 	  }
 	| {
 			type: typeof MessagingPushNotificationConnectorType.Aws;
-			options: {
-				loggingConnectorType?: string;
-				config: IAwsPushNotificationConnectorConfig;
-			};
+			options: IAwsMessagingPushNotificationConnectorConstructorOptions;
 	  };

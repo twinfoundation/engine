@@ -20,11 +20,15 @@ Create a new instance of FileStateStorage.
 
 #### Parameters
 
-• **filename**: `string`
+##### filename
+
+`string`
 
 The filename to store the state.
 
-• **readonlyMode**: `boolean` = `false`
+##### readonlyMode
+
+`boolean` = `false`
 
 Whether the file is in read-only mode.
 
@@ -50,7 +54,9 @@ Method for loading the state.
 
 #### Parameters
 
-• **engineCore**: `IEngineCore`\<`IEngineCoreConfig`, `IEngineState`\>
+##### engineCore
+
+`IEngineCore`
 
 The engine core to load the state for.
 
@@ -74,11 +80,15 @@ Method for saving the state.
 
 #### Parameters
 
-• **engineCore**: `IEngineCore`\<`IEngineCoreConfig`, `IEngineState`\>
+##### engineCore
+
+`IEngineCore`
 
 The engine core to save the state for.
 
-• **state**: `S`
+##### state
+
+`S`
 
 The state of the engine to save.
 

@@ -10,13 +10,21 @@ Method definition for the engine type initialiser.
 
 ## Parameters
 
-• **engineCore**: [`IEngineCore`](../interfaces/IEngineCore.md)
+### engineCore
 
-• **context**: [`IEngineCoreContext`](../interfaces/IEngineCoreContext.md)
+[`IEngineCore`](../interfaces/IEngineCore.md)
 
-• **instanceConfig**: `T`
+### context
 
-• **overrideInstanceType?**: `string`
+[`IEngineCoreContext`](../interfaces/IEngineCoreContext.md)
+
+### instanceConfig
+
+`T`
+
+### overrideInstanceType?
+
+`string`
 
 ## Returns
 

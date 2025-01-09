@@ -1,6 +1,7 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
-import type { IAwsSmsConnectorConfig } from "@twin.org/messaging-connector-aws";
+import type { IAwsMessagingSmsConnectorConstructorOptions } from "@twin.org/messaging-connector-aws";
+import type { IEntityStorageMessagingSmsConnectorConstructorOptions } from "@twin.org/messaging-connector-entity-storage";
 import type { MessagingSmsConnectorType } from "../types/messagingSmsConnectorType";
 
 /**
@@ -10,15 +11,9 @@ import type { MessagingSmsConnectorType } from "../types/messagingSmsConnectorTy
 export type MessagingSmsConnectorConfig =
 	| {
 			type: typeof MessagingSmsConnectorType.EntityStorage;
-			options?: {
-				loggingConnectorType?: string;
-				messagingSmsEntryStorageConnectorType?: string;
-			};
+			options?: IEntityStorageMessagingSmsConnectorConstructorOptions;
 	  }
 	| {
 			type: typeof MessagingSmsConnectorType.Aws;
-			options: {
-				loggingConnectorType?: string;
-				config: IAwsSmsConnectorConfig;
-			};
+			options: IAwsMessagingSmsConnectorConstructorOptions;
 	  };

@@ -6,19 +6,27 @@ Initialise the entity storage connector.
 
 ## Parameters
 
-• **engineCore**: `IEngineCore`\<[`IEngineConfig`](../interfaces/IEngineConfig.md), `IEngineState`\>
+### engineCore
+
+`IEngineCore`\<[`IEngineConfig`](../interfaces/IEngineConfig.md)\>
 
 The engine core.
 
-• **context**: `IEngineCoreContext`\<[`IEngineConfig`](../interfaces/IEngineConfig.md), `IEngineState`\>
+### context
+
+`IEngineCoreContext`\<[`IEngineConfig`](../interfaces/IEngineConfig.md)\>
 
 The context for the engine.
 
-• **typeCustom**: `undefined` \| `string`
+### typeCustom
 
 Override the type of connector to use instead of default configuration.
 
-• **schema**: `string`
+`undefined` | `string`
+
+### schema
+
+`string`
 
 The schema for the entity storage.
 

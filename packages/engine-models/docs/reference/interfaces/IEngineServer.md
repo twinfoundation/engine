@@ -12,19 +12,27 @@ Add a REST route generator.
 
 #### Parameters
 
-• **type**: `string`
+##### type
+
+`string`
 
 The type to add the generator for.
 
-• **typeConfig**: `undefined` \| [`IEngineCoreTypeConfig`](../type-aliases/IEngineCoreTypeConfig.md)[]
+##### typeConfig
 
 The type config.
 
-• **module**: `string`
+`undefined` | [`IEngineCoreTypeConfig`](../type-aliases/IEngineCoreTypeConfig.md)[]
+
+##### module
+
+`string`
 
 The module containing the generator.
 
-• **method**: `string`
+##### method
+
+`string`
 
 The method to call on the module.
 
@@ -42,19 +50,27 @@ Add a socket route generator.
 
 #### Parameters
 
-• **type**: `string`
+##### type
+
+`string`
 
 The type to add the generator for.
 
-• **typeConfig**: `undefined` \| [`IEngineCoreTypeConfig`](../type-aliases/IEngineCoreTypeConfig.md)[]
+##### typeConfig
 
 The type config.
 
-• **module**: `string`
+`undefined` | [`IEngineCoreTypeConfig`](../type-aliases/IEngineCoreTypeConfig.md)[]
+
+##### module
+
+`string`
 
 The module containing the generator.
 
-• **method**: `string`
+##### method
+
+`string`
 
 The method to call on the module.
 

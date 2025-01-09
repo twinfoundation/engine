@@ -8,12 +8,12 @@ DLT config types.
 
 ### type
 
-> **type**: *typeof* `DltConfigType.Iota`
+> **type**: *typeof* [`Iota`](../variables/DltConfigType.md#iota)
 
 ### options?
 
 > `optional` **options**: `object`
 
-### options.config?
+#### options.config?
 
 > `optional` **config**: `IIotaConfig`

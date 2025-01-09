@@ -1,7 +1,7 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
-import type { IEntityStorageAttestationConnectorConfig } from "@twin.org/attestation-connector-entity-storage";
-import type { IIotaAttestationConnectorConfig } from "@twin.org/attestation-connector-iota";
+import type { IEntityStorageAttestationConnectorConstructorOptions } from "@twin.org/attestation-connector-entity-storage";
+import type { IIotaAttestationConnectorConstructorOptions } from "@twin.org/attestation-connector-iota";
 import type { AttestationConnectorType } from "../types/attestationConnectorType";
 
 /**
@@ -10,17 +10,9 @@ import type { AttestationConnectorType } from "../types/attestationConnectorType
 export type AttestationConnectorConfig =
 	| {
 			type: typeof AttestationConnectorType.EntityStorage;
-			options?: {
-				identityConnectorType?: string;
-				nftConnectorType?: string;
-				config?: IEntityStorageAttestationConnectorConfig;
-			};
+			options?: IEntityStorageAttestationConnectorConstructorOptions;
 	  }
 	| {
 			type: typeof AttestationConnectorType.Iota;
-			options?: {
-				identityConnectorType?: string;
-				nftConnectorType?: string;
-				config?: IIotaAttestationConnectorConfig;
-			};
+			options?: IIotaAttestationConnectorConstructorOptions;
 	  };

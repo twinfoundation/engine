@@ -6,19 +6,27 @@ Initialise the attestation connector.
 
 ## Parameters
 
-• **engineCore**: `IEngineCore`\<[`IEngineConfig`](../interfaces/IEngineConfig.md), `IEngineState`\>
+### engineCore
+
+`IEngineCore`\<[`IEngineConfig`](../interfaces/IEngineConfig.md)\>
 
 The engine core.
 
-• **context**: `IEngineCoreContext`\<[`IEngineConfig`](../interfaces/IEngineConfig.md), `IEngineState`\>
+### context
+
+`IEngineCoreContext`\<[`IEngineConfig`](../interfaces/IEngineConfig.md)\>
 
 The context for the engine.
 
-• **instanceConfig**: [`AttestationConnectorConfig`](../type-aliases/AttestationConnectorConfig.md)
+### instanceConfig
+
+[`AttestationConnectorConfig`](../type-aliases/AttestationConnectorConfig.md)
 
 The instance config.
 
-• **overrideInstanceType?**: `string`
+### overrideInstanceType?
+
+`string`
 
 The instance type to override the default.
 

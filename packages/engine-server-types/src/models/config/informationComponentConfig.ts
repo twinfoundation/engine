@@ -1,6 +1,6 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
-import type { IInformationServiceConfig } from "@twin.org/api-service";
+import type { IInformationServiceConstructorOptions } from "@twin.org/api-service";
 import type { InformationComponentType } from "../types/informationComponentType";
 
 /**
@@ -9,7 +9,5 @@ import type { InformationComponentType } from "../types/informationComponentType
 // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
 export type InformationComponentConfig = {
 	type: typeof InformationComponentType.Service;
-	options: {
-		config: IInformationServiceConfig;
-	};
+	options: IInformationServiceConstructorOptions;
 };

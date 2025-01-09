@@ -8,12 +8,8 @@ Telemetry component config types.
 
 ### type
 
-> **type**: *typeof* `TelemetryComponentType.Service`
+> **type**: *typeof* [`Service`](../variables/TelemetryComponentType.md#service)
 
 ### options?
 
-> `optional` **options**: `object`
-
-### options.telemetryConnectorType?
-
-> `optional` **telemetryConnectorType**: `string`
+> `optional` **options**: `ITelemetryServiceConstructorOptions`

@@ -8,20 +8,8 @@ Telemetry connector config types.
 
 ### type
 
-> **type**: *typeof* `TelemetryConnectorType.EntityStorage`
+> **type**: *typeof* [`EntityStorage`](../variables/TelemetryConnectorType.md#entitystorage)
 
 ### options?
 
-> `optional` **options**: `object`
-
-### options.telemetryMetricStorageConnectorType?
-
-> `optional` **telemetryMetricStorageConnectorType**: `string`
-
-### options.telemetryMetricValueStorageConnectorType?
-
-> `optional` **telemetryMetricValueStorageConnectorType**: `string`
-
-### options.loggingConnectorType?
-
-> `optional` **loggingConnectorType**: `string`
+> `optional` **options**: `IEntityStorageTelemetryConnectorConstructorOptions`

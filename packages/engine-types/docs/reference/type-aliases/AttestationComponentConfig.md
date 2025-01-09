@@ -8,16 +8,8 @@ Attestation component config types.
 
 ### type
 
-> **type**: *typeof* `AttestationComponentType.Service`
+> **type**: *typeof* [`Service`](../variables/AttestationComponentType.md#service)
 
 ### options?
 
-> `optional` **options**: `object`
-
-### options.walletConnectorType?
-
-> `optional` **walletConnectorType**: `string`
-
-### options.config?
-
-> `optional` **config**: `IAttestationServiceConfig`
+> `optional` **options**: `IAttestationServiceConstructorOptions`

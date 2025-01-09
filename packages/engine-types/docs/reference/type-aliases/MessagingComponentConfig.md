@@ -8,24 +8,8 @@ Messaging component config types.
 
 ### type
 
-> **type**: *typeof* `MessagingComponentType.Service`
+> **type**: *typeof* [`Service`](../variables/MessagingComponentType.md#service)
 
 ### options?
 
-> `optional` **options**: `object`
-
-### options.messagingEmailConnectorType?
-
-> `optional` **messagingEmailConnectorType**: `string`
-
-### options.messagingPushNotificationConnectorType?
-
-> `optional` **messagingPushNotificationConnectorType**: `string`
-
-### options.messagingSmsConnectorType?
-
-> `optional` **messagingSmsConnectorType**: `string`
-
-### options.templateEntryStorageConnectorType?
-
-> `optional` **templateEntryStorageConnectorType**: `string`
+> `optional` **options**: `IMessagingServiceConstructorOptions`

@@ -8,12 +8,8 @@ Identity profile connector config types.
 
 ### type
 
-> **type**: *typeof* `IdentityProfileConnectorType.EntityStorage`
+> **type**: *typeof* [`EntityStorage`](../variables/IdentityProfileConnectorType.md#entitystorage)
 
 ### options?
 
-> `optional` **options**: `object`
-
-### options.profileEntityStorageType?
-
-> `optional` **profileEntityStorageType**: `string`
+> `optional` **options**: `IEntityStorageIdentityProfileConnectorConstructorOptions`

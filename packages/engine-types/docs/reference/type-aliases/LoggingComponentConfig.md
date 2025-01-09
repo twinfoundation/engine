@@ -8,12 +8,8 @@ Logging component config types.
 
 ### type
 
-> **type**: *typeof* `LoggingComponentType.Service`
+> **type**: *typeof* [`Service`](../variables/LoggingComponentType.md#service)
 
 ### options?
 
-> `optional` **options**: `object`
-
-### options.loggingConnectorType?
-
-> `optional` **loggingConnectorType**: `string`
+> `optional` **options**: `ILoggingServiceConstructorOptions`

@@ -8,28 +8,8 @@ Auditable item stream component config types.
 
 ### type
 
-> **type**: *typeof* `AuditableItemStreamComponentType.Service`
+> **type**: *typeof* [`Service`](../variables/AuditableItemStreamComponentType.md#service)
 
 ### options?
 
-> `optional` **options**: `object`
-
-### options.immutableProofComponentType?
-
-> `optional` **immutableProofComponentType**: `string`
-
-### options.streamEntityStorageType?
-
-> `optional` **streamEntityStorageType**: `string`
-
-### options.streamEntryEntityStorageType?
-
-> `optional` **streamEntryEntityStorageType**: `string`
-
-### options.eventBusComponentType?
-
-> `optional` **eventBusComponentType**: `string`
-
-### options.config?
-
-> `optional` **config**: `IAuditableItemStreamServiceConfig`
+> `optional` **options**: `IAuditableItemStreamServiceConstructorOptions`

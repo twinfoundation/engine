@@ -8,7 +8,7 @@ Mime type processor config types.
 
 ### type
 
-> **type**: *typeof* `MimeTypeProcessorType.Jwt`
+> **type**: *typeof* [`Jwt`](../variables/MimeTypeProcessorType.md#jwt)
 
 ### options?
 

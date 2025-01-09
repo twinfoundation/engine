@@ -8,20 +8,8 @@ Authentication component config types.
 
 ### type
 
-> **type**: *typeof* `AuthenticationComponentType.EntityStorage`
+> **type**: *typeof* [`EntityStorage`](../variables/AuthenticationComponentType.md#entitystorage)
 
 ### options?
 
-> `optional` **options**: `object`
-
-### options.userEntityStorageType?
-
-> `optional` **userEntityStorageType**: `string`
-
-### options.vaultConnectorType?
-
-> `optional` **vaultConnectorType**: `string`
-
-### options.config?
-
-> `optional` **config**: `IEntityStorageAuthenticationServiceConfig`
+> `optional` **options**: `IEntityStorageAuthenticationServiceConstructorOptions`

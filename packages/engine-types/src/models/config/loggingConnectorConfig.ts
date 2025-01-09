@@ -1,8 +1,8 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
-import type { IConsoleLoggingConnectorConfig } from "@twin.org/logging-connector-console";
-import type { IEntityStorageLoggingConnectorConfig } from "@twin.org/logging-connector-entity-storage";
-import type { ILoggingLevelsConfig } from "@twin.org/logging-models";
+import type { IConsoleLoggingConnectorConstructorOptions } from "@twin.org/logging-connector-console";
+import type { IEntityStorageLoggingConnectorConstructorOptions } from "@twin.org/logging-connector-entity-storage";
+import type { IMultiLoggingConnectorConstructorOptions } from "@twin.org/logging-models";
 import type { LoggingConnectorType } from "../types/loggingConnectorType";
 
 /**
@@ -11,21 +11,13 @@ import type { LoggingConnectorType } from "../types/loggingConnectorType";
 export type LoggingConnectorConfig =
 	| {
 			type: typeof LoggingConnectorType.EntityStorage;
-			options?: {
-				logEntryStorageConnectorType?: string;
-				config?: IEntityStorageLoggingConnectorConfig;
-			};
+			options?: IEntityStorageLoggingConnectorConstructorOptions;
 	  }
 	| {
 			type: typeof LoggingConnectorType.Console;
-			options?: {
-				config?: IConsoleLoggingConnectorConfig;
-			};
+			options?: IConsoleLoggingConnectorConstructorOptions;
 	  }
 	| {
 			type: typeof LoggingConnectorType.Multi;
-			options: {
-				loggingConnectorTypes: string[];
-				config?: ILoggingLevelsConfig;
-			};
+			options: IMultiLoggingConnectorConstructorOptions;
 	  };

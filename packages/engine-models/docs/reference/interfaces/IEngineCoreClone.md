@@ -32,6 +32,22 @@ The state of the engine.
 
 The type initialisers for the engine.
 
+#### type
+
+> **type**: `string`
+
+#### typeConfig
+
+> **typeConfig**: [`IEngineCoreTypeConfig`](../type-aliases/IEngineCoreTypeConfig.md)[]
+
+#### module
+
+> **module**: `string`
+
+#### method
+
+> **method**: `string`
+
 ***
 
 ### entitySchemas
@@ -42,7 +58,7 @@ The entity schemas for the engine.
 
 #### Index Signature
 
- \[`schema`: `string`\]: `IEntitySchema`
+\[`schema`: `string`\]: `IEntitySchema`
 
 ***
 

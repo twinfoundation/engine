@@ -8,12 +8,8 @@ Identity component config types.
 
 ### type
 
-> **type**: *typeof* `IdentityComponentType.Service`
+> **type**: *typeof* [`Service`](../variables/IdentityComponentType.md#service)
 
 ### options?
 
-> `optional` **options**: `object`
-
-### options.config?
-
-> `optional` **config**: `IIdentityServiceConfig`
+> `optional` **options**: `IIdentityServiceConstructorOptions`

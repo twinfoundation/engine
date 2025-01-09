@@ -52,7 +52,7 @@ The types to initialise in the engine.
 
 #### Index Signature
 
- \[`type`: `string`\]: `IEngineCoreTypeConfig`[] \| `undefined`
+\[`type`: `string`\]: `undefined` \| `IEngineCoreTypeConfig`[]
 
 #### loggingConnector?
 

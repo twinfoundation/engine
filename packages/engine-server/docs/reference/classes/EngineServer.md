@@ -20,11 +20,13 @@ Create a new instance of EngineServer.
 
 #### Parameters
 
-• **options**
+##### options
 
 The options for the engine.
 
-• **options.engineCore**: `IEngineCore`\<`T`, `IEngineState`\>
+###### engineCore
+
+`IEngineCore`\<`T`\>
 
 The engine core to serve from.
 
@@ -50,19 +52,27 @@ Add a REST route generator.
 
 #### Parameters
 
-• **type**: `string`
+##### type
+
+`string`
 
 The type to add the generator for.
 
-• **typeConfig**: `undefined` \| `IEngineCoreTypeConfig`[]
+##### typeConfig
 
 The type config.
 
-• **module**: `string`
+`undefined` | `IEngineCoreTypeConfig`[]
+
+##### module
+
+`string`
 
 The module containing the generator.
 
-• **method**: `string`
+##### method
+
+`string`
 
 The method to call on the module.
 
@@ -84,19 +94,27 @@ Add a socket route generator.
 
 #### Parameters
 
-• **type**: `string`
+##### type
+
+`string`
 
 The type to add the generator for.
 
-• **typeConfig**: `undefined` \| `IEngineCoreTypeConfig`[]
+##### typeConfig
 
 The type config.
 
-• **module**: `string`
+`undefined` | `IEngineCoreTypeConfig`[]
+
+##### module
+
+`string`
 
 The module containing the generator.
 
-• **method**: `string`
+##### method
+
+`string`
 
 The method to call on the module.
 

@@ -6,19 +6,27 @@ Initialise a telemetry connector.
 
 ## Parameters
 
-• **engineCore**: `IEngineCore`\<[`IEngineConfig`](../interfaces/IEngineConfig.md), `IEngineState`\>
+### engineCore
+
+`IEngineCore`\<[`IEngineConfig`](../interfaces/IEngineConfig.md)\>
 
 The engine core.
 
-• **context**: `IEngineCoreContext`\<[`IEngineConfig`](../interfaces/IEngineConfig.md), `IEngineState`\>
+### context
+
+`IEngineCoreContext`\<[`IEngineConfig`](../interfaces/IEngineConfig.md)\>
 
 The context for the engine.
 
-• **instanceConfig**: [`TelemetryConnectorConfig`](../type-aliases/TelemetryConnectorConfig.md)
+### instanceConfig
+
+[`TelemetryConnectorConfig`](../type-aliases/TelemetryConnectorConfig.md)
 
 The instance config.
 
-• **overrideInstanceType?**: `string`
+### overrideInstanceType?
+
+`string`
 
 The instance type to override the default.
 

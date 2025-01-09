@@ -42,9 +42,13 @@ Populate the type initialisers for the engine.
 
 #### Parameters
 
-• **engineCore**: `IEngineCore`\<`C`, `S`\>
+##### engineCore
 
-• **context**: `IEngineCoreContext`\<`C`, `S`\>
+`IEngineCore`\<`C`, `S`\>
+
+##### context
+
+`IEngineCoreContext`\<`C`, `S`\>
 
 #### Returns
 
@@ -60,9 +64,13 @@ Custom bootstrap method for the engine.
 
 #### Parameters
 
-• **engineCore**: `IEngineCore`\<`C`, `S`\>
+##### engineCore
 
-• **context**: `IEngineCoreContext`\<`C`, `S`\>
+`IEngineCore`\<`C`, `S`\>
+
+##### context
+
+`IEngineCoreContext`\<`C`, `S`\>
 
 #### Returns
 

@@ -6,19 +6,27 @@ Initialise the messaging component.
 
 ## Parameters
 
-• **engineCore**: `IEngineCore`\<[`IEngineConfig`](../interfaces/IEngineConfig.md), `IEngineState`\>
+### engineCore
+
+`IEngineCore`\<[`IEngineConfig`](../interfaces/IEngineConfig.md)\>
 
 The engine core.
 
-• **context**: `IEngineCoreContext`\<[`IEngineConfig`](../interfaces/IEngineConfig.md), `IEngineState`\>
+### context
+
+`IEngineCoreContext`\<[`IEngineConfig`](../interfaces/IEngineConfig.md)\>
 
 The context for the engine.
 
-• **instanceConfig**: [`MessagingComponentConfig`](../type-aliases/MessagingComponentConfig.md)
+### instanceConfig
+
+[`MessagingComponentConfig`](../type-aliases/MessagingComponentConfig.md)
 
 The instance config.
 
-• **overrideInstanceType?**: `string`
+### overrideInstanceType?
+
+`string`
 
 The instance type to override the default.
 

@@ -8,12 +8,8 @@ Information component config types.
 
 ### type
 
-> **type**: *typeof* `InformationComponentType.Service`
+> **type**: *typeof* [`Service`](../variables/InformationComponentType.md#service)
 
 ### options
 
-> **options**: `object`
-
-### options.config
-
-> **config**: `IInformationServiceConfig`
+> **options**: `IInformationServiceConstructorOptions`

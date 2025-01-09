@@ -6,7 +6,9 @@ Build the engine core configuration from environment variables.
 
 ## Parameters
 
-• **envVars**: [`IEngineEnvironmentVariables`](../interfaces/IEngineEnvironmentVariables.md)
+### envVars
+
+[`IEngineEnvironmentVariables`](../interfaces/IEngineEnvironmentVariables.md)
 
 The environment variables.
 

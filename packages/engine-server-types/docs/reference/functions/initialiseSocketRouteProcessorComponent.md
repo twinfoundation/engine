@@ -6,19 +6,27 @@ Initialise the socket route processor.
 
 ## Parameters
 
-• **engineCore**: `IEngineCore`\<[`IEngineServerConfig`](../interfaces/IEngineServerConfig.md), `IEngineState`\>
+### engineCore
+
+`IEngineCore`\<[`IEngineServerConfig`](../interfaces/IEngineServerConfig.md)\>
 
 The engine core.
 
-• **context**: `IEngineCoreContext`\<[`IEngineServerConfig`](../interfaces/IEngineServerConfig.md), `IEngineState`\>
+### context
+
+`IEngineCoreContext`\<[`IEngineServerConfig`](../interfaces/IEngineServerConfig.md)\>
 
 The context for the engine.
 
-• **instanceConfig**: [`SocketRouteProcessorConfig`](../type-aliases/SocketRouteProcessorConfig.md)
+### instanceConfig
+
+[`SocketRouteProcessorConfig`](../type-aliases/SocketRouteProcessorConfig.md)
 
 The instance config.
 
-• **overrideInstanceType?**: `string`
+### overrideInstanceType?
+
+`string`
 
 The instance type to override the default.
 

@@ -1,6 +1,7 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
-import type { IIotaImmutableStorageConnectorConfig } from "@twin.org/immutable-storage-connector-iota";
+import type { IEntityStorageImmutableStorageConnectorConstructorOptions } from "@twin.org/immutable-storage-connector-entity-storage";
+import type { IIotaImmutableStorageConnectorConstructorOptions } from "@twin.org/immutable-storage-connector-iota";
 import type { ImmutableStorageConnectorType } from "../types/immutableStorageConnectorType";
 
 /**
@@ -9,14 +10,9 @@ import type { ImmutableStorageConnectorType } from "../types/immutableStorageCon
 export type ImmutableStorageConnectorConfig =
 	| {
 			type: typeof ImmutableStorageConnectorType.EntityStorage;
-			options?: {
-				immutableStorageEntityStorageType?: string;
-			};
+			options?: IEntityStorageImmutableStorageConnectorConstructorOptions;
 	  }
 	| {
 			type: typeof ImmutableStorageConnectorType.Iota;
-			options: {
-				vaultConnectorType?: string;
-				config: IIotaImmutableStorageConnectorConfig;
-			};
+			options: IIotaImmutableStorageConnectorConstructorOptions;
 	  };

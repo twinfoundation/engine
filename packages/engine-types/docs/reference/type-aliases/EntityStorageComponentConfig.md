@@ -8,16 +8,8 @@ Entity storage component config types.
 
 ### type
 
-> **type**: *typeof* `EntityStorageComponentType.Service`
+> **type**: *typeof* [`Service`](../variables/EntityStorageComponentType.md#service)
 
 ### options
 
-> **options**: `object`
-
-### options.entityStorageType
-
-> **entityStorageType**: `string`
-
-### options.config?
-
-> `optional` **config**: `IEntityStorageConfig`
+> **options**: `IEntityStorageServiceConstructorOptions`

@@ -1,6 +1,7 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
-import type { IIotaNftConnectorConfig } from "@twin.org/nft-connector-iota";
+import type { IEntityStorageNftConnectorConstructorOptions } from "@twin.org/nft-connector-entity-storage";
+import type { IIotaNftConnectorConstructorOptions } from "@twin.org/nft-connector-iota";
 import type { NftConnectorType } from "../types/nftConnectorType";
 
 /**
@@ -9,14 +10,9 @@ import type { NftConnectorType } from "../types/nftConnectorType";
 export type NftConnectorConfig =
 	| {
 			type: typeof NftConnectorType.EntityStorage;
-			options?: {
-				nftEntityStorageType?: string;
-			};
+			options?: IEntityStorageNftConnectorConstructorOptions;
 	  }
 	| {
 			type: typeof NftConnectorType.Iota;
-			options: {
-				vaultConnectorType?: string;
-				config: IIotaNftConnectorConfig;
-			};
+			options: IIotaNftConnectorConstructorOptions;
 	  };

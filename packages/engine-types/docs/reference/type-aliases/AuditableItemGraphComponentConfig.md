@@ -8,28 +8,8 @@ Auditable item graph component config types.
 
 ### type
 
-> **type**: *typeof* `AuditableItemGraphComponentType.Service`
+> **type**: *typeof* [`Service`](../variables/AuditableItemGraphComponentType.md#service)
 
 ### options?
 
-> `optional` **options**: `object`
-
-### options.immutableProofComponentType?
-
-> `optional` **immutableProofComponentType**: `string`
-
-### options.vertexEntityStorageType?
-
-> `optional` **vertexEntityStorageType**: `string`
-
-### options.changesetEntityStorageType?
-
-> `optional` **changesetEntityStorageType**: `string`
-
-### options.eventBusComponentType?
-
-> `optional` **eventBusComponentType**: `string`
-
-### options.config?
-
-> `optional` **config**: `IAuditableItemGraphServiceConfig`
+> `optional` **options**: `IAuditableItemGraphServiceConstructorOptions`

@@ -8,12 +8,8 @@ Event bus connector config types.
 
 ### type
 
-> **type**: *typeof* `EventBusConnectorType.Local`
+> **type**: *typeof* [`Local`](../variables/EventBusConnectorType.md#local)
 
 ### options?
 
-> `optional` **options**: `object`
-
-### options.loggingConnectorType?
-
-> `optional` **loggingConnectorType**: `string`
+> `optional` **options**: `ILocalEventBusConnectorConstructorOptions`

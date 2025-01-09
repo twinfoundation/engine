@@ -8,12 +8,8 @@ Identity profile component config types.
 
 ### type
 
-> **type**: *typeof* `IdentityComponentType.Service`
+> **type**: *typeof* [`Service`](../variables/IdentityComponentType.md#service)
 
 ### options?
 
-> `optional` **options**: `object`
-
-### options.profileEntityConnectorType?
-
-> `optional` **profileEntityConnectorType**: `string`
+> `optional` **options**: `IIdentityProfileServiceConstructorOptions`

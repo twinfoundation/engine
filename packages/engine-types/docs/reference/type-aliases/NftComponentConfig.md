@@ -8,12 +8,8 @@ NFT component config types.
 
 ### type
 
-> **type**: *typeof* `NftComponentType.Service`
+> **type**: *typeof* [`Service`](../variables/NftComponentType.md#service)
 
 ### options?
 
-> `optional` **options**: `object`
-
-### options.config?
-
-> `optional` **config**: `INftServiceConfig`
+> `optional` **options**: `INftServiceConstructorOptions`

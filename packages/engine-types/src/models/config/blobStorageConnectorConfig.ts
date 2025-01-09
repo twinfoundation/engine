@@ -1,10 +1,10 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
-import type { IS3BlobStorageConnectorConfig } from "@twin.org/blob-storage-connector-aws-s3";
-import type { IAzureBlobStorageConnectorConfig } from "@twin.org/blob-storage-connector-azure";
-import type { IFileBlobStorageConnectorConfig } from "@twin.org/blob-storage-connector-file";
-import type { IGcpBlobStorageConnectorConfig } from "@twin.org/blob-storage-connector-gcp";
-import type { IIpfsBlobStorageConnectorConfig } from "@twin.org/blob-storage-connector-ipfs";
+import type { IS3BlobStorageConnectorConstructorOptions } from "@twin.org/blob-storage-connector-aws-s3";
+import type { IAzureBlobStorageConnectorConstructorOptions } from "@twin.org/blob-storage-connector-azure";
+import type { IFileBlobStorageConnectorConstructorOptions } from "@twin.org/blob-storage-connector-file";
+import type { IGcpBlobStorageConnectorConstructorOptions } from "@twin.org/blob-storage-connector-gcp";
+import type { IIpfsBlobStorageConnectorConstructorOptions } from "@twin.org/blob-storage-connector-ipfs";
 import type { BlobStorageConnectorType } from "../types/blobStorageConnectorType";
 
 /**
@@ -13,8 +13,7 @@ import type { BlobStorageConnectorType } from "../types/blobStorageConnectorType
 export type BlobStorageConnectorConfig =
 	| {
 			type: typeof BlobStorageConnectorType.File;
-			options: {
-				config: IFileBlobStorageConnectorConfig;
+			options: IFileBlobStorageConnectorConstructorOptions & {
 				storagePrefix?: string;
 			};
 	  }
@@ -24,28 +23,23 @@ export type BlobStorageConnectorConfig =
 	  }
 	| {
 			type: typeof BlobStorageConnectorType.AwsS3;
-			options: {
-				config: IS3BlobStorageConnectorConfig;
+			options: IS3BlobStorageConnectorConstructorOptions & {
 				storagePrefix?: string;
 			};
 	  }
 	| {
 			type: typeof BlobStorageConnectorType.AzureStorage;
-			options: {
-				config: IAzureBlobStorageConnectorConfig;
+			options: IAzureBlobStorageConnectorConstructorOptions & {
 				storagePrefix?: string;
 			};
 	  }
 	| {
 			type: typeof BlobStorageConnectorType.GcpStorage;
-			options: {
-				config: IGcpBlobStorageConnectorConfig;
+			options: IGcpBlobStorageConnectorConstructorOptions & {
 				storagePrefix?: string;
 			};
 	  }
 	| {
 			type: typeof BlobStorageConnectorType.Ipfs;
-			options: {
-				config: IIpfsBlobStorageConnectorConfig;
-			};
+			options: IIpfsBlobStorageConnectorConstructorOptions;
 	  };

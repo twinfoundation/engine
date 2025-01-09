@@ -1,10 +1,10 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
-import type { ICosmosDbEntityStorageConnectorConfig } from "@twin.org/entity-storage-connector-cosmosdb";
-import type { IDynamoDbEntityStorageConnectorConfig } from "@twin.org/entity-storage-connector-dynamodb";
-import type { IFileEntityStorageConnectorConfig } from "@twin.org/entity-storage-connector-file";
-import type { IFirestoreEntityStorageConnectorConfig } from "@twin.org/entity-storage-connector-gcp-firestore";
-import type { IScyllaDBTableConfig } from "@twin.org/entity-storage-connector-scylladb";
+import type { ICosmosDbEntityStorageConnectorConstructorOptions } from "@twin.org/entity-storage-connector-cosmosdb";
+import type { IDynamoDbEntityStorageConnectorConstructorOptions } from "@twin.org/entity-storage-connector-dynamodb";
+import type { IFileEntityStorageConnectorConstructorOptions } from "@twin.org/entity-storage-connector-file";
+import type { IFirestoreEntityStorageConnectorConstructorOptions } from "@twin.org/entity-storage-connector-gcp-firestore";
+import type { IScyllaDBTableConnectorConstructorOptions } from "@twin.org/entity-storage-connector-scylladb";
 import type { EntityStorageConnectorType } from "../types/entityStorageConnectorType";
 
 /**
@@ -13,8 +13,7 @@ import type { EntityStorageConnectorType } from "../types/entityStorageConnector
 export type EntityStorageConnectorConfig =
 	| {
 			type: typeof EntityStorageConnectorType.File;
-			options: {
-				config: IFileEntityStorageConnectorConfig;
+			options: Omit<IFileEntityStorageConnectorConstructorOptions, "entitySchema"> & {
 				folderPrefix?: string;
 			};
 	  }
@@ -24,33 +23,38 @@ export type EntityStorageConnectorConfig =
 	  }
 	| {
 			type: typeof EntityStorageConnectorType.AwsDynamoDb;
-			options: {
-				loggingConnectorType?: string;
-				config: Omit<IDynamoDbEntityStorageConnectorConfig, "tableName">;
+			options: Omit<
+				IDynamoDbEntityStorageConnectorConstructorOptions,
+				"entitySchema" | "config"
+			> & {
+				config: Omit<IDynamoDbEntityStorageConnectorConstructorOptions["config"], "tableName">;
 				tablePrefix?: string;
 			};
 	  }
 	| {
 			type: typeof EntityStorageConnectorType.AzureCosmosDb;
-			options: {
-				loggingConnectorType?: string;
-				config: Omit<ICosmosDbEntityStorageConnectorConfig, "tableName">;
+			options: Omit<
+				ICosmosDbEntityStorageConnectorConstructorOptions,
+				"entitySchema" | "config"
+			> & {
+				config: Omit<ICosmosDbEntityStorageConnectorConstructorOptions["config"], "tableName">;
 				tablePrefix?: string;
 			};
 	  }
 	| {
 			type: typeof EntityStorageConnectorType.GcpFirestoreDb;
-			options: {
-				loggingConnectorType?: string;
-				config: Omit<IFirestoreEntityStorageConnectorConfig, "tableName">;
+			options: Omit<
+				IFirestoreEntityStorageConnectorConstructorOptions,
+				"entitySchema" | "config"
+			> & {
+				config: Omit<IFirestoreEntityStorageConnectorConstructorOptions["config"], "tableName">;
 				tablePrefix?: string;
 			};
 	  }
 	| {
 			type: typeof EntityStorageConnectorType.ScyllaDb;
-			options: {
-				loggingConnectorType?: string;
-				config: Omit<IScyllaDBTableConfig, "tableName">;
+			options: Omit<IScyllaDBTableConnectorConstructorOptions, "entitySchema" | "config"> & {
+				config: Omit<IScyllaDBTableConnectorConstructorOptions["config"], "tableName">;
 				tablePrefix?: string;
 			};
 	  };

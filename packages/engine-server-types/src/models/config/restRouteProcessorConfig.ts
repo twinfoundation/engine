@@ -1,10 +1,10 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
-import type { IAuthHeaderProcessorConfig } from "@twin.org/api-auth-entity-storage-service";
+import type { IAuthHeaderProcessorConstructorOptions } from "@twin.org/api-auth-entity-storage-service";
 import type {
-	ILoggingProcessorConfig,
-	IRouteProcessorConfig,
-	IStaticUserIdentityProcessorConfig
+	ILoggingProcessorConstructorOptions,
+	IRestRouteProcessorConstructorOptions,
+	IStaticUserIdentityProcessorConstructorOptions
 } from "@twin.org/api-processors";
 import type { RestRouteProcessorType } from "../types/restRouteProcessorType";
 
@@ -15,17 +15,11 @@ import type { RestRouteProcessorType } from "../types/restRouteProcessorType";
 export type RestRouteProcessorConfig =
 	| {
 			type: typeof RestRouteProcessorType.AuthHeader;
-			options?: {
-				vaultConnectorType?: string;
-				config?: IAuthHeaderProcessorConfig;
-			};
+			options?: IAuthHeaderProcessorConstructorOptions;
 	  }
 	| {
 			type: typeof RestRouteProcessorType.Logging;
-			options?: {
-				loggingConnectorType?: string;
-				config?: ILoggingProcessorConfig;
-			};
+			options?: ILoggingProcessorConstructorOptions;
 	  }
 	| {
 			type: typeof RestRouteProcessorType.NodeIdentity;
@@ -33,13 +27,9 @@ export type RestRouteProcessorConfig =
 	  }
 	| {
 			type: typeof RestRouteProcessorType.StaticUserIdentity;
-			options: {
-				config: IStaticUserIdentityProcessorConfig;
-			};
+			options: IStaticUserIdentityProcessorConstructorOptions;
 	  }
 	| {
 			type: typeof RestRouteProcessorType.RestRoute;
-			options?: {
-				config?: IRouteProcessorConfig;
-			};
+			options?: IRestRouteProcessorConstructorOptions;
 	  };

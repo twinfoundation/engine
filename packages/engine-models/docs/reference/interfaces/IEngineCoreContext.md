@@ -42,7 +42,7 @@ The default types to use when components don't have custom types.
 
 #### Index Signature
 
- \[`type`: `string`\]: `string`
+\[`type`: `string`\]: `string`
 
 ***
 
@@ -51,3 +51,11 @@ The default types to use when components don't have custom types.
 > **componentInstances**: `object`[]
 
 The components.
+
+#### instanceType
+
+> **instanceType**: `string`
+
+#### component
+
+> **component**: `IComponent`

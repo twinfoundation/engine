@@ -1,5 +1,5 @@
 # Type Alias: EntityStorageConnectorConfig
 
-> **EntityStorageConnectorConfig**: `object` \| `object` \| `object` \| `object` \| `object` \| `object`
+> **EntityStorageConnectorConfig**: \{ `type`: *typeof* [`File`](../variables/EntityStorageConnectorType.md#file); `options`: `Omit`\<`IFileEntityStorageConnectorConstructorOptions`, `"entitySchema"`\> & `object`; \} \| \{ `type`: *typeof* [`Memory`](../variables/EntityStorageConnectorType.md#memory); `options`: `never`; \} \| \{ `type`: *typeof* [`AwsDynamoDb`](../variables/EntityStorageConnectorType.md#awsdynamodb); `options`: `Omit`\<`IDynamoDbEntityStorageConnectorConstructorOptions`, `"entitySchema"` \| `"config"`\> & `object`; \} \| \{ `type`: *typeof* [`AzureCosmosDb`](../variables/EntityStorageConnectorType.md#azurecosmosdb); `options`: `Omit`\<`ICosmosDbEntityStorageConnectorConstructorOptions`, `"entitySchema"` \| `"config"`\> & `object`; \} \| \{ `type`: *typeof* [`GcpFirestoreDb`](../variables/EntityStorageConnectorType.md#gcpfirestoredb); `options`: `Omit`\<`IFirestoreEntityStorageConnectorConstructorOptions`, `"entitySchema"` \| `"config"`\> & `object`; \} \| \{ `type`: *typeof* [`ScyllaDb`](../variables/EntityStorageConnectorType.md#scylladb); `options`: `Omit`\<`IScyllaDBTableConnectorConstructorOptions`, `"entitySchema"` \| `"config"`\> & `object`; \}
 
 Entity storage connector config types.

@@ -8,12 +8,8 @@ Event bus storage component config types.
 
 ### type
 
-> **type**: *typeof* `EventBusComponentType.Service`
+> **type**: *typeof* [`Service`](../variables/EventBusComponentType.md#service)
 
 ### options?
 
-> `optional` **options**: `object`
-
-### options.eventBusConnectorType?
-
-> `optional` **eventBusConnectorType**: `string`
+> `optional` **options**: `IEventBusServiceConstructorOptions`

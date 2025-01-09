@@ -8,20 +8,8 @@ Background task connector config types.
 
 ### type
 
-> **type**: *typeof* `BackgroundTaskConnectorType.EntityStorage`
+> **type**: *typeof* [`EntityStorage`](../variables/BackgroundTaskConnectorType.md#entitystorage)
 
 ### options?
 
-> `optional` **options**: `object`
-
-### options.backgroundTaskEntityStorageType?
-
-> `optional` **backgroundTaskEntityStorageType**: `string`
-
-### options.loggingConnectorType?
-
-> `optional` **loggingConnectorType**: `string`
-
-### options.config?
-
-> `optional` **config**: `IEntityStorageBackgroundTaskConnectorConfig`
+> `optional` **options**: `IEntityStorageBackgroundTaskConnectorConstructorOptions`
