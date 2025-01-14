@@ -9,6 +9,7 @@ import {
 	type Nft
 } from "@twin.org/nft-connector-entity-storage";
 import { IotaNftConnector } from "@twin.org/nft-connector-iota";
+import { IotaRebasedNftConnector } from "@twin.org/nft-connector-iota-rebased";
 import { NftConnectorFactory, type INftComponent, type INftConnector } from "@twin.org/nft-models";
 import { NftService } from "@twin.org/nft-service";
 import { initialiseEntityStorageConnector } from "./entityStorage.js";
@@ -59,6 +60,12 @@ export function initialiseNftConnector(
 			...instanceConfig.options
 		});
 		instanceType = IotaNftConnector.NAMESPACE;
+	} else if (type === NftConnectorType.IotaRebased) {
+		connector = new IotaRebasedNftConnector({
+			vaultConnectorType: context.defaultTypes.vaultConnector,
+			...instanceConfig.options
+		});
+		instanceType = IotaRebasedNftConnector.NAMESPACE;
 	} else {
 		throw new GeneralError("engineCore", "connectorUnknownType", {
 			type,

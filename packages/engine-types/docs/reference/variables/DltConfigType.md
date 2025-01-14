@@ -11,3 +11,9 @@ DLT config types.
 > `readonly` **Iota**: `"iota"` = `"iota"`
 
 IOTA.
+
+### IotaRebased
+
+> `readonly` **IotaRebased**: `"iota-rebased"` = `"iota-rebased"`
+
+IOTA Rebased.

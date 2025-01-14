@@ -7,14 +7,9 @@
 // eslint-disable-next-line @typescript-eslint/naming-convention
 export const AttestationConnectorType = {
 	/**
-	 * Entity storage.
+	 * NFT.
 	 */
-	EntityStorage: "entity-storage",
-
-	/**
-	 * IOTA.
-	 */
-	Iota: "iota"
+	Nft: "nft"
 } as const;
 
 /**

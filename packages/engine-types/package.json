@@ -40,8 +40,7 @@
 	},
 	"peerDependencies": {
 		"@twin.org/attestation-models": "next",
-		"@twin.org/attestation-connector-entity-storage": "next",
-		"@twin.org/attestation-connector-iota": "next",
+		"@twin.org/attestation-connector-nft": "next",
 		"@twin.org/attestation-service": "next",
 		"@twin.org/auditable-item-graph-models": "next",
 		"@twin.org/auditable-item-graph-service": "next",
@@ -76,6 +75,7 @@
 		"@twin.org/immutable-proof-service": "next",
 		"@twin.org/immutable-storage-connector-entity-storage": "next",
 		"@twin.org/immutable-storage-connector-iota": "next",
+		"@twin.org/immutable-storage-connector-iota-rebased": "next",
 		"@twin.org/immutable-storage-models": "next",
 		"@twin.org/logging-models": "next",
 		"@twin.org/logging-connector-console": "next",
@@ -88,6 +88,7 @@
 		"@twin.org/nft-models": "next",
 		"@twin.org/nft-connector-entity-storage": "next",
 		"@twin.org/nft-connector-iota": "next",
+		"@twin.org/nft-connector-iota-rebased": "next",
 		"@twin.org/nft-service": "next",
 		"@twin.org/telemetry-models": "next",
 		"@twin.org/telemetry-connector-entity-storage": "next",
@@ -97,7 +98,8 @@
 		"@twin.org/vault-connector-hashicorp": "next",
 		"@twin.org/wallet-models": "next",
 		"@twin.org/wallet-connector-entity-storage": "next",
-		"@twin.org/wallet-connector-iota": "next"
+		"@twin.org/wallet-connector-iota": "next",
+		"@twin.org/wallet-connector-iota-rebased": "next"
 	},
 	"devDependencies": {
 		"@twin.org/nameof-transformer": "next",

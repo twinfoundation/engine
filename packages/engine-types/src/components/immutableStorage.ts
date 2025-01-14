@@ -8,6 +8,7 @@ import {
 	type ImmutableItem
 } from "@twin.org/immutable-storage-connector-entity-storage";
 import { IotaImmutableStorageConnector } from "@twin.org/immutable-storage-connector-iota";
+import { IotaRebasedImmutableStorageConnector } from "@twin.org/immutable-storage-connector-iota-rebased";
 import {
 	ImmutableStorageConnectorFactory,
 	type IImmutableStorageConnector
@@ -55,6 +56,19 @@ export function initialiseImmutableStorageConnector(
 			}
 		});
 		instanceType = IotaImmutableStorageConnector.NAMESPACE;
+	} else if (type === ImmutableStorageConnectorType.IotaRebased) {
+		const dltConfig = context.config.types.dltConfig?.find(
+			dlt => dlt.type === context.defaultTypes.dltConfig
+		);
+		connector = new IotaRebasedImmutableStorageConnector({
+			vaultConnectorType: context.defaultTypes.vaultConnector,
+			...instanceConfig.options,
+			config: {
+				...dltConfig?.options?.config,
+				...instanceConfig.options.config
+			}
+		});
+		instanceType = IotaRebasedImmutableStorageConnector.NAMESPACE;
 	} else if (type === ImmutableStorageConnectorType.EntityStorage) {
 		initSchemaImmutableStorageStorage();
 		initialiseEntityStorageConnector(

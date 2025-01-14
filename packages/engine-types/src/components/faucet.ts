@@ -4,6 +4,7 @@ import { GeneralError, I18n } from "@twin.org/core";
 import type { IEngineCore, IEngineCoreContext } from "@twin.org/engine-models";
 import { EntityStorageFaucetConnector } from "@twin.org/wallet-connector-entity-storage";
 import { IotaFaucetConnector } from "@twin.org/wallet-connector-iota";
+import { IotaRebasedFaucetConnector } from "@twin.org/wallet-connector-iota-rebased";
 import { FaucetConnectorFactory, type IFaucetConnector } from "@twin.org/wallet-models";
 import type { FaucetConnectorConfig } from "../models/config/faucetConnectorConfig";
 import type { IEngineConfig } from "../models/IEngineConfig";
@@ -47,6 +48,18 @@ export function initialiseFaucetConnector(
 			}
 		});
 		instanceType = IotaFaucetConnector.NAMESPACE;
+	} else if (type === FaucetConnectorType.IotaRebased) {
+		const dltConfig = context.config.types.dltConfig?.find(
+			dlt => dlt.type === context.defaultTypes.dltConfig
+		);
+		connector = new IotaRebasedFaucetConnector({
+			...instanceConfig.options,
+			config: {
+				...dltConfig?.options?.config,
+				...instanceConfig.options.config
+			}
+		});
+		instanceType = IotaRebasedFaucetConnector.NAMESPACE;
 	} else if (type === FaucetConnectorType.EntityStorage) {
 		connector = new EntityStorageFaucetConnector(instanceConfig.options);
 		instanceType = EntityStorageFaucetConnector.NAMESPACE;

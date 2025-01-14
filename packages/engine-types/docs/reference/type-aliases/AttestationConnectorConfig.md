@@ -1,5 +1,15 @@
 # Type Alias: AttestationConnectorConfig
 
-> **AttestationConnectorConfig**: \{ `type`: *typeof* [`EntityStorage`](../variables/AttestationConnectorType.md#entitystorage); `options`: `IEntityStorageAttestationConnectorConstructorOptions`; \} \| \{ `type`: *typeof* [`Iota`](../variables/AttestationConnectorType.md#iota); `options`: `IIotaAttestationConnectorConstructorOptions`; \}
+> **AttestationConnectorConfig**: `object`
 
 Attestation config connector types.
+
+## Type declaration
+
+### type
+
+> **type**: *typeof* [`Nft`](../variables/AttestationConnectorType.md#nft)
+
+### options?
+
+> `optional` **options**: `INftAttestationConnectorConstructorOptions`

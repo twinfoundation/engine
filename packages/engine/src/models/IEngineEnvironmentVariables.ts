@@ -326,6 +326,21 @@ export interface IEngineEnvironmentVariables {
 	iotaNodeEndpoint?: string;
 
 	/**
+	 * IOTA Rebased Faucet Endpoint.
+	 */
+	iotaRebasedFaucetEndpoint?: string;
+
+	/**
+	 * IOTA Rebased Node Endpoint.
+	 */
+	iotaRebasedNodeEndpoint?: string;
+
+	/**
+	 * IOTA Rebased network.
+	 */
+	iotaRebasedNetwork?: string;
+
+	/**
 	 * IOTA Bech32 HRP
 	 */
 	iotaBech32Hrp?: string;

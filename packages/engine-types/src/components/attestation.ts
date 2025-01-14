@@ -1,7 +1,6 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
-import { EntityStorageAttestationConnector } from "@twin.org/attestation-connector-entity-storage";
-import { IotaAttestationConnector } from "@twin.org/attestation-connector-iota";
+import { NftAttestationConnector } from "@twin.org/attestation-connector-nft";
 import {
 	AttestationConnectorFactory,
 	type IAttestationComponent,
@@ -40,20 +39,13 @@ export function initialiseAttestationConnector(
 	const type = instanceConfig.type;
 	let connector: IAttestationConnector;
 	let instanceType: string;
-	if (type === AttestationConnectorType.Iota) {
-		connector = new IotaAttestationConnector({
+	if (type === AttestationConnectorType.Nft) {
+		connector = new NftAttestationConnector({
 			identityConnectorType: context.defaultTypes.identityConnector,
 			nftConnectorType: context.defaultTypes.nftConnector,
 			...instanceConfig.options
 		});
-		instanceType = IotaAttestationConnector.NAMESPACE;
-	} else if (type === AttestationConnectorType.EntityStorage) {
-		connector = new EntityStorageAttestationConnector({
-			identityConnectorType: context.defaultTypes.identityConnector,
-			nftConnectorType: context.defaultTypes.nftConnector,
-			...instanceConfig.options
-		});
-		instanceType = EntityStorageAttestationConnector.NAMESPACE;
+		instanceType = NftAttestationConnector.NAMESPACE;
 	} else {
 		throw new GeneralError("engineCore", "connectorUnknownType", {
 			type,

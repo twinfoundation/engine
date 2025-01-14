@@ -516,6 +516,30 @@ IOTA Node Endpoint.
 
 ***
 
+### iotaRebasedFaucetEndpoint?
+
+> `optional` **iotaRebasedFaucetEndpoint**: `string`
+
+IOTA Rebased Faucet Endpoint.
+
+***
+
+### iotaRebasedNodeEndpoint?
+
+> `optional` **iotaRebasedNodeEndpoint**: `string`
+
+IOTA Rebased Node Endpoint.
+
+***
+
+### iotaRebasedNetwork?
+
+> `optional` **iotaRebasedNetwork**: `string`
+
+IOTA Rebased network.
+
+***
+
 ### iotaBech32Hrp?
 
 > `optional` **iotaBech32Hrp**: `string`

@@ -108,7 +108,7 @@ describe("engine-server", () => {
 				identityProfileComponent: [{ type: IdentityProfileComponentType.Service }],
 				nftConnector: [{ type: NftConnectorType.EntityStorage }],
 				nftComponent: [{ type: NftComponentType.Service }],
-				attestationConnector: [{ type: AttestationConnectorType.EntityStorage }],
+				attestationConnector: [{ type: AttestationConnectorType.Nft }],
 				attestationComponent: [{ type: AttestationComponentType.Service }],
 				auditableItemGraphComponent: [{ type: AuditableItemGraphComponentType.Service }],
 				auditableItemStreamComponent: [{ type: AuditableItemStreamComponentType.Service }],
@@ -144,7 +144,7 @@ describe("engine-server", () => {
 		const engineServer = new EngineServer({
 			engineCore: engine
 		});
-		await engineServer.start();
+		const canContinue = await engineServer.start();
 
 		const res = await fetch("http://localhost:3000/info");
 		expect(await res.json()).toEqual({
@@ -153,6 +153,7 @@ describe("engine-server", () => {
 		});
 
 		await engineServer.stop();
+		expect(canContinue).toEqual(true);
 		expect(engineServer).toBeDefined();
 	});
 
@@ -181,7 +182,8 @@ describe("engine-server", () => {
 		const engineServer = new EngineServer({
 			engineCore: engine
 		});
-		await engineServer.start();
+		const canContinue = await engineServer.start();
+		expect(canContinue).toEqual(true);
 
 		const res = await fetch("http://localhost:3000/foo/info");
 		expect(await res.json()).toEqual({
@@ -218,7 +220,8 @@ describe("engine-server", () => {
 			"generateRestRoutes"
 		);
 
-		await engineServer.start();
+		const canContinue = await engineServer.start();
+		expect(canContinue).toEqual(true);
 
 		const res = await fetch("http://localhost:3000/test/value");
 		expect(await res.json()).toEqual({
@@ -262,7 +265,8 @@ describe("engine-server", () => {
 			engineCore: engine
 		});
 
-		await engineServer.start();
+		const canContinue = await engineServer.start();
+		expect(canContinue).toEqual(true);
 
 		const service = ComponentFactory.get<IEntityStorageComponent<TestEntity>>("test-entity");
 		await service.set({ id: "test1234" });

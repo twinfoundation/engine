@@ -550,6 +550,19 @@ function configureFaucetConnectors(
 				}
 			}
 		});
+	} else if (envVars.faucetConnector === FaucetConnectorType.IotaRebased) {
+		coreConfig.types.faucetConnector.push({
+			type: FaucetConnectorType.IotaRebased,
+			options: {
+				config: {
+					endpoint: envVars.iotaRebasedFaucetEndpoint ?? "",
+					clientOptions: {
+						url: envVars.iotaRebasedNodeEndpoint ?? ""
+					},
+					network: envVars.iotaRebasedNetwork ?? ""
+				}
+			}
+		});
 	}
 }
 
@@ -581,6 +594,18 @@ function configureWalletConnectors(
 				}
 			}
 		});
+	} else if (envVars.walletConnector === WalletConnectorType.IotaRebased) {
+		coreConfig.types.walletConnector.push({
+			type: WalletConnectorType.IotaRebased,
+			options: {
+				config: {
+					clientOptions: {
+						url: envVars.iotaRebasedNodeEndpoint ?? ""
+					},
+					network: envVars.iotaRebasedNetwork ?? ""
+				}
+			}
+		});
 	}
 }
 
@@ -609,6 +634,18 @@ function configureNftConnectors(
 					},
 					bech32Hrp: envVars.iotaBech32Hrp,
 					coinType: Coerce.number(envVars.iotaCoinType)
+				}
+			}
+		});
+	} else if (envVars.nftConnector === NftConnectorType.IotaRebased) {
+		coreConfig.types.nftConnector.push({
+			type: NftConnectorType.IotaRebased,
+			options: {
+				config: {
+					clientOptions: {
+						url: envVars.iotaRebasedNodeEndpoint ?? ""
+					},
+					network: envVars.iotaRebasedNetwork ?? ""
 				}
 			}
 		});
@@ -744,13 +781,9 @@ function configureAttestationConnectors(
 ): void {
 	coreConfig.types.attestationConnector ??= [];
 
-	if (envVars.attestationConnector === AttestationConnectorType.EntityStorage) {
+	if (envVars.attestationConnector === AttestationConnectorType.Nft) {
 		coreConfig.types.attestationConnector.push({
-			type: AttestationConnectorType.EntityStorage
-		});
-	} else if (envVars.attestationConnector === AttestationConnectorType.Iota) {
-		coreConfig.types.attestationConnector.push({
-			type: AttestationConnectorType.Iota
+			type: AttestationConnectorType.Nft
 		});
 	}
 

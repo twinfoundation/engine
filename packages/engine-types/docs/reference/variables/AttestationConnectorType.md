@@ -6,14 +6,8 @@ Attestation connector types.
 
 ## Type declaration
 
-### EntityStorage
+### Nft
 
-> `readonly` **EntityStorage**: `"entity-storage"` = `"entity-storage"`
+> `readonly` **Nft**: `"nft"` = `"nft"`
 
-Entity storage.
-
-### Iota
-
-> `readonly` **Iota**: `"iota"` = `"iota"`
-
-IOTA.
+NFT.

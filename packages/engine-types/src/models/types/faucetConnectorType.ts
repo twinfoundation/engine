@@ -14,7 +14,12 @@ export const FaucetConnectorType = {
 	/**
 	 * IOTA.
 	 */
-	Iota: "iota"
+	Iota: "iota",
+
+	/**
+	 * IOTA Rebased.
+	 */
+	IotaRebased: "iota-rebased"
 } as const;
 
 /**

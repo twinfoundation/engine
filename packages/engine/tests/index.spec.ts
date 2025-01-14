@@ -69,18 +69,20 @@ describe("engine", () => {
 
 	test("Can start engine with no config", async () => {
 		const engine = new Engine();
-		await engine.start();
+		const canContinue = await engine.start();
 		await engine.stop();
 
+		expect(canContinue).toEqual(true);
 		expect(engine).toBeDefined();
 	});
 
 	test("Can start engine with empty config", async () => {
 		const engine = new Engine({ config: { types: {} } });
-		await engine.start();
+		const canContinue = await engine.start();
 		await engine.stop();
 
 		expect(engine).toBeDefined();
+		expect(canContinue).toEqual(true);
 	});
 
 	test("Can start engine with config", async () => {
@@ -117,7 +119,7 @@ describe("engine", () => {
 					identityProfileComponent: [{ type: IdentityProfileComponentType.Service }],
 					nftConnector: [{ type: NftConnectorType.EntityStorage }],
 					nftComponent: [{ type: NftComponentType.Service }],
-					attestationConnector: [{ type: AttestationConnectorType.EntityStorage }],
+					attestationConnector: [{ type: AttestationConnectorType.Nft }],
 					attestationComponent: [{ type: AttestationComponentType.Service }],
 					auditableItemGraphComponent: [{ type: AuditableItemGraphComponentType.Service }],
 					auditableItemStreamComponent: [{ type: AuditableItemStreamComponentType.Service }]
@@ -129,7 +131,7 @@ describe("engine", () => {
 			}
 		});
 
-		await engine.start();
+		const canContinue = await engine.start();
 		await engine.stop();
 
 		expect(ComponentFactory.names()).toEqual([
@@ -176,6 +178,7 @@ describe("engine", () => {
 		]);
 
 		expect(engine).toBeDefined();
+		expect(canContinue).toEqual(true);
 		expect(calledCustomBootstrap).toBeDefined();
 	});
 
@@ -198,9 +201,10 @@ describe("engine", () => {
 			}
 		});
 
-		await engine.start();
+		const canContinue = await engine.start();
 		await engine.stop();
 
+		expect(canContinue).toEqual(true);
 		expect(ComponentFactory.names()).toEqual(["test-entity"]);
 		expect(EntitySchemaFactory.names()).toEqual(["TestEntity"]);
 	});
@@ -238,9 +242,10 @@ describe("engine", () => {
 				}
 			}
 		});
-		await engine.start();
+		const canContinue = await engine.start();
 		await engine.stop();
 
+		expect(canContinue).toEqual(true);
 		expect(ComponentFactory.names()).toEqual(["test-entity"]);
 		expect(EntitySchemaFactory.names()).toEqual(["TestEntity"]);
 
@@ -283,7 +288,7 @@ describe("engine", () => {
 					identityProfileComponent: [{ type: IdentityProfileComponentType.Service }],
 					nftConnector: [{ type: NftConnectorType.EntityStorage }],
 					nftComponent: [{ type: NftComponentType.Service }],
-					attestationConnector: [{ type: AttestationConnectorType.EntityStorage }],
+					attestationConnector: [{ type: AttestationConnectorType.Nft }],
 					attestationComponent: [{ type: AttestationComponentType.Service }],
 					auditableItemGraphComponent: [{ type: AuditableItemGraphComponentType.Service }],
 					auditableItemStreamComponent: [{ type: AuditableItemStreamComponentType.Service }]
@@ -292,7 +297,7 @@ describe("engine", () => {
 			stateStorage: new MemoryStateStorage()
 		});
 
-		await engine.start();
+		const canContinue = await engine.start();
 		await engine.stop();
 
 		Factory.clearFactories();
@@ -300,8 +305,10 @@ describe("engine", () => {
 		const cloneData = engine.getCloneData();
 		const clone = new Engine();
 		clone.populateClone(cloneData);
-		await clone.start();
+		const canContinue2 = await clone.start();
 
+		expect(canContinue).toEqual(true);
+		expect(canContinue2).toEqual(true);
 		expect(clone.getConfig()).toEqual(engine.getConfig());
 		expect(clone.getState()).toEqual(engine.getState());
 		expect(clone.getDefaultTypes()).toEqual(engine.getDefaultTypes());
@@ -339,7 +346,7 @@ describe("engine", () => {
 				identityProfileComponent: [{ type: IdentityProfileComponentType.Service }],
 				nftConnector: [{ type: NftConnectorType.EntityStorage }],
 				nftComponent: [{ type: NftComponentType.Service }],
-				attestationConnector: [{ type: AttestationConnectorType.EntityStorage }],
+				attestationConnector: [{ type: AttestationConnectorType.Nft }],
 				attestationComponent: [{ type: AttestationComponentType.Service }],
 				auditableItemGraphComponent: [{ type: AuditableItemGraphComponentType.Service }],
 				auditableItemStreamComponent: [{ type: AuditableItemStreamComponentType.Service }]
@@ -350,7 +357,7 @@ describe("engine", () => {
 			stateStorage: new MemoryStateStorage()
 		});
 
-		await engine.start();
+		const canContinue = await engine.start();
 		await engine.stop();
 
 		Factory.clearFactories();
@@ -358,8 +365,10 @@ describe("engine", () => {
 		const cloneData = engine.getCloneData();
 		const clone = new Engine();
 		clone.populateClone(cloneData, true);
-		await clone.start();
+		const canContinue2 = await clone.start();
 
+		expect(canContinue).toEqual(true);
+		expect(canContinue2).toEqual(true);
 		expect(clone.getConfig()).toEqual(engine.getConfig());
 		expect(clone.getState()).toEqual(engine.getState());
 		expect(clone.getDefaultTypes()).toEqual(engine.getDefaultTypes());

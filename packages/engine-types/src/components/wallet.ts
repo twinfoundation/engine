@@ -9,6 +9,7 @@ import {
 	type WalletAddress
 } from "@twin.org/wallet-connector-entity-storage";
 import { IotaWalletConnector } from "@twin.org/wallet-connector-iota";
+import { IotaRebasedWalletConnector } from "@twin.org/wallet-connector-iota-rebased";
 import { WalletConnectorFactory, type IWalletConnector } from "@twin.org/wallet-models";
 import { initialiseEntityStorageConnector } from "./entityStorage.js";
 import type { WalletConnectorConfig } from "../models/config/walletConnectorConfig.js";
@@ -54,6 +55,20 @@ export function initialiseWalletConnector(
 			}
 		});
 		instanceType = IotaWalletConnector.NAMESPACE;
+	} else if (type === WalletConnectorType.IotaRebased) {
+		const dltConfig = context.config.types.dltConfig?.find(
+			dlt => dlt.type === context.defaultTypes.dltConfig
+		);
+		connector = new IotaRebasedWalletConnector({
+			vaultConnectorType: context.defaultTypes.vaultConnector,
+			faucetConnectorType: context.defaultTypes.faucetConnector,
+			...instanceConfig.options,
+			config: {
+				...dltConfig?.options?.config,
+				...instanceConfig.options.config
+			}
+		});
+		instanceType = IotaRebasedWalletConnector.NAMESPACE;
 	} else if (type === WalletConnectorType.EntityStorage) {
 		connector = new EntityStorageWalletConnector({
 			vaultConnectorType: context.defaultTypes.vaultConnector,
