@@ -562,7 +562,8 @@ function configureFaucetConnectors(
 					clientOptions: {
 						url: envVars.iotaRebasedNodeEndpoint ?? ""
 					},
-					network: envVars.iotaRebasedNetwork ?? ""
+					network: envVars.iotaRebasedNetwork ?? "",
+					coinType: Coerce.number(envVars.iotaRebasedCoinType)
 				}
 			}
 		});
@@ -605,7 +606,8 @@ function configureWalletConnectors(
 					clientOptions: {
 						url: envVars.iotaRebasedNodeEndpoint ?? ""
 					},
-					network: envVars.iotaRebasedNetwork ?? ""
+					network: envVars.iotaRebasedNetwork ?? "",
+					coinType: Coerce.number(envVars.iotaRebasedCoinType)
 				}
 			}
 		});
@@ -648,7 +650,8 @@ function configureNftConnectors(
 					clientOptions: {
 						url: envVars.iotaRebasedNodeEndpoint ?? ""
 					},
-					network: envVars.iotaRebasedNetwork ?? ""
+					network: envVars.iotaRebasedNetwork ?? "",
+					coinType: Coerce.number(envVars.iotaRebasedCoinType)
 				}
 			}
 		});
@@ -697,7 +700,7 @@ function configureImmutableStorageConnectors(
 						url: envVars.iotaRebasedNodeEndpoint ?? ""
 					},
 					network: envVars.iotaRebasedNetwork ?? "",
-					coinType: Coerce.number(envVars.iotaCoinType)
+					coinType: Coerce.number(envVars.iotaRebasedCoinType)
 				}
 			}
 		});
@@ -764,7 +767,7 @@ function configureIdentityConnectors(
 						url: envVars.iotaRebasedNodeEndpoint ?? ""
 					},
 					network: envVars.iotaRebasedNetwork ?? "",
-					coinType: Coerce.number(envVars.iotaCoinType)
+					coinType: Coerce.number(envVars.iotaRebasedCoinType)
 				}
 			}
 		});
@@ -813,7 +816,7 @@ function configureIdentityResolverConnectors(
 						url: envVars.iotaRebasedNodeEndpoint ?? ""
 					},
 					network: envVars.iotaRebasedNetwork ?? "",
-					coinType: Coerce.number(envVars.iotaCoinType)
+					coinType: Coerce.number(envVars.iotaRebasedCoinType)
 				}
 			}
 		});

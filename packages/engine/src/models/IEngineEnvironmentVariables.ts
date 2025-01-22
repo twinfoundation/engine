@@ -331,6 +331,21 @@ export interface IEngineEnvironmentVariables {
 	iotaNodeEndpoint?: string;
 
 	/**
+	 * IOTA Bech32 HRP
+	 */
+	iotaBech32Hrp?: string;
+
+	/**
+	 * IOTA coin type.
+	 */
+	iotaCoinType?: string;
+
+	/**
+	 * IOTA Explorer Endpoint.
+	 */
+	iotaExplorerEndpoint?: string;
+
+	/**
 	 * IOTA Rebased Faucet Endpoint.
 	 */
 	iotaRebasedFaucetEndpoint?: string;
@@ -346,19 +361,14 @@ export interface IEngineEnvironmentVariables {
 	iotaRebasedNetwork?: string;
 
 	/**
-	 * IOTA Bech32 HRP
+	 * IOTA Rebased coin type.
 	 */
-	iotaBech32Hrp?: string;
+	iotaRebasedCoinType?: string;
 
 	/**
-	 * IOTA coin type.
+	 * IOTA Rebased Explorer Endpoint.
 	 */
-	iotaCoinType?: string;
-
-	/**
-	 * IOTA Explorer Endpoint.
-	 */
-	iotaExplorerEndpoint?: string;
+	iotaRebasedExplorerEndpoint?: string;
 
 	/**
 	 * The type of identity profile connector: entity-storage.

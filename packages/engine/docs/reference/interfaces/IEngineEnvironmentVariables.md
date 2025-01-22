@@ -524,6 +524,30 @@ IOTA Node Endpoint.
 
 ***
 
+### iotaBech32Hrp?
+
+> `optional` **iotaBech32Hrp**: `string`
+
+IOTA Bech32 HRP
+
+***
+
+### iotaCoinType?
+
+> `optional` **iotaCoinType**: `string`
+
+IOTA coin type.
+
+***
+
+### iotaExplorerEndpoint?
+
+> `optional` **iotaExplorerEndpoint**: `string`
+
+IOTA Explorer Endpoint.
+
+***
+
 ### iotaRebasedFaucetEndpoint?
 
 > `optional` **iotaRebasedFaucetEndpoint**: `string`
@@ -548,27 +572,19 @@ IOTA Rebased network.
 
 ***
 
-### iotaBech32Hrp?
+### iotaRebasedCoinType?
 
-> `optional` **iotaBech32Hrp**: `string`
+> `optional` **iotaRebasedCoinType**: `string`
 
-IOTA Bech32 HRP
-
-***
-
-### iotaCoinType?
-
-> `optional` **iotaCoinType**: `string`
-
-IOTA coin type.
+IOTA Rebased coin type.
 
 ***
 
-### iotaExplorerEndpoint?
+### iotaRebasedExplorerEndpoint?
 
-> `optional` **iotaExplorerEndpoint**: `string`
+> `optional` **iotaRebasedExplorerEndpoint**: `string`
 
-IOTA Explorer Endpoint.
+IOTA Rebased Explorer Endpoint.
 
 ***
 
