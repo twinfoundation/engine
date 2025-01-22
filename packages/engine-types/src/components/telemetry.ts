@@ -15,12 +15,12 @@ import {
 	type ITelemetryConnector
 } from "@twin.org/telemetry-models";
 import { TelemetryService } from "@twin.org/telemetry-service";
-import { initialiseEntityStorageConnector } from "./entityStorage.js";
-import type { TelemetryComponentConfig } from "../models/config/telemetryComponentConfig.js";
-import type { TelemetryConnectorConfig } from "../models/config/telemetryConnectorConfig.js";
-import type { IEngineConfig } from "../models/IEngineConfig.js";
-import { TelemetryComponentType } from "../models/types/telemetryComponentType.js";
-import { TelemetryConnectorType } from "../models/types/telemetryConnectorType.js";
+import { initialiseEntityStorageConnector } from "./entityStorage";
+import type { TelemetryComponentConfig } from "../models/config/telemetryComponentConfig";
+import type { TelemetryConnectorConfig } from "../models/config/telemetryConnectorConfig";
+import type { IEngineConfig } from "../models/IEngineConfig";
+import { TelemetryComponentType } from "../models/types/telemetryComponentType";
+import { TelemetryConnectorType } from "../models/types/telemetryConnectorType";
 
 /**
  * Initialise a telemetry connector.

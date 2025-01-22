@@ -170,6 +170,19 @@ export class Engine<
 		);
 
 		this.addTypeInitialiser(
+			"identityResolverConnector",
+			this._context.config.types.identityResolverConnector,
+			"@twin.org/engine-types",
+			"initialiseIdentityResolverConnector"
+		);
+		this.addTypeInitialiser(
+			"identityResolverComponent",
+			this._context.config.types.identityResolverComponent,
+			"@twin.org/engine-types",
+			"initialiseIdentityResolverComponent"
+		);
+
+		this.addTypeInitialiser(
 			"identityProfileConnector",
 			this._context.config.types.identityProfileConnector,
 			"@twin.org/engine-types",

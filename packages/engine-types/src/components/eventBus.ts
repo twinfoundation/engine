@@ -9,11 +9,11 @@ import {
 	type IEventBusConnector
 } from "@twin.org/event-bus-models";
 import { EventBusService } from "@twin.org/event-bus-service";
-import type { EventBusComponentConfig } from "../models/config/eventBusComponentConfig.js";
-import type { EventBusConnectorConfig } from "../models/config/eventBusConnectorConfig.js";
-import type { IEngineConfig } from "../models/IEngineConfig.js";
-import { EventBusComponentType } from "../models/types/eventBusComponentType.js";
-import { EventBusConnectorType } from "../models/types/eventBusConnectorType.js";
+import type { EventBusComponentConfig } from "../models/config/eventBusComponentConfig";
+import type { EventBusConnectorConfig } from "../models/config/eventBusConnectorConfig";
+import type { IEngineConfig } from "../models/IEngineConfig";
+import { EventBusComponentType } from "../models/types/eventBusComponentType";
+import { EventBusConnectorType } from "../models/types/eventBusConnectorType";
 
 /**
  * Initialise a event bus connector.

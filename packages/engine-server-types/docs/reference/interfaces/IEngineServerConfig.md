@@ -196,7 +196,19 @@ Identity connector options which can be overridden by individual components by s
 
 > `optional` **identityComponent**: `IEngineCoreTypeConfig`\<`IdentityComponentConfig`\>[]
 
-Identity component profile options which can be overridden by individual components by specifying types other than default.
+Identity component options which can be overridden by individual components by specifying types other than default.
+
+##### identityResolverConnector?
+
+> `optional` **identityResolverConnector**: `IEngineCoreTypeConfig`\<`IdentityResolverConnectorConfig`\>[]
+
+Identity resolver connector options which can be overridden by individual components by specifying types other than default.
+
+##### identityResolverComponent?
+
+> `optional` **identityResolverComponent**: `IEngineCoreTypeConfig`\<`IdentityResolverComponentConfig`\>[]
+
+Identity resolver component options which can be overridden by individual components by specifying types other than default.
 
 ##### identityProfileConnector?
 
@@ -208,7 +220,7 @@ Identity profile connector options which can be overridden by individual compone
 
 > `optional` **identityProfileComponent**: `IEngineCoreTypeConfig`\<`IdentityProfileComponentConfig`\>[]
 
-Identity profile component profile options which can be overridden by individual components by specifying types other than default.
+Identity profile component options which can be overridden by individual components by specifying types other than default.
 
 ##### nftConnector?
 

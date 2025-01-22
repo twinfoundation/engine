@@ -14,12 +14,12 @@ import {
 } from "@twin.org/identity-models";
 import { IdentityProfileService } from "@twin.org/identity-service";
 import { nameof } from "@twin.org/nameof";
-import { initialiseEntityStorageConnector } from "./entityStorage.js";
-import type { IdentityProfileComponentConfig } from "../models/config/identityProfileComponentConfig.js";
-import type { IdentityProfileConnectorConfig } from "../models/config/identityProfileConnectorConfig.js";
-import type { IEngineConfig } from "../models/IEngineConfig.js";
-import { IdentityProfileComponentType } from "../models/types/identityProfileComponentType.js";
-import { IdentityProfileConnectorType } from "../models/types/identityProfileConnectorType.js";
+import { initialiseEntityStorageConnector } from "./entityStorage";
+import type { IdentityProfileComponentConfig } from "../models/config/identityProfileComponentConfig";
+import type { IdentityProfileConnectorConfig } from "../models/config/identityProfileConnectorConfig";
+import type { IEngineConfig } from "../models/IEngineConfig";
+import { IdentityProfileComponentType } from "../models/types/identityProfileComponentType";
+import { IdentityProfileConnectorType } from "../models/types/identityProfileConnectorType";
 
 /**
  * Initialise the identity profile connector.

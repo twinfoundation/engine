@@ -16,6 +16,8 @@ import {
 	FaucetConnectorType,
 	IdentityComponentType,
 	IdentityConnectorType,
+	IdentityResolverComponentType,
+	IdentityResolverConnectorType,
 	IdentityProfileComponentType,
 	IdentityProfileConnectorType,
 	type IEngineConfig,
@@ -74,6 +76,7 @@ export function buildEngineConfiguration(envVars: IEngineEnvironmentVariables): 
 	configureNftConnectors(coreConfig, envVars);
 	configureImmutableStorageConnectors(coreConfig, envVars);
 	configureIdentityConnectors(coreConfig, envVars);
+	configureIdentityResolverConnectors(coreConfig, envVars);
 	configureIdentityProfileConnectors(coreConfig, envVars);
 	configureAttestationConnectors(coreConfig, envVars);
 
@@ -685,6 +688,19 @@ function configureImmutableStorageConnectors(
 				}
 			}
 		});
+	} else if (envVars.immutableStorageConnector === ImmutableStorageConnectorType.IotaRebased) {
+		coreConfig.types.immutableStorageConnector.push({
+			type: ImmutableStorageConnectorType.IotaRebased,
+			options: {
+				config: {
+					clientOptions: {
+						url: envVars.iotaRebasedNodeEndpoint ?? ""
+					},
+					network: envVars.iotaRebasedNetwork ?? "",
+					coinType: Coerce.number(envVars.iotaCoinType)
+				}
+			}
+		});
 	}
 
 	if (coreConfig.types.immutableStorageConnector.length > 0) {
@@ -739,11 +755,75 @@ function configureIdentityConnectors(
 				}
 			}
 		});
+	} else if (envVars.identityConnector === IdentityConnectorType.IotaRebased) {
+		coreConfig.types.identityConnector.push({
+			type: IdentityConnectorType.IotaRebased,
+			options: {
+				config: {
+					clientOptions: {
+						url: envVars.iotaRebasedNodeEndpoint ?? ""
+					},
+					network: envVars.iotaRebasedNetwork ?? "",
+					coinType: Coerce.number(envVars.iotaCoinType)
+				}
+			}
+		});
 	}
 
 	if (coreConfig.types.identityConnector.length > 0) {
 		coreConfig.types.identityComponent ??= [];
 		coreConfig.types.identityComponent.push({ type: IdentityComponentType.Service });
+	}
+}
+
+/**
+ * Configures the identity resolver connectors for the core.
+ * @param coreConfig The core config.
+ * @param envVars The environment variables.
+ */
+function configureIdentityResolverConnectors(
+	coreConfig: IEngineConfig,
+	envVars: IEngineEnvironmentVariables
+): void {
+	coreConfig.types.identityResolverConnector ??= [];
+
+	if (envVars.identityResolverConnector === IdentityResolverConnectorType.EntityStorage) {
+		coreConfig.types.identityResolverConnector.push({
+			type: IdentityResolverConnectorType.EntityStorage
+		});
+	} else if (envVars.identityResolverConnector === IdentityResolverConnectorType.Iota) {
+		coreConfig.types.identityResolverConnector.push({
+			type: IdentityResolverConnectorType.Iota,
+			options: {
+				config: {
+					clientOptions: {
+						nodes: [envVars.iotaNodeEndpoint ?? ""]
+					},
+					bech32Hrp: envVars.iotaBech32Hrp,
+					coinType: Coerce.number(envVars.iotaCoinType)
+				}
+			}
+		});
+	} else if (envVars.identityResolverConnector === IdentityResolverConnectorType.IotaRebased) {
+		coreConfig.types.identityResolverConnector.push({
+			type: IdentityResolverConnectorType.IotaRebased,
+			options: {
+				config: {
+					clientOptions: {
+						url: envVars.iotaRebasedNodeEndpoint ?? ""
+					},
+					network: envVars.iotaRebasedNetwork ?? "",
+					coinType: Coerce.number(envVars.iotaCoinType)
+				}
+			}
+		});
+	}
+
+	if (coreConfig.types.identityResolverConnector.length > 0) {
+		coreConfig.types.identityResolverComponent ??= [];
+		coreConfig.types.identityResolverComponent.push({
+			type: IdentityResolverComponentType.Service
+		});
 	}
 }
 

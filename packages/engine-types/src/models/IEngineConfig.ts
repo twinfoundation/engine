@@ -18,6 +18,8 @@ import type { IdentityComponentConfig } from "./config/identityComponentConfig";
 import type { IdentityConnectorConfig } from "./config/identityConnectorConfig";
 import type { IdentityProfileComponentConfig } from "./config/identityProfileComponentConfig";
 import type { IdentityProfileConnectorConfig } from "./config/identityProfileConnectorConfig";
+import type { IdentityResolverComponentConfig } from "./config/identityResolverComponentConfig";
+import type { IdentityResolverConnectorConfig } from "./config/identityResolverConnectorConfig";
 import type { ImmutableProofComponentConfig } from "./config/immutableProofComponentConfig";
 import type { ImmutableStorageConnectorConfig } from "./config/immutableStorageConnectorConfig";
 import type { LoggingComponentConfig } from "./config/loggingComponentConfig";
@@ -154,9 +156,19 @@ export interface IEngineConfig extends IEngineCoreConfig {
 		identityConnector?: IEngineCoreTypeConfig<IdentityConnectorConfig>[];
 
 		/**
-		 * Identity component profile options which can be overridden by individual components by specifying types other than default.
+		 * Identity component options which can be overridden by individual components by specifying types other than default.
 		 */
 		identityComponent?: IEngineCoreTypeConfig<IdentityComponentConfig>[];
+
+		/**
+		 * Identity resolver connector options which can be overridden by individual components by specifying types other than default.
+		 */
+		identityResolverConnector?: IEngineCoreTypeConfig<IdentityResolverConnectorConfig>[];
+
+		/**
+		 * Identity resolver component options which can be overridden by individual components by specifying types other than default.
+		 */
+		identityResolverComponent?: IEngineCoreTypeConfig<IdentityResolverComponentConfig>[];
 
 		/**
 		 * Identity profile connector options which can be overridden by individual components by specifying types other than default.
@@ -164,7 +176,7 @@ export interface IEngineConfig extends IEngineCoreConfig {
 		identityProfileConnector?: IEngineCoreTypeConfig<IdentityProfileConnectorConfig>[];
 
 		/**
-		 * Identity profile component profile options which can be overridden by individual components by specifying types other than default.
+		 * Identity profile component options which can be overridden by individual components by specifying types other than default.
 		 */
 		identityProfileComponent?: IEngineCoreTypeConfig<IdentityProfileComponentConfig>[];
 

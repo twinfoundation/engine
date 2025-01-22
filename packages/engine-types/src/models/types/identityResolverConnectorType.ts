@@ -2,10 +2,10 @@
 // SPDX-License-Identifier: Apache-2.0.
 
 /**
- * Identity connector types.
+ * Identity resolver connector types.
  */
 // eslint-disable-next-line @typescript-eslint/naming-convention
-export const IdentityConnectorType = {
+export const IdentityResolverConnectorType = {
 	/**
 	 * Entity storage.
 	 */
@@ -23,7 +23,7 @@ export const IdentityConnectorType = {
 } as const;
 
 /**
- * Identity connector types.
+ * Identity resolver connector types.
  */
-export type IdentityConnectorType =
-	(typeof IdentityConnectorType)[keyof typeof IdentityConnectorType];
+export type IdentityResolverConnectorType =
+	(typeof IdentityResolverConnectorType)[keyof typeof IdentityResolverConnectorType];

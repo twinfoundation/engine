@@ -427,6 +427,12 @@ export class EngineServer<T extends IEngineServerConfig = IEngineServerConfig>
 			"generateRestRoutesIdentity"
 		);
 		this.addRestRouteGenerator(
+			"identityResolverComponent",
+			coreConfig.types.identityResolverComponent,
+			"@twin.org/identity-service",
+			"generateRestRoutesIdentityResolver"
+		);
+		this.addRestRouteGenerator(
 			"identityProfileComponent",
 			coreConfig.types.identityProfileComponent,
 			"@twin.org/identity-service",

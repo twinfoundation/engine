@@ -11,10 +11,10 @@ import {
 import { IotaWalletConnector } from "@twin.org/wallet-connector-iota";
 import { IotaRebasedWalletConnector } from "@twin.org/wallet-connector-iota-rebased";
 import { WalletConnectorFactory, type IWalletConnector } from "@twin.org/wallet-models";
-import { initialiseEntityStorageConnector } from "./entityStorage.js";
-import type { WalletConnectorConfig } from "../models/config/walletConnectorConfig.js";
-import type { IEngineConfig } from "../models/IEngineConfig.js";
-import { WalletConnectorType } from "../models/types/walletConnectorType.js";
+import { initialiseEntityStorageConnector } from "./entityStorage";
+import type { WalletConnectorConfig } from "../models/config/walletConnectorConfig";
+import type { IEngineConfig } from "../models/IEngineConfig";
+import { WalletConnectorType } from "../models/types/walletConnectorType";
 
 /**
  * Initialise a wallet connector.

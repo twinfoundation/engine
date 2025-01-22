@@ -12,12 +12,12 @@ import { IotaNftConnector } from "@twin.org/nft-connector-iota";
 import { IotaRebasedNftConnector } from "@twin.org/nft-connector-iota-rebased";
 import { NftConnectorFactory, type INftComponent, type INftConnector } from "@twin.org/nft-models";
 import { NftService } from "@twin.org/nft-service";
-import { initialiseEntityStorageConnector } from "./entityStorage.js";
-import type { NftComponentConfig } from "../models/config/nftComponentConfig.js";
-import type { NftConnectorConfig } from "../models/config/nftConnectorConfig.js";
-import type { IEngineConfig } from "../models/IEngineConfig.js";
-import { NftComponentType } from "../models/types/nftComponentType.js";
-import { NftConnectorType } from "../models/types/nftConnectorType.js";
+import { initialiseEntityStorageConnector } from "./entityStorage";
+import type { NftComponentConfig } from "../models/config/nftComponentConfig";
+import type { NftConnectorConfig } from "../models/config/nftConnectorConfig";
+import type { IEngineConfig } from "../models/IEngineConfig";
+import { NftComponentType } from "../models/types/nftComponentType";
+import { NftConnectorType } from "../models/types/nftConnectorType";
 
 /**
  * Initialise the NFT connector.

@@ -14,10 +14,10 @@ import {
 	type IImmutableStorageConnector
 } from "@twin.org/immutable-storage-models";
 import { nameof } from "@twin.org/nameof";
-import { initialiseEntityStorageConnector } from "./entityStorage.js";
-import type { ImmutableStorageConnectorConfig } from "../models/config/immutableStorageConnectorConfig.js";
-import type { IEngineConfig } from "../models/IEngineConfig.js";
-import { ImmutableStorageConnectorType } from "../models/types/immutableStorageConnectorType.js";
+import { initialiseEntityStorageConnector } from "./entityStorage";
+import type { ImmutableStorageConnectorConfig } from "../models/config/immutableStorageConnectorConfig";
+import type { IEngineConfig } from "../models/IEngineConfig";
+import { ImmutableStorageConnectorType } from "../models/types/immutableStorageConnectorType";
 
 /**
  * Initialise the immutable storage connector.

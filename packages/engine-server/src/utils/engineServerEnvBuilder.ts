@@ -193,6 +193,13 @@ function addRestPaths(
 	}
 
 	if (
+		Is.arrayValue(coreEngineConfig.types.identityResolverComponent) &&
+		!Is.stringValue(coreEngineConfig.types.identityResolverComponent[0].restPath)
+	) {
+		coreEngineConfig.types.identityResolverComponent[0].restPath = "identity";
+	}
+
+	if (
 		Is.arrayValue(coreEngineConfig.types.identityProfileComponent) &&
 		!Is.stringValue(coreEngineConfig.types.identityProfileComponent[0].restPath)
 	) {

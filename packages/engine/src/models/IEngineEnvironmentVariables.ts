@@ -306,9 +306,14 @@ export interface IEngineEnvironmentVariables {
 	nftConnector?: string;
 
 	/**
-	 * The type of identity connector: entity-storage, iota.
+	 * The type of identity connector: entity-storage, iota, iota-rebased.
 	 */
 	identityConnector?: string;
+
+	/**
+	 * The type of identity resolver connector: entity-storage, iota, iota-rebased.
+	 */
+	identityResolverConnector?: string;
 
 	/**
 	 * The type of immutable storage connector: entity-storage, iota.

@@ -20,12 +20,12 @@ import {
 import { ComponentFactory, GeneralError, I18n, Is } from "@twin.org/core";
 import type { IEngineCore, IEngineCoreContext } from "@twin.org/engine-models";
 import { nameof } from "@twin.org/nameof";
-import { initialiseEntityStorageConnector } from "./entityStorage.js";
-import type { BlobStorageComponentConfig } from "../models/config/blobStorageComponentConfig.js";
-import type { BlobStorageConnectorConfig } from "../models/config/blobStorageConnectorConfig.js";
-import type { IEngineConfig } from "../models/IEngineConfig.js";
-import { BlobStorageComponentType } from "../models/types/blobStorageComponentType.js";
-import { BlobStorageConnectorType } from "../models/types/blobStorageConnectorType.js";
+import { initialiseEntityStorageConnector } from "./entityStorage";
+import type { BlobStorageComponentConfig } from "../models/config/blobStorageComponentConfig";
+import type { BlobStorageConnectorConfig } from "../models/config/blobStorageConnectorConfig";
+import type { IEngineConfig } from "../models/IEngineConfig";
+import { BlobStorageComponentType } from "../models/types/blobStorageComponentType";
+import { BlobStorageConnectorType } from "../models/types/blobStorageConnectorType";
 
 /**
  * Initialise the blob storage connector.

@@ -10,10 +10,10 @@ import {
 import { ComponentFactory, GeneralError, I18n } from "@twin.org/core";
 import type { IEngineCore, IEngineCoreContext } from "@twin.org/engine-models";
 import { nameof } from "@twin.org/nameof";
-import { initialiseEntityStorageConnector } from "./entityStorage.js";
-import type { AuditableItemStreamComponentConfig } from "../models/config/auditableItemStreamComponentConfig.js";
-import type { IEngineConfig } from "../models/IEngineConfig.js";
-import { AuditableItemStreamComponentType } from "../models/types/auditableItemStreamComponentType.js";
+import { initialiseEntityStorageConnector } from "./entityStorage";
+import type { AuditableItemStreamComponentConfig } from "../models/config/auditableItemStreamComponentConfig";
+import type { IEngineConfig } from "../models/IEngineConfig";
+import { AuditableItemStreamComponentType } from "../models/types/auditableItemStreamComponentType";
 
 /**
  * Initialise the auditable item stream component.

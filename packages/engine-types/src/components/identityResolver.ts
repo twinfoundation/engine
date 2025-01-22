@@ -1,30 +1,30 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
 import { ComponentFactory, GeneralError, I18n } from "@twin.org/core";
-import type { IEngineCoreContext, IEngineCore } from "@twin.org/engine-models";
+import type { IEngineCore, IEngineCoreContext } from "@twin.org/engine-models";
 import {
-	EntityStorageIdentityConnector,
+	EntityStorageIdentityResolverConnector,
 	initSchema as initSchemaIdentityStorage,
 	type IdentityDocument
 } from "@twin.org/identity-connector-entity-storage";
-import { IotaIdentityConnector } from "@twin.org/identity-connector-iota";
-import { IotaRebasedIdentityConnector } from "@twin.org/identity-connector-iota-rebased";
+import { IotaIdentityResolverConnector } from "@twin.org/identity-connector-iota";
+import { IotaRebasedIdentityResolverConnector } from "@twin.org/identity-connector-iota-rebased";
 import {
-	IdentityConnectorFactory,
-	type IIdentityComponent,
-	type IIdentityConnector
+	IdentityResolverConnectorFactory,
+	type IIdentityResolverComponent,
+	type IIdentityResolverConnector
 } from "@twin.org/identity-models";
-import { IdentityService } from "@twin.org/identity-service";
+import { IdentityResolverService } from "@twin.org/identity-service";
 import { nameof } from "@twin.org/nameof";
 import { initialiseEntityStorageConnector } from "./entityStorage";
-import type { IdentityComponentConfig } from "../models/config/identityComponentConfig";
-import type { IdentityConnectorConfig } from "../models/config/identityConnectorConfig";
+import type { IdentityResolverComponentConfig } from "../models/config/identityResolverComponentConfig";
+import type { IdentityResolverConnectorConfig } from "../models/config/identityResolverConnectorConfig";
 import type { IEngineConfig } from "../models/IEngineConfig";
-import { IdentityComponentType } from "../models/types/identityComponentType";
-import { IdentityConnectorType } from "../models/types/identityConnectorType";
+import { IdentityResolverComponentType } from "../models/types/identityResolverComponentType";
+import { IdentityResolverConnectorType } from "../models/types/identityResolverConnectorType";
 
 /**
- * Initialise the identity connector.
+ * Initialise the identity resolver connector.
  * @param engineCore The engine core.
  * @param context The context for the engine.
  * @param instanceConfig The instance config.
@@ -32,48 +32,46 @@ import { IdentityConnectorType } from "../models/types/identityConnectorType";
  * @returns The name of the instance created.
  * @throws GeneralError if the connector type is unknown.
  */
-export function initialiseIdentityConnector(
+export function initialiseIdentityResolverConnector(
 	engineCore: IEngineCore<IEngineConfig>,
 	context: IEngineCoreContext<IEngineConfig>,
-	instanceConfig: IdentityConnectorConfig,
+	instanceConfig: IdentityResolverConnectorConfig,
 	overrideInstanceType?: string
 ): string | undefined {
 	engineCore.logInfo(
 		I18n.formatMessage("engineCore.configuring", {
-			element: `Identity Connector: ${instanceConfig.type}`
+			element: `Identity Resolver Connector: ${instanceConfig.type}`
 		})
 	);
 
 	const type = instanceConfig.type;
-	let connector: IIdentityConnector;
+	let connector: IIdentityResolverConnector;
 	let instanceType: string;
-	if (type === IdentityConnectorType.Iota) {
+	if (type === IdentityResolverConnectorType.Iota) {
 		const dltConfig = context.config.types.dltConfig?.find(
 			dlt => dlt.type === context.defaultTypes.dltConfig
 		);
-		connector = new IotaIdentityConnector({
-			vaultConnectorType: context.defaultTypes.vaultConnector,
+		connector = new IotaIdentityResolverConnector({
 			...instanceConfig.options,
 			config: {
 				...dltConfig?.options?.config,
 				...instanceConfig.options.config
 			}
 		});
-		instanceType = IotaIdentityConnector.NAMESPACE;
-	} else if (type === IdentityConnectorType.IotaRebased) {
+		instanceType = IotaIdentityResolverConnector.NAMESPACE;
+	} else if (type === IdentityResolverConnectorType.IotaRebased) {
 		const dltConfig = context.config.types.dltConfig?.find(
 			dlt => dlt.type === context.defaultTypes.dltConfig
 		);
-		connector = new IotaRebasedIdentityConnector({
-			vaultConnectorType: context.defaultTypes.vaultConnector,
+		connector = new IotaRebasedIdentityResolverConnector({
 			...instanceConfig.options,
 			config: {
 				...dltConfig?.options?.config,
 				...instanceConfig.options.config
 			}
 		});
-		instanceType = IotaRebasedIdentityConnector.NAMESPACE;
-	} else if (type === IdentityConnectorType.EntityStorage) {
+		instanceType = IotaRebasedIdentityResolverConnector.NAMESPACE;
+	} else if (type === IdentityResolverConnectorType.EntityStorage) {
 		initSchemaIdentityStorage({ includeProfile: false });
 		initialiseEntityStorageConnector(
 			engineCore,
@@ -81,26 +79,26 @@ export function initialiseIdentityConnector(
 			instanceConfig.options?.didDocumentEntityStorageType,
 			nameof<IdentityDocument>()
 		);
-		connector = new EntityStorageIdentityConnector({
+		connector = new EntityStorageIdentityResolverConnector({
 			vaultConnectorType: context.defaultTypes.vaultConnector,
 			...instanceConfig.options
 		});
-		instanceType = EntityStorageIdentityConnector.NAMESPACE;
+		instanceType = EntityStorageIdentityResolverConnector.NAMESPACE;
 	} else {
 		throw new GeneralError("engineCore", "connectorUnknownType", {
 			type,
-			connectorType: "identityConnector"
+			connectorType: "identityResolverConnector"
 		});
 	}
 
 	const finalInstanceType = overrideInstanceType ?? instanceType;
 	context.componentInstances.push({ instanceType: finalInstanceType, component: connector });
-	IdentityConnectorFactory.register(finalInstanceType, () => connector);
+	IdentityResolverConnectorFactory.register(finalInstanceType, () => connector);
 	return finalInstanceType;
 }
 
 /**
- * Initialise the identity component.
+ * Initialise the identity resolver component.
  * @param engineCore The engine core.
  * @param context The context for the engine.
  * @param instanceConfig The instance config.
@@ -108,29 +106,29 @@ export function initialiseIdentityConnector(
  * @returns The name of the instance created.
  * @throws GeneralError if the component type is unknown.
  */
-export function initialiseIdentityComponent(
+export function initialiseIdentityResolverComponent(
 	engineCore: IEngineCore<IEngineConfig>,
 	context: IEngineCoreContext<IEngineConfig>,
-	instanceConfig: IdentityComponentConfig,
+	instanceConfig: IdentityResolverComponentConfig,
 	overrideInstanceType?: string
 ): string | undefined {
 	engineCore.logInfo(
 		I18n.formatMessage("engineCore.configuring", {
-			element: `Identity Component: ${instanceConfig.type}`
+			element: `Identity Resolver Component: ${instanceConfig.type}`
 		})
 	);
 
 	const type = instanceConfig.type;
-	let component: IIdentityComponent;
+	let component: IIdentityResolverComponent;
 	let instanceType: string;
 
-	if (type === IdentityComponentType.Service) {
-		component = new IdentityService(instanceConfig.options);
-		instanceType = IdentityService.NAMESPACE;
+	if (type === IdentityResolverComponentType.Service) {
+		component = new IdentityResolverService(instanceConfig.options);
+		instanceType = IdentityResolverService.NAMESPACE;
 	} else {
 		throw new GeneralError("engineCore", "componentUnknownType", {
 			type,
-			componentType: "identityComponent"
+			componentType: "identityResolverComponent"
 		});
 	}
 

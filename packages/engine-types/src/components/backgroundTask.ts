@@ -12,10 +12,10 @@ import {
 import { GeneralError, I18n } from "@twin.org/core";
 import type { IEngineCoreContext, IEngineCore } from "@twin.org/engine-models";
 import { nameof } from "@twin.org/nameof";
-import { initialiseEntityStorageConnector } from "./entityStorage.js";
-import type { BackgroundTaskConnectorConfig } from "../models/config/backgroundTaskConnectorConfig.js";
-import type { IEngineConfig } from "../models/IEngineConfig.js";
-import { BackgroundTaskConnectorType } from "../models/types/backgroundTaskConnectorType.js";
+import { initialiseEntityStorageConnector } from "./entityStorage";
+import type { BackgroundTaskConnectorConfig } from "../models/config/backgroundTaskConnectorConfig";
+import type { IEngineConfig } from "../models/IEngineConfig";
+import { BackgroundTaskConnectorType } from "../models/types/backgroundTaskConnectorType";
 
 /**
  * Initialise a background task connector.

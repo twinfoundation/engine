@@ -1,8 +1,8 @@
-# Variable: IdentityConnectorType
+# Variable: IdentityResolverConnectorType
 
-> `const` **IdentityConnectorType**: `object`
+> `const` **IdentityResolverConnectorType**: `object`
 
-Identity connector types.
+Identity resolver connector types.
 
 ## Type declaration
 

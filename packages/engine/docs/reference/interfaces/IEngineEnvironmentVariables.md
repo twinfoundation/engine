@@ -488,7 +488,15 @@ The type of NFT connector: entity-storage, iota.
 
 > `optional` **identityConnector**: `string`
 
-The type of identity connector: entity-storage, iota.
+The type of identity connector: entity-storage, iota, iota-rebased.
+
+***
+
+### identityResolverConnector?
+
+> `optional` **identityResolverConnector**: `string`
+
+The type of identity resolver connector: entity-storage, iota, iota-rebased.
 
 ***
 

@@ -1,6 +1,6 @@
 {
 	"name": "@twin.org/engine-types",
-	"version": "0.0.1-next.33",
+	"version": "0.0.1-next.34",
 	"description": "Types to use in an engine.",
 	"repository": {
 		"type": "git",
@@ -33,7 +33,7 @@
 		"@twin.org/crypto": "next",
 		"@twin.org/data-core": "next",
 		"@twin.org/data-schema-org": "next",
-		"@twin.org/engine-models": "0.0.1-next.33",
+		"@twin.org/engine-models": "0.0.1-next.34",
 		"@twin.org/entity": "next",
 		"@twin.org/modules": "next",
 		"@twin.org/nameof": "next"
@@ -70,6 +70,7 @@
 		"@twin.org/identity-models": "next",
 		"@twin.org/identity-connector-entity-storage": "next",
 		"@twin.org/identity-connector-iota": "next",
+		"@twin.org/identity-connector-iota-rebased": "next",
 		"@twin.org/identity-service": "next",
 		"@twin.org/immutable-proof-models": "next",
 		"@twin.org/immutable-proof-service": "next",
@@ -105,25 +106,25 @@
 		"@twin.org/nameof-transformer": "next",
 		"@twin.org/nameof-vitest-plugin": "next",
 		"@twin.org/ts-to-openapi": "next",
-		"@vitest/coverage-v8": "2.1.8",
+		"@vitest/coverage-v8": "3.0.3",
 		"copyfiles": "2.4.1",
 		"rimraf": "6.0.1",
-		"rollup": "4.30.1",
+		"rollup": "4.31.0",
 		"ts-patch": "3.3.0",
 		"tsc-watch": "6.2.1",
 		"typedoc": "0.27.6",
 		"typedoc-plugin-markdown": "4.4.1",
 		"typescript": "5.7.3",
-		"vitest": "2.1.8"
+		"vitest": "3.0.3"
 	},
 	"main": "./dist/cjs/index.cjs",
 	"module": "./dist/esm/index.mjs",
 	"types": "./dist/types/index.d.ts",
 	"exports": {
 		".": {
+			"types": "./dist/types/index.d.ts",
 			"require": "./dist/cjs/index.cjs",
-			"import": "./dist/esm/index.mjs",
-			"types": "./dist/types/index.d.ts"
+			"import": "./dist/esm/index.mjs"
 		},
 		"./locales/*.json": "./locales/*.json"
 	},

@@ -32,16 +32,16 @@ import {
 	type TemplateEntry
 } from "@twin.org/messaging-service";
 import { nameof } from "@twin.org/nameof";
-import { initialiseEntityStorageConnector } from "./entityStorage.js";
-import type { MessagingComponentConfig } from "../models/config/messagingComponentConfig.js";
-import type { MessagingEmailConnectorConfig } from "../models/config/messagingEmailConnectorConfig.js";
-import type { MessagingPushNotificationConnectorConfig } from "../models/config/messagingPushNotificationConnectorConfig.js";
-import type { MessagingSmsConnectorConfig } from "../models/config/messagingSmsConnectorConfig.js";
-import type { IEngineConfig } from "../models/IEngineConfig.js";
-import { MessagingComponentType } from "../models/types/messagingComponentType.js";
-import { MessagingEmailConnectorType } from "../models/types/messagingEmailConnectorType.js";
-import { MessagingPushNotificationConnectorType } from "../models/types/messagingPushNotificationConnectorType.js";
-import { MessagingSmsConnectorType } from "../models/types/messagingSmsConnectorType.js";
+import { initialiseEntityStorageConnector } from "./entityStorage";
+import type { MessagingComponentConfig } from "../models/config/messagingComponentConfig";
+import type { MessagingEmailConnectorConfig } from "../models/config/messagingEmailConnectorConfig";
+import type { MessagingPushNotificationConnectorConfig } from "../models/config/messagingPushNotificationConnectorConfig";
+import type { MessagingSmsConnectorConfig } from "../models/config/messagingSmsConnectorConfig";
+import type { IEngineConfig } from "../models/IEngineConfig";
+import { MessagingComponentType } from "../models/types/messagingComponentType";
+import { MessagingEmailConnectorType } from "../models/types/messagingEmailConnectorType";
+import { MessagingPushNotificationConnectorType } from "../models/types/messagingPushNotificationConnectorType";
+import { MessagingSmsConnectorType } from "../models/types/messagingSmsConnectorType";
 
 /**
  * Initialise a messaging email connector.
