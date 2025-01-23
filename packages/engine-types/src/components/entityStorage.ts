@@ -36,107 +36,109 @@ export function initialiseEntityStorageConnector(
 ): void {
 	const instanceName = StringHelper.kebabCase(schema);
 
-	let entityStorageConfig;
+	if (!EntityStorageConnectorFactory.hasName(instanceName)) {
+		let entityStorageConfig;
 
-	if (Is.stringValue(typeCustom)) {
-		// A custom type has been specified, so look it up
-		entityStorageConfig = context.config.types.entityStorageConnector?.find(
-			c => c.type === typeCustom || c.overrideInstanceType === typeCustom
+		if (Is.stringValue(typeCustom)) {
+			// A custom type has been specified, so look it up
+			entityStorageConfig = context.config.types.entityStorageConnector?.find(
+				c => c.type === typeCustom || c.overrideInstanceType === typeCustom
+			);
+			if (Is.empty(entityStorageConfig)) {
+				throw new GeneralError("engineCore", "entityStorageCustomMissing", {
+					typeCustom,
+					storageName: instanceName
+				});
+			}
+		} else {
+			// The default entity storage method is either the one with the isDefault flag set
+			// or pick the first one if no default is set.
+			entityStorageConfig =
+				context.config.types.entityStorageConnector?.find(c => c.isDefault ?? false) ??
+				context.config.types.entityStorageConnector?.[0];
+			if (Is.empty(entityStorageConfig)) {
+				throw new GeneralError("engineCore", "entityStorageMissing", {
+					storageName: instanceName
+				});
+			}
+		}
+
+		const type = entityStorageConfig.type;
+		let entityStorageConnector: IEntityStorageConnector;
+
+		engineCore.logInfo(
+			I18n.formatMessage("engineCore.configuringEntityStorage", {
+				element: "Entity Storage",
+				storageName: instanceName,
+				storageType: type
+			})
 		);
-		if (Is.empty(entityStorageConfig)) {
-			throw new GeneralError("engineCore", "entityStorageCustomMissing", {
-				typeCustom,
-				storageName: instanceName
+
+		if (type === EntityStorageConnectorType.Memory) {
+			entityStorageConnector = new MemoryEntityStorageConnector({
+				entitySchema: schema
+			});
+		} else if (type === EntityStorageConnectorType.File) {
+			entityStorageConnector = new FileEntityStorageConnector({
+				entitySchema: schema,
+				...entityStorageConfig.options,
+				config: {
+					...entityStorageConfig.options.config,
+					directory: path.join(
+						entityStorageConfig.options.config.directory,
+						`${entityStorageConfig.options.folderPrefix ?? ""}${instanceName}`
+					)
+				}
+			});
+		} else if (type === EntityStorageConnectorType.AwsDynamoDb) {
+			entityStorageConnector = new DynamoDbEntityStorageConnector({
+				entitySchema: schema,
+				...entityStorageConfig.options,
+				config: {
+					...entityStorageConfig.options.config,
+					tableName: `${entityStorageConfig.options.tablePrefix ?? ""}${instanceName}`
+				}
+			});
+		} else if (type === EntityStorageConnectorType.AzureCosmosDb) {
+			entityStorageConnector = new CosmosDbEntityStorageConnector({
+				entitySchema: schema,
+				...entityStorageConfig.options,
+				config: {
+					...entityStorageConfig.options.config,
+					containerId: `${entityStorageConfig.options.tablePrefix ?? ""}${instanceName}`
+				}
+			});
+		} else if (type === EntityStorageConnectorType.GcpFirestoreDb) {
+			entityStorageConnector = new FirestoreEntityStorageConnector({
+				entitySchema: schema,
+				...entityStorageConfig.options,
+				config: {
+					...entityStorageConfig.options.config,
+					collectionName: `${entityStorageConfig.options.tablePrefix ?? ""}${instanceName}`
+				}
+			});
+		} else if (type === EntityStorageConnectorType.ScyllaDb) {
+			entityStorageConnector = new ScyllaDBTableConnector({
+				entitySchema: schema,
+				...entityStorageConfig.options,
+				config: {
+					...entityStorageConfig.options.config,
+					tableName: `${entityStorageConfig.options.tablePrefix ?? ""}${instanceName}`
+				}
+			});
+		} else {
+			throw new GeneralError("engineCore", "connectorUnknownType", {
+				type,
+				connectorType: "entityStorageConnector"
 			});
 		}
-	} else {
-		// The default entity storage method is either the one with the isDefault flag set
-		// or pick the first one if no default is set.
-		entityStorageConfig =
-			context.config.types.entityStorageConnector?.find(c => c.isDefault ?? false) ??
-			context.config.types.entityStorageConnector?.[0];
-		if (Is.empty(entityStorageConfig)) {
-			throw new GeneralError("engineCore", "entityStorageMissing", {
-				storageName: instanceName
-			});
-		}
+
+		context.componentInstances.push({
+			instanceType: instanceName,
+			component: entityStorageConnector
+		});
+		EntityStorageConnectorFactory.register(instanceName, () => entityStorageConnector);
 	}
-
-	const type = entityStorageConfig.type;
-	let entityStorageConnector: IEntityStorageConnector;
-
-	engineCore.logInfo(
-		I18n.formatMessage("engineCore.configuringEntityStorage", {
-			element: "Entity Storage",
-			storageName: instanceName,
-			storageType: type
-		})
-	);
-
-	if (type === EntityStorageConnectorType.Memory) {
-		entityStorageConnector = new MemoryEntityStorageConnector({
-			entitySchema: schema
-		});
-	} else if (type === EntityStorageConnectorType.File) {
-		entityStorageConnector = new FileEntityStorageConnector({
-			entitySchema: schema,
-			...entityStorageConfig.options,
-			config: {
-				...entityStorageConfig.options.config,
-				directory: path.join(
-					entityStorageConfig.options.config.directory,
-					`${entityStorageConfig.options.folderPrefix ?? ""}${instanceName}`
-				)
-			}
-		});
-	} else if (type === EntityStorageConnectorType.AwsDynamoDb) {
-		entityStorageConnector = new DynamoDbEntityStorageConnector({
-			entitySchema: schema,
-			...entityStorageConfig.options,
-			config: {
-				...entityStorageConfig.options.config,
-				tableName: `${entityStorageConfig.options.tablePrefix ?? ""}${instanceName}`
-			}
-		});
-	} else if (type === EntityStorageConnectorType.AzureCosmosDb) {
-		entityStorageConnector = new CosmosDbEntityStorageConnector({
-			entitySchema: schema,
-			...entityStorageConfig.options,
-			config: {
-				...entityStorageConfig.options.config,
-				containerId: `${entityStorageConfig.options.tablePrefix ?? ""}${instanceName}`
-			}
-		});
-	} else if (type === EntityStorageConnectorType.GcpFirestoreDb) {
-		entityStorageConnector = new FirestoreEntityStorageConnector({
-			entitySchema: schema,
-			...entityStorageConfig.options,
-			config: {
-				...entityStorageConfig.options.config,
-				collectionName: `${entityStorageConfig.options.tablePrefix ?? ""}${instanceName}`
-			}
-		});
-	} else if (type === EntityStorageConnectorType.ScyllaDb) {
-		entityStorageConnector = new ScyllaDBTableConnector({
-			entitySchema: schema,
-			...entityStorageConfig.options,
-			config: {
-				...entityStorageConfig.options.config,
-				tableName: `${entityStorageConfig.options.tablePrefix ?? ""}${instanceName}`
-			}
-		});
-	} else {
-		throw new GeneralError("engineCore", "connectorUnknownType", {
-			type,
-			connectorType: "entityStorageConnector"
-		});
-	}
-
-	context.componentInstances.push({
-		instanceType: instanceName,
-		component: entityStorageConnector
-	});
-	EntityStorageConnectorFactory.register(instanceName, () => entityStorageConnector);
 }
 
 /**
