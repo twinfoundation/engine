@@ -34,7 +34,12 @@ export const EntityStorageConnectorType = {
 	/**
 	 * GCP Firestore.
 	 */
-	GcpFirestoreDb: "gcp-firestoredb"
+	GcpFirestoreDb: "gcp-firestoredb",
+
+	/**
+	 * MySqlDb.
+	 */
+	MySqlDb: "mysql"
 } as const;
 
 /**

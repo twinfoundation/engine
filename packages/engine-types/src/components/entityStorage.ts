@@ -8,6 +8,7 @@ import { DynamoDbEntityStorageConnector } from "@twin.org/entity-storage-connect
 import { FileEntityStorageConnector } from "@twin.org/entity-storage-connector-file";
 import { FirestoreEntityStorageConnector } from "@twin.org/entity-storage-connector-gcp-firestore";
 import { MemoryEntityStorageConnector } from "@twin.org/entity-storage-connector-memory";
+import { MySqlEntityStorageConnector } from "@twin.org/entity-storage-connector-mysql";
 import { ScyllaDBTableConnector } from "@twin.org/entity-storage-connector-scylladb";
 import {
 	EntityStorageConnectorFactory,
@@ -119,6 +120,15 @@ export function initialiseEntityStorageConnector(
 			});
 		} else if (type === EntityStorageConnectorType.ScyllaDb) {
 			entityStorageConnector = new ScyllaDBTableConnector({
+				entitySchema: schema,
+				...entityStorageConfig.options,
+				config: {
+					...entityStorageConfig.options.config,
+					tableName: `${entityStorageConfig.options.tablePrefix ?? ""}${instanceName}`
+				}
+			});
+		} else if (type === EntityStorageConnectorType.MySqlDb) {
+			entityStorageConnector = new MySqlEntityStorageConnector({
 				entitySchema: schema,
 				...entityStorageConfig.options,
 				config: {

@@ -41,3 +41,9 @@ Azure CosmosDB.
 > `readonly` **GcpFirestoreDb**: `"gcp-firestoredb"` = `"gcp-firestoredb"`
 
 GCP Firestore.
+
+### MySqlDb
+
+> `readonly` **MySqlDb**: `"mysql"` = `"mysql"`
+
+MySqlDb.

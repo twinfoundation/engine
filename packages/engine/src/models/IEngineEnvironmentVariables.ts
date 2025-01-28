@@ -21,7 +21,7 @@ export interface IEngineEnvironmentVariables {
 	stateFilename?: string;
 
 	/**
-	 * The type of the default entity storage: file, memory, aws-dynamodb, azure-cosmosdb, gcp-firestoredb, scylladb.
+	 * The type of the default entity storage: file, memory, aws-dynamodb, azure-cosmosdb, gcp-firestoredb, scylladb, mysql.
 	 */
 	entityStorageConnectorType?: string;
 
@@ -119,6 +119,31 @@ export interface IEngineEnvironmentVariables {
 	 * ScyllaDB local data center.
 	 */
 	scylladbLocalDataCenter?: string;
+
+	/**
+	 * MySQL host.
+	 */
+	mySqlHost?: string;
+
+	/**
+	 * MySQL port.
+	 */
+	mySqlPort?: number;
+
+	/**
+	 * MySQL username.
+	 */
+	mySqlUser?: string;
+
+	/**
+	 * MySQL password.
+	 */
+	mySqlPassword?: string;
+
+	/**
+	 * MySQL Database.
+	 */
+	mySqlDatabase?: string;
 
 	/**
 	 * The security token for accessing IPFS API.

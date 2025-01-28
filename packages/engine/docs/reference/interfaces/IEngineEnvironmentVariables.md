@@ -32,7 +32,7 @@ The name of the state file.
 
 > `optional` **entityStorageConnectorType**: `string`
 
-The type of the default entity storage: file, memory, aws-dynamodb, azure-cosmosdb, gcp-firestoredb, scylladb.
+The type of the default entity storage: file, memory, aws-dynamodb, azure-cosmosdb, gcp-firestoredb, scylladb, mysql.
 
 ***
 
@@ -185,6 +185,46 @@ ScyllaDB keyspace.
 > `optional` **scylladbLocalDataCenter**: `string`
 
 ScyllaDB local data center.
+
+***
+
+### mySqlHost?
+
+> `optional` **mySqlHost**: `string`
+
+MySQL host.
+
+***
+
+### mySqlPort?
+
+> `optional` **mySqlPort**: `number`
+
+MySQL port.
+
+***
+
+### mySqlUser?
+
+> `optional` **mySqlUser**: `string`
+
+MySQL username.
+
+***
+
+### mySqlPassword?
+
+> `optional` **mySqlPassword**: `string`
+
+MySQL password.
+
+***
+
+### mySqlDatabase?
+
+> `optional` **mySqlDatabase**: `string`
+
+MySQL Database.
 
 ***
 

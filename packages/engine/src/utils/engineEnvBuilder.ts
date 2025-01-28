@@ -177,6 +177,22 @@ function configureEntityStorageConnectors(
 		});
 	}
 
+	if (Is.stringValue(envVars.mySqlHost)) {
+		coreConfig.types.entityStorageConnector.push({
+			type: EntityStorageConnectorType.MySqlDb,
+			options: {
+				config: {
+					host: envVars.mySqlHost,
+					port: envVars.mySqlPort ?? 3306,
+					user: envVars.mySqlUser ?? "",
+					password: envVars.mySqlPassword ?? "",
+					database: envVars.mySqlDatabase ?? ""
+				},
+				tablePrefix: envVars.entityStorageTablePrefix
+			}
+		});
+	}
+
 	const defaultStorageConnector = envVars.entityStorageConnectorType;
 	if (Is.stringValue(defaultStorageConnector)) {
 		for (const config of coreConfig.types.entityStorageConnector) {
