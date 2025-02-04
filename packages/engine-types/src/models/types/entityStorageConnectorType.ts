@@ -39,7 +39,17 @@ export const EntityStorageConnectorType = {
 	/**
 	 * MySqlDb.
 	 */
-	MySqlDb: "mysql"
+	MySqlDb: "mysql",
+
+	/**
+	 * MongoDb.
+	 */
+	MongoDb: "mongodb",
+
+	/**
+	 * Postgre SQL.
+	 */
+	PostgreSql: "postgresql"
 } as const;
 
 /**

@@ -193,6 +193,54 @@ function configureEntityStorageConnectors(
 		});
 	}
 
+	if (Is.stringValue(envVars.mySqlHost)) {
+		coreConfig.types.entityStorageConnector.push({
+			type: EntityStorageConnectorType.MySqlDb,
+			options: {
+				config: {
+					host: envVars.mySqlHost,
+					port: envVars.mySqlPort ?? 3306,
+					user: envVars.mySqlUser ?? "",
+					password: envVars.mySqlPassword ?? "",
+					database: envVars.mySqlDatabase ?? ""
+				},
+				tablePrefix: envVars.entityStorageTablePrefix
+			}
+		});
+	}
+
+	if (Is.stringValue(envVars.mongoDbHost)) {
+		coreConfig.types.entityStorageConnector.push({
+			type: EntityStorageConnectorType.MongoDb,
+			options: {
+				config: {
+					host: envVars.mongoDbHost,
+					port: envVars.mongoDbPort,
+					user: envVars.mongoDbUser ?? "",
+					password: envVars.mongoDbPassword ?? "",
+					database: envVars.mongoDbDatabase ?? ""
+				},
+				tablePrefix: envVars.entityStorageTablePrefix
+			}
+		});
+	}
+
+	if (Is.stringValue(envVars.postgreSqlHost)) {
+		coreConfig.types.entityStorageConnector.push({
+			type: EntityStorageConnectorType.PostgreSql,
+			options: {
+				config: {
+					host: envVars.postgreSqlHost,
+					port: envVars.postgreSqlPort,
+					user: envVars.postgreSqlUser ?? "",
+					password: envVars.postgreSqlPassword ?? "",
+					database: envVars.postgreSqlDatabase ?? ""
+				},
+				tablePrefix: envVars.entityStorageTablePrefix
+			}
+		});
+	}
+
 	const defaultStorageConnector = envVars.entityStorageConnectorType;
 	if (Is.stringValue(defaultStorageConnector)) {
 		for (const config of coreConfig.types.entityStorageConnector) {

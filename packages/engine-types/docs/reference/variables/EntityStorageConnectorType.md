@@ -47,3 +47,15 @@ GCP Firestore.
 > `readonly` **MySqlDb**: `"mysql"` = `"mysql"`
 
 MySqlDb.
+
+### MongoDb
+
+> `readonly` **MongoDb**: `"mongodb"` = `"mongodb"`
+
+MongoDb.
+
+### PostgreSql
+
+> `readonly` **PostgreSql**: `"postgresql"` = `"postgresql"`
+
+Postgre SQL.

@@ -21,7 +21,7 @@ export interface IEngineEnvironmentVariables {
 	stateFilename?: string;
 
 	/**
-	 * The type of the default entity storage: file, memory, aws-dynamodb, azure-cosmosdb, gcp-firestoredb, scylladb, mysql.
+	 * The type of the default entity storage: file, memory, aws-dynamodb, azure-cosmosdb, gcp-firestoredb, scylladb, mysql, mongodb, postgresql.
 	 */
 	entityStorageConnectorType?: string;
 
@@ -144,6 +144,56 @@ export interface IEngineEnvironmentVariables {
 	 * MySQL Database.
 	 */
 	mySqlDatabase?: string;
+
+	/**
+	 * MongoDB host.
+	 */
+	mongoDbHost?: string;
+
+	/**
+	 * MongoDB port.
+	 */
+	mongoDbPort?: number;
+
+	/**
+	 * MongoDB username.
+	 */
+	mongoDbUser?: string;
+
+	/**
+	 * MongoDB password.
+	 */
+	mongoDbPassword?: string;
+
+	/**
+	 * MongoDB Database.
+	 */
+	mongoDbDatabase?: string;
+
+	/**
+	 * PostgreSQl host.
+	 */
+	postgreSqlHost?: string;
+
+	/**
+	 * PostgreSQl port.
+	 */
+	postgreSqlPort?: number;
+
+	/**
+	 * PostgreSQl username.
+	 */
+	postgreSqlUser?: string;
+
+	/**
+	 * PostgreSQl password.
+	 */
+	postgreSqlPassword?: string;
+
+	/**
+	 * PostgreSQl Database.
+	 */
+	postgreSqlDatabase?: string;
 
 	/**
 	 * The security token for accessing IPFS API.

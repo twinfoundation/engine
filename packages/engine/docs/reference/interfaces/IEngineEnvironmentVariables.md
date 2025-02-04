@@ -32,7 +32,7 @@ The name of the state file.
 
 > `optional` **entityStorageConnectorType**: `string`
 
-The type of the default entity storage: file, memory, aws-dynamodb, azure-cosmosdb, gcp-firestoredb, scylladb, mysql.
+The type of the default entity storage: file, memory, aws-dynamodb, azure-cosmosdb, gcp-firestoredb, scylladb, mysql, mongodb, postgresql.
 
 ***
 
@@ -225,6 +225,86 @@ MySQL password.
 > `optional` **mySqlDatabase**: `string`
 
 MySQL Database.
+
+***
+
+### mongoDbHost?
+
+> `optional` **mongoDbHost**: `string`
+
+MongoDB host.
+
+***
+
+### mongoDbPort?
+
+> `optional` **mongoDbPort**: `number`
+
+MongoDB port.
+
+***
+
+### mongoDbUser?
+
+> `optional` **mongoDbUser**: `string`
+
+MongoDB username.
+
+***
+
+### mongoDbPassword?
+
+> `optional` **mongoDbPassword**: `string`
+
+MongoDB password.
+
+***
+
+### mongoDbDatabase?
+
+> `optional` **mongoDbDatabase**: `string`
+
+MongoDB Database.
+
+***
+
+### postgreSqlHost?
+
+> `optional` **postgreSqlHost**: `string`
+
+PostgreSQl host.
+
+***
+
+### postgreSqlPort?
+
+> `optional` **postgreSqlPort**: `number`
+
+PostgreSQl port.
+
+***
+
+### postgreSqlUser?
+
+> `optional` **postgreSqlUser**: `string`
+
+PostgreSQl username.
+
+***
+
+### postgreSqlPassword?
+
+> `optional` **postgreSqlPassword**: `string`
+
+PostgreSQl password.
+
+***
+
+### postgreSqlDatabase?
+
+> `optional` **postgreSqlDatabase**: `string`
+
+PostgreSQl Database.
 
 ***
 

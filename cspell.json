@@ -27,6 +27,7 @@
 		"ipfs",
 		"nameof",
 		"openapi",
+		"Postgre",
 		"scylladb",
 		"Stiftung"
 	],

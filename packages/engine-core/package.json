@@ -1,6 +1,6 @@
 {
 	"name": "@twin.org/engine-core",
-	"version": "0.0.1-next.37",
+	"version": "0.0.1-next.38",
 	"description": "Engine core.",
 	"repository": {
 		"type": "git",
@@ -33,7 +33,7 @@
 		"@twin.org/crypto": "next",
 		"@twin.org/data-core": "next",
 		"@twin.org/data-schema-org": "next",
-		"@twin.org/engine-models": "0.0.1-next.37",
+		"@twin.org/engine-models": "0.0.1-next.38",
 		"@twin.org/entity": "next",
 		"@twin.org/logging-connector-console": "next",
 		"@twin.org/logging-models": "next",
@@ -44,17 +44,17 @@
 		"@twin.org/nameof-transformer": "next",
 		"@twin.org/nameof-vitest-plugin": "next",
 		"@twin.org/ts-to-openapi": "next",
-		"@types/node": "22.12.0",
-		"@vitest/coverage-v8": "3.0.4",
+		"@types/node": "22.13.1",
+		"@vitest/coverage-v8": "3.0.5",
 		"copyfiles": "2.4.1",
 		"rimraf": "6.0.1",
-		"rollup": "4.32.1",
+		"rollup": "4.33.0",
 		"ts-patch": "3.3.0",
 		"tsc-watch": "6.2.1",
 		"typedoc": "0.27.6",
 		"typedoc-plugin-markdown": "4.4.1",
 		"typescript": "5.7.3",
-		"vitest": "3.0.4"
+		"vitest": "3.0.5"
 	},
 	"main": "./dist/cjs/index.cjs",
 	"module": "./dist/esm/index.mjs",

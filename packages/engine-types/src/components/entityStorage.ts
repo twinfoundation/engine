@@ -8,7 +8,9 @@ import { DynamoDbEntityStorageConnector } from "@twin.org/entity-storage-connect
 import { FileEntityStorageConnector } from "@twin.org/entity-storage-connector-file";
 import { FirestoreEntityStorageConnector } from "@twin.org/entity-storage-connector-gcp-firestore";
 import { MemoryEntityStorageConnector } from "@twin.org/entity-storage-connector-memory";
+import { MongoDbEntityStorageConnector } from "@twin.org/entity-storage-connector-mongodb";
 import { MySqlEntityStorageConnector } from "@twin.org/entity-storage-connector-mysql";
+import { PostgreSqlEntityStorageConnector } from "@twin.org/entity-storage-connector-postgresql";
 import { ScyllaDBTableConnector } from "@twin.org/entity-storage-connector-scylladb";
 import {
 	EntityStorageConnectorFactory,
@@ -129,6 +131,24 @@ export function initialiseEntityStorageConnector(
 			});
 		} else if (type === EntityStorageConnectorType.MySqlDb) {
 			entityStorageConnector = new MySqlEntityStorageConnector({
+				entitySchema: schema,
+				...entityStorageConfig.options,
+				config: {
+					...entityStorageConfig.options.config,
+					tableName: `${entityStorageConfig.options.tablePrefix ?? ""}${instanceName}`
+				}
+			});
+		} else if (type === EntityStorageConnectorType.MongoDb) {
+			entityStorageConnector = new MongoDbEntityStorageConnector({
+				entitySchema: schema,
+				...entityStorageConfig.options,
+				config: {
+					...entityStorageConfig.options.config,
+					collection: `${entityStorageConfig.options.tablePrefix ?? ""}${instanceName}`
+				}
+			});
+		} else if (type === EntityStorageConnectorType.PostgreSql) {
+			entityStorageConnector = new PostgreSqlEntityStorageConnector({
 				entitySchema: schema,
 				...entityStorageConfig.options,
 				config: {
