@@ -745,3 +745,19 @@ The type of attestation connector: entity-storage, iota.
 > `optional` **attestationAssertionMethodId**: `string`
 
 The identity assertion method id to use with attestation.
+
+***
+
+### dataConverterConnectors?
+
+> `optional` **dataConverterConnectors**: `string`
+
+The type of the default data converters, can be a comma separated list: json, xml.
+
+***
+
+### dataExtractorConnectors?
+
+> `optional` **dataExtractorConnectors**: `string`
+
+The type of the default data extractor, can be a comma separated list: json-path.

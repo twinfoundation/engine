@@ -240,5 +240,24 @@ export class Engine<
 			"@twin.org/engine-types",
 			"initialiseAuditableItemStreamComponent"
 		);
+
+		this.addTypeInitialiser(
+			"dataConverterConnector",
+			this._context.config.types.dataConverterConnector,
+			"@twin.org/engine-types",
+			"initialiseDataConverterConnector"
+		);
+		this.addTypeInitialiser(
+			"dataExtractorConnector",
+			this._context.config.types.dataExtractorConnector,
+			"@twin.org/engine-types",
+			"initialiseDataExtractorConnector"
+		);
+		this.addTypeInitialiser(
+			"dataProcessingComponent",
+			this._context.config.types.dataProcessingComponent,
+			"@twin.org/engine-types",
+			"initialiseDataProcessingComponent"
+		);
 	}
 }

@@ -474,6 +474,12 @@ export class EngineServer<T extends IEngineServerConfig = IEngineServerConfig>
 			"@twin.org/entity-storage-service",
 			"generateRestRoutesEntityStorage"
 		);
+		this.addRestRouteGenerator(
+			"dataProcessingComponent",
+			coreConfig.types.dataProcessingComponent,
+			"@twin.org/data-processing-service",
+			"generateRestRoutesDataProcessing"
+		);
 	}
 
 	/**

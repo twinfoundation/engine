@@ -244,7 +244,7 @@ Attestation connector options which can be overridden by individual components b
 
 > `optional` **attestationComponent**: `IEngineCoreTypeConfig`\<`AttestationComponentConfig`\>[]
 
-Attestation component profile options which can be overridden by individual components by specifying types other than default.
+Attestation component options which can be overridden by individual components by specifying types other than default.
 
 ##### auditableItemGraphComponent?
 
@@ -256,7 +256,25 @@ Auditable item graph component options which can be overridden by individual com
 
 > `optional` **auditableItemStreamComponent**: `IEngineCoreTypeConfig`\<`AuditableItemStreamComponentConfig`\>[]
 
-Auditable item stream component profile options which can be overridden by individual components by specifying types other than default.
+Auditable item stream component  options which can be overridden by individual components by specifying types other than default.
+
+##### dataConverterConnector?
+
+> `optional` **dataConverterConnector**: `IEngineCoreTypeConfig`\<`DataConverterConnectorConfig`\>[]
+
+Data converter connector options which can be overridden by individual components by specifying types other than default.
+
+##### dataExtractorConnector?
+
+> `optional` **dataExtractorConnector**: `IEngineCoreTypeConfig`\<`DataExtractorConnectorConfig`\>[]
+
+Data extractor connector options which can be overridden by individual components by specifying types other than default.
+
+##### dataProcessingComponent?
+
+> `optional` **dataProcessingComponent**: `IEngineCoreTypeConfig`\<`DataProcessingComponentConfig`\>[]
+
+Date processing options which can be overridden by individual components by specifying types other than default.
 
 #### Type declaration
 

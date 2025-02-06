@@ -240,6 +240,13 @@ function addRestPaths(
 	) {
 		coreEngineConfig.types.auditableItemStreamComponent[0].restPath = "ais";
 	}
+
+	if (
+		Is.arrayValue(coreEngineConfig.types.dataProcessingComponent) &&
+		!Is.stringValue(coreEngineConfig.types.dataProcessingComponent[0].restPath)
+	) {
+		coreEngineConfig.types.dataProcessingComponent[0].restPath = "data-processing";
+	}
 }
 
 /**

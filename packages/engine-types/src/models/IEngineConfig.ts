@@ -8,6 +8,9 @@ import type { AuditableItemStreamComponentConfig } from "./config/auditableItemS
 import type { BackgroundTaskConnectorConfig } from "./config/backgroundTaskConnectorConfig";
 import type { BlobStorageComponentConfig } from "./config/blobStorageComponentConfig";
 import type { BlobStorageConnectorConfig } from "./config/blobStorageConnectorConfig";
+import type { DataConverterConnectorConfig } from "./config/dataConverterConnectorConfig";
+import type { DataExtractorConnectorConfig } from "./config/dataExtractorConnectorConfig";
+import type { DataProcessingComponentConfig } from "./config/dataProcessingComponentConfig";
 import type { DltConfig } from "./config/dltConfig";
 import type { EntityStorageComponentConfig } from "./config/entityStorageComponentConfig";
 import type { EntityStorageConnectorConfig } from "./config/entityStorageConnectorConfig";
@@ -196,7 +199,7 @@ export interface IEngineConfig extends IEngineCoreConfig {
 		attestationConnector?: IEngineCoreTypeConfig<AttestationConnectorConfig>[];
 
 		/**
-		 * Attestation component profile options which can be overridden by individual components by specifying types other than default.
+		 * Attestation component options which can be overridden by individual components by specifying types other than default.
 		 */
 		attestationComponent?: IEngineCoreTypeConfig<AttestationComponentConfig>[];
 
@@ -206,8 +209,23 @@ export interface IEngineConfig extends IEngineCoreConfig {
 		auditableItemGraphComponent?: IEngineCoreTypeConfig<AuditableItemGraphComponentConfig>[];
 
 		/**
-		 * Auditable item stream component profile options which can be overridden by individual components by specifying types other than default.
+		 * Auditable item stream component  options which can be overridden by individual components by specifying types other than default.
 		 */
 		auditableItemStreamComponent?: IEngineCoreTypeConfig<AuditableItemStreamComponentConfig>[];
+
+		/**
+		 * Data converter connector options which can be overridden by individual components by specifying types other than default.
+		 */
+		dataConverterConnector?: IEngineCoreTypeConfig<DataConverterConnectorConfig>[];
+
+		/**
+		 * Data extractor connector options which can be overridden by individual components by specifying types other than default.
+		 */
+		dataExtractorConnector?: IEngineCoreTypeConfig<DataExtractorConnectorConfig>[];
+
+		/**
+		 * Date processing options which can be overridden by individual components by specifying types other than default.
+		 */
+		dataProcessingComponent?: IEngineCoreTypeConfig<DataProcessingComponentConfig>[];
 	};
 }

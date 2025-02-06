@@ -469,4 +469,14 @@ export interface IEngineEnvironmentVariables {
 	 * The identity assertion method id to use with attestation.
 	 */
 	attestationAssertionMethodId?: string;
+
+	/**
+	 * The type of the default data converters, can be a comma separated list: json, xml.
+	 */
+	dataConverterConnectors?: string;
+
+	/**
+	 * The type of the default data extractor, can be a comma separated list: json-path.
+	 */
+	dataExtractorConnectors?: string;
 }

@@ -34,7 +34,10 @@ import {
 	TelemetryComponentType,
 	TelemetryConnectorType,
 	VaultConnectorType,
-	WalletConnectorType
+	WalletConnectorType,
+	DataExtractorConnectorType,
+	DataConverterConnectorType,
+	DataProcessingComponentType
 } from "@twin.org/engine-types";
 import type { IEngineEnvironmentVariables } from "../models/IEngineEnvironmentVariables";
 
@@ -79,6 +82,7 @@ export function buildEngineConfiguration(envVars: IEngineEnvironmentVariables): 
 	configureIdentityResolverConnectors(coreConfig, envVars);
 	configureIdentityProfileConnectors(coreConfig, envVars);
 	configureAttestationConnectors(coreConfig, envVars);
+	configureDataProcessingConnectors(coreConfig, envVars);
 
 	return coreConfig;
 }
@@ -939,5 +943,48 @@ function configureAttestationConnectors(
 		coreConfig.types.attestationComponent.push({
 			type: AttestationComponentType.Service
 		});
+	}
+}
+
+/**
+ * Configures the data processing connectors for the core.
+ * @param coreConfig The core config.
+ * @param envVars The environment variables.
+ */
+function configureDataProcessingConnectors(
+	coreConfig: IEngineConfig,
+	envVars: IEngineEnvironmentVariables
+): void {
+	coreConfig.types.dataConverterConnector ??= [];
+	coreConfig.types.dataExtractorConnector ??= [];
+
+	const converterConnectors = envVars.dataConverterConnectors?.split(",") ?? [];
+	for (const converterConnector of converterConnectors) {
+		if (converterConnector === DataConverterConnectorType.Json) {
+			coreConfig.types.dataConverterConnector.push({
+				type: DataConverterConnectorType.Json
+			});
+		} else if (converterConnector === DataConverterConnectorType.Xml) {
+			coreConfig.types.dataConverterConnector.push({
+				type: DataConverterConnectorType.Xml
+			});
+		}
+	}
+
+	const extractorConnectors = envVars.dataExtractorConnectors?.split(",") ?? [];
+	for (const extractorConnector of extractorConnectors) {
+		if (extractorConnector === DataExtractorConnectorType.JsonPath) {
+			coreConfig.types.dataExtractorConnector.push({
+				type: DataExtractorConnectorType.JsonPath
+			});
+		}
+	}
+
+	if (
+		coreConfig.types.dataConverterConnector.length > 0 ||
+		coreConfig.types.dataExtractorConnector.length > 0
+	) {
+		coreConfig.types.dataProcessingComponent ??= [];
+		coreConfig.types.dataProcessingComponent.push({ type: DataProcessingComponentType.Service });
 	}
 }
