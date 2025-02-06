@@ -57,12 +57,14 @@ export function initialiseNftConnector(
 	} else if (type === NftConnectorType.Iota) {
 		connector = new IotaNftConnector({
 			vaultConnectorType: context.defaultTypes.vaultConnector,
+			walletConnectorType: context.defaultTypes.walletConnector,
 			...instanceConfig.options
 		});
 		instanceType = IotaNftConnector.NAMESPACE;
 	} else if (type === NftConnectorType.IotaRebased) {
 		connector = new IotaRebasedNftConnector({
 			vaultConnectorType: context.defaultTypes.vaultConnector,
+			walletConnectorType: context.defaultTypes.walletConnector,
 			...instanceConfig.options
 		});
 		instanceType = IotaRebasedNftConnector.NAMESPACE;
