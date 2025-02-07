@@ -11,6 +11,9 @@ import {
 	BackgroundTaskConnectorType,
 	BlobStorageComponentType,
 	BlobStorageConnectorType,
+	DataConverterConnectorType,
+	DataExtractorConnectorType,
+	DataProcessingComponentType,
 	EntityStorageComponentType,
 	EntityStorageConnectorType,
 	EventBusComponentType,
@@ -126,7 +129,13 @@ describe("engine", () => {
 					attestationConnector: [{ type: AttestationConnectorType.Nft }],
 					attestationComponent: [{ type: AttestationComponentType.Service }],
 					auditableItemGraphComponent: [{ type: AuditableItemGraphComponentType.Service }],
-					auditableItemStreamComponent: [{ type: AuditableItemStreamComponentType.Service }]
+					auditableItemStreamComponent: [{ type: AuditableItemStreamComponentType.Service }],
+					dataConverterConnector: [
+						{ type: DataConverterConnectorType.Json },
+						{ type: DataConverterConnectorType.Xml }
+					],
+					dataExtractorConnector: [{ type: DataExtractorConnectorType.JsonPath }],
+					dataProcessingComponent: [{ type: DataProcessingComponentType.Service }]
 				}
 			},
 			stateStorage: new MemoryStateStorage(),
@@ -151,7 +160,8 @@ describe("engine", () => {
 			"immutable-proof",
 			"attestation",
 			"aig",
-			"ais"
+			"ais",
+			"data-processing"
 		]);
 
 		expect(EntitySchemaFactory.names()).toEqual([
@@ -179,7 +189,9 @@ describe("engine", () => {
 			"AuditableItemGraphChangeset",
 			"AuditableItemGraphPatch",
 			"AuditableItemStream",
-			"AuditableItemStreamEntry"
+			"AuditableItemStreamEntry",
+			"ExtractionRuleGroup",
+			"ExtractionRule"
 		]);
 
 		expect(engine).toBeDefined();
@@ -298,7 +310,13 @@ describe("engine", () => {
 					attestationConnector: [{ type: AttestationConnectorType.Nft }],
 					attestationComponent: [{ type: AttestationComponentType.Service }],
 					auditableItemGraphComponent: [{ type: AuditableItemGraphComponentType.Service }],
-					auditableItemStreamComponent: [{ type: AuditableItemStreamComponentType.Service }]
+					auditableItemStreamComponent: [{ type: AuditableItemStreamComponentType.Service }],
+					dataConverterConnector: [
+						{ type: DataConverterConnectorType.Json },
+						{ type: DataConverterConnectorType.Xml }
+					],
+					dataExtractorConnector: [{ type: DataExtractorConnectorType.JsonPath }],
+					dataProcessingComponent: [{ type: DataProcessingComponentType.Service }]
 				}
 			},
 			stateStorage: new MemoryStateStorage()
@@ -358,7 +376,13 @@ describe("engine", () => {
 				attestationConnector: [{ type: AttestationConnectorType.Nft }],
 				attestationComponent: [{ type: AttestationComponentType.Service }],
 				auditableItemGraphComponent: [{ type: AuditableItemGraphComponentType.Service }],
-				auditableItemStreamComponent: [{ type: AuditableItemStreamComponentType.Service }]
+				auditableItemStreamComponent: [{ type: AuditableItemStreamComponentType.Service }],
+				dataConverterConnector: [
+					{ type: DataConverterConnectorType.Json },
+					{ type: DataConverterConnectorType.Xml }
+				],
+				dataExtractorConnector: [{ type: DataExtractorConnectorType.JsonPath }],
+				dataProcessingComponent: [{ type: DataProcessingComponentType.Service }]
 			}
 		};
 		const engine = new Engine({

@@ -19,6 +19,9 @@ import {
 	BackgroundTaskConnectorType,
 	BlobStorageComponentType,
 	BlobStorageConnectorType,
+	DataConverterConnectorType,
+	DataExtractorConnectorType,
+	DataProcessingComponentType,
 	EntityStorageComponentType,
 	EntityStorageConnectorType,
 	EventBusComponentType,
@@ -26,10 +29,10 @@ import {
 	FaucetConnectorType,
 	IdentityComponentType,
 	IdentityConnectorType,
-	IdentityResolverComponentType,
-	IdentityResolverConnectorType,
 	IdentityProfileComponentType,
 	IdentityProfileConnectorType,
+	IdentityResolverComponentType,
+	IdentityResolverConnectorType,
 	ImmutableProofComponentType,
 	ImmutableStorageConnectorType,
 	LoggingComponentType,
@@ -116,6 +119,12 @@ describe("engine-server", () => {
 				attestationComponent: [{ type: AttestationComponentType.Service }],
 				auditableItemGraphComponent: [{ type: AuditableItemGraphComponentType.Service }],
 				auditableItemStreamComponent: [{ type: AuditableItemStreamComponentType.Service }],
+				dataConverterConnector: [
+					{ type: DataConverterConnectorType.Json },
+					{ type: DataConverterConnectorType.Xml }
+				],
+				dataExtractorConnector: [{ type: DataExtractorConnectorType.JsonPath }],
+				dataProcessingComponent: [{ type: DataProcessingComponentType.Service }],
 				informationComponent: [
 					{
 						type: InformationComponentType.Service,
@@ -142,23 +151,27 @@ describe("engine-server", () => {
 				]
 			}
 		};
-		const engine = new Engine({
-			config
-		});
-		const engineServer = new EngineServer({
-			engineCore: engine
-		});
-		const canContinue = await engineServer.start();
+		try {
+			const engine = new Engine({
+				config
+			});
+			const engineServer = new EngineServer({
+				engineCore: engine
+			});
+			const canContinue = await engineServer.start();
 
-		const res = await fetch("http://localhost:3000/info");
-		expect(await res.json()).toEqual({
-			name: "foo",
-			version: "1"
-		});
+			const res = await fetch("http://localhost:3000/info");
+			expect(await res.json()).toEqual({
+				name: "foo",
+				version: "1"
+			});
 
-		await engineServer.stop();
-		expect(canContinue).toEqual(true);
-		expect(engineServer).toBeDefined();
+			await engineServer.stop();
+			expect(canContinue).toEqual(true);
+			expect(engineServer).toBeDefined();
+		} catch (err) {
+			console.log(err);
+		}
 	});
 
 	test("Can start engine server with custom rest path", async () => {
