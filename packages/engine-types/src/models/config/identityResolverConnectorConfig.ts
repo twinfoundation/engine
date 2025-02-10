@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0.
 import type { IEntityStorageIdentityResolverConnectorConstructorOptions } from "@twin.org/identity-connector-entity-storage";
 import type { IIotaIdentityResolverConnectorConstructorOptions } from "@twin.org/identity-connector-iota";
-import type { IIotaRebasedIdentityResolverConnectorConstructorOptions } from "@twin.org/identity-connector-iota-rebased";
+import type { IIotaStardustIdentityResolverConnectorConstructorOptions } from "@twin.org/identity-connector-iota-stardust";
 import type { IdentityConnectorType } from "../types/identityConnectorType";
 
 /**
@@ -18,6 +18,6 @@ export type IdentityResolverConnectorConfig =
 			options: IIotaIdentityResolverConnectorConstructorOptions;
 	  }
 	| {
-			type: typeof IdentityConnectorType.IotaRebased;
-			options: IIotaRebasedIdentityResolverConnectorConstructorOptions;
+			type: typeof IdentityConnectorType.IotaStardust;
+			options: IIotaStardustIdentityResolverConnectorConstructorOptions;
 	  };

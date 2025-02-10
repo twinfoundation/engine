@@ -1,6 +1,6 @@
 # Function: initialiseMessagingSmsConnector()
 
-> **initialiseMessagingSmsConnector**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType`?): `string` \| `undefined`
+> **initialiseMessagingSmsConnector**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType`?): `undefined` \| `string`
 
 Initialise a messaging sms connector.
 
@@ -32,7 +32,7 @@ The instance type to override the default.
 
 ## Returns
 
-`string` \| `undefined`
+`undefined` \| `string`
 
 The name of the instance created.
 

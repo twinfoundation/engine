@@ -381,12 +381,12 @@ export interface IEngineEnvironmentVariables {
 	nftConnector?: string;
 
 	/**
-	 * The type of identity connector: entity-storage, iota, iota-rebased.
+	 * The type of identity connector: entity-storage, iota, iota-stardust.
 	 */
 	identityConnector?: string;
 
 	/**
-	 * The type of identity resolver connector: entity-storage, iota, iota-rebased.
+	 * The type of identity resolver connector: entity-storage, iota, iota-stardust.
 	 */
 	identityResolverConnector?: string;
 
@@ -394,6 +394,31 @@ export interface IEngineEnvironmentVariables {
 	 * The type of immutable storage connector: entity-storage, iota.
 	 */
 	immutableStorageConnector?: string;
+
+	/**
+	 * IOTA Stardust Faucet Endpoint.
+	 */
+	iotaStardustFaucetEndpoint?: string;
+
+	/**
+	 * IOTA Stardust Node Endpoint.
+	 */
+	iotaStardustNodeEndpoint?: string;
+
+	/**
+	 * IOTA Stardust Bech32 HRP
+	 */
+	iotaStardustBech32Hrp?: string;
+
+	/**
+	 * IOTA Stardust coin type.
+	 */
+	iotaStardustCoinType?: string;
+
+	/**
+	 * IOTA Stardust Explorer Endpoint.
+	 */
+	iotaStardustExplorerEndpoint?: string;
 
 	/**
 	 * IOTA Faucet Endpoint.
@@ -406,9 +431,9 @@ export interface IEngineEnvironmentVariables {
 	iotaNodeEndpoint?: string;
 
 	/**
-	 * IOTA Bech32 HRP
+	 * IOTA network.
 	 */
-	iotaBech32Hrp?: string;
+	iotaNetwork?: string;
 
 	/**
 	 * IOTA coin type.
@@ -419,31 +444,6 @@ export interface IEngineEnvironmentVariables {
 	 * IOTA Explorer Endpoint.
 	 */
 	iotaExplorerEndpoint?: string;
-
-	/**
-	 * IOTA Rebased Faucet Endpoint.
-	 */
-	iotaRebasedFaucetEndpoint?: string;
-
-	/**
-	 * IOTA Rebased Node Endpoint.
-	 */
-	iotaRebasedNodeEndpoint?: string;
-
-	/**
-	 * IOTA Rebased network.
-	 */
-	iotaRebasedNetwork?: string;
-
-	/**
-	 * IOTA Rebased coin type.
-	 */
-	iotaRebasedCoinType?: string;
-
-	/**
-	 * IOTA Rebased Explorer Endpoint.
-	 */
-	iotaRebasedExplorerEndpoint?: string;
 
 	/**
 	 * The type of identity profile connector: entity-storage.

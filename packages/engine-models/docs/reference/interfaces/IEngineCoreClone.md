@@ -58,7 +58,7 @@ The entity schemas for the engine.
 
 #### Index Signature
 
-\[`schema`: `string`\]: `IEntitySchema`
+\[`schema`: `string`\]: `IEntitySchema`\<`unknown`\>
 
 ***
 

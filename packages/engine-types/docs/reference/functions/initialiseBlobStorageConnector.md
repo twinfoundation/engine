@@ -1,6 +1,6 @@
 # Function: initialiseBlobStorageConnector()
 
-> **initialiseBlobStorageConnector**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType`?): `string` \| `undefined`
+> **initialiseBlobStorageConnector**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType`?): `undefined` \| `string`
 
 Initialise the blob storage connector.
 
@@ -32,7 +32,7 @@ The instance type to override the default.
 
 ## Returns
 
-`string` \| `undefined`
+`undefined` \| `string`
 
 The name of the instance created.
 

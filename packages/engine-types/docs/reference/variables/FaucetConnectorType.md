@@ -18,8 +18,8 @@ Entity storage.
 
 IOTA.
 
-### IotaRebased
+### IotaStardust
 
-> `readonly` **IotaRebased**: `"iota-rebased"` = `"iota-rebased"`
+> `readonly` **IotaStardust**: `"iota-stardust"` = `"iota-stardust"`
 
-IOTA Rebased.
+IOTA Stardust.

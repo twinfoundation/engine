@@ -8,7 +8,7 @@ import {
 	type IdentityDocument
 } from "@twin.org/identity-connector-entity-storage";
 import { IotaIdentityResolverConnector } from "@twin.org/identity-connector-iota";
-import { IotaRebasedIdentityResolverConnector } from "@twin.org/identity-connector-iota-rebased";
+import { IotaStardustIdentityResolverConnector } from "@twin.org/identity-connector-iota-stardust";
 import {
 	IdentityResolverConnectorFactory,
 	type IIdentityResolverComponent,
@@ -47,7 +47,19 @@ export function initialiseIdentityResolverConnector(
 	const type = instanceConfig.type;
 	let connector: IIdentityResolverConnector;
 	let instanceType: string;
-	if (type === IdentityResolverConnectorType.Iota) {
+	if (type === IdentityResolverConnectorType.IotaStardust) {
+		const dltConfig = context.config.types.dltConfig?.find(
+			dlt => dlt.type === context.defaultTypes.dltConfig
+		);
+		connector = new IotaStardustIdentityResolverConnector({
+			...instanceConfig.options,
+			config: {
+				...dltConfig?.options?.config,
+				...instanceConfig.options.config
+			}
+		});
+		instanceType = IotaStardustIdentityResolverConnector.NAMESPACE;
+	} else if (type === IdentityResolverConnectorType.Iota) {
 		const dltConfig = context.config.types.dltConfig?.find(
 			dlt => dlt.type === context.defaultTypes.dltConfig
 		);
@@ -59,18 +71,6 @@ export function initialiseIdentityResolverConnector(
 			}
 		});
 		instanceType = IotaIdentityResolverConnector.NAMESPACE;
-	} else if (type === IdentityResolverConnectorType.IotaRebased) {
-		const dltConfig = context.config.types.dltConfig?.find(
-			dlt => dlt.type === context.defaultTypes.dltConfig
-		);
-		connector = new IotaRebasedIdentityResolverConnector({
-			...instanceConfig.options,
-			config: {
-				...dltConfig?.options?.config,
-				...instanceConfig.options.config
-			}
-		});
-		instanceType = IotaRebasedIdentityResolverConnector.NAMESPACE;
 	} else if (type === IdentityResolverConnectorType.EntityStorage) {
 		initSchemaIdentityStorage({ includeProfile: false });
 		initialiseEntityStorageConnector(

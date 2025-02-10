@@ -1,6 +1,6 @@
 # Function: initialiseDataExtractorConnector()
 
-> **initialiseDataExtractorConnector**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType`?): `string` \| `undefined`
+> **initialiseDataExtractorConnector**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType`?): `undefined` \| `string`
 
 Initialise the data extractor connector.
 
@@ -32,7 +32,7 @@ The instance type to override the default.
 
 ## Returns
 
-`string` \| `undefined`
+`undefined` \| `string`
 
 The name of the instance created.
 

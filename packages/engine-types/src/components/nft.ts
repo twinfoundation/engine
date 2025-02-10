@@ -9,7 +9,7 @@ import {
 	type Nft
 } from "@twin.org/nft-connector-entity-storage";
 import { IotaNftConnector } from "@twin.org/nft-connector-iota";
-import { IotaRebasedNftConnector } from "@twin.org/nft-connector-iota-rebased";
+import { IotaStardustNftConnector } from "@twin.org/nft-connector-iota-stardust";
 import { NftConnectorFactory, type INftComponent, type INftConnector } from "@twin.org/nft-models";
 import { NftService } from "@twin.org/nft-service";
 import { initialiseEntityStorageConnector } from "./entityStorage";
@@ -54,6 +54,13 @@ export function initialiseNftConnector(
 		);
 		connector = new EntityStorageNftConnector(instanceConfig.options);
 		instanceType = EntityStorageNftConnector.NAMESPACE;
+	} else if (type === NftConnectorType.IotaStardust) {
+		connector = new IotaStardustNftConnector({
+			vaultConnectorType: context.defaultTypes.vaultConnector,
+			walletConnectorType: context.defaultTypes.walletConnector,
+			...instanceConfig.options
+		});
+		instanceType = IotaStardustNftConnector.NAMESPACE;
 	} else if (type === NftConnectorType.Iota) {
 		connector = new IotaNftConnector({
 			vaultConnectorType: context.defaultTypes.vaultConnector,
@@ -61,13 +68,6 @@ export function initialiseNftConnector(
 			...instanceConfig.options
 		});
 		instanceType = IotaNftConnector.NAMESPACE;
-	} else if (type === NftConnectorType.IotaRebased) {
-		connector = new IotaRebasedNftConnector({
-			vaultConnectorType: context.defaultTypes.vaultConnector,
-			walletConnectorType: context.defaultTypes.walletConnector,
-			...instanceConfig.options
-		});
-		instanceType = IotaRebasedNftConnector.NAMESPACE;
 	} else {
 		throw new GeneralError("engineCore", "connectorUnknownType", {
 			type,

@@ -8,7 +8,7 @@ import {
 	type IdentityDocument
 } from "@twin.org/identity-connector-entity-storage";
 import { IotaIdentityConnector } from "@twin.org/identity-connector-iota";
-import { IotaRebasedIdentityConnector } from "@twin.org/identity-connector-iota-rebased";
+import { IotaStardustIdentityConnector } from "@twin.org/identity-connector-iota-stardust";
 import {
 	IdentityConnectorFactory,
 	type IIdentityComponent,
@@ -47,7 +47,20 @@ export function initialiseIdentityConnector(
 	const type = instanceConfig.type;
 	let connector: IIdentityConnector;
 	let instanceType: string;
-	if (type === IdentityConnectorType.Iota) {
+	if (type === IdentityConnectorType.IotaStardust) {
+		const dltConfig = context.config.types.dltConfig?.find(
+			dlt => dlt.type === context.defaultTypes.dltConfig
+		);
+		connector = new IotaStardustIdentityConnector({
+			vaultConnectorType: context.defaultTypes.vaultConnector,
+			...instanceConfig.options,
+			config: {
+				...dltConfig?.options?.config,
+				...instanceConfig.options.config
+			}
+		});
+		instanceType = IotaStardustIdentityConnector.NAMESPACE;
+	} else if (type === IdentityConnectorType.Iota) {
 		const dltConfig = context.config.types.dltConfig?.find(
 			dlt => dlt.type === context.defaultTypes.dltConfig
 		);
@@ -60,19 +73,6 @@ export function initialiseIdentityConnector(
 			}
 		});
 		instanceType = IotaIdentityConnector.NAMESPACE;
-	} else if (type === IdentityConnectorType.IotaRebased) {
-		const dltConfig = context.config.types.dltConfig?.find(
-			dlt => dlt.type === context.defaultTypes.dltConfig
-		);
-		connector = new IotaRebasedIdentityConnector({
-			vaultConnectorType: context.defaultTypes.vaultConnector,
-			...instanceConfig.options,
-			config: {
-				...dltConfig?.options?.config,
-				...instanceConfig.options.config
-			}
-		});
-		instanceType = IotaRebasedIdentityConnector.NAMESPACE;
 	} else if (type === IdentityConnectorType.EntityStorage) {
 		initSchemaIdentityStorage({ includeProfile: false });
 		initialiseEntityStorageConnector(

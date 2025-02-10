@@ -1,6 +1,6 @@
 # Function: initialiseVaultConnector()
 
-> **initialiseVaultConnector**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType`?): `string` \| `undefined`
+> **initialiseVaultConnector**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType`?): `undefined` \| `string`
 
 Initialise the vault connector.
 
@@ -32,7 +32,7 @@ The instance type to override the default.
 
 ## Returns
 
-`string` \| `undefined`
+`undefined` \| `string`
 
 The name of the instance created.
 

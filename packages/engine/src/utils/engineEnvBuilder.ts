@@ -612,6 +612,20 @@ function configureFaucetConnectors(
 		coreConfig.types.faucetConnector.push({
 			type: FaucetConnectorType.EntityStorage
 		});
+	} else if (envVars.faucetConnector === FaucetConnectorType.IotaStardust) {
+		coreConfig.types.faucetConnector.push({
+			type: FaucetConnectorType.IotaStardust,
+			options: {
+				config: {
+					endpoint: envVars.iotaStardustFaucetEndpoint ?? "",
+					clientOptions: {
+						nodes: [envVars.iotaStardustNodeEndpoint ?? ""]
+					},
+					bech32Hrp: envVars.iotaStardustBech32Hrp,
+					coinType: Coerce.number(envVars.iotaStardustCoinType)
+				}
+			}
+		});
 	} else if (envVars.faucetConnector === FaucetConnectorType.Iota) {
 		coreConfig.types.faucetConnector.push({
 			type: FaucetConnectorType.Iota,
@@ -619,24 +633,10 @@ function configureFaucetConnectors(
 				config: {
 					endpoint: envVars.iotaFaucetEndpoint ?? "",
 					clientOptions: {
-						nodes: [envVars.iotaNodeEndpoint ?? ""]
+						url: envVars.iotaNodeEndpoint ?? ""
 					},
-					bech32Hrp: envVars.iotaBech32Hrp,
+					network: envVars.iotaNetwork ?? "",
 					coinType: Coerce.number(envVars.iotaCoinType)
-				}
-			}
-		});
-	} else if (envVars.faucetConnector === FaucetConnectorType.IotaRebased) {
-		coreConfig.types.faucetConnector.push({
-			type: FaucetConnectorType.IotaRebased,
-			options: {
-				config: {
-					endpoint: envVars.iotaRebasedFaucetEndpoint ?? "",
-					clientOptions: {
-						url: envVars.iotaRebasedNodeEndpoint ?? ""
-					},
-					network: envVars.iotaRebasedNetwork ?? "",
-					coinType: Coerce.number(envVars.iotaRebasedCoinType)
 				}
 			}
 		});
@@ -658,29 +658,29 @@ function configureWalletConnectors(
 		coreConfig.types.walletConnector.push({
 			type: WalletConnectorType.EntityStorage
 		});
+	} else if (envVars.walletConnector === WalletConnectorType.IotaStardust) {
+		coreConfig.types.walletConnector.push({
+			type: WalletConnectorType.IotaStardust,
+			options: {
+				config: {
+					clientOptions: {
+						nodes: [envVars.iotaStardustNodeEndpoint ?? ""]
+					},
+					bech32Hrp: envVars.iotaStardustBech32Hrp,
+					coinType: Coerce.number(envVars.iotaStardustCoinType)
+				}
+			}
+		});
 	} else if (envVars.walletConnector === WalletConnectorType.Iota) {
 		coreConfig.types.walletConnector.push({
 			type: WalletConnectorType.Iota,
 			options: {
 				config: {
 					clientOptions: {
-						nodes: [envVars.iotaNodeEndpoint ?? ""]
+						url: envVars.iotaNodeEndpoint ?? ""
 					},
-					bech32Hrp: envVars.iotaBech32Hrp,
+					network: envVars.iotaNetwork ?? "",
 					coinType: Coerce.number(envVars.iotaCoinType)
-				}
-			}
-		});
-	} else if (envVars.walletConnector === WalletConnectorType.IotaRebased) {
-		coreConfig.types.walletConnector.push({
-			type: WalletConnectorType.IotaRebased,
-			options: {
-				config: {
-					clientOptions: {
-						url: envVars.iotaRebasedNodeEndpoint ?? ""
-					},
-					network: envVars.iotaRebasedNetwork ?? "",
-					coinType: Coerce.number(envVars.iotaRebasedCoinType)
 				}
 			}
 		});
@@ -702,29 +702,29 @@ function configureNftConnectors(
 		coreConfig.types.nftConnector.push({
 			type: NftConnectorType.EntityStorage
 		});
+	} else if (envVars.nftConnector === NftConnectorType.IotaStardust) {
+		coreConfig.types.nftConnector.push({
+			type: NftConnectorType.IotaStardust,
+			options: {
+				config: {
+					clientOptions: {
+						nodes: [envVars.iotaStardustNodeEndpoint ?? ""]
+					},
+					bech32Hrp: envVars.iotaStardustBech32Hrp,
+					coinType: Coerce.number(envVars.iotaStardustCoinType)
+				}
+			}
+		});
 	} else if (envVars.nftConnector === NftConnectorType.Iota) {
 		coreConfig.types.nftConnector.push({
 			type: NftConnectorType.Iota,
 			options: {
 				config: {
 					clientOptions: {
-						nodes: [envVars.iotaNodeEndpoint ?? ""]
+						url: envVars.iotaNodeEndpoint ?? ""
 					},
-					bech32Hrp: envVars.iotaBech32Hrp,
+					network: envVars.iotaNetwork ?? "",
 					coinType: Coerce.number(envVars.iotaCoinType)
-				}
-			}
-		});
-	} else if (envVars.nftConnector === NftConnectorType.IotaRebased) {
-		coreConfig.types.nftConnector.push({
-			type: NftConnectorType.IotaRebased,
-			options: {
-				config: {
-					clientOptions: {
-						url: envVars.iotaRebasedNodeEndpoint ?? ""
-					},
-					network: envVars.iotaRebasedNetwork ?? "",
-					coinType: Coerce.number(envVars.iotaRebasedCoinType)
 				}
 			}
 		});
@@ -751,29 +751,29 @@ function configureImmutableStorageConnectors(
 		coreConfig.types.immutableStorageConnector.push({
 			type: ImmutableStorageConnectorType.EntityStorage
 		});
+	} else if (envVars.immutableStorageConnector === ImmutableStorageConnectorType.IotaStardust) {
+		coreConfig.types.immutableStorageConnector.push({
+			type: ImmutableStorageConnectorType.IotaStardust,
+			options: {
+				config: {
+					clientOptions: {
+						nodes: [envVars.iotaStardustNodeEndpoint ?? ""]
+					},
+					bech32Hrp: envVars.iotaStardustBech32Hrp,
+					coinType: Coerce.number(envVars.iotaStardustCoinType)
+				}
+			}
+		});
 	} else if (envVars.immutableStorageConnector === ImmutableStorageConnectorType.Iota) {
 		coreConfig.types.immutableStorageConnector.push({
 			type: ImmutableStorageConnectorType.Iota,
 			options: {
 				config: {
 					clientOptions: {
-						nodes: [envVars.iotaNodeEndpoint ?? ""]
+						url: envVars.iotaNodeEndpoint ?? ""
 					},
-					bech32Hrp: envVars.iotaBech32Hrp,
+					network: envVars.iotaNetwork ?? "",
 					coinType: Coerce.number(envVars.iotaCoinType)
-				}
-			}
-		});
-	} else if (envVars.immutableStorageConnector === ImmutableStorageConnectorType.IotaRebased) {
-		coreConfig.types.immutableStorageConnector.push({
-			type: ImmutableStorageConnectorType.IotaRebased,
-			options: {
-				config: {
-					clientOptions: {
-						url: envVars.iotaRebasedNodeEndpoint ?? ""
-					},
-					network: envVars.iotaRebasedNetwork ?? "",
-					coinType: Coerce.number(envVars.iotaRebasedCoinType)
 				}
 			}
 		});
@@ -818,29 +818,29 @@ function configureIdentityConnectors(
 		coreConfig.types.identityConnector.push({
 			type: IdentityConnectorType.EntityStorage
 		});
+	} else if (envVars.identityConnector === IdentityConnectorType.IotaStardust) {
+		coreConfig.types.identityConnector.push({
+			type: IdentityConnectorType.IotaStardust,
+			options: {
+				config: {
+					clientOptions: {
+						nodes: [envVars.iotaStardustNodeEndpoint ?? ""]
+					},
+					bech32Hrp: envVars.iotaStardustBech32Hrp,
+					coinType: Coerce.number(envVars.iotaStardustCoinType)
+				}
+			}
+		});
 	} else if (envVars.identityConnector === IdentityConnectorType.Iota) {
 		coreConfig.types.identityConnector.push({
 			type: IdentityConnectorType.Iota,
 			options: {
 				config: {
 					clientOptions: {
-						nodes: [envVars.iotaNodeEndpoint ?? ""]
+						url: envVars.iotaNodeEndpoint ?? ""
 					},
-					bech32Hrp: envVars.iotaBech32Hrp,
+					network: envVars.iotaNetwork ?? "",
 					coinType: Coerce.number(envVars.iotaCoinType)
-				}
-			}
-		});
-	} else if (envVars.identityConnector === IdentityConnectorType.IotaRebased) {
-		coreConfig.types.identityConnector.push({
-			type: IdentityConnectorType.IotaRebased,
-			options: {
-				config: {
-					clientOptions: {
-						url: envVars.iotaRebasedNodeEndpoint ?? ""
-					},
-					network: envVars.iotaRebasedNetwork ?? "",
-					coinType: Coerce.number(envVars.iotaRebasedCoinType)
 				}
 			}
 		});
@@ -867,29 +867,29 @@ function configureIdentityResolverConnectors(
 		coreConfig.types.identityResolverConnector.push({
 			type: IdentityResolverConnectorType.EntityStorage
 		});
+	} else if (envVars.identityResolverConnector === IdentityResolverConnectorType.IotaStardust) {
+		coreConfig.types.identityResolverConnector.push({
+			type: IdentityResolverConnectorType.IotaStardust,
+			options: {
+				config: {
+					clientOptions: {
+						nodes: [envVars.iotaStardustNodeEndpoint ?? ""]
+					},
+					bech32Hrp: envVars.iotaStardustBech32Hrp,
+					coinType: Coerce.number(envVars.iotaStardustCoinType)
+				}
+			}
+		});
 	} else if (envVars.identityResolverConnector === IdentityResolverConnectorType.Iota) {
 		coreConfig.types.identityResolverConnector.push({
 			type: IdentityResolverConnectorType.Iota,
 			options: {
 				config: {
 					clientOptions: {
-						nodes: [envVars.iotaNodeEndpoint ?? ""]
+						url: envVars.iotaNodeEndpoint ?? ""
 					},
-					bech32Hrp: envVars.iotaBech32Hrp,
+					network: envVars.iotaNetwork ?? "",
 					coinType: Coerce.number(envVars.iotaCoinType)
-				}
-			}
-		});
-	} else if (envVars.identityResolverConnector === IdentityResolverConnectorType.IotaRebased) {
-		coreConfig.types.identityResolverConnector.push({
-			type: IdentityResolverConnectorType.IotaRebased,
-			options: {
-				config: {
-					clientOptions: {
-						url: envVars.iotaRebasedNodeEndpoint ?? ""
-					},
-					network: envVars.iotaRebasedNetwork ?? "",
-					coinType: Coerce.number(envVars.iotaRebasedCoinType)
 				}
 			}
 		});

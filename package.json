@@ -1,6 +1,6 @@
 {
 	"name": "@twin.org/engine",
-	"version": "0.0.1-next.43",
+	"version": "0.0.1-next.44",
 	"description": "Engine",
 	"repository": {
 		"type": "git",
@@ -36,7 +36,7 @@
 		"eslint-plugin-unused-imports": "3.2.0",
 		"fast-glob": "3.3.3",
 		"markdownlint-cli": "0.44.0",
-		"prettier": "3.4.2"
+		"prettier": "3.5.0"
 	},
 	"workspaces": [
 		"packages/engine-models",

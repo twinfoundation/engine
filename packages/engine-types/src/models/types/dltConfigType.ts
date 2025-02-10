@@ -12,9 +12,9 @@ export const DltConfigType = {
 	Iota: "iota",
 
 	/**
-	 * IOTA Rebased.
+	 * IOTA Stardust.
 	 */
-	IotaRebased: "iota-rebased"
+	IotaStardust: "iota-stardust"
 } as const;
 
 /**
