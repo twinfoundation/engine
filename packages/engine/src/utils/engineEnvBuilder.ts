@@ -381,6 +381,8 @@ function configureLoggingConnectors(
 	coreConfig: IEngineConfig,
 	envVars: IEngineEnvironmentVariables
 ): void {
+	coreConfig.types.loggingConnector ??= [];
+
 	const loggingConnectors = (envVars.loggingConnector ?? "").split(",");
 	for (const loggingConnector of loggingConnectors) {
 		if (loggingConnector === LoggingConnectorType.Console) {
@@ -391,14 +393,17 @@ function configureLoggingConnectors(
 						translateMessages: true,
 						hideGroups: true
 					}
-				}
+				},
+				isDefault: loggingConnectors.length === 1
 			});
 		} else if (loggingConnector === LoggingConnectorType.EntityStorage) {
 			coreConfig.types.loggingConnector?.push({
-				type: LoggingConnectorType.EntityStorage
+				type: LoggingConnectorType.EntityStorage,
+				isDefault: loggingConnectors.length === 1
 			});
 		}
 	}
+
 	if (loggingConnectors.length > 1) {
 		coreConfig.types.loggingConnector?.push({
 			type: LoggingConnectorType.Multi,

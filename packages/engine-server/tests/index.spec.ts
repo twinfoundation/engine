@@ -151,27 +151,23 @@ describe("engine-server", () => {
 				]
 			}
 		};
-		try {
-			const engine = new Engine({
-				config
-			});
-			const engineServer = new EngineServer({
-				engineCore: engine
-			});
-			const canContinue = await engineServer.start();
+		const engine = new Engine({
+			config
+		});
+		const engineServer = new EngineServer({
+			engineCore: engine
+		});
+		const canContinue = await engineServer.start();
 
-			const res = await fetch("http://localhost:3000/info");
-			expect(await res.json()).toEqual({
-				name: "foo",
-				version: "1"
-			});
+		const res = await fetch("http://localhost:3000/info");
+		expect(await res.json()).toEqual({
+			name: "foo",
+			version: "1"
+		});
 
-			await engineServer.stop();
-			expect(canContinue).toEqual(true);
-			expect(engineServer).toBeDefined();
-		} catch (err) {
-			console.log(err);
-		}
+		await engineServer.stop();
+		expect(canContinue).toEqual(true);
+		expect(engineServer).toBeDefined();
 	});
 
 	test("Can start engine server with custom rest path", async () => {
