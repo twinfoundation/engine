@@ -110,6 +110,8 @@ export function initialiseWalletStorage(
 	const type = instanceConfig.type;
 	if (type === WalletConnectorType.Iota) {
 		// No storage required for IOTA wallet connector.
+	} else if (type === WalletConnectorType.IotaStardust) {
+		// No storage required for IOTA Stardust wallet connector.
 	} else if (type === WalletConnectorType.EntityStorage) {
 		initSchemaWallet();
 		initialiseEntityStorageConnector(
