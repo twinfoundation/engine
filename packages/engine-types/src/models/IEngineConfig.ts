@@ -24,6 +24,7 @@ import type { IdentityProfileConnectorConfig } from "./config/identityProfileCon
 import type { IdentityResolverComponentConfig } from "./config/identityResolverComponentConfig";
 import type { IdentityResolverConnectorConfig } from "./config/identityResolverConnectorConfig";
 import type { ImmutableProofComponentConfig } from "./config/immutableProofComponentConfig";
+import type { ImmutableStorageComponentConfig } from "./config/immutableStorageComponentConfig";
 import type { ImmutableStorageConnectorConfig } from "./config/immutableStorageConnectorConfig";
 import type { LoggingComponentConfig } from "./config/loggingComponentConfig";
 import type { LoggingConnectorConfig } from "./config/loggingConnectorConfig";
@@ -142,6 +143,11 @@ export interface IEngineConfig extends IEngineCoreConfig {
 		 * Immutable storage connector options which can be overridden by individual components by specifying types other than default.
 		 */
 		immutableStorageConnector?: IEngineCoreTypeConfig<ImmutableStorageConnectorConfig>[];
+
+		/**
+		 * Immutable storage component options which can be overridden by individual components by specifying types other than default.
+		 */
+		immutableStorageComponent?: IEngineCoreTypeConfig<ImmutableStorageComponentConfig>[];
 
 		/**
 		 * Immutable proof component options which can be overridden by individual components by specifying types other than default.

@@ -1,6 +1,6 @@
 {
 	"name": "@twin.org/engine-types",
-	"version": "0.0.1-next.47",
+	"version": "0.0.1-next.48",
 	"description": "Types to use in an engine.",
 	"repository": {
 		"type": "git",
@@ -33,7 +33,7 @@
 		"@twin.org/core": "next",
 		"@twin.org/crypto": "next",
 		"@twin.org/data-core": "next",
-		"@twin.org/engine-models": "0.0.1-next.47",
+		"@twin.org/engine-models": "0.0.1-next.48",
 		"@twin.org/entity": "next",
 		"@twin.org/modules": "next",
 		"@twin.org/nameof": "next"
@@ -85,6 +85,7 @@
 		"@twin.org/immutable-storage-connector-iota": "next",
 		"@twin.org/immutable-storage-connector-iota-stardust": "next",
 		"@twin.org/immutable-storage-models": "next",
+		"@twin.org/immutable-storage-service": "next",
 		"@twin.org/logging-models": "next",
 		"@twin.org/logging-connector-console": "next",
 		"@twin.org/logging-connector-entity-storage": "next",

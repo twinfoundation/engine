@@ -37,7 +37,8 @@ import {
 	WalletConnectorType,
 	DataExtractorConnectorType,
 	DataConverterConnectorType,
-	DataProcessingComponentType
+	DataProcessingComponentType,
+	ImmutableStorageComponentType
 } from "@twin.org/engine-types";
 import type { IEngineEnvironmentVariables } from "../models/IEngineEnvironmentVariables";
 
@@ -780,6 +781,11 @@ function configureImmutableStorageConnectors(
 	}
 
 	if (coreConfig.types.immutableStorageConnector.length > 0) {
+		coreConfig.types.immutableStorageComponent ??= [];
+		coreConfig.types.immutableStorageComponent.push({
+			type: ImmutableStorageComponentType.Service
+		});
+
 		coreConfig.types.immutableProofComponent ??= [];
 		coreConfig.types.immutableProofComponent.push({
 			type: ImmutableProofComponentType.Service,

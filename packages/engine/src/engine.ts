@@ -138,6 +138,13 @@ export class Engine<
 		);
 
 		this.addTypeInitialiser(
+			"immutableStorageComponent",
+			this._context.config.types.immutableStorageComponent,
+			"@twin.org/engine-types",
+			"initialiseImmutableStorageComponent"
+		);
+
+		this.addTypeInitialiser(
 			"walletConnector",
 			this._context.config.types.walletConnector,
 			"@twin.org/engine-types",

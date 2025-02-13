@@ -168,6 +168,12 @@ Wallet connector options which can be overridden by individual components by spe
 
 Immutable storage connector options which can be overridden by individual components by specifying types other than default.
 
+#### immutableStorageComponent?
+
+> `optional` **immutableStorageComponent**: `IEngineCoreTypeConfig`\<[`ImmutableStorageComponentConfig`](../type-aliases/ImmutableStorageComponentConfig.md)\>[]
+
+Immutable storage component options which can be overridden by individual components by specifying types other than default.
+
 #### immutableProofComponent?
 
 > `optional` **immutableProofComponent**: `IEngineCoreTypeConfig`\<[`ImmutableProofComponentConfig`](../type-aliases/ImmutableProofComponentConfig.md)\>[]
