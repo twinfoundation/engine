@@ -508,8 +508,8 @@ function configureTelemetryConnectors(
 	}
 
 	if (coreConfig.types.telemetryConnector.length > 0) {
-		coreConfig.types.telemetryComponents ??= [];
-		coreConfig.types.telemetryComponents.push({ type: TelemetryComponentType.Service });
+		coreConfig.types.telemetryComponent ??= [];
+		coreConfig.types.telemetryComponent.push({ type: TelemetryComponentType.Service });
 	}
 }
 
