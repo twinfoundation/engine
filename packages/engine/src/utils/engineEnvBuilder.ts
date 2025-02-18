@@ -54,9 +54,9 @@ export function buildEngineConfiguration(envVars: IEngineEnvironmentVariables): 
 		envVars.stateFilename = path.join(envVars.storageFileRoot, envVars.stateFilename);
 	}
 
-	envVars.attestationAssertionMethodId ??= "attestation-assertion";
+	envVars.attestationVerificationMethodId ??= "attestation-assertion";
 	envVars.immutableProofHashKeyId ??= "immutable-proof-hash";
-	envVars.immutableProofAssertionMethodId ??= "immutable-proof-assertion";
+	envVars.immutableProofVerificationMethodId ??= "immutable-proof-assertion";
 	envVars.blobStorageEnableEncryption ??= "false";
 	envVars.blobStorageEncryptionKey ??= "blob-encryption";
 
@@ -791,7 +791,7 @@ function configureImmutableStorageConnectors(
 			type: ImmutableProofComponentType.Service,
 			options: {
 				config: {
-					assertionMethodId: envVars.immutableProofAssertionMethodId,
+					verificationMethodId: envVars.immutableProofVerificationMethodId,
 					proofHashKeyId: envVars.immutableProofHashKeyId
 				}
 			}
@@ -952,7 +952,12 @@ function configureAttestationConnectors(
 	if (coreConfig.types.attestationConnector.length > 0) {
 		coreConfig.types.attestationComponent ??= [];
 		coreConfig.types.attestationComponent.push({
-			type: AttestationComponentType.Service
+			type: AttestationComponentType.Service,
+			options: {
+				config: {
+					verificationMethodId: envVars.attestationVerificationMethodId
+				}
+			}
 		});
 	}
 }

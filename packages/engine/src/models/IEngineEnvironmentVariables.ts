@@ -451,9 +451,9 @@ export interface IEngineEnvironmentVariables {
 	identityProfileConnector?: string;
 
 	/**
-	 * The identity assertion method id to use with immutable proofs.
+	 * The identity verification method id to use with immutable proofs.
 	 */
-	immutableProofAssertionMethodId?: string;
+	immutableProofVerificationMethodId?: string;
 
 	/**
 	 * The hash key from the vault to use with immutable proofs.
@@ -466,9 +466,9 @@ export interface IEngineEnvironmentVariables {
 	attestationConnector?: string;
 
 	/**
-	 * The identity assertion method id to use with attestation.
+	 * The identity verification method id to use with attestation.
 	 */
-	attestationAssertionMethodId?: string;
+	attestationVerificationMethodId?: string;
 
 	/**
 	 * The type of the default data converters, can be a comma separated list: json, xml.

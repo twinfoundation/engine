@@ -716,11 +716,11 @@ The type of identity profile connector: entity-storage.
 
 ***
 
-### immutableProofAssertionMethodId?
+### immutableProofVerificationMethodId?
 
-> `optional` **immutableProofAssertionMethodId**: `string`
+> `optional` **immutableProofVerificationMethodId**: `string`
 
-The identity assertion method id to use with immutable proofs.
+The identity verification method id to use with immutable proofs.
 
 ***
 
@@ -740,11 +740,11 @@ The type of attestation connector: entity-storage, iota.
 
 ***
 
-### attestationAssertionMethodId?
+### attestationVerificationMethodId?
 
-> `optional` **attestationAssertionMethodId**: `string`
+> `optional` **attestationVerificationMethodId**: `string`
 
-The identity assertion method id to use with attestation.
+The identity verification method id to use with attestation.
 
 ***
 
