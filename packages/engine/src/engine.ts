@@ -266,5 +266,12 @@ export class Engine<
 			"@twin.org/engine-types",
 			"initialiseDataProcessingComponent"
 		);
+
+		this.addTypeInitialiser(
+			"documentManagementComponent",
+			this._context.config.types.documentManagementComponent,
+			"@twin.org/engine-types",
+			"initialiseDocumentManagementComponent"
+		);
 	}
 }

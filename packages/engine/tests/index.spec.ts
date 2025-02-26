@@ -14,6 +14,7 @@ import {
 	DataConverterConnectorType,
 	DataExtractorConnectorType,
 	DataProcessingComponentType,
+	DocumentManagementComponentType,
 	EntityStorageComponentType,
 	EntityStorageConnectorType,
 	EventBusComponentType,
@@ -137,7 +138,8 @@ describe("engine", () => {
 						{ type: DataConverterConnectorType.Xml }
 					],
 					dataExtractorConnector: [{ type: DataExtractorConnectorType.JsonPath }],
-					dataProcessingComponent: [{ type: DataProcessingComponentType.Service }]
+					dataProcessingComponent: [{ type: DataProcessingComponentType.Service }],
+					documentManagementComponent: [{ type: DocumentManagementComponentType.Service }]
 				}
 			},
 			stateStorage: new MemoryStateStorage(),
@@ -164,7 +166,8 @@ describe("engine", () => {
 			"attestation",
 			"aig",
 			"ais",
-			"data-processing"
+			"data-processing",
+			"documents"
 		]);
 
 		expect(EntitySchemaFactory.names()).toEqual([
@@ -320,7 +323,8 @@ describe("engine", () => {
 						{ type: DataConverterConnectorType.Xml }
 					],
 					dataExtractorConnector: [{ type: DataExtractorConnectorType.JsonPath }],
-					dataProcessingComponent: [{ type: DataProcessingComponentType.Service }]
+					dataProcessingComponent: [{ type: DataProcessingComponentType.Service }],
+					documentManagementComponent: [{ type: DocumentManagementComponentType.Service }]
 				}
 			},
 			stateStorage: new MemoryStateStorage()
@@ -387,7 +391,8 @@ describe("engine", () => {
 					{ type: DataConverterConnectorType.Xml }
 				],
 				dataExtractorConnector: [{ type: DataExtractorConnectorType.JsonPath }],
-				dataProcessingComponent: [{ type: DataProcessingComponentType.Service }]
+				dataProcessingComponent: [{ type: DataProcessingComponentType.Service }],
+				documentManagementComponent: [{ type: DocumentManagementComponentType.Service }]
 			}
 		};
 		const engine = new Engine({

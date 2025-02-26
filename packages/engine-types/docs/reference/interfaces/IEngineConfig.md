@@ -276,6 +276,12 @@ Data extractor connector options which can be overridden by individual component
 
 Date processing options which can be overridden by individual components by specifying types other than default.
 
+#### documentManagementComponent?
+
+> `optional` **documentManagementComponent**: `IEngineCoreTypeConfig`\<[`DocumentManagementComponentConfig`](../type-aliases/DocumentManagementComponentConfig.md)\>[]
+
+Document management options which can be overridden by individual components by specifying types other than default.
+
 #### Overrides
 
 `IEngineCoreConfig.types`

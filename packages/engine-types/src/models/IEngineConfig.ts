@@ -12,6 +12,7 @@ import type { DataConverterConnectorConfig } from "./config/dataConverterConnect
 import type { DataExtractorConnectorConfig } from "./config/dataExtractorConnectorConfig";
 import type { DataProcessingComponentConfig } from "./config/dataProcessingComponentConfig";
 import type { DltConfig } from "./config/dltConfig";
+import type { DocumentManagementComponentConfig } from "./config/documentManagementComponentConfig";
 import type { EntityStorageComponentConfig } from "./config/entityStorageComponentConfig";
 import type { EntityStorageConnectorConfig } from "./config/entityStorageConnectorConfig";
 import type { EventBusComponentConfig } from "./config/eventBusComponentConfig";
@@ -233,5 +234,10 @@ export interface IEngineConfig extends IEngineCoreConfig {
 		 * Date processing options which can be overridden by individual components by specifying types other than default.
 		 */
 		dataProcessingComponent?: IEngineCoreTypeConfig<DataProcessingComponentConfig>[];
+
+		/**
+		 * Document management options which can be overridden by individual components by specifying types other than default.
+		 */
+		documentManagementComponent?: IEngineCoreTypeConfig<DocumentManagementComponentConfig>[];
 	};
 }

@@ -254,6 +254,13 @@ function addRestPaths(
 	) {
 		coreEngineConfig.types.dataProcessingComponent[0].restPath = "data-processing";
 	}
+
+	if (
+		Is.arrayValue(coreEngineConfig.types.documentManagementComponent) &&
+		!Is.stringValue(coreEngineConfig.types.documentManagementComponent[0].restPath)
+	) {
+		coreEngineConfig.types.documentManagementComponent[0].restPath = "document-management";
+	}
 }
 
 /**

@@ -22,6 +22,7 @@ import {
 	DataConverterConnectorType,
 	DataExtractorConnectorType,
 	DataProcessingComponentType,
+	DocumentManagementComponentType,
 	EntityStorageComponentType,
 	EntityStorageConnectorType,
 	EventBusComponentType,
@@ -127,6 +128,7 @@ describe("engine-server", () => {
 				],
 				dataExtractorConnector: [{ type: DataExtractorConnectorType.JsonPath }],
 				dataProcessingComponent: [{ type: DataProcessingComponentType.Service }],
+				documentManagementComponent: [{ type: DocumentManagementComponentType.Service }],
 				informationComponent: [
 					{
 						type: InformationComponentType.Service,

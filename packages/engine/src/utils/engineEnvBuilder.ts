@@ -10,18 +10,23 @@ import {
 	BackgroundTaskConnectorType,
 	BlobStorageComponentType,
 	BlobStorageConnectorType,
+	DataConverterConnectorType,
+	DataExtractorConnectorType,
+	DataProcessingComponentType,
+	DocumentManagementComponentType,
 	EntityStorageConnectorType,
 	EventBusComponentType,
 	EventBusConnectorType,
 	FaucetConnectorType,
 	IdentityComponentType,
 	IdentityConnectorType,
-	IdentityResolverComponentType,
-	IdentityResolverConnectorType,
 	IdentityProfileComponentType,
 	IdentityProfileConnectorType,
+	IdentityResolverComponentType,
+	IdentityResolverConnectorType,
 	type IEngineConfig,
 	ImmutableProofComponentType,
+	ImmutableStorageComponentType,
 	ImmutableStorageConnectorType,
 	LoggingComponentType,
 	LoggingConnectorType,
@@ -34,11 +39,7 @@ import {
 	TelemetryComponentType,
 	TelemetryConnectorType,
 	VaultConnectorType,
-	WalletConnectorType,
-	DataExtractorConnectorType,
-	DataConverterConnectorType,
-	DataProcessingComponentType,
-	ImmutableStorageComponentType
+	WalletConnectorType
 } from "@twin.org/engine-types";
 import type { IEngineEnvironmentVariables } from "../models/IEngineEnvironmentVariables";
 
@@ -65,35 +66,39 @@ export function buildEngineConfiguration(envVars: IEngineEnvironmentVariables): 
 		types: {}
 	};
 
-	configureEntityStorageConnectors(coreConfig, envVars);
-	configureBlobStorageConnectors(coreConfig, envVars);
-	configureVaultConnectors(coreConfig, envVars);
+	configureEntityStorage(coreConfig, envVars);
+	configureBlobStorage(coreConfig, envVars);
+	configureVault(coreConfig, envVars);
 
-	configureLoggingConnectors(coreConfig, envVars);
-	configureBackgroundTaskConnectors(coreConfig, envVars);
-	configureEventBusConnectors(coreConfig, envVars);
-	configureTelemetryConnectors(coreConfig, envVars);
-	configureMessagingConnectors(coreConfig, envVars);
+	configureLogging(coreConfig, envVars);
+	configureBackgroundTask(coreConfig, envVars);
+	configureEventBus(coreConfig, envVars);
+	configureTelemetry(coreConfig, envVars);
+	configureMessaging(coreConfig, envVars);
 
-	configureFaucetConnectors(coreConfig, envVars);
-	configureWalletConnectors(coreConfig, envVars);
-	configureNftConnectors(coreConfig, envVars);
-	configureImmutableStorageConnectors(coreConfig, envVars);
-	configureIdentityConnectors(coreConfig, envVars);
-	configureIdentityResolverConnectors(coreConfig, envVars);
-	configureIdentityProfileConnectors(coreConfig, envVars);
-	configureAttestationConnectors(coreConfig, envVars);
-	configureDataProcessingConnectors(coreConfig, envVars);
+	configureFaucet(coreConfig, envVars);
+	configureWallet(coreConfig, envVars);
+	configureNft(coreConfig, envVars);
+	configureImmutableStorage(coreConfig, envVars);
+	configureIdentity(coreConfig, envVars);
+	configureIdentityResolver(coreConfig, envVars);
+	configureIdentityProfile(coreConfig, envVars);
+	configureAttestation(coreConfig, envVars);
+	configureDataProcessing(coreConfig, envVars);
+
+	configureAuditableItemGraph(coreConfig, envVars);
+	configureAuditableItemStream(coreConfig, envVars);
+	configureDocumentManagement(coreConfig, envVars);
 
 	return coreConfig;
 }
 
 /**
- * Configures the entity storage connectors for the core.
+ * Configures the entity storage.
  * @param coreConfig The core config.
  * @param envVars The environment variables.
  */
-function configureEntityStorageConnectors(
+function configureEntityStorage(
 	coreConfig: IEngineConfig,
 	envVars: IEngineEnvironmentVariables
 ): void {
@@ -257,11 +262,11 @@ function configureEntityStorageConnectors(
 }
 
 /**
- * Configures the blob storage connectors for the core.
+ * Configures the blob storage.
  * @param coreConfig The core config.
  * @param envVars The environment variables.
  */
-function configureBlobStorageConnectors(
+function configureBlobStorage(
 	coreConfig: IEngineConfig,
 	envVars: IEngineEnvironmentVariables
 ): void {
@@ -374,14 +379,11 @@ function configureBlobStorageConnectors(
 }
 
 /**
- * Configures the logging connectors for the core.
+ * Configures the logging.
  * @param coreConfig The core config.
  * @param envVars The environment variables.
  */
-function configureLoggingConnectors(
-	coreConfig: IEngineConfig,
-	envVars: IEngineEnvironmentVariables
-): void {
+function configureLogging(coreConfig: IEngineConfig, envVars: IEngineEnvironmentVariables): void {
 	coreConfig.types.loggingConnector ??= [];
 
 	const loggingConnectors = (envVars.loggingConnector ?? "").split(",");
@@ -422,14 +424,11 @@ function configureLoggingConnectors(
 }
 
 /**
- * Configures the vault connectors for the core.
+ * Configures the vault.
  * @param coreConfig The core config.
  * @param envVars The environment variables.
  */
-function configureVaultConnectors(
-	coreConfig: IEngineConfig,
-	envVars: IEngineEnvironmentVariables
-): void {
+function configureVault(coreConfig: IEngineConfig, envVars: IEngineEnvironmentVariables): void {
 	coreConfig.types.vaultConnector ??= [];
 
 	if (envVars.vaultConnector === VaultConnectorType.EntityStorage) {
@@ -450,11 +449,11 @@ function configureVaultConnectors(
 }
 
 /**
- * Configures the background task connectors for the core.
+ * Configures the background task.
  * @param coreConfig The core config.
  * @param envVars The environment variables.
  */
-function configureBackgroundTaskConnectors(
+function configureBackgroundTask(
 	coreConfig: IEngineConfig,
 	envVars: IEngineEnvironmentVariables
 ): void {
@@ -468,14 +467,11 @@ function configureBackgroundTaskConnectors(
 }
 
 /**
- * Configures the event bud connectors for the core.
+ * Configures the event bud.
  * @param coreConfig The core config.
  * @param envVars The environment variables.
  */
-function configureEventBusConnectors(
-	coreConfig: IEngineConfig,
-	envVars: IEngineEnvironmentVariables
-): void {
+function configureEventBus(coreConfig: IEngineConfig, envVars: IEngineEnvironmentVariables): void {
 	coreConfig.types.eventBusConnector ??= [];
 
 	if (envVars.eventBusConnector === EventBusConnectorType.Local) {
@@ -491,14 +487,11 @@ function configureEventBusConnectors(
 }
 
 /**
- * Configures the telemetry connectors for the core.
+ * Configures the telemetry.
  * @param coreConfig The core config.
  * @param envVars The environment variables.
  */
-function configureTelemetryConnectors(
-	coreConfig: IEngineConfig,
-	envVars: IEngineEnvironmentVariables
-): void {
+function configureTelemetry(coreConfig: IEngineConfig, envVars: IEngineEnvironmentVariables): void {
 	coreConfig.types.telemetryConnector ??= [];
 
 	if (envVars.telemetryConnector === TelemetryConnectorType.EntityStorage) {
@@ -514,14 +507,11 @@ function configureTelemetryConnectors(
 }
 
 /**
- * Configures the messaging connectors for the core.
+ * Configures the messaging.
  * @param coreConfig The core config.
  * @param envVars The environment variables.
  */
-function configureMessagingConnectors(
-	coreConfig: IEngineConfig,
-	envVars: IEngineEnvironmentVariables
-): void {
+function configureMessaging(coreConfig: IEngineConfig, envVars: IEngineEnvironmentVariables): void {
 	coreConfig.types.messagingEmailConnector ??= [];
 	coreConfig.types.messagingSmsConnector ??= [];
 	coreConfig.types.messagingPushNotificationConnector ??= [];
@@ -599,14 +589,11 @@ function configureMessagingConnectors(
 }
 
 /**
- * Configures the faucet connectors for the core.
+ * Configures the faucet.
  * @param coreConfig The core config.
  * @param envVars The environment variables.
  */
-function configureFaucetConnectors(
-	coreConfig: IEngineConfig,
-	envVars: IEngineEnvironmentVariables
-): void {
+function configureFaucet(coreConfig: IEngineConfig, envVars: IEngineEnvironmentVariables): void {
 	coreConfig.types.faucetConnector ??= [];
 
 	if (envVars.faucetConnector === FaucetConnectorType.EntityStorage) {
@@ -645,14 +632,11 @@ function configureFaucetConnectors(
 }
 
 /**
- * Configures the wallet connectors for the core.
+ * Configures the wallet.
  * @param coreConfig The core config.
  * @param envVars The environment variables.
  */
-function configureWalletConnectors(
-	coreConfig: IEngineConfig,
-	envVars: IEngineEnvironmentVariables
-): void {
+function configureWallet(coreConfig: IEngineConfig, envVars: IEngineEnvironmentVariables): void {
 	coreConfig.types.walletConnector ??= [];
 
 	if (envVars.walletConnector === WalletConnectorType.EntityStorage) {
@@ -689,14 +673,11 @@ function configureWalletConnectors(
 }
 
 /**
- * Configures the NFT connectors for the core.
+ * Configures the NFT.
  * @param coreConfig The core config.
  * @param envVars The environment variables.
  */
-function configureNftConnectors(
-	coreConfig: IEngineConfig,
-	envVars: IEngineEnvironmentVariables
-): void {
+function configureNft(coreConfig: IEngineConfig, envVars: IEngineEnvironmentVariables): void {
 	coreConfig.types.nftConnector ??= [];
 
 	if (envVars.nftConnector === NftConnectorType.EntityStorage) {
@@ -738,11 +719,11 @@ function configureNftConnectors(
 }
 
 /**
- * Configures the immutable storage connectors for the core.
+ * Configures the immutable storage.
  * @param coreConfig The core config.
  * @param envVars The environment variables.
  */
-function configureImmutableStorageConnectors(
+function configureImmutableStorage(
 	coreConfig: IEngineConfig,
 	envVars: IEngineEnvironmentVariables
 ): void {
@@ -810,14 +791,11 @@ function configureImmutableStorageConnectors(
 }
 
 /**
- * Configures the identity connectors for the core.
+ * Configures the identity.
  * @param coreConfig The core config.
  * @param envVars The environment variables.
  */
-function configureIdentityConnectors(
-	coreConfig: IEngineConfig,
-	envVars: IEngineEnvironmentVariables
-): void {
+function configureIdentity(coreConfig: IEngineConfig, envVars: IEngineEnvironmentVariables): void {
 	coreConfig.types.identityConnector ??= [];
 
 	if (envVars.identityConnector === IdentityConnectorType.EntityStorage) {
@@ -859,11 +837,11 @@ function configureIdentityConnectors(
 }
 
 /**
- * Configures the identity resolver connectors for the core.
+ * Configures the identity resolver.
  * @param coreConfig The core config.
  * @param envVars The environment variables.
  */
-function configureIdentityResolverConnectors(
+function configureIdentityResolver(
 	coreConfig: IEngineConfig,
 	envVars: IEngineEnvironmentVariables
 ): void {
@@ -910,11 +888,11 @@ function configureIdentityResolverConnectors(
 }
 
 /**
- * Configures the identity profile connectors for the core.
+ * Configures the identity profile.
  * @param coreConfig The core config.
  * @param envVars The environment variables.
  */
-function configureIdentityProfileConnectors(
+function configureIdentityProfile(
 	coreConfig: IEngineConfig,
 	envVars: IEngineEnvironmentVariables
 ): void {
@@ -933,11 +911,11 @@ function configureIdentityProfileConnectors(
 }
 
 /**
- * Configures the attestation connectors for the core.
+ * Configures the attestation.
  * @param coreConfig The core config.
  * @param envVars The environment variables.
  */
-function configureAttestationConnectors(
+function configureAttestation(
 	coreConfig: IEngineConfig,
 	envVars: IEngineEnvironmentVariables
 ): void {
@@ -963,11 +941,45 @@ function configureAttestationConnectors(
 }
 
 /**
- * Configures the data processing connectors for the core.
+ * Configures the auditable item graph.
  * @param coreConfig The core config.
  * @param envVars The environment variables.
  */
-function configureDataProcessingConnectors(
+function configureAuditableItemGraph(
+	coreConfig: IEngineConfig,
+	envVars: IEngineEnvironmentVariables
+): void {
+	if (Is.arrayValue(coreConfig.types.immutableStorageConnector)) {
+		coreConfig.types.auditableItemGraphComponent ??= [];
+		coreConfig.types.auditableItemGraphComponent.push({
+			type: AuditableItemGraphComponentType.Service
+		});
+	}
+}
+
+/**
+ * Configures the auditable item stream.
+ * @param coreConfig The core config.
+ * @param envVars The environment variables.
+ */
+function configureAuditableItemStream(
+	coreConfig: IEngineConfig,
+	envVars: IEngineEnvironmentVariables
+): void {
+	if (Is.arrayValue(coreConfig.types.immutableStorageConnector)) {
+		coreConfig.types.auditableItemStreamComponent ??= [];
+		coreConfig.types.auditableItemStreamComponent.push({
+			type: AuditableItemStreamComponentType.Service
+		});
+	}
+}
+
+/**
+ * Configures the data processing.
+ * @param coreConfig The core config.
+ * @param envVars The environment variables.
+ */
+function configureDataProcessing(
 	coreConfig: IEngineConfig,
 	envVars: IEngineEnvironmentVariables
 ): void {
@@ -1002,5 +1014,26 @@ function configureDataProcessingConnectors(
 	) {
 		coreConfig.types.dataProcessingComponent ??= [];
 		coreConfig.types.dataProcessingComponent.push({ type: DataProcessingComponentType.Service });
+	}
+}
+
+/**
+ * Configures the document management.
+ * @param coreConfig The core config.
+ * @param envVars The environment variables.
+ */
+function configureDocumentManagement(
+	coreConfig: IEngineConfig,
+	envVars: IEngineEnvironmentVariables
+): void {
+	if (
+		Is.arrayValue(coreConfig.types.auditableItemGraphComponent) &&
+		Is.arrayValue(coreConfig.types.blobStorageComponent) &&
+		Is.arrayValue(coreConfig.types.attestationComponent)
+	) {
+		coreConfig.types.documentManagementComponent ??= [];
+		coreConfig.types.documentManagementComponent.push({
+			type: DocumentManagementComponentType.Service
+		});
 	}
 }

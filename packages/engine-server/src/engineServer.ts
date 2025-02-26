@@ -486,6 +486,12 @@ export class EngineServer<T extends IEngineServerConfig = IEngineServerConfig>
 			"@twin.org/data-processing-service",
 			"generateRestRoutesDataProcessing"
 		);
+		this.addRestRouteGenerator(
+			"documentManagementComponent",
+			coreConfig.types.documentManagementComponent,
+			"@twin.org/document-management-service",
+			"generateRestRoutesDocumentManagement"
+		);
 	}
 
 	/**
