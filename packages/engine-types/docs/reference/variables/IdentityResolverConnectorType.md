@@ -18,6 +18,12 @@ Entity storage.
 
 IOTA.
 
+### IotaUniversal
+
+> `readonly` **IotaUniversal**: `"iota-universal"` = `"iota-universal"`
+
+IOTA Universal.
+
 ### IotaStardust
 
 > `readonly` **IotaStardust**: `"iota-stardust"` = `"iota-stardust"`

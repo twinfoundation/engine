@@ -56,7 +56,6 @@ export function buildEngineConfiguration(envVars: IEngineEnvironmentVariables): 
 	}
 
 	envVars.attestationVerificationMethodId ??= "attestation-assertion";
-	envVars.immutableProofHashKeyId ??= "immutable-proof-hash";
 	envVars.immutableProofVerificationMethodId ??= "immutable-proof-assertion";
 	envVars.blobStorageEnableEncryption ??= "false";
 	envVars.blobStorageEncryptionKey ??= "blob-encryption";
@@ -772,8 +771,7 @@ function configureImmutableStorage(
 			type: ImmutableProofComponentType.Service,
 			options: {
 				config: {
-					verificationMethodId: envVars.immutableProofVerificationMethodId,
-					proofHashKeyId: envVars.immutableProofHashKeyId
+					verificationMethodId: envVars.immutableProofVerificationMethodId
 				}
 			}
 		});
@@ -874,6 +872,15 @@ function configureIdentityResolver(
 					},
 					network: envVars.iotaNetwork ?? "",
 					coinType: Coerce.number(envVars.iotaCoinType)
+				}
+			}
+		});
+	} else if (envVars.identityResolverConnector === IdentityResolverConnectorType.IotaUniversal) {
+		coreConfig.types.identityResolverConnector.push({
+			type: IdentityResolverConnectorType.IotaUniversal,
+			options: {
+				config: {
+					endpoint: envVars.iotaUniversalResolverEndpoint ?? ""
 				}
 			}
 		});

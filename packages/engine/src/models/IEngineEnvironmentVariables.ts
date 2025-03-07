@@ -446,6 +446,11 @@ export interface IEngineEnvironmentVariables {
 	iotaExplorerEndpoint?: string;
 
 	/**
+	 * IOTA Universal Resolver Endpoint.
+	 */
+	iotaUniversalResolverEndpoint?: string;
+
+	/**
 	 * The type of identity profile connector: entity-storage.
 	 */
 	identityProfileConnector?: string;
@@ -454,11 +459,6 @@ export interface IEngineEnvironmentVariables {
 	 * The identity verification method id to use with immutable proofs.
 	 */
 	immutableProofVerificationMethodId?: string;
-
-	/**
-	 * The hash key from the vault to use with immutable proofs.
-	 */
-	immutableProofHashKeyId?: string;
 
 	/**
 	 * The type of attestation connector: entity-storage, iota.

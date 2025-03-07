@@ -50,7 +50,6 @@ export function initialiseImmutableProofComponent(
 		);
 
 		component = new ImmutableProofService({
-			vaultConnectorType: context.defaultTypes.vaultConnector,
 			immutableStorageType: context.defaultTypes.immutableStorageConnector,
 			identityConnectorType: context.defaultTypes.identityConnector,
 			backgroundTaskConnectorType: context.defaultTypes.backgroundTaskConnector,

@@ -17,6 +17,11 @@ export const IdentityResolverConnectorType = {
 	Iota: "iota",
 
 	/**
+	 * IOTA Universal.
+	 */
+	IotaUniversal: "iota-universal",
+
+	/**
 	 * IOTA Stardust.
 	 */
 	IotaStardust: "iota-stardust"

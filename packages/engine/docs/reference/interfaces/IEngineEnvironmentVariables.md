@@ -708,6 +708,14 @@ IOTA Explorer Endpoint.
 
 ***
 
+### iotaUniversalResolverEndpoint?
+
+> `optional` **iotaUniversalResolverEndpoint**: `string`
+
+IOTA Universal Resolver Endpoint.
+
+***
+
 ### identityProfileConnector?
 
 > `optional` **identityProfileConnector**: `string`
@@ -721,14 +729,6 @@ The type of identity profile connector: entity-storage.
 > `optional` **immutableProofVerificationMethodId**: `string`
 
 The identity verification method id to use with immutable proofs.
-
-***
-
-### immutableProofHashKeyId?
-
-> `optional` **immutableProofHashKeyId**: `string`
-
-The hash key from the vault to use with immutable proofs.
 
 ***
 
