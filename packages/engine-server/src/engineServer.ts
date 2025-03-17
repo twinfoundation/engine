@@ -445,10 +445,10 @@ export class EngineServer<T extends IEngineServerConfig = IEngineServerConfig>
 			"generateRestRoutesNft"
 		);
 		this.addRestRouteGenerator(
-			"immutableStorageComponent",
-			coreConfig.types.immutableStorageComponent,
-			"@twin.org/immutable-storage-service",
-			"generateRestRoutesImmutableStorage"
+			"verifiableStorageComponent",
+			coreConfig.types.verifiableStorageComponent,
+			"@twin.org/verifiable-storage-service",
+			"generateRestRoutesVerifiableStorage"
 		);
 		this.addRestRouteGenerator(
 			"attestationComponent",

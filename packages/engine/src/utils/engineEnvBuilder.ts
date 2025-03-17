@@ -26,8 +26,8 @@ import {
 	IdentityResolverConnectorType,
 	type IEngineConfig,
 	ImmutableProofComponentType,
-	ImmutableStorageComponentType,
-	ImmutableStorageConnectorType,
+	VerifiableStorageComponentType,
+	VerifiableStorageConnectorType,
 	LoggingComponentType,
 	LoggingConnectorType,
 	MessagingComponentType,
@@ -78,7 +78,7 @@ export function buildEngineConfiguration(envVars: IEngineEnvironmentVariables): 
 	configureFaucet(coreConfig, envVars);
 	configureWallet(coreConfig, envVars);
 	configureNft(coreConfig, envVars);
-	configureImmutableStorage(coreConfig, envVars);
+	configureVerifiableStorage(coreConfig, envVars);
 	configureIdentity(coreConfig, envVars);
 	configureIdentityResolver(coreConfig, envVars);
 	configureIdentityProfile(coreConfig, envVars);
@@ -718,23 +718,23 @@ function configureNft(coreConfig: IEngineConfig, envVars: IEngineEnvironmentVari
 }
 
 /**
- * Configures the immutable storage.
+ * Configures the verifiable storage.
  * @param coreConfig The core config.
  * @param envVars The environment variables.
  */
-function configureImmutableStorage(
+function configureVerifiableStorage(
 	coreConfig: IEngineConfig,
 	envVars: IEngineEnvironmentVariables
 ): void {
-	coreConfig.types.immutableStorageConnector ??= [];
+	coreConfig.types.verifiableStorageConnector ??= [];
 
-	if (envVars.immutableStorageConnector === ImmutableStorageConnectorType.EntityStorage) {
-		coreConfig.types.immutableStorageConnector.push({
-			type: ImmutableStorageConnectorType.EntityStorage
+	if (envVars.verifiableStorageConnector === VerifiableStorageConnectorType.EntityStorage) {
+		coreConfig.types.verifiableStorageConnector.push({
+			type: VerifiableStorageConnectorType.EntityStorage
 		});
-	} else if (envVars.immutableStorageConnector === ImmutableStorageConnectorType.IotaStardust) {
-		coreConfig.types.immutableStorageConnector.push({
-			type: ImmutableStorageConnectorType.IotaStardust,
+	} else if (envVars.verifiableStorageConnector === VerifiableStorageConnectorType.IotaStardust) {
+		coreConfig.types.verifiableStorageConnector.push({
+			type: VerifiableStorageConnectorType.IotaStardust,
 			options: {
 				config: {
 					clientOptions: {
@@ -745,9 +745,9 @@ function configureImmutableStorage(
 				}
 			}
 		});
-	} else if (envVars.immutableStorageConnector === ImmutableStorageConnectorType.Iota) {
-		coreConfig.types.immutableStorageConnector.push({
-			type: ImmutableStorageConnectorType.Iota,
+	} else if (envVars.verifiableStorageConnector === VerifiableStorageConnectorType.Iota) {
+		coreConfig.types.verifiableStorageConnector.push({
+			type: VerifiableStorageConnectorType.Iota,
 			options: {
 				config: {
 					clientOptions: {
@@ -760,10 +760,10 @@ function configureImmutableStorage(
 		});
 	}
 
-	if (coreConfig.types.immutableStorageConnector.length > 0) {
-		coreConfig.types.immutableStorageComponent ??= [];
-		coreConfig.types.immutableStorageComponent.push({
-			type: ImmutableStorageComponentType.Service
+	if (coreConfig.types.verifiableStorageConnector.length > 0) {
+		coreConfig.types.verifiableStorageComponent ??= [];
+		coreConfig.types.verifiableStorageComponent.push({
+			type: VerifiableStorageComponentType.Service
 		});
 
 		coreConfig.types.immutableProofComponent ??= [];
@@ -875,12 +875,12 @@ function configureIdentityResolver(
 				}
 			}
 		});
-	} else if (envVars.identityResolverConnector === IdentityResolverConnectorType.IotaUniversal) {
+	} else if (envVars.identityResolverConnector === IdentityResolverConnectorType.Universal) {
 		coreConfig.types.identityResolverConnector.push({
-			type: IdentityResolverConnectorType.IotaUniversal,
+			type: IdentityResolverConnectorType.Universal,
 			options: {
 				config: {
-					endpoint: envVars.iotaUniversalResolverEndpoint ?? ""
+					endpoint: envVars.universalResolverEndpoint ?? ""
 				}
 			}
 		});
@@ -956,7 +956,7 @@ function configureAuditableItemGraph(
 	coreConfig: IEngineConfig,
 	envVars: IEngineEnvironmentVariables
 ): void {
-	if (Is.arrayValue(coreConfig.types.immutableStorageConnector)) {
+	if (Is.arrayValue(coreConfig.types.verifiableStorageConnector)) {
 		coreConfig.types.auditableItemGraphComponent ??= [];
 		coreConfig.types.auditableItemGraphComponent.push({
 			type: AuditableItemGraphComponentType.Service
@@ -973,7 +973,7 @@ function configureAuditableItemStream(
 	coreConfig: IEngineConfig,
 	envVars: IEngineEnvironmentVariables
 ): void {
-	if (Is.arrayValue(coreConfig.types.immutableStorageConnector)) {
+	if (Is.arrayValue(coreConfig.types.verifiableStorageConnector)) {
 		coreConfig.types.auditableItemStreamComponent ??= [];
 		coreConfig.types.auditableItemStreamComponent.push({
 			type: AuditableItemStreamComponentType.Service

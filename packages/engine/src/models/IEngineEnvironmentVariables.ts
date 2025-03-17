@@ -391,9 +391,9 @@ export interface IEngineEnvironmentVariables {
 	identityResolverConnector?: string;
 
 	/**
-	 * The type of immutable storage connector: entity-storage, iota.
+	 * The type of verifiable storage connector: entity-storage, iota.
 	 */
-	immutableStorageConnector?: string;
+	verifiableStorageConnector?: string;
 
 	/**
 	 * IOTA Stardust Faucet Endpoint.
@@ -446,9 +446,9 @@ export interface IEngineEnvironmentVariables {
 	iotaExplorerEndpoint?: string;
 
 	/**
-	 * IOTA Universal Resolver Endpoint.
+	 * Universal Resolver Endpoint.
 	 */
-	iotaUniversalResolverEndpoint?: string;
+	universalResolverEndpoint?: string;
 
 	/**
 	 * The type of identity profile connector: entity-storage.

@@ -2,10 +2,10 @@
 // SPDX-License-Identifier: Apache-2.0.
 
 /**
- * Immutable storage connector types.
+ * Verifiable storage connector types.
  */
 // eslint-disable-next-line @typescript-eslint/naming-convention
-export const ImmutableStorageConnectorType = {
+export const VerifiableStorageConnectorType = {
 	/**
 	 * Entity storage.
 	 */
@@ -23,7 +23,7 @@ export const ImmutableStorageConnectorType = {
 } as const;
 
 /**
- * Immutable storage connector types.
+ * Verifiable storage connector types.
  */
-export type ImmutableStorageConnectorType =
-	(typeof ImmutableStorageConnectorType)[keyof typeof ImmutableStorageConnectorType];
+export type VerifiableStorageConnectorType =
+	(typeof VerifiableStorageConnectorType)[keyof typeof VerifiableStorageConnectorType];

@@ -1,8 +1,8 @@
-# Variable: ImmutableStorageConnectorType
+# Variable: VerifiableStorageConnectorType
 
-> `const` **ImmutableStorageConnectorType**: `object`
+> `const` **VerifiableStorageConnectorType**: `object`
 
-Immutable storage connector types.
+Verifiable storage connector types.
 
 ## Type declaration
 

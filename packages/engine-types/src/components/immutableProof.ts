@@ -50,7 +50,7 @@ export function initialiseImmutableProofComponent(
 		);
 
 		component = new ImmutableProofService({
-			immutableStorageType: context.defaultTypes.immutableStorageConnector,
+			verifiableStorageType: context.defaultTypes.verifiableStorageConnector,
 			identityConnectorType: context.defaultTypes.identityConnector,
 			backgroundTaskConnectorType: context.defaultTypes.backgroundTaskConnector,
 			eventBusComponentType: context.defaultTypes.eventBusComponent,

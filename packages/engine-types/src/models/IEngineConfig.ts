@@ -25,8 +25,6 @@ import type { IdentityProfileConnectorConfig } from "./config/identityProfileCon
 import type { IdentityResolverComponentConfig } from "./config/identityResolverComponentConfig";
 import type { IdentityResolverConnectorConfig } from "./config/identityResolverConnectorConfig";
 import type { ImmutableProofComponentConfig } from "./config/immutableProofComponentConfig";
-import type { ImmutableStorageComponentConfig } from "./config/immutableStorageComponentConfig";
-import type { ImmutableStorageConnectorConfig } from "./config/immutableStorageConnectorConfig";
 import type { LoggingComponentConfig } from "./config/loggingComponentConfig";
 import type { LoggingConnectorConfig } from "./config/loggingConnectorConfig";
 import type { MessagingComponentConfig } from "./config/messagingComponentConfig";
@@ -38,6 +36,8 @@ import type { NftConnectorConfig } from "./config/nftConnectorConfig";
 import type { TelemetryComponentConfig } from "./config/telemetryComponentConfig";
 import type { TelemetryConnectorConfig } from "./config/telemetryConnectorConfig";
 import type { VaultConnectorConfig } from "./config/vaultConnectorConfig";
+import type { VerifiableStorageComponentConfig } from "./config/verifiableStorageComponentConfig";
+import type { VerifiableStorageConnectorConfig } from "./config/verifiableStorageConnectorConfig";
 import type { WalletConnectorConfig } from "./config/walletConnectorConfig";
 
 /**
@@ -141,14 +141,14 @@ export interface IEngineConfig extends IEngineCoreConfig {
 		walletConnector?: IEngineCoreTypeConfig<WalletConnectorConfig>[];
 
 		/**
-		 * Immutable storage connector options which can be overridden by individual components by specifying types other than default.
+		 * Verifiable storage connector options which can be overridden by individual components by specifying types other than default.
 		 */
-		immutableStorageConnector?: IEngineCoreTypeConfig<ImmutableStorageConnectorConfig>[];
+		verifiableStorageConnector?: IEngineCoreTypeConfig<VerifiableStorageConnectorConfig>[];
 
 		/**
-		 * Immutable storage component options which can be overridden by individual components by specifying types other than default.
+		 * Verifiable storage component options which can be overridden by individual components by specifying types other than default.
 		 */
-		immutableStorageComponent?: IEngineCoreTypeConfig<ImmutableStorageComponentConfig>[];
+		verifiableStorageComponent?: IEngineCoreTypeConfig<VerifiableStorageComponentConfig>[];
 
 		/**
 		 * Immutable proof component options which can be overridden by individual components by specifying types other than default.

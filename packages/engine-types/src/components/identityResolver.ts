@@ -9,6 +9,7 @@ import {
 } from "@twin.org/identity-connector-entity-storage";
 import { IotaIdentityResolverConnector } from "@twin.org/identity-connector-iota";
 import { IotaStardustIdentityResolverConnector } from "@twin.org/identity-connector-iota-stardust";
+import { UniversalResolverConnector } from "@twin.org/identity-connector-universal";
 import {
 	IdentityResolverConnectorFactory,
 	type IIdentityResolverComponent,
@@ -84,6 +85,11 @@ export function initialiseIdentityResolverConnector(
 			...instanceConfig.options
 		});
 		instanceType = EntityStorageIdentityResolverConnector.NAMESPACE;
+	} else if (type === IdentityResolverConnectorType.Universal) {
+		connector = new UniversalResolverConnector({
+			...instanceConfig.options
+		});
+		instanceType = UniversalResolverConnector.NAMESPACE;
 	} else {
 		throw new GeneralError("engineCore", "connectorUnknownType", {
 			type,

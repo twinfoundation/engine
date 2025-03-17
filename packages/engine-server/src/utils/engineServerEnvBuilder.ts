@@ -214,10 +214,10 @@ function addRestPaths(
 	}
 
 	if (
-		Is.arrayValue(coreEngineConfig.types.immutableStorageComponent) &&
-		!Is.stringValue(coreEngineConfig.types.immutableStorageComponent[0].restPath)
+		Is.arrayValue(coreEngineConfig.types.verifiableStorageComponent) &&
+		!Is.stringValue(coreEngineConfig.types.verifiableStorageComponent[0].restPath)
 	) {
-		coreEngineConfig.types.immutableStorageComponent[0].restPath = "immutable";
+		coreEngineConfig.types.verifiableStorageComponent[0].restPath = "immutable";
 	}
 
 	if (

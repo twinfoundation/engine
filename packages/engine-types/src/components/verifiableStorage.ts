@@ -2,29 +2,29 @@
 // SPDX-License-Identifier: Apache-2.0.
 import { ComponentFactory, GeneralError, I18n } from "@twin.org/core";
 import type { IEngineCoreContext, IEngineCore } from "@twin.org/engine-models";
-import {
-	EntityStorageImmutableStorageConnector,
-	initSchema as initSchemaImmutableStorageStorage,
-	type ImmutableItem
-} from "@twin.org/immutable-storage-connector-entity-storage";
-import { IotaImmutableStorageConnector } from "@twin.org/immutable-storage-connector-iota";
-import { IotaStardustImmutableStorageConnector } from "@twin.org/immutable-storage-connector-iota-stardust";
-import {
-	type IImmutableStorageComponent,
-	ImmutableStorageConnectorFactory,
-	type IImmutableStorageConnector
-} from "@twin.org/immutable-storage-models";
-import { ImmutableStorageService } from "@twin.org/immutable-storage-service";
 import { nameof } from "@twin.org/nameof";
+import {
+	EntityStorageVerifiableStorageConnector,
+	initSchema as initSchemaVerifiableStorageStorage,
+	type VerifiableItem
+} from "@twin.org/verifiable-storage-connector-entity-storage";
+import { IotaVerifiableStorageConnector } from "@twin.org/verifiable-storage-connector-iota";
+import { IotaStardustVerifiableStorageConnector } from "@twin.org/verifiable-storage-connector-iota-stardust";
+import {
+	type IVerifiableStorageComponent,
+	VerifiableStorageConnectorFactory,
+	type IVerifiableStorageConnector
+} from "@twin.org/verifiable-storage-models";
+import { VerifiableStorageService } from "@twin.org/verifiable-storage-service";
 import { initialiseEntityStorageConnector } from "./entityStorage";
-import type { ImmutableStorageComponentConfig } from "../models/config/immutableStorageComponentConfig";
-import type { ImmutableStorageConnectorConfig } from "../models/config/immutableStorageConnectorConfig";
+import type { VerifiableStorageComponentConfig } from "../models/config/verifiableStorageComponentConfig";
+import type { VerifiableStorageConnectorConfig } from "../models/config/verifiableStorageConnectorConfig";
 import type { IEngineConfig } from "../models/IEngineConfig";
-import { ImmutableStorageComponentType } from "../models/types/immutableStorageComponentType";
-import { ImmutableStorageConnectorType } from "../models/types/immutableStorageConnectorType";
+import { VerifiableStorageComponentType } from "../models/types/verifiableStorageComponentType";
+import { VerifiableStorageConnectorType } from "../models/types/verifiableStorageConnectorType";
 
 /**
- * Initialise the immutable storage connector.
+ * Initialise the verifiable storage connector.
  * @param engineCore The engine core.
  * @param context The context for the engine.
  * @param instanceConfig The instance config.
@@ -32,26 +32,26 @@ import { ImmutableStorageConnectorType } from "../models/types/immutableStorageC
  * @returns The name of the instance created.
  * @throws GeneralError if the connector type is unknown.
  */
-export function initialiseImmutableStorageConnector(
+export function initialiseVerifiableStorageConnector(
 	engineCore: IEngineCore<IEngineConfig>,
 	context: IEngineCoreContext<IEngineConfig>,
-	instanceConfig: ImmutableStorageConnectorConfig,
+	instanceConfig: VerifiableStorageConnectorConfig,
 	overrideInstanceType?: string
 ): string | undefined {
 	engineCore.logInfo(
 		I18n.formatMessage("engineCore.configuring", {
-			element: `Immutable Storage Connector: ${instanceConfig.type}`
+			element: `Verifiable Storage Connector: ${instanceConfig.type}`
 		})
 	);
 
 	const type = instanceConfig.type;
-	let connector: IImmutableStorageConnector;
+	let connector: IVerifiableStorageConnector;
 	let instanceType: string;
-	if (type === ImmutableStorageConnectorType.IotaStardust) {
+	if (type === VerifiableStorageConnectorType.IotaStardust) {
 		const dltConfig = context.config.types.dltConfig?.find(
 			dlt => dlt.type === context.defaultTypes.dltConfig
 		);
-		connector = new IotaStardustImmutableStorageConnector({
+		connector = new IotaStardustVerifiableStorageConnector({
 			vaultConnectorType: context.defaultTypes.vaultConnector,
 			...instanceConfig.options,
 			config: {
@@ -59,12 +59,12 @@ export function initialiseImmutableStorageConnector(
 				...instanceConfig.options.config
 			}
 		});
-		instanceType = IotaStardustImmutableStorageConnector.NAMESPACE;
-	} else if (type === ImmutableStorageConnectorType.Iota) {
+		instanceType = IotaStardustVerifiableStorageConnector.NAMESPACE;
+	} else if (type === VerifiableStorageConnectorType.Iota) {
 		const dltConfig = context.config.types.dltConfig?.find(
 			dlt => dlt.type === context.defaultTypes.dltConfig
 		);
-		connector = new IotaImmutableStorageConnector({
+		connector = new IotaVerifiableStorageConnector({
 			vaultConnectorType: context.defaultTypes.vaultConnector,
 			...instanceConfig.options,
 			config: {
@@ -72,21 +72,21 @@ export function initialiseImmutableStorageConnector(
 				...instanceConfig.options.config
 			}
 		});
-		instanceType = IotaImmutableStorageConnector.NAMESPACE;
-	} else if (type === ImmutableStorageConnectorType.EntityStorage) {
-		initSchemaImmutableStorageStorage();
+		instanceType = IotaVerifiableStorageConnector.NAMESPACE;
+	} else if (type === VerifiableStorageConnectorType.EntityStorage) {
+		initSchemaVerifiableStorageStorage();
 		initialiseEntityStorageConnector(
 			engineCore,
 			context,
-			instanceConfig.options?.immutableStorageEntityStorageType,
-			nameof<ImmutableItem>()
+			instanceConfig.options?.verifiableStorageEntityStorageType,
+			nameof<VerifiableItem>()
 		);
-		connector = new EntityStorageImmutableStorageConnector(instanceConfig.options);
-		instanceType = EntityStorageImmutableStorageConnector.NAMESPACE;
+		connector = new EntityStorageVerifiableStorageConnector(instanceConfig.options);
+		instanceType = EntityStorageVerifiableStorageConnector.NAMESPACE;
 	} else {
 		throw new GeneralError("engineCore", "connectorUnknownType", {
 			type,
-			connectorType: "immutableStorageConnector"
+			connectorType: "verifiableStorageConnector"
 		});
 	}
 
@@ -95,12 +95,12 @@ export function initialiseImmutableStorageConnector(
 		instanceType: finalInstanceType,
 		component: connector
 	});
-	ImmutableStorageConnectorFactory.register(finalInstanceType, () => connector);
+	VerifiableStorageConnectorFactory.register(finalInstanceType, () => connector);
 	return finalInstanceType;
 }
 
 /**
- * Initialise the immutable storage component.
+ * Initialise the verifiable storage component.
  * @param engineCore The engine core.
  * @param context The context for the engine.
  * @param instanceConfig The instance config.
@@ -108,31 +108,31 @@ export function initialiseImmutableStorageConnector(
  * @returns The name of the instance created.
  * @throws GeneralError if the component type is unknown.
  */
-export function initialiseImmutableStorageComponent(
+export function initialiseVerifiableStorageComponent(
 	engineCore: IEngineCore<IEngineConfig>,
 	context: IEngineCoreContext<IEngineConfig>,
-	instanceConfig: ImmutableStorageComponentConfig,
+	instanceConfig: VerifiableStorageComponentConfig,
 	overrideInstanceType?: string
 ): string | undefined {
 	engineCore.logInfo(
 		I18n.formatMessage("engineCore.configuring", {
-			element: `Immutable Storage Component: ${instanceConfig.type}`
+			element: `Verifiable Storage Component: ${instanceConfig.type}`
 		})
 	);
 
 	const type = instanceConfig.type;
-	let component: IImmutableStorageComponent;
+	let component: IVerifiableStorageComponent;
 	let instanceType: string;
 
-	if (type === ImmutableStorageComponentType.Service) {
-		component = new ImmutableStorageService({
+	if (type === VerifiableStorageComponentType.Service) {
+		component = new VerifiableStorageService({
 			...instanceConfig.options
 		});
-		instanceType = ImmutableStorageService.NAMESPACE;
+		instanceType = VerifiableStorageService.NAMESPACE;
 	} else {
 		throw new GeneralError("engineCore", "componentUnknownType", {
 			type,
-			componentType: "immutableStorageComponent"
+			componentType: "verifiableStorageComponent"
 		});
 	}
 

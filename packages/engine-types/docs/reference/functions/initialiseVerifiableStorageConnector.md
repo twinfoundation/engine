@@ -1,8 +1,8 @@
-# Function: initialiseImmutableStorageComponent()
+# Function: initialiseVerifiableStorageConnector()
 
-> **initialiseImmutableStorageComponent**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType`?): `undefined` \| `string`
+> **initialiseVerifiableStorageConnector**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType`?): `undefined` \| `string`
 
-Initialise the immutable storage component.
+Initialise the verifiable storage connector.
 
 ## Parameters
 
@@ -20,7 +20,7 @@ The context for the engine.
 
 ### instanceConfig
 
-[`ImmutableStorageComponentConfig`](../type-aliases/ImmutableStorageComponentConfig.md)
+[`VerifiableStorageConnectorConfig`](../type-aliases/VerifiableStorageConnectorConfig.md)
 
 The instance config.
 
@@ -38,4 +38,4 @@ The name of the instance created.
 
 ## Throws
 
-GeneralError if the component type is unknown.
+GeneralError if the connector type is unknown.

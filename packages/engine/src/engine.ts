@@ -131,17 +131,17 @@ export class Engine<
 		);
 
 		this.addTypeInitialiser(
-			"immutableStorageConnector",
-			this._context.config.types.immutableStorageConnector,
+			"verifiableStorageConnector",
+			this._context.config.types.verifiableStorageConnector,
 			"@twin.org/engine-types",
-			"initialiseImmutableStorageConnector"
+			"initialiseVerifiableStorageConnector"
 		);
 
 		this.addTypeInitialiser(
-			"immutableStorageComponent",
-			this._context.config.types.immutableStorageComponent,
+			"verifiableStorageComponent",
+			this._context.config.types.verifiableStorageComponent,
 			"@twin.org/engine-types",
-			"initialiseImmutableStorageComponent"
+			"initialiseVerifiableStorageComponent"
 		);
 
 		this.addTypeInitialiser(

@@ -620,11 +620,11 @@ The type of identity resolver connector: entity-storage, iota, iota-stardust.
 
 ***
 
-### immutableStorageConnector?
+### verifiableStorageConnector?
 
-> `optional` **immutableStorageConnector**: `string`
+> `optional` **verifiableStorageConnector**: `string`
 
-The type of immutable storage connector: entity-storage, iota.
+The type of verifiable storage connector: entity-storage, iota.
 
 ***
 
@@ -708,11 +708,11 @@ IOTA Explorer Endpoint.
 
 ***
 
-### iotaUniversalResolverEndpoint?
+### universalResolverEndpoint?
 
-> `optional` **iotaUniversalResolverEndpoint**: `string`
+> `optional` **universalResolverEndpoint**: `string`
 
-IOTA Universal Resolver Endpoint.
+Universal Resolver Endpoint.
 
 ***
 

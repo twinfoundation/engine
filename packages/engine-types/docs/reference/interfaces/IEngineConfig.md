@@ -162,17 +162,17 @@ DLT options which can be overridden by individual components by specifying types
 
 Wallet connector options which can be overridden by individual components by specifying types other than default.
 
-#### immutableStorageConnector?
+#### verifiableStorageConnector?
 
-> `optional` **immutableStorageConnector**: `IEngineCoreTypeConfig`\<[`ImmutableStorageConnectorConfig`](../type-aliases/ImmutableStorageConnectorConfig.md)\>[]
+> `optional` **verifiableStorageConnector**: `IEngineCoreTypeConfig`\<[`VerifiableStorageConnectorConfig`](../type-aliases/VerifiableStorageConnectorConfig.md)\>[]
 
-Immutable storage connector options which can be overridden by individual components by specifying types other than default.
+Verifiable storage connector options which can be overridden by individual components by specifying types other than default.
 
-#### immutableStorageComponent?
+#### verifiableStorageComponent?
 
-> `optional` **immutableStorageComponent**: `IEngineCoreTypeConfig`\<[`ImmutableStorageComponentConfig`](../type-aliases/ImmutableStorageComponentConfig.md)\>[]
+> `optional` **verifiableStorageComponent**: `IEngineCoreTypeConfig`\<[`VerifiableStorageComponentConfig`](../type-aliases/VerifiableStorageComponentConfig.md)\>[]
 
-Immutable storage component options which can be overridden by individual components by specifying types other than default.
+Verifiable storage component options which can be overridden by individual components by specifying types other than default.
 
 #### immutableProofComponent?
 
