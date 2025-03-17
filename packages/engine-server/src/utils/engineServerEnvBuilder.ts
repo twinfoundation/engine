@@ -217,7 +217,7 @@ function addRestPaths(
 		Is.arrayValue(coreEngineConfig.types.verifiableStorageComponent) &&
 		!Is.stringValue(coreEngineConfig.types.verifiableStorageComponent[0].restPath)
 	) {
-		coreEngineConfig.types.verifiableStorageComponent[0].restPath = "immutable";
+		coreEngineConfig.types.verifiableStorageComponent[0].restPath = "verifiable";
 	}
 
 	if (
