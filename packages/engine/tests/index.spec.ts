@@ -1,6 +1,6 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
-import { mkdir, rmdir } from "node:fs/promises";
+import { mkdir, rm } from "node:fs/promises";
 import { ComponentFactory, Factory, I18n } from "@twin.org/core";
 import { MemoryStateStorage } from "@twin.org/engine-core";
 import {
@@ -28,8 +28,6 @@ import {
 	IdentityResolverConnectorType,
 	type IEngineConfig,
 	ImmutableProofComponentType,
-	VerifiableStorageComponentType,
-	VerifiableStorageConnectorType,
 	LoggingComponentType,
 	LoggingConnectorType,
 	MessagingComponentType,
@@ -41,6 +39,8 @@ import {
 	TelemetryComponentType,
 	TelemetryConnectorType,
 	VaultConnectorType,
+	VerifiableStorageComponentType,
+	VerifiableStorageConnectorType,
 	WalletConnectorType
 } from "@twin.org/engine-types";
 import { entity, EntitySchemaFactory, EntitySchemaHelper, property } from "@twin.org/entity";
@@ -71,7 +71,7 @@ describe("engine", () => {
 	});
 
 	afterEach(async () => {
-		await rmdir("tests/.tmp", { recursive: true });
+		await rm("tests/.tmp", { recursive: true });
 	});
 
 	test("Can start engine with no config", async () => {

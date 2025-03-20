@@ -129,7 +129,13 @@ export function initialiseIdentityResolverComponent(
 	let instanceType: string;
 
 	if (type === IdentityResolverComponentType.Service) {
-		component = new IdentityResolverService(instanceConfig.options);
+		component = new IdentityResolverService({
+			fallbackResolverConnectorType:
+				context.defaultTypes.identityResolverConnector !== IdentityResolverConnectorType.Universal
+					? IdentityResolverConnectorType.Universal
+					: undefined,
+			...instanceConfig.options
+		});
 		instanceType = IdentityResolverService.NAMESPACE;
 	} else {
 		throw new GeneralError("engineCore", "componentUnknownType", {
