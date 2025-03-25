@@ -1,6 +1,6 @@
 {
 	"name": "@twin.org/engine-types",
-	"version": "0.0.1-next.63",
+	"version": "0.0.1-next.64",
 	"description": "Types to use in an engine.",
 	"repository": {
 		"type": "git",
@@ -33,7 +33,7 @@
 		"@twin.org/core": "next",
 		"@twin.org/crypto": "next",
 		"@twin.org/data-core": "next",
-		"@twin.org/engine-models": "0.0.1-next.63",
+		"@twin.org/engine-models": "0.0.1-next.64",
 		"@twin.org/entity": "next",
 		"@twin.org/modules": "next",
 		"@twin.org/nameof": "next"
