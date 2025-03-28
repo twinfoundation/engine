@@ -18,6 +18,7 @@
 		"**/wordlists/**"
 	],
 	"words": [
+		"abbrev",
 		"bech",
 		"cosmosdb",
 		"Fastify",
