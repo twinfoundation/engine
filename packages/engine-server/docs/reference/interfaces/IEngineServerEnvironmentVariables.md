@@ -65,3 +65,19 @@ The type of auth processor to use on the API: entity-storage.
 > `optional` **authSigningKeyId**: `string`
 
 The id of the key in the vault to use for signing in auth operations.
+
+***
+
+### mimeTypeProcessors?
+
+> `optional` **mimeTypeProcessors**: `string`
+
+Additional MIME type processors to include, comma separated.
+
+***
+
+### disableNodeIdentity?
+
+> `optional` **disableNodeIdentity**: `string`
+
+Disable Node Identity route processors.

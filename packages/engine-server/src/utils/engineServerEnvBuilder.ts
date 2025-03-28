@@ -6,6 +6,7 @@ import type { IEngineCoreConfig } from "@twin.org/engine-models";
 import {
 	AuthenticationComponentType,
 	InformationComponentType,
+	type MimeTypeProcessorType,
 	RestRouteProcessorType,
 	SocketRouteProcessorType,
 	type IEngineServerConfig
@@ -65,15 +66,32 @@ export function buildEngineServerConfiguration(
 		}
 	};
 
+	if (Is.stringValue(envVars.mimeTypeProcessors)) {
+		const mimeTypeProcessors = envVars.mimeTypeProcessors.split(",");
+
+		if (Is.arrayValue(mimeTypeProcessors)) {
+			serverConfig.types.mimeTypeProcessor ??= [];
+			for (const mimeTypeProcessor of mimeTypeProcessors) {
+				serverConfig.types.mimeTypeProcessor.push({
+					type: mimeTypeProcessor as MimeTypeProcessorType
+				});
+			}
+		}
+	}
+
 	serverConfig.types.restRouteProcessor ??= [];
 	serverConfig.types.socketRouteProcessor ??= [];
 
-	serverConfig.types.restRouteProcessor.push({
-		type: RestRouteProcessorType.NodeIdentity
-	});
-	serverConfig.types.socketRouteProcessor.push({
-		type: SocketRouteProcessorType.NodeIdentity
-	});
+	const disableNodeIdentity = Coerce.boolean(envVars.disableNodeIdentity);
+
+	if (!disableNodeIdentity) {
+		serverConfig.types.restRouteProcessor.push({
+			type: RestRouteProcessorType.NodeIdentity
+		});
+		serverConfig.types.socketRouteProcessor.push({
+			type: SocketRouteProcessorType.NodeIdentity
+		});
+	}
 
 	if (!coreEngineConfig.silent) {
 		serverConfig.types.restRouteProcessor.push({

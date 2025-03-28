@@ -44,4 +44,14 @@ export interface IEngineServerEnvironmentVariables {
 	 * The id of the key in the vault to use for signing in auth operations.
 	 */
 	authSigningKeyId?: string;
+
+	/**
+	 * Additional MIME type processors to include, comma separated.
+	 */
+	mimeTypeProcessors?: string;
+
+	/**
+	 * Disable Node Identity route processors.
+	 */
+	disableNodeIdentity?: string;
 }
