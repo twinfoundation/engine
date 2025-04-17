@@ -1,5 +1,23 @@
 # @twin.org/engine-server - Changelog
 
+## [0.0.1-next.68](https://github.com/twinfoundation/engine/compare/engine-server-v0.0.1-next.67...engine-server-v0.0.1-next.68) (2025-04-17)
+
+
+### Features
+
+* use shared store mechanism ([#2](https://github.com/twinfoundation/engine/issues/2)) ([9eed8d7](https://github.com/twinfoundation/engine/commit/9eed8d7766388479b42f03e2542fe761f2156408))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @twin.org/engine-core bumped from 0.0.1-next.67 to 0.0.1-next.68
+    * @twin.org/engine-models bumped from 0.0.1-next.67 to 0.0.1-next.68
+    * @twin.org/engine-server-types bumped from 0.0.1-next.67 to 0.0.1-next.68
+  * devDependencies
+    * @twin.org/engine bumped from 0.0.1-next.67 to 0.0.1-next.68
+
 ## [0.0.1-next.67](https://github.com/twinfoundation/engine/compare/engine-server-v0.0.1-next.66...engine-server-v0.0.1-next.67) (2025-03-28)
 
 
