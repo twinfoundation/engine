@@ -1,6 +1,6 @@
 # Function: initialiseEventBusComponent()
 
-> **initialiseEventBusComponent**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType`?): `undefined` \| `string`
+> **initialiseEventBusComponent**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType?`): `undefined` \| `string`
 
 Initialise the event bus component.
 

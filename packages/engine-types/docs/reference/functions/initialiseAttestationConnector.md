@@ -1,6 +1,6 @@
 # Function: initialiseAttestationConnector()
 
-> **initialiseAttestationConnector**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType`?): `undefined` \| `string`
+> **initialiseAttestationConnector**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType?`): `undefined` \| `string`
 
 Initialise the attestation connector.
 

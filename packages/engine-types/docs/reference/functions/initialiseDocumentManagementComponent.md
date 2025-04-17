@@ -1,6 +1,6 @@
 # Function: initialiseDocumentManagementComponent()
 
-> **initialiseDocumentManagementComponent**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType`?): `undefined` \| `string`
+> **initialiseDocumentManagementComponent**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType?`): `undefined` \| `string`
 
 Initialise the document management component.
 

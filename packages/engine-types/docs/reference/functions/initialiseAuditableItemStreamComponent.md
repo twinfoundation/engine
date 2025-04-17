@@ -1,6 +1,6 @@
 # Function: initialiseAuditableItemStreamComponent()
 
-> **initialiseAuditableItemStreamComponent**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType`?): `undefined` \| `string`
+> **initialiseAuditableItemStreamComponent**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType?`): `undefined` \| `string`
 
 Initialise the auditable item stream component.
 

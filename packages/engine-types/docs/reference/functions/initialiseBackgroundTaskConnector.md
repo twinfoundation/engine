@@ -1,6 +1,6 @@
 # Function: initialiseBackgroundTaskConnector()
 
-> **initialiseBackgroundTaskConnector**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType`?): `undefined` \| `string`
+> **initialiseBackgroundTaskConnector**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType?`): `undefined` \| `string`
 
 Initialise a background task connector.
 

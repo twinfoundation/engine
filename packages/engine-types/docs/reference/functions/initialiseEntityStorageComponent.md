@@ -1,6 +1,6 @@
 # Function: initialiseEntityStorageComponent()
 
-> **initialiseEntityStorageComponent**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType`?): `undefined` \| `string`
+> **initialiseEntityStorageComponent**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType?`): `undefined` \| `string`
 
 Initialise the entity storage connector.
 

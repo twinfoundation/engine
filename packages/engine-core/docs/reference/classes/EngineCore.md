@@ -4,9 +4,13 @@ Core for the engine.
 
 ## Type Parameters
 
-• **C** *extends* `IEngineCoreConfig` = `IEngineCoreConfig`
+### C
 
-• **S** *extends* `IEngineState` = `IEngineState`
+`C` *extends* `IEngineCoreConfig` = `IEngineCoreConfig`
+
+### S
+
+`S` *extends* `IEngineState` = `IEngineState`
 
 ## Implements
 
@@ -14,9 +18,9 @@ Core for the engine.
 
 ## Constructors
 
-### new EngineCore()
+### Constructor
 
-> **new EngineCore**\<`C`, `S`\>(`options`?): [`EngineCore`](EngineCore.md)\<`C`, `S`\>
+> **new EngineCore**\<`C`, `S`\>(`options?`): `EngineCore`\<`C`, `S`\>
 
 Create a new instance of EngineCore.
 
@@ -30,7 +34,7 @@ The options for the engine.
 
 #### Returns
 
-[`EngineCore`](EngineCore.md)\<`C`, `S`\>
+`EngineCore`\<`C`, `S`\>
 
 ## Properties
 
@@ -258,7 +262,7 @@ The clone data.
 
 ### populateClone()
 
-> **populateClone**(`cloneData`, `silent`?): `void`
+> **populateClone**(`cloneData`, `silent?`): `void`
 
 Populate the engine from the clone data.
 

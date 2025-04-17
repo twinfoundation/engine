@@ -4,9 +4,13 @@ The options for creating engine core.
 
 ## Type Parameters
 
-• **C** *extends* `IEngineCoreConfig` = `IEngineCoreConfig`
+### C
 
-• **S** *extends* `IEngineState` = `IEngineState`
+`C` *extends* `IEngineCoreConfig` = `IEngineCoreConfig`
+
+### S
+
+`S` *extends* `IEngineState` = `IEngineState`
 
 ## Properties
 

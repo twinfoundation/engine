@@ -1,14 +1,16 @@
 # Type Alias: BackgroundTaskConnectorConfig
 
-> **BackgroundTaskConnectorConfig**: `object`
+> **BackgroundTaskConnectorConfig** = `object`
 
 Background task connector config types.
 
-## Type declaration
+## Properties
 
 ### type
 
 > **type**: *typeof* [`EntityStorage`](../variables/BackgroundTaskConnectorType.md#entitystorage)
+
+***
 
 ### options?
 

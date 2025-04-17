@@ -1,14 +1,16 @@
 # Type Alias: TelemetryConnectorConfig
 
-> **TelemetryConnectorConfig**: `object`
+> **TelemetryConnectorConfig** = `object`
 
 Telemetry connector config types.
 
-## Type declaration
+## Properties
 
 ### type
 
 > **type**: *typeof* [`EntityStorage`](../variables/TelemetryConnectorType.md#entitystorage)
+
+***
 
 ### options?
 

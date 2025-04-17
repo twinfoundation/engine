@@ -1,6 +1,6 @@
 # Function: initialiseNftComponent()
 
-> **initialiseNftComponent**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType`?): `undefined` \| `string`
+> **initialiseNftComponent**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType?`): `undefined` \| `string`
 
 Initialise the NFT component.
 

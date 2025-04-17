@@ -1,14 +1,16 @@
 # Type Alias: AuditableItemStreamComponentConfig
 
-> **AuditableItemStreamComponentConfig**: `object`
+> **AuditableItemStreamComponentConfig** = `object`
 
 Auditable item stream component config types.
 
-## Type declaration
+## Properties
 
 ### type
 
 > **type**: *typeof* [`Service`](../variables/AuditableItemStreamComponentType.md#service)
+
+***
 
 ### options?
 

@@ -1,6 +1,6 @@
 # Function: initialiseDataProcessingComponent()
 
-> **initialiseDataProcessingComponent**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType`?): `undefined` \| `string`
+> **initialiseDataProcessingComponent**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType?`): `undefined` \| `string`
 
 Initialise the data processing component.
 

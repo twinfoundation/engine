@@ -1,14 +1,16 @@
 # Type Alias: AttestationComponentConfig
 
-> **AttestationComponentConfig**: `object`
+> **AttestationComponentConfig** = `object`
 
 Attestation component config types.
 
-## Type declaration
+## Properties
 
 ### type
 
 > **type**: *typeof* [`Service`](../variables/AttestationComponentType.md#service)
+
+***
 
 ### options?
 

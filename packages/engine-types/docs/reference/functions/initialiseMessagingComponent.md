@@ -1,6 +1,6 @@
 # Function: initialiseMessagingComponent()
 
-> **initialiseMessagingComponent**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType`?): `undefined` \| `string`
+> **initialiseMessagingComponent**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType?`): `undefined` \| `string`
 
 Initialise the messaging component.
 

@@ -1,6 +1,6 @@
 # Function: initialiseRestRouteProcessorComponent()
 
-> **initialiseRestRouteProcessorComponent**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType`?): `undefined` \| `string`
+> **initialiseRestRouteProcessorComponent**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType?`): `undefined` \| `string`
 
 Initialise the rest route processor.
 

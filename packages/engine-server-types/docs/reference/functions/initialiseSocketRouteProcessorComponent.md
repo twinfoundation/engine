@@ -1,6 +1,6 @@
 # Function: initialiseSocketRouteProcessorComponent()
 
-> **initialiseSocketRouteProcessorComponent**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType`?): `undefined` \| `string`
+> **initialiseSocketRouteProcessorComponent**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType?`): `undefined` \| `string`
 
 Initialise the socket route processor.
 

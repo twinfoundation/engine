@@ -8,15 +8,19 @@ The engine with built in types.
 
 ## Type Parameters
 
-• **C** *extends* `IEngineConfig` = `IEngineConfig`
+### C
 
-• **S** *extends* `IEngineState` = `IEngineState`
+`C` *extends* `IEngineConfig` = `IEngineConfig`
+
+### S
+
+`S` *extends* `IEngineState` = `IEngineState`
 
 ## Constructors
 
-### new Engine()
+### Constructor
 
-> **new Engine**\<`C`, `S`\>(`options`?): [`Engine`](Engine.md)\<`C`, `S`\>
+> **new Engine**\<`C`, `S`\>(`options?`): `Engine`\<`C`, `S`\>
 
 Create a new instance of Engine.
 
@@ -30,13 +34,25 @@ The options for the engine.
 
 #### Returns
 
-[`Engine`](Engine.md)\<`C`, `S`\>
+`Engine`\<`C`, `S`\>
 
 #### Overrides
 
 `EngineCore<C, S>.constructor`
 
 ## Properties
+
+### CLASS\_NAME
+
+> `readonly` **CLASS\_NAME**: `string`
+
+Runtime name for the class.
+
+#### Overrides
+
+`EngineCore.CLASS_NAME`
+
+***
 
 ### LOGGER\_TYPE\_NAME
 
@@ -59,18 +75,6 @@ The core context.
 #### Inherited from
 
 `EngineCore._context`
-
-***
-
-### CLASS\_NAME
-
-> `readonly` **CLASS\_NAME**: `string`
-
-Runtime name for the class.
-
-#### Overrides
-
-`EngineCore.CLASS_NAME`
 
 ## Methods
 
@@ -274,7 +278,7 @@ The clone data.
 
 ### populateClone()
 
-> **populateClone**(`cloneData`, `silent`?): `void`
+> **populateClone**(`cloneData`, `silent?`): `void`
 
 Populate the engine from the clone data.
 

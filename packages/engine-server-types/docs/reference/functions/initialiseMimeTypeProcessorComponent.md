@@ -1,6 +1,6 @@
 # Function: initialiseMimeTypeProcessorComponent()
 
-> **initialiseMimeTypeProcessorComponent**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType`?): `undefined` \| `string`
+> **initialiseMimeTypeProcessorComponent**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType?`): `undefined` \| `string`
 
 Initialise the mime type processor.
 

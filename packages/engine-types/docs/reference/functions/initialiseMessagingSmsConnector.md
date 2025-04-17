@@ -1,6 +1,6 @@
 # Function: initialiseMessagingSmsConnector()
 
-> **initialiseMessagingSmsConnector**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType`?): `undefined` \| `string`
+> **initialiseMessagingSmsConnector**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType?`): `undefined` \| `string`
 
 Initialise a messaging sms connector.
 

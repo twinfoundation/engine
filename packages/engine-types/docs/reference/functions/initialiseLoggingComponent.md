@@ -1,6 +1,6 @@
 # Function: initialiseLoggingComponent()
 
-> **initialiseLoggingComponent**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType`?): `undefined` \| `string`
+> **initialiseLoggingComponent**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType?`): `undefined` \| `string`
 
 Initialise the logging component.
 

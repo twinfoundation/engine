@@ -1,14 +1,16 @@
 # Type Alias: DocumentManagementComponentConfig
 
-> **DocumentManagementComponentConfig**: `object`
+> **DocumentManagementComponentConfig** = `object`
 
 Data processing component config types.
 
-## Type declaration
+## Properties
 
 ### type
 
 > **type**: *typeof* [`Service`](../variables/DocumentManagementComponentType.md#service)
+
+***
 
 ### options?
 

@@ -1,14 +1,16 @@
 # Type Alias: MessagingComponentConfig
 
-> **MessagingComponentConfig**: `object`
+> **MessagingComponentConfig** = `object`
 
 Messaging component config types.
 
-## Type declaration
+## Properties
 
 ### type
 
 > **type**: *typeof* [`Service`](../variables/MessagingComponentType.md#service)
+
+***
 
 ### options?
 

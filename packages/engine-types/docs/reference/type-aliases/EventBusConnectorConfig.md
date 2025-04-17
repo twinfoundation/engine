@@ -1,14 +1,16 @@
 # Type Alias: EventBusConnectorConfig
 
-> **EventBusConnectorConfig**: `object`
+> **EventBusConnectorConfig** = `object`
 
 Event bus connector config types.
 
-## Type declaration
+## Properties
 
 ### type
 
 > **type**: *typeof* [`Local`](../variables/EventBusConnectorType.md#local)
+
+***
 
 ### options?
 

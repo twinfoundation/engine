@@ -1,6 +1,6 @@
 # Function: initialiseMessagingEmailConnector()
 
-> **initialiseMessagingEmailConnector**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType`?): `undefined` \| `string`
+> **initialiseMessagingEmailConnector**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType?`): `undefined` \| `string`
 
 Initialise a messaging email connector.
 

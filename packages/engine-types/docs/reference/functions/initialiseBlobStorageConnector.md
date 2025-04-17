@@ -1,6 +1,6 @@
 # Function: initialiseBlobStorageConnector()
 
-> **initialiseBlobStorageConnector**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType`?): `undefined` \| `string`
+> **initialiseBlobStorageConnector**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType?`): `undefined` \| `string`
 
 Initialise the blob storage connector.
 

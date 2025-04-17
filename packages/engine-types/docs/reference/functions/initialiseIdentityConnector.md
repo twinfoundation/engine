@@ -1,6 +1,6 @@
 # Function: initialiseIdentityConnector()
 
-> **initialiseIdentityConnector**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType`?): `undefined` \| `string`
+> **initialiseIdentityConnector**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType?`): `undefined` \| `string`
 
 Initialise the identity connector.
 

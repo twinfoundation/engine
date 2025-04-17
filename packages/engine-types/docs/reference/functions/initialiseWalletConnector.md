@@ -1,6 +1,6 @@
 # Function: initialiseWalletConnector()
 
-> **initialiseWalletConnector**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType`?): `undefined` \| `string`
+> **initialiseWalletConnector**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType?`): `undefined` \| `string`
 
 Initialise a wallet connector.
 

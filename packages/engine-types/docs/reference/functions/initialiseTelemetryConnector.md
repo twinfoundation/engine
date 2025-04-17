@@ -1,6 +1,6 @@
 # Function: initialiseTelemetryConnector()
 
-> **initialiseTelemetryConnector**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType`?): `undefined` \| `string`
+> **initialiseTelemetryConnector**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType?`): `undefined` \| `string`
 
 Initialise a telemetry connector.
 

@@ -1,6 +1,6 @@
 # Type Alias: IEngineCoreTypeConfig\<T\>
 
-> **IEngineCoreTypeConfig**\<`T`\>: `T` & `object`
+> **IEngineCoreTypeConfig**\<`T`\> = `T` & `object`
 
 Configuration for the engine core type.
 
@@ -16,4 +16,6 @@ Configuration for the engine core type.
 
 ## Type Parameters
 
-• **T** *extends* [`IEngineCoreTypeBaseConfig`](../interfaces/IEngineCoreTypeBaseConfig.md) = \{ `type`: `string`; \}
+### T
+
+`T` *extends* [`IEngineCoreTypeBaseConfig`](../interfaces/IEngineCoreTypeBaseConfig.md) = \{ `type`: `string`; \}

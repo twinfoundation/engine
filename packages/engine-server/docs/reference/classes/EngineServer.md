@@ -4,7 +4,9 @@ Server for the engine.
 
 ## Type Parameters
 
-• **T** *extends* `IEngineServerConfig` = `IEngineServerConfig`
+### T
+
+`T` *extends* `IEngineServerConfig` = `IEngineServerConfig`
 
 ## Implements
 
@@ -12,9 +14,9 @@ Server for the engine.
 
 ## Constructors
 
-### new EngineServer()
+### Constructor
 
-> **new EngineServer**\<`T`\>(`options`): [`EngineServer`](EngineServer.md)\<`T`\>
+> **new EngineServer**\<`T`\>(`options`): `EngineServer`\<`T`\>
 
 Create a new instance of EngineServer.
 
@@ -32,7 +34,7 @@ The engine core to serve from.
 
 #### Returns
 
-[`EngineServer`](EngineServer.md)\<`T`\>
+`EngineServer`\<`T`\>
 
 ## Properties
 

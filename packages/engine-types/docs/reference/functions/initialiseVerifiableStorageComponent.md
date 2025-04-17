@@ -1,6 +1,6 @@
 # Function: initialiseVerifiableStorageComponent()
 
-> **initialiseVerifiableStorageComponent**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType`?): `undefined` \| `string`
+> **initialiseVerifiableStorageComponent**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType?`): `undefined` \| `string`
 
 Initialise the verifiable storage component.
 

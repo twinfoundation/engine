@@ -1,14 +1,16 @@
 # Type Alias: IdentityProfileConnectorConfig
 
-> **IdentityProfileConnectorConfig**: `object`
+> **IdentityProfileConnectorConfig** = `object`
 
 Identity profile connector config types.
 
-## Type declaration
+## Properties
 
 ### type
 
 > **type**: *typeof* [`EntityStorage`](../variables/IdentityProfileConnectorType.md#entitystorage)
+
+***
 
 ### options?
 

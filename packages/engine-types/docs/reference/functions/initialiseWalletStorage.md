@@ -1,6 +1,6 @@
 # Function: initialiseWalletStorage()
 
-> **initialiseWalletStorage**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType`?): `undefined` \| `string`
+> **initialiseWalletStorage**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType?`): `undefined` \| `string`
 
 Initialise the wallet storage.
 

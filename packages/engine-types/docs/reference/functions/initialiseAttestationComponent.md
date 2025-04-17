@@ -1,6 +1,6 @@
 # Function: initialiseAttestationComponent()
 
-> **initialiseAttestationComponent**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType`?): `undefined` \| `string`
+> **initialiseAttestationComponent**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType?`): `undefined` \| `string`
 
 Initialise the attestation component.
 

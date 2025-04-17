@@ -4,7 +4,9 @@ Store state in a file.
 
 ## Type Parameters
 
-• **S** *extends* `IEngineState` = `IEngineState`
+### S
+
+`S` *extends* `IEngineState` = `IEngineState`
 
 ## Implements
 
@@ -12,9 +14,9 @@ Store state in a file.
 
 ## Constructors
 
-### new FileStateStorage()
+### Constructor
 
-> **new FileStateStorage**\<`S`\>(`filename`, `readonlyMode`): [`FileStateStorage`](FileStateStorage.md)\<`S`\>
+> **new FileStateStorage**\<`S`\>(`filename`, `readonlyMode`): `FileStateStorage`\<`S`\>
 
 Create a new instance of FileStateStorage.
 
@@ -34,7 +36,7 @@ Whether the file is in read-only mode.
 
 #### Returns
 
-[`FileStateStorage`](FileStateStorage.md)\<`S`\>
+`FileStateStorage`\<`S`\>
 
 ## Properties
 

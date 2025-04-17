@@ -1,6 +1,6 @@
 # Function: initialiseNftConnector()
 
-> **initialiseNftConnector**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType`?): `undefined` \| `string`
+> **initialiseNftConnector**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType?`): `undefined` \| `string`
 
 Initialise the NFT connector.
 

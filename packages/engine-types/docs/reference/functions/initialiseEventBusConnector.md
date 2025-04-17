@@ -1,6 +1,6 @@
 # Function: initialiseEventBusConnector()
 
-> **initialiseEventBusConnector**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType`?): `undefined` \| `string`
+> **initialiseEventBusConnector**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType?`): `undefined` \| `string`
 
 Initialise a event bus connector.
 

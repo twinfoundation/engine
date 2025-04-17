@@ -1,14 +1,16 @@
 # Type Alias: IdentityProfileComponentConfig
 
-> **IdentityProfileComponentConfig**: `object`
+> **IdentityProfileComponentConfig** = `object`
 
 Identity profile component config types.
 
-## Type declaration
+## Properties
 
 ### type
 
 > **type**: *typeof* [`Service`](../variables/IdentityComponentType.md#service)
+
+***
 
 ### options?
 

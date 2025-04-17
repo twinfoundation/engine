@@ -1,6 +1,6 @@
 # Function: initialiseVerifiableStorageConnector()
 
-> **initialiseVerifiableStorageConnector**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType`?): `undefined` \| `string`
+> **initialiseVerifiableStorageConnector**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType?`): `undefined` \| `string`
 
 Initialise the verifiable storage connector.
 

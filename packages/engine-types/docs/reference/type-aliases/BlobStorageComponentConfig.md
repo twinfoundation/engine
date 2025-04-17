@@ -1,14 +1,16 @@
 # Type Alias: BlobStorageComponentConfig
 
-> **BlobStorageComponentConfig**: `object`
+> **BlobStorageComponentConfig** = `object`
 
 Blob storage component config types.
 
-## Type declaration
+## Properties
 
 ### type
 
 > **type**: *typeof* [`Service`](../variables/BlobStorageComponentType.md#service)
+
+***
 
 ### options?
 

@@ -1,6 +1,6 @@
 # Function: initialiseBlobStorageComponent()
 
-> **initialiseBlobStorageComponent**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType`?): `undefined` \| `string`
+> **initialiseBlobStorageComponent**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType?`): `undefined` \| `string`
 
 Initialise the blob storage component.
 

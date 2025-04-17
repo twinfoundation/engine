@@ -1,14 +1,16 @@
 # Type Alias: LoggingComponentConfig
 
-> **LoggingComponentConfig**: `object`
+> **LoggingComponentConfig** = `object`
 
 Logging component config types.
 
-## Type declaration
+## Properties
 
 ### type
 
 > **type**: *typeof* [`Service`](../variables/LoggingComponentType.md#service)
+
+***
 
 ### options?
 

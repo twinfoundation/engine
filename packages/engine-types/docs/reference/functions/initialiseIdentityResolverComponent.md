@@ -1,6 +1,6 @@
 # Function: initialiseIdentityResolverComponent()
 
-> **initialiseIdentityResolverComponent**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType`?): `undefined` \| `string`
+> **initialiseIdentityResolverComponent**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType?`): `undefined` \| `string`
 
 Initialise the identity resolver component.
 

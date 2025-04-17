@@ -1,6 +1,6 @@
 # Function: initialiseVaultConnector()
 
-> **initialiseVaultConnector**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType`?): `undefined` \| `string`
+> **initialiseVaultConnector**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType?`): `undefined` \| `string`
 
 Initialise the vault connector.
 

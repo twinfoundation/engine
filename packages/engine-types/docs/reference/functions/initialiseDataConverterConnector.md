@@ -1,6 +1,6 @@
 # Function: initialiseDataConverterConnector()
 
-> **initialiseDataConverterConnector**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType`?): `undefined` \| `string`
+> **initialiseDataConverterConnector**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType?`): `undefined` \| `string`
 
 Initialise the data converter connector.
 

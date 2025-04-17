@@ -1,6 +1,6 @@
 # Function: initialiseAuditableItemGraphComponent()
 
-> **initialiseAuditableItemGraphComponent**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType`?): `undefined` \| `string`
+> **initialiseAuditableItemGraphComponent**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType?`): `undefined` \| `string`
 
 Initialise the auditable item graph component.
 
