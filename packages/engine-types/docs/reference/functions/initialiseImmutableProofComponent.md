@@ -1,6 +1,6 @@
 # Function: initialiseImmutableProofComponent()
 
-> **initialiseImmutableProofComponent**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType`?): `undefined` \| `string`
+> **initialiseImmutableProofComponent**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType?`): `undefined` \| `string`
 
 Initialise the immutable proof component.
 

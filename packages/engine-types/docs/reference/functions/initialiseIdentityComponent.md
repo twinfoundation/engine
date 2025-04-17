@@ -1,6 +1,6 @@
 # Function: initialiseIdentityComponent()
 
-> **initialiseIdentityComponent**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType`?): `undefined` \| `string`
+> **initialiseIdentityComponent**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType?`): `undefined` \| `string`
 
 Initialise the identity component.
 

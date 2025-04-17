@@ -1,14 +1,16 @@
 # Type Alias: AuthenticationComponentConfig
 
-> **AuthenticationComponentConfig**: `object`
+> **AuthenticationComponentConfig** = `object`
 
 Authentication component config types.
 
-## Type declaration
+## Properties
 
 ### type
 
 > **type**: *typeof* [`EntityStorage`](../variables/AuthenticationComponentType.md#entitystorage)
+
+***
 
 ### options?
 

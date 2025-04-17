@@ -1,14 +1,16 @@
 # Type Alias: InformationComponentConfig
 
-> **InformationComponentConfig**: `object`
+> **InformationComponentConfig** = `object`
 
 Information component config types.
 
-## Type declaration
+## Properties
 
 ### type
 
 > **type**: *typeof* [`Service`](../variables/InformationComponentType.md#service)
+
+***
 
 ### options
 

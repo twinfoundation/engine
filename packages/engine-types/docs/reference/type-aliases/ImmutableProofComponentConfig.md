@@ -1,14 +1,16 @@
 # Type Alias: ImmutableProofComponentConfig
 
-> **ImmutableProofComponentConfig**: `object`
+> **ImmutableProofComponentConfig** = `object`
 
 Immutable proof component config types.
 
-## Type declaration
+## Properties
 
 ### type
 
 > **type**: *typeof* [`Service`](../variables/ImmutableProofComponentType.md#service)
+
+***
 
 ### options?
 

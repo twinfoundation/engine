@@ -1,14 +1,16 @@
 # Type Alias: TelemetryComponentConfig
 
-> **TelemetryComponentConfig**: `object`
+> **TelemetryComponentConfig** = `object`
 
 Telemetry component config types.
 
-## Type declaration
+## Properties
 
 ### type
 
 > **type**: *typeof* [`Service`](../variables/TelemetryComponentType.md#service)
+
+***
 
 ### options?
 

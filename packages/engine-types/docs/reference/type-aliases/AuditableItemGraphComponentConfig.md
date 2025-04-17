@@ -1,14 +1,16 @@
 # Type Alias: AuditableItemGraphComponentConfig
 
-> **AuditableItemGraphComponentConfig**: `object`
+> **AuditableItemGraphComponentConfig** = `object`
 
 Auditable item graph component config types.
 
-## Type declaration
+## Properties
 
 ### type
 
 > **type**: *typeof* [`Service`](../variables/AuditableItemGraphComponentType.md#service)
+
+***
 
 ### options?
 

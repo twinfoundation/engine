@@ -1,14 +1,16 @@
 # Type Alias: AttestationConnectorConfig
 
-> **AttestationConnectorConfig**: `object`
+> **AttestationConnectorConfig** = `object`
 
 Attestation config connector types.
 
-## Type declaration
+## Properties
 
 ### type
 
 > **type**: *typeof* [`Nft`](../variables/AttestationConnectorType.md#nft)
+
+***
 
 ### options?
 

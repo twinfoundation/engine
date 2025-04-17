@@ -1,14 +1,16 @@
 # Type Alias: DataProcessingComponentConfig
 
-> **DataProcessingComponentConfig**: `object`
+> **DataProcessingComponentConfig** = `object`
 
 Data processing component config types.
 
-## Type declaration
+## Properties
 
 ### type
 
 > **type**: *typeof* [`Service`](../variables/DataProcessingComponentType.md#service)
+
+***
 
 ### options?
 

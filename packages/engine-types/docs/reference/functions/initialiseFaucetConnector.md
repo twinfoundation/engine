@@ -1,6 +1,6 @@
 # Function: initialiseFaucetConnector()
 
-> **initialiseFaucetConnector**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType`?): `undefined` \| `string`
+> **initialiseFaucetConnector**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType?`): `undefined` \| `string`
 
 Initialise a faucet connector.
 

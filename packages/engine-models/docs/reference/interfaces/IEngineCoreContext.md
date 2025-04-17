@@ -4,9 +4,13 @@ The context for the engine core.
 
 ## Type Parameters
 
-• **C** *extends* [`IEngineCoreConfig`](IEngineCoreConfig.md) = [`IEngineCoreConfig`](IEngineCoreConfig.md)
+### C
 
-• **S** *extends* [`IEngineState`](IEngineState.md) = [`IEngineState`](IEngineState.md)
+`C` *extends* [`IEngineCoreConfig`](IEngineCoreConfig.md) = [`IEngineCoreConfig`](IEngineCoreConfig.md)
+
+### S
+
+`S` *extends* [`IEngineState`](IEngineState.md) = [`IEngineState`](IEngineState.md)
 
 ## Properties
 

@@ -1,6 +1,6 @@
 # Function: initialiseLoggingConnector()
 
-> **initialiseLoggingConnector**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType`?): `undefined` \| `string`
+> **initialiseLoggingConnector**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType?`): `undefined` \| `string`
 
 Initialise the logging connector.
 

@@ -4,7 +4,9 @@ Store state in memory.
 
 ## Type Parameters
 
-• **S** *extends* `IEngineState` = `IEngineState`
+### S
+
+`S` *extends* `IEngineState` = `IEngineState`
 
 ## Implements
 
@@ -12,9 +14,9 @@ Store state in memory.
 
 ## Constructors
 
-### new MemoryStateStorage()
+### Constructor
 
-> **new MemoryStateStorage**\<`S`\>(`readonlyMode`, `state`?): [`MemoryStateStorage`](MemoryStateStorage.md)\<`S`\>
+> **new MemoryStateStorage**\<`S`\>(`readonlyMode`, `state?`): `MemoryStateStorage`\<`S`\>
 
 Create a new instance of MemoryStateStorage.
 
@@ -34,7 +36,7 @@ The initial state.
 
 #### Returns
 
-[`MemoryStateStorage`](MemoryStateStorage.md)\<`S`\>
+`MemoryStateStorage`\<`S`\>
 
 ## Properties
 

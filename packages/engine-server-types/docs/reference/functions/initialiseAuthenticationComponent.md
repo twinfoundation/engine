@@ -1,6 +1,6 @@
 # Function: initialiseAuthenticationComponent()
 
-> **initialiseAuthenticationComponent**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType`?): `undefined` \| `string`
+> **initialiseAuthenticationComponent**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType?`): `undefined` \| `string`
 
 Initialise the authentication.
 

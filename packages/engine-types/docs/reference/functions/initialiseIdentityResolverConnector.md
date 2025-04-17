@@ -1,6 +1,6 @@
 # Function: initialiseIdentityResolverConnector()
 
-> **initialiseIdentityResolverConnector**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType`?): `undefined` \| `string`
+> **initialiseIdentityResolverConnector**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType?`): `undefined` \| `string`
 
 Initialise the identity resolver connector.
 

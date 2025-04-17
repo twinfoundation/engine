@@ -1,6 +1,6 @@
 # Function: initialiseTelemetryComponent()
 
-> **initialiseTelemetryComponent**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType`?): `undefined` \| `string`
+> **initialiseTelemetryComponent**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType?`): `undefined` \| `string`
 
 Initialise the telemetry component.
 

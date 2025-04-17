@@ -1,14 +1,16 @@
 # Type Alias: NftComponentConfig
 
-> **NftComponentConfig**: `object`
+> **NftComponentConfig** = `object`
 
 NFT component config types.
 
-## Type declaration
+## Properties
 
 ### type
 
 > **type**: *typeof* [`Service`](../variables/NftComponentType.md#service)
+
+***
 
 ### options?
 

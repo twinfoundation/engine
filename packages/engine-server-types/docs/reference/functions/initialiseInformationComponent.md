@@ -1,6 +1,6 @@
 # Function: initialiseInformationComponent()
 
-> **initialiseInformationComponent**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType`?): `undefined` \| `string`
+> **initialiseInformationComponent**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType?`): `undefined` \| `string`
 
 Initialise the information component.
 

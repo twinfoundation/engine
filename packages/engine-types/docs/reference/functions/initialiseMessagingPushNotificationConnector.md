@@ -1,6 +1,6 @@
 # Function: initialiseMessagingPushNotificationConnector()
 
-> **initialiseMessagingPushNotificationConnector**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType`?): `undefined` \| `string`
+> **initialiseMessagingPushNotificationConnector**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType?`): `undefined` \| `string`
 
 Initialise a messaging push notification connector.
 

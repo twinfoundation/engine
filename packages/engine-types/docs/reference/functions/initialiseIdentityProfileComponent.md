@@ -1,6 +1,6 @@
 # Function: initialiseIdentityProfileComponent()
 
-> **initialiseIdentityProfileComponent**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType`?): `undefined` \| `string`
+> **initialiseIdentityProfileComponent**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType?`): `undefined` \| `string`
 
 Initialise the identity profile component.
 

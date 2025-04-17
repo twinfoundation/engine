@@ -1,14 +1,16 @@
 # Type Alias: MimeTypeProcessorConfig
 
-> **MimeTypeProcessorConfig**: `object`
+> **MimeTypeProcessorConfig** = `object`
 
 Mime type processor config types.
 
-## Type declaration
+## Properties
 
 ### type
 
 > **type**: *typeof* [`Jwt`](../variables/MimeTypeProcessorType.md#jwt)
+
+***
 
 ### options?
 

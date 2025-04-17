@@ -1,6 +1,6 @@
 # Function: initialiseIdentityProfileConnector()
 
-> **initialiseIdentityProfileConnector**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType`?): `undefined` \| `string`
+> **initialiseIdentityProfileConnector**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType?`): `undefined` \| `string`
 
 Initialise the identity profile connector.
 

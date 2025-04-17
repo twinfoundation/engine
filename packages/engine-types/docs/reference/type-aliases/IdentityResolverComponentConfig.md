@@ -1,14 +1,16 @@
 # Type Alias: IdentityResolverComponentConfig
 
-> **IdentityResolverComponentConfig**: `object`
+> **IdentityResolverComponentConfig** = `object`
 
 Identity resolver component config types.
 
-## Type declaration
+## Properties
 
 ### type
 
 > **type**: *typeof* [`Service`](../variables/IdentityComponentType.md#service)
+
+***
 
 ### options?
 

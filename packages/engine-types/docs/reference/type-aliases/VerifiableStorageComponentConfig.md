@@ -1,14 +1,16 @@
 # Type Alias: VerifiableStorageComponentConfig
 
-> **VerifiableStorageComponentConfig**: `object`
+> **VerifiableStorageComponentConfig** = `object`
 
 Verifiable storage component config types.
 
-## Type declaration
+## Properties
 
 ### type
 
 > **type**: *typeof* [`Service`](../variables/VerifiableStorageComponentType.md#service)
+
+***
 
 ### options?
 

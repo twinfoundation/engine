@@ -1,6 +1,6 @@
 # Function: initialiseDataExtractorConnector()
 
-> **initialiseDataExtractorConnector**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType`?): `undefined` \| `string`
+> **initialiseDataExtractorConnector**(`engineCore`, `context`, `instanceConfig`, `overrideInstanceType?`): `undefined` \| `string`
 
 Initialise the data extractor connector.
 
