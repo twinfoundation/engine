@@ -1,5 +1,28 @@
 # @twin.org/engine-server - Changelog
 
+## [0.0.1-next.69](https://github.com/twinfoundation/engine/compare/engine-server-v0.0.1-next.68...engine-server-v0.0.1-next.69) (2025-04-25)
+
+
+### Features
+
+* expose default rest and socket path creation ([e6c6e26](https://github.com/twinfoundation/engine/commit/e6c6e266c8017212a74d4997e2e335347457a2bc))
+
+
+### Bug Fixes
+
+* use abbreviated docs path ([9258a72](https://github.com/twinfoundation/engine/commit/9258a72adf266ddcc4f98002a07a7a162755f24b))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @twin.org/engine-core bumped from 0.0.1-next.68 to 0.0.1-next.69
+    * @twin.org/engine-models bumped from 0.0.1-next.68 to 0.0.1-next.69
+    * @twin.org/engine-server-types bumped from 0.0.1-next.68 to 0.0.1-next.69
+  * devDependencies
+    * @twin.org/engine bumped from 0.0.1-next.68 to 0.0.1-next.69
+
 ## [0.0.1-next.68](https://github.com/twinfoundation/engine/compare/engine-server-v0.0.1-next.67...engine-server-v0.0.1-next.68) (2025-04-17)
 
 
