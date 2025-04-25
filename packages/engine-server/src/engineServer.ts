@@ -69,6 +69,18 @@ export class EngineServer<T extends IEngineServerConfig = IEngineServerConfig>
 	private _loggingConnectorType?: string;
 
 	/**
+	 * The REST routes for the application.
+	 * @internal
+	 */
+	private _restRoutes: IRestRoute[];
+
+	/**
+	 * The Socket routes for the application.
+	 * @internal
+	 */
+	private _socketRoutes: ISocketRoute[];
+
+	/**
 	 * Create a new instance of EngineServer.
 	 * @param options The options for the engine.
 	 * @param options.engineCore The engine core to serve from.
@@ -80,6 +92,8 @@ export class EngineServer<T extends IEngineServerConfig = IEngineServerConfig>
 		this._engineCore = options.engineCore;
 		this._restRouteGenerators = [];
 		this._socketRouteGenerators = [];
+		this._restRoutes = [];
+		this._socketRoutes = [];
 
 		const coreConfig = this._engineCore.getConfig();
 
@@ -181,6 +195,22 @@ export class EngineServer<T extends IEngineServerConfig = IEngineServerConfig>
 	}
 
 	/**
+	 * Get the built REST routes.
+	 * @returns The REST routes.
+	 */
+	public getRestRoutes(): IRestRoute[] {
+		return this._restRoutes;
+	}
+
+	/**
+	 * Get the built socket routes.
+	 * @returns The socket routes.
+	 */
+	public getSocketRoutes(): ISocketRoute[] {
+		return this._socketRoutes;
+	}
+
+	/**
 	 * Start the engine server.
 	 * @returns True if the start was successful.
 	 */
@@ -212,8 +242,8 @@ export class EngineServer<T extends IEngineServerConfig = IEngineServerConfig>
 	 * @internal
 	 */
 	private async startWebServer(): Promise<void> {
-		const restRoutes = await this.buildRestRoutes();
-		const socketRoutes = await this.buildSocketRoutes();
+		this._restRoutes = await this.buildRestRoutes();
+		this._socketRoutes = await this.buildSocketRoutes();
 		const restRouteProcessors = RestRouteProcessorFactory.names().map(n =>
 			RestRouteProcessorFactory.get(n)
 		);
@@ -235,9 +265,9 @@ export class EngineServer<T extends IEngineServerConfig = IEngineServerConfig>
 
 		await this._webServer.build(
 			restRouteProcessors,
-			restRoutes,
+			this._restRoutes,
 			socketRouteProcessors,
-			socketRoutes,
+			this._socketRoutes,
 			coreConfig.web
 		);
 		await this._webServer.start();
@@ -297,6 +327,7 @@ export class EngineServer<T extends IEngineServerConfig = IEngineServerConfig>
 
 			for (let i = 0; i < typeConfig.length; i++) {
 				const restPath = typeConfig[i].restPath;
+
 				if (Is.string(restPath)) {
 					const serviceType = typeConfig[i].overrideInstanceType ?? defaultEngineTypes[typeKey];
 					if (Is.stringValue(serviceType)) {

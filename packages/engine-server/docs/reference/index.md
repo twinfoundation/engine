@@ -11,3 +11,5 @@
 ## Functions
 
 - [buildEngineServerConfiguration](functions/buildEngineServerConfiguration.md)
+- [addDefaultRestPaths](functions/addDefaultRestPaths.md)
+- [addDefaultSocketPaths](functions/addDefaultSocketPaths.md)

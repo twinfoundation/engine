@@ -156,21 +156,17 @@ export function buildEngineServerConfiguration(
 		});
 	}
 
-	addRestPaths(coreEngineConfig, serverConfig);
-	addSocketPaths(coreEngineConfig, serverConfig);
+	addDefaultRestPaths(serverConfig);
+	addDefaultSocketPaths(serverConfig);
 
 	return serverConfig;
 }
 
 /**
  * Adds the rest paths to the server config.
- * @param coreEngineConfig The core engine config.
  * @param serverConfig The server config.
  */
-function addRestPaths(
-	coreEngineConfig: IEngineServerConfig,
-	serverConfig: IEngineServerConfig
-): void {
+export function addDefaultRestPaths(serverConfig: IEngineServerConfig): void {
 	if (Is.arrayValue(serverConfig.types.informationComponent)) {
 		serverConfig.types.informationComponent[0].restPath = "";
 	}
@@ -183,117 +179,113 @@ function addRestPaths(
 	}
 
 	if (
-		Is.arrayValue(coreEngineConfig.types.blobStorageComponent) &&
-		!Is.stringValue(coreEngineConfig.types.blobStorageComponent[0].restPath)
+		Is.arrayValue(serverConfig.types.blobStorageComponent) &&
+		!Is.stringValue(serverConfig.types.blobStorageComponent[0].restPath)
 	) {
-		coreEngineConfig.types.blobStorageComponent[0].restPath = "blob";
+		serverConfig.types.blobStorageComponent[0].restPath = "blob";
 	}
 
 	if (
-		Is.arrayValue(coreEngineConfig.types.loggingComponent) &&
-		!Is.stringValue(coreEngineConfig.types.loggingComponent[0].restPath)
+		Is.arrayValue(serverConfig.types.loggingComponent) &&
+		!Is.stringValue(serverConfig.types.loggingComponent[0].restPath)
 	) {
-		coreEngineConfig.types.loggingComponent[0].restPath = "logging";
+		serverConfig.types.loggingComponent[0].restPath = "logging";
 	}
 
 	if (
-		Is.arrayValue(coreEngineConfig.types.telemetryComponent) &&
-		!Is.stringValue(coreEngineConfig.types.telemetryComponent[0].restPath)
+		Is.arrayValue(serverConfig.types.telemetryComponent) &&
+		!Is.stringValue(serverConfig.types.telemetryComponent[0].restPath)
 	) {
-		coreEngineConfig.types.telemetryComponent[0].restPath = "telemetry";
+		serverConfig.types.telemetryComponent[0].restPath = "telemetry";
 	}
 
 	if (
-		Is.arrayValue(coreEngineConfig.types.identityComponent) &&
-		!Is.stringValue(coreEngineConfig.types.identityComponent[0].restPath)
+		Is.arrayValue(serverConfig.types.identityComponent) &&
+		!Is.stringValue(serverConfig.types.identityComponent[0].restPath)
 	) {
-		coreEngineConfig.types.identityComponent[0].restPath = "identity";
+		serverConfig.types.identityComponent[0].restPath = "identity";
 	}
 
 	if (
-		Is.arrayValue(coreEngineConfig.types.identityResolverComponent) &&
-		!Is.stringValue(coreEngineConfig.types.identityResolverComponent[0].restPath)
+		Is.arrayValue(serverConfig.types.identityResolverComponent) &&
+		!Is.stringValue(serverConfig.types.identityResolverComponent[0].restPath)
 	) {
-		coreEngineConfig.types.identityResolverComponent[0].restPath = "identity";
+		serverConfig.types.identityResolverComponent[0].restPath = "identity";
 	}
 
 	if (
-		Is.arrayValue(coreEngineConfig.types.identityProfileComponent) &&
-		!Is.stringValue(coreEngineConfig.types.identityProfileComponent[0].restPath)
+		Is.arrayValue(serverConfig.types.identityProfileComponent) &&
+		!Is.stringValue(serverConfig.types.identityProfileComponent[0].restPath)
 	) {
-		coreEngineConfig.types.identityProfileComponent[0].restPath = "identity/profile";
+		serverConfig.types.identityProfileComponent[0].restPath = "identity/profile";
 	}
 
 	if (
-		Is.arrayValue(coreEngineConfig.types.nftComponent) &&
-		!Is.stringValue(coreEngineConfig.types.nftComponent[0].restPath)
+		Is.arrayValue(serverConfig.types.nftComponent) &&
+		!Is.stringValue(serverConfig.types.nftComponent[0].restPath)
 	) {
-		coreEngineConfig.types.nftComponent[0].restPath = "nft";
+		serverConfig.types.nftComponent[0].restPath = "nft";
 	}
 
 	if (
-		Is.arrayValue(coreEngineConfig.types.verifiableStorageComponent) &&
-		!Is.stringValue(coreEngineConfig.types.verifiableStorageComponent[0].restPath)
+		Is.arrayValue(serverConfig.types.verifiableStorageComponent) &&
+		!Is.stringValue(serverConfig.types.verifiableStorageComponent[0].restPath)
 	) {
-		coreEngineConfig.types.verifiableStorageComponent[0].restPath = "verifiable";
+		serverConfig.types.verifiableStorageComponent[0].restPath = "verifiable";
 	}
 
 	if (
-		Is.arrayValue(coreEngineConfig.types.immutableProofComponent) &&
-		!Is.stringValue(coreEngineConfig.types.immutableProofComponent[0].restPath)
+		Is.arrayValue(serverConfig.types.immutableProofComponent) &&
+		!Is.stringValue(serverConfig.types.immutableProofComponent[0].restPath)
 	) {
-		coreEngineConfig.types.immutableProofComponent[0].restPath = "immutable-proof";
+		serverConfig.types.immutableProofComponent[0].restPath = "immutable-proof";
 	}
 
 	if (
-		Is.arrayValue(coreEngineConfig.types.attestationComponent) &&
-		!Is.stringValue(coreEngineConfig.types.attestationComponent[0].restPath)
+		Is.arrayValue(serverConfig.types.attestationComponent) &&
+		!Is.stringValue(serverConfig.types.attestationComponent[0].restPath)
 	) {
-		coreEngineConfig.types.attestationComponent[0].restPath = "attestation";
+		serverConfig.types.attestationComponent[0].restPath = "attestation";
 	}
 
 	if (
-		Is.arrayValue(coreEngineConfig.types.auditableItemGraphComponent) &&
-		!Is.stringValue(coreEngineConfig.types.auditableItemGraphComponent[0].restPath)
+		Is.arrayValue(serverConfig.types.auditableItemGraphComponent) &&
+		!Is.stringValue(serverConfig.types.auditableItemGraphComponent[0].restPath)
 	) {
-		coreEngineConfig.types.auditableItemGraphComponent[0].restPath = "aig";
+		serverConfig.types.auditableItemGraphComponent[0].restPath = "aig";
 	}
 
 	if (
-		Is.arrayValue(coreEngineConfig.types.auditableItemStreamComponent) &&
-		!Is.stringValue(coreEngineConfig.types.auditableItemStreamComponent[0].restPath)
+		Is.arrayValue(serverConfig.types.auditableItemStreamComponent) &&
+		!Is.stringValue(serverConfig.types.auditableItemStreamComponent[0].restPath)
 	) {
-		coreEngineConfig.types.auditableItemStreamComponent[0].restPath = "ais";
+		serverConfig.types.auditableItemStreamComponent[0].restPath = "ais";
 	}
 
 	if (
-		Is.arrayValue(coreEngineConfig.types.dataProcessingComponent) &&
-		!Is.stringValue(coreEngineConfig.types.dataProcessingComponent[0].restPath)
+		Is.arrayValue(serverConfig.types.dataProcessingComponent) &&
+		!Is.stringValue(serverConfig.types.dataProcessingComponent[0].restPath)
 	) {
-		coreEngineConfig.types.dataProcessingComponent[0].restPath = "data-processing";
+		serverConfig.types.dataProcessingComponent[0].restPath = "data-processing";
 	}
 
 	if (
-		Is.arrayValue(coreEngineConfig.types.documentManagementComponent) &&
-		!Is.stringValue(coreEngineConfig.types.documentManagementComponent[0].restPath)
+		Is.arrayValue(serverConfig.types.documentManagementComponent) &&
+		!Is.stringValue(serverConfig.types.documentManagementComponent[0].restPath)
 	) {
-		coreEngineConfig.types.documentManagementComponent[0].restPath = "documents";
+		serverConfig.types.documentManagementComponent[0].restPath = "documents";
 	}
 }
 
 /**
  * Adds the socket paths to the server config.
- * @param coreEngineConfig The core engine config.
  * @param serverConfig The server config.
  */
-function addSocketPaths(
-	coreEngineConfig: IEngineServerConfig,
-	serverConfig: IEngineServerConfig
-): void {
+export function addDefaultSocketPaths(serverConfig: IEngineServerConfig): void {
 	if (
-		Is.arrayValue(coreEngineConfig.types.eventBusComponent) &&
-		!Is.stringValue(coreEngineConfig.types.eventBusComponent[0].socketPath)
+		Is.arrayValue(serverConfig.types.eventBusComponent) &&
+		!Is.stringValue(serverConfig.types.eventBusComponent[0].socketPath)
 	) {
-		coreEngineConfig.types.eventBusComponent[0].socketPath = "event-bus";
+		serverConfig.types.eventBusComponent[0].socketPath = "event-bus";
 	}
 }

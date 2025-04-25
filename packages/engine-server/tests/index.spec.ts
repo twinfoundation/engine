@@ -55,6 +55,7 @@ import type { IEntityStorageComponent } from "@twin.org/entity-storage-models";
 import { nameof } from "@twin.org/nameof";
 import packageLocales from "../locales/en.json";
 import { EngineServer } from "../src/engineServer";
+import { addDefaultRestPaths } from "../src/utils/engineServerEnvBuilder";
 
 /**
  * Class representing information for a test entity.
@@ -161,7 +162,95 @@ describe("engine-server", () => {
 		const engineServer = new EngineServer({
 			engineCore: engine
 		});
+
+		addDefaultRestPaths(config);
 		const canContinue = await engineServer.start();
+
+		const buildRestRoutes = engineServer.getRestRoutes();
+		expect(buildRestRoutes.map(r => r.path)).toEqual([
+			"/",
+			"/info",
+			"/health",
+			"/spec",
+			"logging/",
+			"logging/",
+			"telemetry/metric",
+			"telemetry/metric/:id",
+			"telemetry/metric/:id",
+			"telemetry/metric/:id/value",
+			"telemetry/metric/:id",
+			"telemetry/metric",
+			"telemetry/metric/:id/value",
+			"blob/",
+			"blob/:id",
+			"blob/:id/content",
+			"blob/:id",
+			"blob/:id",
+			"blob/",
+			"identity/",
+			"identity/:identity/verification-method",
+			"identity/:identity/verification-method/:verificationMethodId",
+			"identity/:identity/service",
+			"identity/:identity/service/:serviceId",
+			"identity/:identity/verifiable-credential",
+			"identity/verifiable-credential/verify",
+			"identity/:identity/verifiable-credential/revoke/:revocationIndex",
+			"identity/:identity/verifiable-credential/unrevoke/:revocationIndex",
+			"identity/:identity/verifiable-presentation",
+			"identity/verifiable-presentation/verify",
+			"identity/:identity/proof",
+			"identity/proof/verify",
+			"identity/:identity",
+			"identity/profile/",
+			"identity/profile/",
+			"identity/profile/:identity/public",
+			"identity/profile/",
+			"identity/profile/",
+			"identity/profile/query/",
+			"nft/",
+			"nft/:id",
+			"nft/:id",
+			"nft/:id/transfer",
+			"nft/:id",
+			"verifiable/",
+			"verifiable/:id",
+			"verifiable/:id",
+			"verifiable/:id",
+			"attestation/",
+			"attestation/:id",
+			"attestation/:id/transfer",
+			"attestation/:id",
+			"immutable-proof/",
+			"immutable-proof/:id",
+			"immutable-proof/:id/verify",
+			"aig/",
+			"aig/:id",
+			"aig/:id",
+			"aig/",
+			"ais/",
+			"ais/:id",
+			"ais/:id",
+			"ais/:id",
+			"ais/",
+			"ais/:id",
+			"ais/:id/:entryId",
+			"ais/:id/:entryId/object",
+			"ais/:id/:entryId",
+			"ais/:id/:entryId",
+			"ais/:id/entries",
+			"ais/:id/entries/objects",
+			"data-processing/rule-group/:id",
+			"data-processing/rule-group/:id",
+			"data-processing/rule-group/:id",
+			"data-processing/extract",
+			"data-processing/convert",
+			"data-processing/rule-group",
+			"documents/",
+			"documents/:auditableItemGraphDocumentId",
+			"documents/:auditableItemGraphDocumentId",
+			"documents/:auditableItemGraphDocumentId/:revision",
+			"documents/"
+		]);
 
 		const res = await fetch("http://localhost:3000/info");
 		expect(await res.json()).toEqual({
