@@ -277,7 +277,7 @@ function addRestPaths(
 		Is.arrayValue(coreEngineConfig.types.documentManagementComponent) &&
 		!Is.stringValue(coreEngineConfig.types.documentManagementComponent[0].restPath)
 	) {
-		coreEngineConfig.types.documentManagementComponent[0].restPath = "document-management";
+		coreEngineConfig.types.documentManagementComponent[0].restPath = "documents";
 	}
 }
 
