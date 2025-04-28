@@ -1,5 +1,19 @@
 # @twin.org/engine-types - Changelog
 
+## [0.0.1-next.70](https://github.com/twinfoundation/engine/compare/engine-types-v0.0.1-next.69...engine-types-v0.0.1-next.70) (2025-04-28)
+
+
+### Features
+
+* add data processing component to doc management component ([2e4920f](https://github.com/twinfoundation/engine/commit/2e4920fb0626060dd6c570bc2bc7357fa8605ff0))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @twin.org/engine-models bumped from 0.0.1-next.69 to 0.0.1-next.70
+
 ## [0.0.1-next.69](https://github.com/twinfoundation/engine/compare/engine-types-v0.0.1-next.68...engine-types-v0.0.1-next.69) (2025-04-25)
 
 

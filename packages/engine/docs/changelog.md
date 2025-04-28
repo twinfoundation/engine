@@ -1,5 +1,20 @@
 # @twin.org/engine - Changelog
 
+## [0.0.1-next.70](https://github.com/twinfoundation/engine/compare/engine-v0.0.1-next.69...engine-v0.0.1-next.70) (2025-04-28)
+
+
+### Miscellaneous Chores
+
+* **engine:** Synchronize repo versions
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @twin.org/engine-core bumped from 0.0.1-next.69 to 0.0.1-next.70
+    * @twin.org/engine-types bumped from 0.0.1-next.69 to 0.0.1-next.70
+
 ## [0.0.1-next.69](https://github.com/twinfoundation/engine/compare/engine-v0.0.1-next.68...engine-v0.0.1-next.69) (2025-04-25)
 
 
