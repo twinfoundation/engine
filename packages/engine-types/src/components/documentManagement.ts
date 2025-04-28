@@ -38,6 +38,7 @@ export function initialiseDocumentManagementComponent(
 			auditableItemGraphComponentType: context.defaultTypes.auditableItemGraphComponent,
 			blobStorageComponentType: context.defaultTypes.blobStorageComponent,
 			attestationComponentType: context.defaultTypes.attestationComponent,
+			dataProcessingComponentType: context.defaultTypes.dataProcessingComponent,
 			...instanceConfig.options
 		});
 		instanceType = DocumentManagementService.NAMESPACE;
