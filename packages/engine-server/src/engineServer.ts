@@ -339,7 +339,7 @@ export class EngineServer<T extends IEngineServerConfig = IEngineServerConfig>
 	}
 
 	/**
-	 * Initialise the rest routes from connector.
+	 * Initialise the socket routes from connector.
 	 * @param routes The routes to add to.
 	 * @param typeKey The key for the default types.
 	 * @param typeConfig The type config.
