@@ -89,7 +89,6 @@ export function initialiseAttestationComponent(
 
 	if (type === AttestationComponentType.Service) {
 		component = new AttestationService({
-			walletConnectorType: context.defaultTypes.walletConnector,
 			...instanceConfig.options
 		});
 		instanceType = AttestationService.NAMESPACE;
