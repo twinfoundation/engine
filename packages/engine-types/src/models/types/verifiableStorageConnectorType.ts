@@ -14,12 +14,7 @@ export const VerifiableStorageConnectorType = {
 	/**
 	 * IOTA.
 	 */
-	Iota: "iota",
-
-	/**
-	 * IOTA Stardust.
-	 */
-	IotaStardust: "iota-stardust"
+	Iota: "iota"
 } as const;
 
 /**

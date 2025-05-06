@@ -11,9 +11,3 @@ DLT config types.
 > `readonly` **Iota**: `"iota"` = `"iota"`
 
 IOTA.
-
-### IotaStardust
-
-> `readonly` **IotaStardust**: `"iota-stardust"` = `"iota-stardust"`
-
-IOTA Stardust.

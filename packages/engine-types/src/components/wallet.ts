@@ -9,7 +9,6 @@ import {
 	type WalletAddress
 } from "@twin.org/wallet-connector-entity-storage";
 import { IotaWalletConnector } from "@twin.org/wallet-connector-iota";
-import { IotaStardustWalletConnector } from "@twin.org/wallet-connector-iota-stardust";
 import { WalletConnectorFactory, type IWalletConnector } from "@twin.org/wallet-models";
 import { initialiseEntityStorageConnector } from "./entityStorage";
 import type { WalletConnectorConfig } from "../models/config/walletConnectorConfig";
@@ -41,21 +40,7 @@ export function initialiseWalletConnector(
 	let connector: IWalletConnector;
 	let instanceType: string;
 
-	if (type === WalletConnectorType.IotaStardust) {
-		const dltConfig = context.config.types.dltConfig?.find(
-			dlt => dlt.type === context.defaultTypes.dltConfig
-		);
-		connector = new IotaStardustWalletConnector({
-			vaultConnectorType: context.defaultTypes.vaultConnector,
-			faucetConnectorType: context.defaultTypes.faucetConnector,
-			...instanceConfig.options,
-			config: {
-				...dltConfig?.options?.config,
-				...instanceConfig.options.config
-			}
-		});
-		instanceType = IotaStardustWalletConnector.NAMESPACE;
-	} else if (type === WalletConnectorType.Iota) {
+	if (type === WalletConnectorType.Iota) {
 		const dltConfig = context.config.types.dltConfig?.find(
 			dlt => dlt.type === context.defaultTypes.dltConfig
 		);
@@ -110,8 +95,6 @@ export function initialiseWalletStorage(
 	const type = instanceConfig.type;
 	if (type === WalletConnectorType.Iota) {
 		// No storage required for IOTA wallet connector.
-	} else if (type === WalletConnectorType.IotaStardust) {
-		// No storage required for IOTA Stardust wallet connector.
 	} else if (type === WalletConnectorType.EntityStorage) {
 		initSchemaWallet();
 		initialiseEntityStorageConnector(

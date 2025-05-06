@@ -8,7 +8,6 @@ import {
 	type IdentityDocument
 } from "@twin.org/identity-connector-entity-storage";
 import { IotaIdentityResolverConnector } from "@twin.org/identity-connector-iota";
-import { IotaStardustIdentityResolverConnector } from "@twin.org/identity-connector-iota-stardust";
 import { UniversalResolverConnector } from "@twin.org/identity-connector-universal";
 import {
 	IdentityResolverConnectorFactory,
@@ -48,19 +47,7 @@ export function initialiseIdentityResolverConnector(
 	const type = instanceConfig.type;
 	let connector: IIdentityResolverConnector;
 	let instanceType: string;
-	if (type === IdentityResolverConnectorType.IotaStardust) {
-		const dltConfig = context.config.types.dltConfig?.find(
-			dlt => dlt.type === context.defaultTypes.dltConfig
-		);
-		connector = new IotaStardustIdentityResolverConnector({
-			...instanceConfig.options,
-			config: {
-				...dltConfig?.options?.config,
-				...instanceConfig.options.config
-			}
-		});
-		instanceType = IotaStardustIdentityResolverConnector.NAMESPACE;
-	} else if (type === IdentityResolverConnectorType.Iota) {
+	if (type === IdentityResolverConnectorType.Iota) {
 		const dltConfig = context.config.types.dltConfig?.find(
 			dlt => dlt.type === context.defaultTypes.dltConfig
 		);

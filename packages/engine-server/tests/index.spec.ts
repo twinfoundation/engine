@@ -249,6 +249,7 @@ describe("engine-server", () => {
 			"documents/:auditableItemGraphDocumentId",
 			"documents/:auditableItemGraphDocumentId",
 			"documents/:auditableItemGraphDocumentId/:revision",
+			"documents/:auditableItemGraphDocumentId/:revision",
 			"documents/"
 		]);
 

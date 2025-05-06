@@ -381,12 +381,12 @@ export interface IEngineEnvironmentVariables {
 	nftConnector?: string;
 
 	/**
-	 * The type of identity connector: entity-storage, iota, iota-stardust.
+	 * The type of identity connector: entity-storage, iota.
 	 */
 	identityConnector?: string;
 
 	/**
-	 * The type of identity resolver connector: entity-storage, iota, iota-stardust.
+	 * The type of identity resolver connector: entity-storage, iota.
 	 */
 	identityResolverConnector?: string;
 
@@ -394,31 +394,6 @@ export interface IEngineEnvironmentVariables {
 	 * The type of verifiable storage connector: entity-storage, iota.
 	 */
 	verifiableStorageConnector?: string;
-
-	/**
-	 * IOTA Stardust Faucet Endpoint.
-	 */
-	iotaStardustFaucetEndpoint?: string;
-
-	/**
-	 * IOTA Stardust Node Endpoint.
-	 */
-	iotaStardustNodeEndpoint?: string;
-
-	/**
-	 * IOTA Stardust Bech32 HRP
-	 */
-	iotaStardustBech32Hrp?: string;
-
-	/**
-	 * IOTA Stardust coin type.
-	 */
-	iotaStardustCoinType?: string;
-
-	/**
-	 * IOTA Stardust Explorer Endpoint.
-	 */
-	iotaStardustExplorerEndpoint?: string;
 
 	/**
 	 * IOTA Faucet Endpoint.

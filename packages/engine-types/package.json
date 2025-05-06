@@ -79,7 +79,6 @@
 		"@twin.org/identity-models": "next",
 		"@twin.org/identity-connector-entity-storage": "next",
 		"@twin.org/identity-connector-iota": "next",
-		"@twin.org/identity-connector-iota-stardust": "next",
 		"@twin.org/identity-connector-universal": "next",
 		"@twin.org/identity-service": "next",
 		"@twin.org/immutable-proof-models": "next",
@@ -95,7 +94,6 @@
 		"@twin.org/nft-models": "next",
 		"@twin.org/nft-connector-entity-storage": "next",
 		"@twin.org/nft-connector-iota": "next",
-		"@twin.org/nft-connector-iota-stardust": "next",
 		"@twin.org/nft-service": "next",
 		"@twin.org/telemetry-models": "next",
 		"@twin.org/telemetry-connector-entity-storage": "next",
@@ -105,13 +103,11 @@
 		"@twin.org/vault-connector-hashicorp": "next",
 		"@twin.org/verifiable-storage-connector-entity-storage": "next",
 		"@twin.org/verifiable-storage-connector-iota": "next",
-		"@twin.org/verifiable-storage-connector-iota-stardust": "next",
 		"@twin.org/verifiable-storage-models": "next",
 		"@twin.org/verifiable-storage-service": "next",
 		"@twin.org/wallet-models": "next",
 		"@twin.org/wallet-connector-entity-storage": "next",
-		"@twin.org/wallet-connector-iota": "next",
-		"@twin.org/wallet-connector-iota-stardust": "next"
+		"@twin.org/wallet-connector-iota": "next"
 	},
 	"devDependencies": {
 		"@twin.org/nameof-transformer": "next",

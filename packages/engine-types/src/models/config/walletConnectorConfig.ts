@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0.
 import type { IEntityStorageWalletConnectorConstructorOptions } from "@twin.org/wallet-connector-entity-storage";
 import type { IIotaWalletConnectorConstructorOptions } from "@twin.org/wallet-connector-iota";
-import type { IIotaStardustWalletConnectorConstructorOptions } from "@twin.org/wallet-connector-iota-stardust";
 import type { WalletConnectorType } from "../types/walletConnectorType";
 
 /**
@@ -16,8 +15,4 @@ export type WalletConnectorConfig =
 	| {
 			type: typeof WalletConnectorType.Iota;
 			options: IIotaWalletConnectorConstructorOptions;
-	  }
-	| {
-			type: typeof WalletConnectorType.IotaStardust;
-			options: IIotaStardustWalletConnectorConstructorOptions;
 	  };

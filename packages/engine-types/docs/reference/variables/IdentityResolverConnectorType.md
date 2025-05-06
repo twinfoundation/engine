@@ -23,9 +23,3 @@ IOTA.
 > `readonly` **Universal**: `"universal"` = `"universal"`
 
 Universal.
-
-### IotaStardust
-
-> `readonly` **IotaStardust**: `"iota-stardust"` = `"iota-stardust"`
-
-IOTA Stardust.

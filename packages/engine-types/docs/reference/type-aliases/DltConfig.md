@@ -1,5 +1,21 @@
 # Type Alias: DltConfig
 
-> **DltConfig** = \{ `type`: *typeof* [`Iota`](../variables/DltConfigType.md#iota); `options`: \{ `config`: `IIotaConfig`; \}; \} \| \{ `type`: *typeof* [`IotaStardust`](../variables/DltConfigType.md#iotastardust); `options`: \{ `config`: `IIotaStardustConfig`; \}; \}
+> **DltConfig** = `object`
 
 DLT config types.
+
+## Properties
+
+### type
+
+> **type**: *typeof* [`Iota`](../variables/DltConfigType.md#iota)
+
+***
+
+### options?
+
+> `optional` **options**: `object`
+
+#### config?
+
+> `optional` **config**: `IIotaConfig`

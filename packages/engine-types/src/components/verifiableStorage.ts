@@ -9,7 +9,6 @@ import {
 	type VerifiableItem
 } from "@twin.org/verifiable-storage-connector-entity-storage";
 import { IotaVerifiableStorageConnector } from "@twin.org/verifiable-storage-connector-iota";
-import { IotaStardustVerifiableStorageConnector } from "@twin.org/verifiable-storage-connector-iota-stardust";
 import {
 	type IVerifiableStorageComponent,
 	VerifiableStorageConnectorFactory,
@@ -47,20 +46,7 @@ export function initialiseVerifiableStorageConnector(
 	const type = instanceConfig.type;
 	let connector: IVerifiableStorageConnector;
 	let instanceType: string;
-	if (type === VerifiableStorageConnectorType.IotaStardust) {
-		const dltConfig = context.config.types.dltConfig?.find(
-			dlt => dlt.type === context.defaultTypes.dltConfig
-		);
-		connector = new IotaStardustVerifiableStorageConnector({
-			vaultConnectorType: context.defaultTypes.vaultConnector,
-			...instanceConfig.options,
-			config: {
-				...dltConfig?.options?.config,
-				...instanceConfig.options.config
-			}
-		});
-		instanceType = IotaStardustVerifiableStorageConnector.NAMESPACE;
-	} else if (type === VerifiableStorageConnectorType.Iota) {
+	if (type === VerifiableStorageConnectorType.Iota) {
 		const dltConfig = context.config.types.dltConfig?.find(
 			dlt => dlt.type === context.defaultTypes.dltConfig
 		);
