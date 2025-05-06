@@ -1,5 +1,20 @@
 # @twin.org/engine - Changelog
 
+## [0.0.1-next.71](https://github.com/twinfoundation/engine/compare/engine-v0.0.1-next.70...engine-v0.0.1-next.71) (2025-05-06)
+
+
+### Features
+
+* iota rebased release ([474d92b](https://github.com/twinfoundation/engine/commit/474d92b352f4ccc431a4f138afee2ee89824664d))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @twin.org/engine-core bumped from 0.0.1-next.70 to 0.0.1-next.71
+    * @twin.org/engine-types bumped from 0.0.1-next.70 to 0.0.1-next.71
+
 ## [0.0.1-next.70](https://github.com/twinfoundation/engine/compare/engine-v0.0.1-next.69...engine-v0.0.1-next.70) (2025-04-28)
 
 
