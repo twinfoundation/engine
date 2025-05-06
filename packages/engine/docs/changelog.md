@@ -1,5 +1,22 @@
 # @twin.org/engine - Changelog
 
+## [0.0.1-next.72](https://github.com/twinfoundation/engine/compare/engine-v0.0.1-next.71...engine-v0.0.1-next.72) (2025-05-06)
+
+
+### Features
+
+* add mimeTypeProcessors and disableNodeIdentity ([bb7e81e](https://github.com/twinfoundation/engine/commit/bb7e81e2036fe042068a5645ec59b22e20d33aad))
+* iota rebased release ([474d92b](https://github.com/twinfoundation/engine/commit/474d92b352f4ccc431a4f138afee2ee89824664d))
+* use shared store mechanism ([#2](https://github.com/twinfoundation/engine/issues/2)) ([9eed8d7](https://github.com/twinfoundation/engine/commit/9eed8d7766388479b42f03e2542fe761f2156408))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @twin.org/engine-core bumped from 0.0.1-next.71 to 0.0.1-next.72
+    * @twin.org/engine-types bumped from 0.0.1-next.71 to 0.0.1-next.72
+
 ## [0.0.1-next.71](https://github.com/twinfoundation/engine/compare/engine-v0.0.1-next.70...engine-v0.0.1-next.71) (2025-05-06)
 
 
