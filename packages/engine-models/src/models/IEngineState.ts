@@ -11,11 +11,6 @@ export interface IEngineState {
 	nodeIdentity?: string;
 
 	/**
-	 * The ids of the bootstrapped components.
-	 */
-	bootstrappedComponents: string[];
-
-	/**
 	 * The component states.
 	 */
 	componentStates: {

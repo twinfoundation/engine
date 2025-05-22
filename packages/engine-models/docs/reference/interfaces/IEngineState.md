@@ -12,14 +12,6 @@ The identity for the node.
 
 ***
 
-### bootstrappedComponents
-
-> **bootstrappedComponents**: `string`[]
-
-The ids of the bootstrapped components.
-
-***
-
 ### componentStates
 
 > **componentStates**: `object`

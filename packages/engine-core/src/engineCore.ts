@@ -137,7 +137,7 @@ export class EngineCore<
 			config: options.config,
 			defaultTypes: {},
 			componentInstances: [],
-			state: { bootstrappedComponents: [], componentStates: {} } as unknown as S,
+			state: { componentStates: {} } as unknown as S,
 			stateDirty: false
 		};
 		this._stateStorage = options.stateStorage;
@@ -402,7 +402,7 @@ export class EngineCore<
 			config: cloneData.config,
 			defaultTypes: {},
 			componentInstances: [],
-			state: { bootstrappedComponents: [], componentStates: {} } as unknown as S,
+			state: { componentStates: {} } as unknown as S,
 			stateDirty: false
 		};
 
@@ -486,10 +486,8 @@ export class EngineCore<
 		if (this._stateStorage) {
 			try {
 				this._context.state = ((await this._stateStorage.load(this)) ?? {
-					bootstrappedComponents: [],
 					componentStates: {}
 				}) as unknown as S;
-				this._context.state.bootstrappedComponents ??= [];
 				this._context.state.componentStates ??= {};
 				this._context.stateDirty = false;
 
@@ -534,35 +532,31 @@ export class EngineCore<
 				if (Is.function(instance.component.bootstrap)) {
 					const instanceName = this.getInstanceName(instance);
 
-					if (!this._context.state.bootstrappedComponents.includes(instanceName)) {
-						this.logInfo(
-							I18n.formatMessage("engineCore.bootstrapping", {
-								element: instanceName
-							})
-						);
+					this.logInfo(
+						I18n.formatMessage("engineCore.bootstrapping", {
+							element: instanceName
+						})
+					);
 
-						const componentState: {
-							[id: string]: unknown;
-						} = this._context.state.componentStates[instanceName] ?? {};
-						const lastState = ObjectHelper.clone(componentState);
+					const componentState: {
+						[id: string]: unknown;
+					} = this._context.state.componentStates[instanceName] ?? {};
+					const lastState = ObjectHelper.clone(componentState);
 
-						const bootstrapSuccess = await instance.component.bootstrap(
-							this._loggerTypeName,
-							componentState
-						);
+					const bootstrapSuccess = await instance.component.bootstrap(
+						this._loggerTypeName,
+						componentState
+					);
 
-						// If the bootstrap method failed then throw an error
-						if (!bootstrapSuccess) {
-							throw new GeneralError(this.CLASS_NAME, "bootstrapFailed", {
-								component: `${instance.component.CLASS_NAME}:${instance.instanceType}`
-							});
-						}
+					// If the bootstrap method failed then throw an error
+					if (!bootstrapSuccess) {
+						throw new GeneralError(this.CLASS_NAME, "bootstrapFailed", {
+							component: `${instance.component.CLASS_NAME}:${instance.instanceType}`
+						});
+					}
 
-						// Otherwise add the component to the bootstrapped list and set the state as dirty
-						this._context.state.bootstrappedComponents.push(instanceName);
-						if (!ObjectHelper.equal(lastState, componentState)) {
-							this._context.state.componentStates[instanceName] = componentState;
-						}
+					if (!ObjectHelper.equal(lastState, componentState)) {
+						this._context.state.componentStates[instanceName] = componentState;
 						this._context.stateDirty = true;
 					}
 				}
