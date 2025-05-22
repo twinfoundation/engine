@@ -1,5 +1,19 @@
 # @twin.org/engine-core - Changelog
 
+## [0.0.1-next.73](https://github.com/twinfoundation/engine/compare/engine-core-v0.0.1-next.72...engine-core-v0.0.1-next.73) (2025-05-22)
+
+
+### Features
+
+* remove bootstrapped components, component should manage their own state ([5c7e9e4](https://github.com/twinfoundation/engine/commit/5c7e9e419ef26933e49c9c5a21a20a8961244e7f))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @twin.org/engine-models bumped from 0.0.1-next.72 to 0.0.1-next.73
+
 ## [0.0.1-next.72](https://github.com/twinfoundation/engine/compare/engine-core-v0.0.1-next.71...engine-core-v0.0.1-next.72) (2025-05-06)
 
 
