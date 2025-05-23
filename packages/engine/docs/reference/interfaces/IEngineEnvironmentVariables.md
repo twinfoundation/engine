@@ -721,3 +721,19 @@ The type of the default data converters, can be a comma separated list: json, xm
 > `optional` **dataExtractorConnectors**: `string`
 
 The type of the default data extractor, can be a comma separated list: json-path.
+
+***
+
+### federatedCatalogueCacheTtlMs?
+
+> `optional` **federatedCatalogueCacheTtlMs**: `number`
+
+Federated catalog TTL for the cache.
+
+***
+
+### federatedCatalogueClearingHouseApproverList?
+
+> `optional` **federatedCatalogueClearingHouseApproverList**: `string`
+
+Federated catalog clearing house approver list, stringified array of DIDs.

@@ -18,6 +18,7 @@ import {
 	EventBusComponentType,
 	EventBusConnectorType,
 	FaucetConnectorType,
+	FederatedCatalogueComponentType,
 	IdentityComponentType,
 	IdentityConnectorType,
 	IdentityProfileComponentType,
@@ -26,8 +27,6 @@ import {
 	IdentityResolverConnectorType,
 	type IEngineConfig,
 	ImmutableProofComponentType,
-	VerifiableStorageComponentType,
-	VerifiableStorageConnectorType,
 	LoggingComponentType,
 	LoggingConnectorType,
 	MessagingComponentType,
@@ -39,6 +38,8 @@ import {
 	TelemetryComponentType,
 	TelemetryConnectorType,
 	VaultConnectorType,
+	VerifiableStorageComponentType,
+	VerifiableStorageConnectorType,
 	WalletConnectorType
 } from "@twin.org/engine-types";
 import type { IEngineEnvironmentVariables } from "../models/IEngineEnvironmentVariables";
@@ -88,6 +89,7 @@ export function buildEngineConfiguration(envVars: IEngineEnvironmentVariables): 
 	configureAuditableItemGraph(coreConfig, envVars);
 	configureAuditableItemStream(coreConfig, envVars);
 	configureDocumentManagement(coreConfig, envVars);
+	configureFederatedCatalogue(coreConfig, envVars);
 
 	return coreConfig;
 }
@@ -962,6 +964,30 @@ function configureDocumentManagement(
 		coreConfig.types.documentManagementComponent ??= [];
 		coreConfig.types.documentManagementComponent.push({
 			type: DocumentManagementComponentType.Service
+		});
+	}
+}
+
+/**
+ * Configures the federated catalogue.
+ * @param coreConfig The core config.
+ * @param envVars The environment variables.
+ */
+function configureFederatedCatalogue(
+	coreConfig: IEngineConfig,
+	envVars: IEngineEnvironmentVariables
+): void {
+	if (Is.arrayValue(coreConfig.types.identityResolverComponent)) {
+		coreConfig.types.federatedCatalogueComponent ??= [];
+		coreConfig.types.federatedCatalogueComponent.push({
+			type: FederatedCatalogueComponentType.Service,
+			options: {
+				config: {
+					subResourceCacheTtlMs: Coerce.number(envVars.federatedCatalogueCacheTtlMs),
+					clearingHouseApproverList:
+						Coerce.object<string[]>(envVars.federatedCatalogueClearingHouseApproverList) ?? []
+				}
+			}
 		});
 	}
 }

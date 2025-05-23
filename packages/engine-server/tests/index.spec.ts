@@ -48,7 +48,8 @@ import {
 	TelemetryComponentType,
 	TelemetryConnectorType,
 	VaultConnectorType,
-	WalletConnectorType
+	WalletConnectorType,
+	FederatedCatalogueComponentType
 } from "@twin.org/engine-types";
 import { entity, EntitySchemaFactory, EntitySchemaHelper, property } from "@twin.org/entity";
 import type { IEntityStorageComponent } from "@twin.org/entity-storage-models";
@@ -130,6 +131,12 @@ describe("engine-server", () => {
 				dataExtractorConnector: [{ type: DataExtractorConnectorType.JsonPath }],
 				dataProcessingComponent: [{ type: DataProcessingComponentType.Service }],
 				documentManagementComponent: [{ type: DocumentManagementComponentType.Service }],
+				federatedCatalogueComponent: [
+					{
+						type: FederatedCatalogueComponentType.Service,
+						options: { config: { clearingHouseApproverList: [] } }
+					}
+				],
 				informationComponent: [
 					{
 						type: InformationComponentType.Service,
@@ -250,7 +257,19 @@ describe("engine-server", () => {
 			"documents/:auditableItemGraphDocumentId",
 			"documents/:auditableItemGraphDocumentId/:revision",
 			"documents/:auditableItemGraphDocumentId/:revision",
-			"documents/"
+			"documents/",
+			"federated-catalogue/participant-credentials",
+			"federated-catalogue/service-offering-credentials",
+			"federated-catalogue/data-resource-credentials",
+			"federated-catalogue/data-space-connector-credentials",
+			"federated-catalogue/participants",
+			"federated-catalogue/participants/:id",
+			"federated-catalogue/service-offerings",
+			"federated-catalogue/service-offerings/:id",
+			"federated-catalogue/data-resources",
+			"federated-catalogue/data-resources/:id",
+			"federated-catalogue/data-space-connectors",
+			"federated-catalogue/data-space-connectors/:id"
 		]);
 
 		const res = await fetch("http://localhost:3000/info");

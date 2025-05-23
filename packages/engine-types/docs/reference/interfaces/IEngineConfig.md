@@ -282,6 +282,12 @@ Date processing options which can be overridden by individual components by spec
 
 Document management options which can be overridden by individual components by specifying types other than default.
 
+#### federatedCatalogueComponent?
+
+> `optional` **federatedCatalogueComponent**: `IEngineCoreTypeConfig`\<[`FederatedCatalogueComponentConfig`](../type-aliases/FederatedCatalogueComponentConfig.md)\>[]
+
+Federated catalogue options which can be overridden by individual components by specifying types other than default.
+
 #### Overrides
 
 `IEngineCoreConfig.types`

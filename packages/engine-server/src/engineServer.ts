@@ -523,6 +523,12 @@ export class EngineServer<T extends IEngineServerConfig = IEngineServerConfig>
 			"@twin.org/document-management-service",
 			"generateRestRoutesDocumentManagement"
 		);
+		this.addRestRouteGenerator(
+			"federatedCatalogueComponent",
+			coreConfig.types.federatedCatalogueComponent,
+			"@twin.org/federated-catalogue-service",
+			"generateRestRoutesFederatedCatalogue"
+		);
 	}
 
 	/**

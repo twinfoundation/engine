@@ -20,6 +20,7 @@ import {
 	EventBusComponentType,
 	EventBusConnectorType,
 	FaucetConnectorType,
+	FederatedCatalogueComponentType,
 	IdentityComponentType,
 	IdentityConnectorType,
 	IdentityProfileComponentType,
@@ -139,7 +140,13 @@ describe("engine", () => {
 					],
 					dataExtractorConnector: [{ type: DataExtractorConnectorType.JsonPath }],
 					dataProcessingComponent: [{ type: DataProcessingComponentType.Service }],
-					documentManagementComponent: [{ type: DocumentManagementComponentType.Service }]
+					documentManagementComponent: [{ type: DocumentManagementComponentType.Service }],
+					federatedCatalogueComponent: [
+						{
+							type: FederatedCatalogueComponentType.Service,
+							options: { config: { clearingHouseApproverList: [] } }
+						}
+					]
 				}
 			},
 			stateStorage: new MemoryStateStorage(),
@@ -167,7 +174,8 @@ describe("engine", () => {
 			"aig",
 			"ais",
 			"data-processing",
-			"documents"
+			"documents",
+			"fedcat"
 		]);
 
 		expect(EntitySchemaFactory.names()).toEqual([
@@ -197,7 +205,11 @@ describe("engine", () => {
 			"AuditableItemStream",
 			"AuditableItemStreamEntry",
 			"ExtractionRuleGroup",
-			"ExtractionRule"
+			"ExtractionRule",
+			"ParticipantEntry",
+			"DataResourceEntry",
+			"ServiceOfferingEntry",
+			"DataSpaceConnectorEntry"
 		]);
 
 		expect(engine).toBeDefined();
@@ -324,7 +336,13 @@ describe("engine", () => {
 					],
 					dataExtractorConnector: [{ type: DataExtractorConnectorType.JsonPath }],
 					dataProcessingComponent: [{ type: DataProcessingComponentType.Service }],
-					documentManagementComponent: [{ type: DocumentManagementComponentType.Service }]
+					documentManagementComponent: [{ type: DocumentManagementComponentType.Service }],
+					federatedCatalogueComponent: [
+						{
+							type: FederatedCatalogueComponentType.Service,
+							options: { config: { clearingHouseApproverList: [] } }
+						}
+					]
 				}
 			},
 			stateStorage: new MemoryStateStorage()
@@ -392,7 +410,13 @@ describe("engine", () => {
 				],
 				dataExtractorConnector: [{ type: DataExtractorConnectorType.JsonPath }],
 				dataProcessingComponent: [{ type: DataProcessingComponentType.Service }],
-				documentManagementComponent: [{ type: DocumentManagementComponentType.Service }]
+				documentManagementComponent: [{ type: DocumentManagementComponentType.Service }],
+				federatedCatalogueComponent: [
+					{
+						type: FederatedCatalogueComponentType.Service,
+						options: { config: { clearingHouseApproverList: [] } }
+					}
+				]
 			}
 		};
 		const engine = new Engine({

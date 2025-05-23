@@ -275,6 +275,13 @@ export function addDefaultRestPaths(serverConfig: IEngineServerConfig): void {
 	) {
 		serverConfig.types.documentManagementComponent[0].restPath = "documents";
 	}
+
+	if (
+		Is.arrayValue(serverConfig.types.federatedCatalogueComponent) &&
+		!Is.stringValue(serverConfig.types.federatedCatalogueComponent[0].restPath)
+	) {
+		serverConfig.types.federatedCatalogueComponent[0].restPath = "federated-catalogue";
+	}
 }
 
 /**

@@ -454,4 +454,14 @@ export interface IEngineEnvironmentVariables {
 	 * The type of the default data extractor, can be a comma separated list: json-path.
 	 */
 	dataExtractorConnectors?: string;
+
+	/**
+	 * Federated catalog TTL for the cache.
+	 */
+	federatedCatalogueCacheTtlMs?: number;
+
+	/**
+	 * Federated catalog clearing house approver list, stringified array of DIDs.
+	 */
+	federatedCatalogueClearingHouseApproverList?: string;
 }

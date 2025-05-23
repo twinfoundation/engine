@@ -273,5 +273,12 @@ export class Engine<
 			"@twin.org/engine-types",
 			"initialiseDocumentManagementComponent"
 		);
+
+		this.addTypeInitialiser(
+			"federatedCatalogueComponent",
+			this._context.config.types.federatedCatalogueComponent,
+			"@twin.org/engine-types",
+			"initialiseFederatedCatalogueComponent"
+		);
 	}
 }

@@ -76,6 +76,8 @@
 		"@twin.org/event-bus-models": "next",
 		"@twin.org/event-bus-service": "next",
 		"@twin.org/event-bus-connector-local": "next",
+		"@twin.org/federated-catalogue-models": "next",
+		"@twin.org/federated-catalogue-service": "next",
 		"@twin.org/identity-models": "next",
 		"@twin.org/identity-connector-entity-storage": "next",
 		"@twin.org/identity-connector-iota": "next",

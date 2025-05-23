@@ -18,6 +18,7 @@ import type { EntityStorageConnectorConfig } from "./config/entityStorageConnect
 import type { EventBusComponentConfig } from "./config/eventBusComponentConfig";
 import type { EventBusConnectorConfig } from "./config/eventBusConnectorConfig";
 import type { FaucetConnectorConfig } from "./config/faucetConnectorConfig";
+import type { FederatedCatalogueComponentConfig } from "./config/federatedCatalogueComponentConfig";
 import type { IdentityComponentConfig } from "./config/identityComponentConfig";
 import type { IdentityConnectorConfig } from "./config/identityConnectorConfig";
 import type { IdentityProfileComponentConfig } from "./config/identityProfileComponentConfig";
@@ -239,5 +240,10 @@ export interface IEngineConfig extends IEngineCoreConfig {
 		 * Document management options which can be overridden by individual components by specifying types other than default.
 		 */
 		documentManagementComponent?: IEngineCoreTypeConfig<DocumentManagementComponentConfig>[];
+
+		/**
+		 * Federated catalogue options which can be overridden by individual components by specifying types other than default.
+		 */
+		federatedCatalogueComponent?: IEngineCoreTypeConfig<FederatedCatalogueComponentConfig>[];
 	};
 }
