@@ -1,5 +1,19 @@
 # @twin.org/engine-types - Changelog
 
+## [0.0.1-next.74](https://github.com/twinfoundation/engine/compare/engine-types-v0.0.1-next.73...engine-types-v0.0.1-next.74) (2025-05-23)
+
+
+### Features
+
+* add federated catalogue ([1b15dd0](https://github.com/twinfoundation/engine/commit/1b15dd059a11446457651c411a73145fab37f025))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @twin.org/engine-models bumped from 0.0.1-next.73 to 0.0.1-next.74
+
 ## [0.0.1-next.73](https://github.com/twinfoundation/engine/compare/engine-types-v0.0.1-next.72...engine-types-v0.0.1-next.73) (2025-05-22)
 
 
