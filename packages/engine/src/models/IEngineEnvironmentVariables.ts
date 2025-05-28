@@ -464,4 +464,9 @@ export interface IEngineEnvironmentVariables {
 	 * Federated catalog clearing house approver list, stringified array of DIDs.
 	 */
 	federatedCatalogueClearingHouseApproverList?: string;
+
+	/**
+	 * Rights management PAP (Policy Administration Point) entity storage type.
+	 */
+	rightsManagementPapEntityStorageType?: string;
 }

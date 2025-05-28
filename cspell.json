@@ -27,6 +27,7 @@
 		"firestoredb",
 		"ipfs",
 		"nameof",
+		"Odrl",
 		"openapi",
 		"Postgre",
 		"scylladb",

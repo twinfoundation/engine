@@ -37,6 +37,7 @@ import {
 	MessagingSmsConnectorType,
 	NftComponentType,
 	NftConnectorType,
+	RightsManagementComponentType,
 	TelemetryComponentType,
 	TelemetryConnectorType,
 	VaultConnectorType,
@@ -146,6 +147,11 @@ describe("engine", () => {
 							type: FederatedCatalogueComponentType.Service,
 							options: { config: { clearingHouseApproverList: [] } }
 						}
+					],
+					rightsManagementComponent: [
+						{
+							type: RightsManagementComponentType.Service
+						}
 					]
 				}
 			},
@@ -175,7 +181,10 @@ describe("engine", () => {
 			"ais",
 			"data-processing",
 			"documents",
-			"fedcat"
+			"fedcat",
+			"odrl-policy",
+			"entity-storage",
+			"rights-management"
 		]);
 
 		expect(EntitySchemaFactory.names()).toEqual([
@@ -209,7 +218,8 @@ describe("engine", () => {
 			"ParticipantEntry",
 			"DataResourceEntry",
 			"ServiceOfferingEntry",
-			"DataSpaceConnectorEntry"
+			"DataSpaceConnectorEntry",
+			"OdrlPolicy"
 		]);
 
 		expect(engine).toBeDefined();
@@ -341,6 +351,11 @@ describe("engine", () => {
 						{
 							type: FederatedCatalogueComponentType.Service,
 							options: { config: { clearingHouseApproverList: [] } }
+						}
+					],
+					rightsManagementComponent: [
+						{
+							type: RightsManagementComponentType.Service
 						}
 					]
 				}

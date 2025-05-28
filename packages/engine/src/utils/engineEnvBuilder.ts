@@ -35,6 +35,7 @@ import {
 	MessagingSmsConnectorType,
 	NftComponentType,
 	NftConnectorType,
+	RightsManagementComponentType,
 	TelemetryComponentType,
 	TelemetryConnectorType,
 	VaultConnectorType,
@@ -90,6 +91,7 @@ export function buildEngineConfiguration(envVars: IEngineEnvironmentVariables): 
 	configureAuditableItemStream(coreConfig, envVars);
 	configureDocumentManagement(coreConfig, envVars);
 	configureFederatedCatalogue(coreConfig, envVars);
+	configureRightsManagement(coreConfig, envVars);
 
 	return coreConfig;
 }
@@ -990,4 +992,25 @@ function configureFederatedCatalogue(
 			}
 		});
 	}
+}
+
+/**
+ * Configures the rights management.
+ * @param coreConfig The core config.
+ * @param envVars The environment variables.
+ */
+function configureRightsManagement(
+	coreConfig: IEngineConfig,
+	envVars: IEngineEnvironmentVariables
+): void {
+	// Rights management is always available, no conditional initialization
+	coreConfig.types.rightsManagementComponent ??= [];
+	coreConfig.types.rightsManagementComponent.push({
+		type: RightsManagementComponentType.Service,
+		options: {
+			config: {
+				defaultEntityStorageType: envVars.rightsManagementPapEntityStorageType
+			}
+		}
+	});
 }

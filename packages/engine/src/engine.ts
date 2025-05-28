@@ -280,5 +280,12 @@ export class Engine<
 			"@twin.org/engine-types",
 			"initialiseFederatedCatalogueComponent"
 		);
+
+		this.addTypeInitialiser(
+			"rightsManagementComponent",
+			this._context.config.types.rightsManagementComponent,
+			"@twin.org/engine-types",
+			"initialiseRightsManagementComponent"
+		);
 	}
 }
