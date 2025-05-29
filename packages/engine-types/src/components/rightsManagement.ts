@@ -34,8 +34,10 @@ export function initialiseRightsManagementComponent(
 	let instanceType: string;
 
 	if (type === RightsManagementComponentType.Service) {
-		// Create the main Rights Management service
-		component = new RightsManagementService(instanceConfig.options);
+		component = new RightsManagementService({
+			papComponentType: context.defaultTypes.rightsManagementPapComponent,
+			...instanceConfig.options
+		});
 		instanceType = RightsManagementService.NAMESPACE;
 	} else {
 		throw new GeneralError("engineCore", "componentUnknownType", {

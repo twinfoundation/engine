@@ -98,7 +98,6 @@
 		"@twin.org/nft-connector-iota": "next",
 		"@twin.org/nft-service": "next",
 		"@twin.org/rights-management-models": "next",
-		"@twin.org/rights-management-pap-entity-storage": "next",
 		"@twin.org/rights-management-pap-service": "next",
 		"@twin.org/rights-management-service": "next",
 		"@twin.org/telemetry-models": "next",

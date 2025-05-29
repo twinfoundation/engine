@@ -188,7 +188,6 @@ describe("engine", () => {
 			"data-processing",
 			"documents",
 			"fedcat",
-			"odrl-policy",
 			"pap",
 			"rights-management"
 		]);

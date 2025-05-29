@@ -2,14 +2,13 @@
 // SPDX-License-Identifier: Apache-2.0.
 import { ComponentFactory, GeneralError, I18n } from "@twin.org/core";
 import type { IEngineCore, IEngineCoreContext } from "@twin.org/engine-models";
-import { EntityStorageService } from "@twin.org/entity-storage-service";
 import { nameof } from "@twin.org/nameof";
 import type { IPolicyAdministrationPointComponent } from "@twin.org/rights-management-models";
 import {
 	initSchema as initSchemaRightsManagementPap,
-	type OdrlPolicy
-} from "@twin.org/rights-management-pap-entity-storage";
-import { PolicyAdministrationPointService } from "@twin.org/rights-management-pap-service";
+	type OdrlPolicy,
+	PolicyAdministrationPointService
+} from "@twin.org/rights-management-pap-service";
 import { initialiseEntityStorageConnector } from "./entityStorage";
 import type { RightsManagementPapComponentConfig } from "../models/config/rightsManagementPapComponentConfig";
 import type { IEngineConfig } from "../models/IEngineConfig";
@@ -49,15 +48,6 @@ export function initialiseRightsManagementPapComponent(
 			instanceConfig.options?.odrlPolicyEntityStorageType,
 			nameof<OdrlPolicy>()
 		);
-
-		const odrlPolicyEntityStorageService = new EntityStorageService<OdrlPolicy>({
-			entityStorageType: "odrl-policy",
-			config: {
-				includeNodeIdentity: false,
-				includeUserIdentity: false
-			}
-		});
-		ComponentFactory.register("odrl-policy", () => odrlPolicyEntityStorageService);
 
 		component = new PolicyAdministrationPointService(instanceConfig.options);
 		instanceType = PolicyAdministrationPointService.NAMESPACE;

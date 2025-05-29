@@ -1027,9 +1027,7 @@ function configureRightsManagement(
 	coreConfig.types.rightsManagementComponent.push({
 		type: RightsManagementComponentType.Service,
 		options: {
-			config: {
-				defaultEntityStorageType: envVars.rightsManagementPapEntityStorageType
-			}
+			papComponentType: "pap"
 		}
 	});
 }
