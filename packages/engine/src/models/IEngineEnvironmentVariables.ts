@@ -469,4 +469,9 @@ export interface IEngineEnvironmentVariables {
 	 * Rights management PAP (Policy Administration Point) entity storage type.
 	 */
 	rightsManagementPapEntityStorageType?: string;
+
+	/**
+	 * Rights management PAP (Policy Administration Point) component type.
+	 */
+	rightsManagementPapComponentType?: string;
 }

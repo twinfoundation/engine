@@ -1027,7 +1027,7 @@ function configureRightsManagement(
 	coreConfig.types.rightsManagementComponent.push({
 		type: RightsManagementComponentType.Service,
 		options: {
-			papComponentType: "pap"
+			papComponentType: envVars.rightsManagementPapComponentType
 		}
 	});
 }
