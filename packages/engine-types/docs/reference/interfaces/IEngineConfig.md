@@ -288,6 +288,18 @@ Document management options which can be overridden by individual components by 
 
 Federated catalogue options which can be overridden by individual components by specifying types other than default.
 
+#### rightsManagementComponent?
+
+> `optional` **rightsManagementComponent**: `IEngineCoreTypeConfig`\<[`RightsManagementComponentConfig`](../type-aliases/RightsManagementComponentConfig.md)\>[]
+
+Rights management options which can be overridden by individual components by specifying types other than default.
+
+#### rightsManagementPapComponent?
+
+> `optional` **rightsManagementPapComponent**: `IEngineCoreTypeConfig`\<[`RightsManagementPapComponentConfig`](../type-aliases/RightsManagementPapComponentConfig.md)\>[]
+
+Rights management PAP options which can be overridden by individual components by specifying types other than default.
+
 #### Overrides
 
 `IEngineCoreConfig.types`

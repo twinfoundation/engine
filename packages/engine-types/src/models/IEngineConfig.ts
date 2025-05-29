@@ -34,6 +34,8 @@ import type { MessagingPushNotificationConnectorConfig } from "./config/messagin
 import type { MessagingSmsConnectorConfig } from "./config/messagingSmsConnectorConfig";
 import type { NftComponentConfig } from "./config/nftComponentConfig";
 import type { NftConnectorConfig } from "./config/nftConnectorConfig";
+import type { RightsManagementComponentConfig } from "./config/rightsManagementComponentConfig";
+import type { RightsManagementPapComponentConfig } from "./config/rightsManagementPapComponentConfig";
 import type { TelemetryComponentConfig } from "./config/telemetryComponentConfig";
 import type { TelemetryConnectorConfig } from "./config/telemetryConnectorConfig";
 import type { VaultConnectorConfig } from "./config/vaultConnectorConfig";
@@ -245,5 +247,15 @@ export interface IEngineConfig extends IEngineCoreConfig {
 		 * Federated catalogue options which can be overridden by individual components by specifying types other than default.
 		 */
 		federatedCatalogueComponent?: IEngineCoreTypeConfig<FederatedCatalogueComponentConfig>[];
+
+		/**
+		 * Rights management options which can be overridden by individual components by specifying types other than default.
+		 */
+		rightsManagementComponent?: IEngineCoreTypeConfig<RightsManagementComponentConfig>[];
+
+		/**
+		 * Rights management PAP options which can be overridden by individual components by specifying types other than default.
+		 */
+		rightsManagementPapComponent?: IEngineCoreTypeConfig<RightsManagementPapComponentConfig>[];
 	};
 }

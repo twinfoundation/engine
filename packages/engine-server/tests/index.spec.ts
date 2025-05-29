@@ -49,7 +49,9 @@ import {
 	TelemetryConnectorType,
 	VaultConnectorType,
 	WalletConnectorType,
-	FederatedCatalogueComponentType
+	FederatedCatalogueComponentType,
+	RightsManagementComponentType,
+	RightsManagementPapComponentType
 } from "@twin.org/engine-types";
 import { entity, EntitySchemaFactory, EntitySchemaHelper, property } from "@twin.org/entity";
 import type { IEntityStorageComponent } from "@twin.org/entity-storage-models";
@@ -135,6 +137,16 @@ describe("engine-server", () => {
 					{
 						type: FederatedCatalogueComponentType.Service,
 						options: { config: { clearingHouseApproverList: [] } }
+					}
+				],
+				rightsManagementComponent: [
+					{
+						type: RightsManagementComponentType.Service
+					}
+				],
+				rightsManagementPapComponent: [
+					{
+						type: RightsManagementPapComponentType.Service
 					}
 				],
 				informationComponent: [
@@ -269,7 +281,11 @@ describe("engine-server", () => {
 			"federated-catalogue/data-resources",
 			"federated-catalogue/data-resources/:id",
 			"federated-catalogue/data-space-connectors",
-			"federated-catalogue/data-space-connectors/:id"
+			"federated-catalogue/data-space-connectors/:id",
+			"rights-management/pap/",
+			"rights-management/pap/:id",
+			"rights-management/pap/:id",
+			"rights-management/pap/query"
 		]);
 
 		const res = await fetch("http://localhost:3000/info");

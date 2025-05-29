@@ -37,6 +37,8 @@ import {
 	MessagingSmsConnectorType,
 	NftComponentType,
 	NftConnectorType,
+	RightsManagementComponentType,
+	RightsManagementPapComponentType,
 	TelemetryComponentType,
 	TelemetryConnectorType,
 	VaultConnectorType,
@@ -146,6 +148,16 @@ describe("engine", () => {
 							type: FederatedCatalogueComponentType.Service,
 							options: { config: { clearingHouseApproverList: [] } }
 						}
+					],
+					rightsManagementComponent: [
+						{
+							type: RightsManagementComponentType.Service
+						}
+					],
+					rightsManagementPapComponent: [
+						{
+							type: RightsManagementPapComponentType.Service
+						}
 					]
 				}
 			},
@@ -175,7 +187,9 @@ describe("engine", () => {
 			"ais",
 			"data-processing",
 			"documents",
-			"fedcat"
+			"fedcat",
+			"pap",
+			"rights-management"
 		]);
 
 		expect(EntitySchemaFactory.names()).toEqual([
@@ -209,7 +223,8 @@ describe("engine", () => {
 			"ParticipantEntry",
 			"DataResourceEntry",
 			"ServiceOfferingEntry",
-			"DataSpaceConnectorEntry"
+			"DataSpaceConnectorEntry",
+			"OdrlPolicy"
 		]);
 
 		expect(engine).toBeDefined();
@@ -342,6 +357,16 @@ describe("engine", () => {
 							type: FederatedCatalogueComponentType.Service,
 							options: { config: { clearingHouseApproverList: [] } }
 						}
+					],
+					rightsManagementComponent: [
+						{
+							type: RightsManagementComponentType.Service
+						}
+					],
+					rightsManagementPapComponent: [
+						{
+							type: RightsManagementPapComponentType.Service
+						}
 					]
 				}
 			},
@@ -415,6 +440,16 @@ describe("engine", () => {
 					{
 						type: FederatedCatalogueComponentType.Service,
 						options: { config: { clearingHouseApproverList: [] } }
+					}
+				],
+				rightsManagementComponent: [
+					{
+						type: RightsManagementComponentType.Service
+					}
+				],
+				rightsManagementPapComponent: [
+					{
+						type: RightsManagementPapComponentType.Service
 					}
 				]
 			}
