@@ -300,6 +300,12 @@ Federated catalogue options which can be overridden by individual components by 
 
 Rights management options which can be overridden by individual components by specifying types other than default.
 
+##### rightsManagementPapComponent?
+
+> `optional` **rightsManagementPapComponent**: `IEngineCoreTypeConfig`\<`RightsManagementPapComponentConfig`\>[]
+
+Rights management PAP options which can be overridden by individual components by specifying types other than default.
+
 #### Type declaration
 
 ##### informationComponent?

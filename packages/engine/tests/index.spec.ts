@@ -38,6 +38,7 @@ import {
 	NftComponentType,
 	NftConnectorType,
 	RightsManagementComponentType,
+	RightsManagementPapComponentType,
 	TelemetryComponentType,
 	TelemetryConnectorType,
 	VaultConnectorType,
@@ -152,6 +153,11 @@ describe("engine", () => {
 						{
 							type: RightsManagementComponentType.Service
 						}
+					],
+					rightsManagementPapComponent: [
+						{
+							type: RightsManagementPapComponentType.Service
+						}
 					]
 				}
 			},
@@ -183,7 +189,7 @@ describe("engine", () => {
 			"documents",
 			"fedcat",
 			"odrl-policy",
-			"entity-storage",
+			"pap",
 			"rights-management"
 		]);
 
@@ -357,6 +363,11 @@ describe("engine", () => {
 						{
 							type: RightsManagementComponentType.Service
 						}
+					],
+					rightsManagementPapComponent: [
+						{
+							type: RightsManagementPapComponentType.Service
+						}
 					]
 				}
 			},
@@ -430,6 +441,16 @@ describe("engine", () => {
 					{
 						type: FederatedCatalogueComponentType.Service,
 						options: { config: { clearingHouseApproverList: [] } }
+					}
+				],
+				rightsManagementComponent: [
+					{
+						type: RightsManagementComponentType.Service
+					}
+				],
+				rightsManagementPapComponent: [
+					{
+						type: RightsManagementPapComponentType.Service
 					}
 				]
 			}

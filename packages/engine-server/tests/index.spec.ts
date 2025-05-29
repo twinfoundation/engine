@@ -50,7 +50,8 @@ import {
 	VaultConnectorType,
 	WalletConnectorType,
 	FederatedCatalogueComponentType,
-	RightsManagementComponentType
+	RightsManagementComponentType,
+	RightsManagementPapComponentType
 } from "@twin.org/engine-types";
 import { entity, EntitySchemaFactory, EntitySchemaHelper, property } from "@twin.org/entity";
 import type { IEntityStorageComponent } from "@twin.org/entity-storage-models";
@@ -141,6 +142,11 @@ describe("engine-server", () => {
 				rightsManagementComponent: [
 					{
 						type: RightsManagementComponentType.Service
+					}
+				],
+				rightsManagementPapComponent: [
+					{
+						type: RightsManagementPapComponentType.Service
 					}
 				],
 				informationComponent: [

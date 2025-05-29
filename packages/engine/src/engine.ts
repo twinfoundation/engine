@@ -282,6 +282,13 @@ export class Engine<
 		);
 
 		this.addTypeInitialiser(
+			"rightsManagementPapComponent",
+			this._context.config.types.rightsManagementPapComponent,
+			"@twin.org/engine-types",
+			"initialiseRightsManagementPapComponent"
+		);
+
+		this.addTypeInitialiser(
 			"rightsManagementComponent",
 			this._context.config.types.rightsManagementComponent,
 			"@twin.org/engine-types",
