@@ -1,5 +1,23 @@
 # @twin.org/engine-server - Changelog
 
+## [0.0.1-next.75](https://github.com/twinfoundation/engine/compare/engine-server-v0.0.1-next.74...engine-server-v0.0.1-next.75) (2025-05-29)
+
+
+### Features
+
+* modifying the engine to run the new services ([#10](https://github.com/twinfoundation/engine/issues/10)) ([6f7141f](https://github.com/twinfoundation/engine/commit/6f7141fe0a6d05c725066b274bcc18b5490e580b))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @twin.org/engine-core bumped from 0.0.1-next.74 to 0.0.1-next.75
+    * @twin.org/engine-models bumped from 0.0.1-next.74 to 0.0.1-next.75
+    * @twin.org/engine-server-types bumped from 0.0.1-next.74 to 0.0.1-next.75
+  * devDependencies
+    * @twin.org/engine bumped from 0.0.1-next.74 to 0.0.1-next.75
+
 ## [0.0.1-next.74](https://github.com/twinfoundation/engine/compare/engine-server-v0.0.1-next.73...engine-server-v0.0.1-next.74) (2025-05-23)
 
 
