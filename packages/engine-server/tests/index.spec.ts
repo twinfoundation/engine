@@ -285,6 +285,7 @@ describe("engine-server", () => {
 			"rights-management/pap/",
 			"rights-management/pap/:id",
 			"rights-management/pap/:id",
+			"rights-management/pap/:id",
 			"rights-management/pap/query"
 		]);
 
