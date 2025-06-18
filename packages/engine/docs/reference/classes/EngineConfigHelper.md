@@ -24,7 +24,7 @@ Runtime name for the class.
 
 ### addCustomEntityStorage()
 
-> `static` **addCustomEntityStorage**\<`T`\>(`engineConfig`, `entityTypeName`, `entitySchema`, `restPath`, `options?`): `void`
+> `static` **addCustomEntityStorage**\<`T`\>(`engineConfig`, `entityTypeName`, `entitySchema`, `restPath?`, `options?`): `void`
 
 Add a custom entity storage to the engine configuration.
 
@@ -54,11 +54,11 @@ The entity type name.
 
 The entity schema.
 
-##### restPath
+##### restPath?
 
 `string`
 
-The rest path to serve the entity storage from.
+The rest path to serve the entity storage from, leave undefined for no endpoints.
 
 ##### options?
 

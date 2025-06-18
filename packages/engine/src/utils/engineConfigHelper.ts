@@ -19,7 +19,7 @@ export class EngineConfigHelper {
 	 * @param engineConfig The engine configuration.
 	 * @param entityTypeName The entity type name.
 	 * @param entitySchema The entity schema.
-	 * @param restPath The rest path to serve the entity storage from.
+	 * @param restPath The rest path to serve the entity storage from, leave undefined for no endpoints.
 	 * @param options Additional options.
 	 * @param options.includeNodeIdentity Whether to include the node identity in the entity, defaults to true.
 	 * @param options.includeUserIdentity Whether to include the user identity in the entity, defaults to true.
@@ -28,7 +28,7 @@ export class EngineConfigHelper {
 		engineConfig: IEngineConfig,
 		entityTypeName: string,
 		entitySchema: IEntitySchema<T>,
-		restPath: string,
+		restPath?: string,
 		options?: {
 			includeNodeIdentity?: boolean;
 			includeUserIdentity?: true;
@@ -41,7 +41,6 @@ export class EngineConfigHelper {
 			nameof(entitySchema),
 			entitySchema
 		);
-		Guards.stringValue(EngineConfigHelper.CLASS_NAME, nameof(restPath), restPath);
 
 		engineConfig.types.entityStorageComponent ??= [];
 
