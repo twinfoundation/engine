@@ -376,7 +376,10 @@ function configureBlobStorage(
 			type: BlobStorageComponentType.Service,
 			options: {
 				config: {
-					vaultKeyId: envVars.blobStorageEncryptionKey
+					vaultKeyId:
+						(envVars.blobStorageEnableEncryption ?? false)
+							? envVars.blobStorageEncryptionKey
+							: undefined
 				}
 			}
 		});
