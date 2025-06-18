@@ -92,7 +92,6 @@ export function buildEngineConfiguration(envVars: IEngineEnvironmentVariables): 
 	configureAuditableItemStream(coreConfig, envVars);
 	configureDocumentManagement(coreConfig, envVars);
 	configureFederatedCatalogue(coreConfig, envVars);
-	configureRightsManagementPap(coreConfig, envVars);
 	configureRightsManagement(coreConfig, envVars);
 
 	return coreConfig;
@@ -1000,24 +999,6 @@ function configureFederatedCatalogue(
 }
 
 /**
- * Configures the rights management PAP.
- * @param coreConfig The core config.
- * @param envVars The environment variables.
- */
-function configureRightsManagementPap(
-	coreConfig: IEngineConfig,
-	envVars: IEngineEnvironmentVariables
-): void {
-	coreConfig.types.rightsManagementPapComponent ??= [];
-	coreConfig.types.rightsManagementPapComponent.push({
-		type: RightsManagementPapComponentType.Service,
-		options: {
-			odrlPolicyEntityStorageType: envVars.rightsManagementPapEntityStorageType
-		}
-	});
-}
-
-/**
  * Configures the rights management.
  * @param coreConfig The core config.
  * @param envVars The environment variables.
@@ -1026,11 +1007,15 @@ function configureRightsManagement(
 	coreConfig: IEngineConfig,
 	envVars: IEngineEnvironmentVariables
 ): void {
-	coreConfig.types.rightsManagementComponent ??= [];
-	coreConfig.types.rightsManagementComponent.push({
-		type: RightsManagementComponentType.Service,
-		options: {
-			papComponentType: envVars.rightsManagementPapComponentType
-		}
-	});
+	if (Coerce.boolean(envVars.rightsManagementEnabled) ?? false) {
+		coreConfig.types.rightsManagementPapComponent ??= [];
+		coreConfig.types.rightsManagementPapComponent.push({
+			type: RightsManagementPapComponentType.Service
+		});
+
+		coreConfig.types.rightsManagementComponent ??= [];
+		coreConfig.types.rightsManagementComponent.push({
+			type: RightsManagementComponentType.Service
+		});
+	}
 }

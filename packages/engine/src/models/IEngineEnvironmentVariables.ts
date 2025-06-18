@@ -466,12 +466,7 @@ export interface IEngineEnvironmentVariables {
 	federatedCatalogueClearingHouseApproverList?: string;
 
 	/**
-	 * Rights management PAP (Policy Administration Point) entity storage type.
+	 * Is the rights management enabled.
 	 */
-	rightsManagementPapEntityStorageType?: string;
-
-	/**
-	 * Rights management PAP (Policy Administration Point) component type.
-	 */
-	rightsManagementPapComponentType?: string;
+	rightsManagementEnabled?: string;
 }

@@ -740,16 +740,8 @@ Federated catalog clearing house approver list, stringified array of DIDs.
 
 ***
 
-### rightsManagementPapEntityStorageType?
+### rightsManagementEnabled?
 
-> `optional` **rightsManagementPapEntityStorageType**: `string`
+> `optional` **rightsManagementEnabled**: `string`
 
-Rights management PAP (Policy Administration Point) entity storage type.
-
-***
-
-### rightsManagementPapComponentType?
-
-> `optional` **rightsManagementPapComponentType**: `string`
-
-Rights management PAP (Policy Administration Point) component type.
+Is the rights management enabled.
