@@ -1,5 +1,20 @@
 # @twin.org/engine - Changelog
 
+## [0.0.1-next.78](https://github.com/twinfoundation/engine/compare/engine-v0.0.1-next.77...engine-v0.0.1-next.78) (2025-06-18)
+
+
+### Bug Fixes
+
+* blob storage encryption settings ([63ee879](https://github.com/twinfoundation/engine/commit/63ee87904d2be205d8fe2fa11b536790a0d22082))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @twin.org/engine-core bumped from 0.0.1-next.77 to 0.0.1-next.78
+    * @twin.org/engine-types bumped from 0.0.1-next.77 to 0.0.1-next.78
+
 ## [0.0.1-next.77](https://github.com/twinfoundation/engine/compare/engine-v0.0.1-next.76...engine-v0.0.1-next.77) (2025-06-18)
 
 
