@@ -1,5 +1,20 @@
 # @twin.org/engine - Changelog
 
+## [0.0.1-next.77](https://github.com/twinfoundation/engine/compare/engine-v0.0.1-next.76...engine-v0.0.1-next.77) (2025-06-18)
+
+
+### Features
+
+* addCustomEntityStorage optional rest path ([55f42c5](https://github.com/twinfoundation/engine/commit/55f42c568945f010eb8883e27fb385d2c30eebff))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @twin.org/engine-core bumped from 0.0.1-next.76 to 0.0.1-next.77
+    * @twin.org/engine-types bumped from 0.0.1-next.76 to 0.0.1-next.77
+
 ## [0.0.1-next.76](https://github.com/twinfoundation/engine/compare/engine-v0.0.1-next.75...engine-v0.0.1-next.76) (2025-06-12)
 
 
