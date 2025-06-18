@@ -1,5 +1,20 @@
 # @twin.org/engine - Changelog
 
+## [0.0.1-next.79](https://github.com/twinfoundation/engine/compare/engine-v0.0.1-next.78...engine-v0.0.1-next.79) (2025-06-18)
+
+
+### Features
+
+* update rights management config ([d447575](https://github.com/twinfoundation/engine/commit/d447575cd5cdf3cdf1fe92087e90188ec97516f5))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @twin.org/engine-core bumped from 0.0.1-next.78 to 0.0.1-next.79
+    * @twin.org/engine-types bumped from 0.0.1-next.78 to 0.0.1-next.79
+
 ## [0.0.1-next.78](https://github.com/twinfoundation/engine/compare/engine-v0.0.1-next.77...engine-v0.0.1-next.78) (2025-06-18)
 
 
