@@ -1,5 +1,19 @@
 # @twin.org/engine-types - Changelog
 
+## [0.0.1-next.80](https://github.com/twinfoundation/engine/compare/engine-types-v0.0.1-next.79...engine-types-v0.0.1-next.80) (2025-06-23)
+
+
+### Features
+
+* add task scheduler ([0951107](https://github.com/twinfoundation/engine/commit/09511073ad042194a45206303f0ef31d8d6af5db))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @twin.org/engine-models bumped from 0.0.1-next.79 to 0.0.1-next.80
+
 ## [0.0.1-next.79](https://github.com/twinfoundation/engine/compare/engine-types-v0.0.1-next.78...engine-types-v0.0.1-next.79) (2025-06-18)
 
 
