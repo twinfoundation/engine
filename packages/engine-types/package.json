@@ -48,6 +48,7 @@
 		"@twin.org/auditable-item-stream-service": "next",
 		"@twin.org/background-task-models": "next",
 		"@twin.org/background-task-connector-entity-storage": "next",
+		"@twin.org/background-task-scheduler": "next",
 		"@twin.org/blob-storage-connector-aws-s3": "next",
 		"@twin.org/blob-storage-connector-azure": "next",
 		"@twin.org/blob-storage-connector-gcp": "next",

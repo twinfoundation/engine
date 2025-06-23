@@ -37,6 +37,7 @@ import {
 	NftConnectorType,
 	RightsManagementComponentType,
 	RightsManagementPapComponentType,
+	TaskSchedulerComponentType,
 	TelemetryComponentType,
 	TelemetryConnectorType,
 	VaultConnectorType,
@@ -93,6 +94,7 @@ export function buildEngineConfiguration(envVars: IEngineEnvironmentVariables): 
 	configureDocumentManagement(coreConfig, envVars);
 	configureFederatedCatalogue(coreConfig, envVars);
 	configureRightsManagement(coreConfig, envVars);
+	configureTaskScheduler(coreConfig, envVars);
 
 	return coreConfig;
 }
@@ -1016,6 +1018,23 @@ function configureRightsManagement(
 		coreConfig.types.rightsManagementComponent ??= [];
 		coreConfig.types.rightsManagementComponent.push({
 			type: RightsManagementComponentType.Service
+		});
+	}
+}
+
+/**
+ * Configures the task scheduler.
+ * @param coreConfig The core config.
+ * @param envVars The environment variables.
+ */
+function configureTaskScheduler(
+	coreConfig: IEngineConfig,
+	envVars: IEngineEnvironmentVariables
+): void {
+	if (Coerce.boolean(envVars.taskSchedulerEnabled) ?? true) {
+		coreConfig.types.taskSchedulerComponent ??= [];
+		coreConfig.types.taskSchedulerComponent.push({
+			type: TaskSchedulerComponentType.Default
 		});
 	}
 }

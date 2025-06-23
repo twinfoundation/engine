@@ -53,6 +53,13 @@ export class Engine<
 		);
 
 		this.addTypeInitialiser(
+			"taskSchedulerComponent",
+			this._context.config.types.taskSchedulerComponent,
+			"@twin.org/engine-types",
+			"initialiseTaskSchedulerComponent"
+		);
+
+		this.addTypeInitialiser(
 			"eventBusConnector",
 			this._context.config.types.eventBusConnector,
 			"@twin.org/engine-types",

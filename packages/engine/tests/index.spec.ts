@@ -39,6 +39,7 @@ import {
 	NftConnectorType,
 	RightsManagementComponentType,
 	RightsManagementPapComponentType,
+	TaskSchedulerComponentType,
 	TelemetryComponentType,
 	TelemetryConnectorType,
 	VaultConnectorType,
@@ -158,6 +159,11 @@ describe("engine", () => {
 						{
 							type: RightsManagementPapComponentType.Service
 						}
+					],
+					taskSchedulerComponent: [
+						{
+							type: TaskSchedulerComponentType.Default
+						}
 					]
 				}
 			},
@@ -172,6 +178,7 @@ describe("engine", () => {
 
 		expect(ComponentFactory.names()).toEqual([
 			"logging",
+			"task-scheduler",
 			"event-bus",
 			"telemetry",
 			"messaging",
@@ -367,6 +374,11 @@ describe("engine", () => {
 						{
 							type: RightsManagementPapComponentType.Service
 						}
+					],
+					taskSchedulerComponent: [
+						{
+							type: TaskSchedulerComponentType.Default
+						}
 					]
 				}
 			},
@@ -450,6 +462,11 @@ describe("engine", () => {
 				rightsManagementPapComponent: [
 					{
 						type: RightsManagementPapComponentType.Service
+					}
+				],
+				taskSchedulerComponent: [
+					{
+						type: TaskSchedulerComponentType.Default
 					}
 				]
 			}

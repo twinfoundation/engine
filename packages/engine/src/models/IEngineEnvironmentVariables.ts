@@ -466,7 +466,12 @@ export interface IEngineEnvironmentVariables {
 	federatedCatalogueClearingHouseApproverList?: string;
 
 	/**
-	 * Is the rights management enabled.
+	 * Is the rights management enabled, defaults to false.
 	 */
 	rightsManagementEnabled?: string;
+
+	/**
+	 * Is the task scheduler enabled, defaults to true.
+	 */
+	taskSchedulerEnabled?: string;
 }

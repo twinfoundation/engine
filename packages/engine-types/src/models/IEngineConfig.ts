@@ -36,6 +36,7 @@ import type { NftComponentConfig } from "./config/nftComponentConfig";
 import type { NftConnectorConfig } from "./config/nftConnectorConfig";
 import type { RightsManagementComponentConfig } from "./config/rightsManagementComponentConfig";
 import type { RightsManagementPapComponentConfig } from "./config/rightsManagementPapComponentConfig";
+import type { TaskSchedulerComponentConfig } from "./config/taskSchedulerComponentConfig";
 import type { TelemetryComponentConfig } from "./config/telemetryComponentConfig";
 import type { TelemetryConnectorConfig } from "./config/telemetryConnectorConfig";
 import type { VaultConnectorConfig } from "./config/vaultConnectorConfig";
@@ -117,6 +118,11 @@ export interface IEngineConfig extends IEngineCoreConfig {
 		 * Background task connector options which can be overridden by individual components by specifying types other than default.
 		 */
 		backgroundTaskConnector?: IEngineCoreTypeConfig<BackgroundTaskConnectorConfig>[];
+
+		/**
+		 * Task scheduler component options which can be overridden by individual components by specifying types other than default.
+		 */
+		taskSchedulerComponent?: IEngineCoreTypeConfig<TaskSchedulerComponentConfig>[];
 
 		/**
 		 * Event bus connector options which can be overridden by individual components by specifying types other than default.

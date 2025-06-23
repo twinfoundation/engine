@@ -51,7 +51,8 @@ import {
 	WalletConnectorType,
 	FederatedCatalogueComponentType,
 	RightsManagementComponentType,
-	RightsManagementPapComponentType
+	RightsManagementPapComponentType,
+	TaskSchedulerComponentType
 } from "@twin.org/engine-types";
 import { entity, EntitySchemaFactory, EntitySchemaHelper, property } from "@twin.org/entity";
 import type { IEntityStorageComponent } from "@twin.org/entity-storage-models";
@@ -147,6 +148,11 @@ describe("engine-server", () => {
 				rightsManagementPapComponent: [
 					{
 						type: RightsManagementPapComponentType.Service
+					}
+				],
+				taskSchedulerComponent: [
+					{
+						type: TaskSchedulerComponentType.Default
 					}
 				],
 				informationComponent: [

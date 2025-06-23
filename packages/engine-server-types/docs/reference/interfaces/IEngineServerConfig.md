@@ -138,6 +138,12 @@ Messaging component options which can be overridden by individual components by 
 
 Background task connector options which can be overridden by individual components by specifying types other than default.
 
+##### taskSchedulerComponent?
+
+> `optional` **taskSchedulerComponent**: `IEngineCoreTypeConfig`\<`TaskSchedulerComponentConfig`\>[]
+
+Task scheduler component options which can be overridden by individual components by specifying types other than default.
+
 ##### eventBusConnector?
 
 > `optional` **eventBusConnector**: `IEngineCoreTypeConfig`\<`EventBusConnectorConfig`\>[]

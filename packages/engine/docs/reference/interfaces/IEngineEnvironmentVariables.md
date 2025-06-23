@@ -744,4 +744,12 @@ Federated catalog clearing house approver list, stringified array of DIDs.
 
 > `optional` **rightsManagementEnabled**: `string`
 
-Is the rights management enabled.
+Is the rights management enabled, defaults to false.
+
+***
+
+### taskSchedulerEnabled?
+
+> `optional` **taskSchedulerEnabled**: `string`
+
+Is the task scheduler enabled, defaults to true.
