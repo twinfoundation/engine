@@ -31,15 +31,13 @@ describe("Engine Environment Builder", () => {
 			expect(iotaConfig?.options?.config?.gasStation).toBeUndefined();
 		});
 
-		test("should create IOTA DLT configuration with gas station enabled", () => {
+		test("should create IOTA DLT configuration with gas station", () => {
 			const envVars: Partial<IEngineEnvironmentVariables> = {
 				iotaNodeEndpoint: "https://api.testnet.iota.cafe",
 				iotaNetwork: "testnet",
 				iotaCoinType: "4218",
 				iotaGasStationEndpoint: "https://gas-station.example.com",
-				iotaGasStationAuthToken: "test-auth-token",
-				iotaGasStationEnabled: "true",
-				iotaGasStationTimeoutMs: "15000"
+				iotaGasStationAuthToken: "test-auth-token"
 			};
 
 			const config = buildEngineConfiguration(envVars as IEngineEnvironmentVariables);
@@ -54,31 +52,24 @@ describe("Engine Environment Builder", () => {
 				"https://gas-station.example.com"
 			);
 			expect(iotaConfig?.options?.config?.gasStation?.gasStationAuthToken).toBe("test-auth-token");
-			// Note: enabled and timeoutMs are engine-specific extensions, not part of the base IGasStationConfig
-			expect(
-				(iotaConfig?.options?.config?.gasStation as unknown as { enabled: boolean })?.enabled
-			).toBe(true);
-			expect(
-				(iotaConfig?.options?.config?.gasStation as unknown as { timeoutMs: number })?.timeoutMs
-			).toBe(15000);
 		});
 
-		test("should create IOTA DLT configuration with gas station disabled", () => {
+		test("should create IOTA DLT configuration with gas station (alternative)", () => {
 			const envVars: Partial<IEngineEnvironmentVariables> = {
 				iotaNodeEndpoint: "https://api.testnet.iota.cafe",
 				iotaNetwork: "testnet",
 				iotaGasStationEndpoint: "https://gas-station.example.com",
-				iotaGasStationAuthToken: "test-auth-token",
-				iotaGasStationEnabled: "false"
+				iotaGasStationAuthToken: "test-auth-token"
 			};
 
 			const config = buildEngineConfiguration(envVars as IEngineEnvironmentVariables);
 
 			const iotaConfig = config.types.dltConfig?.[0];
 			expect(iotaConfig?.options?.config?.gasStation).toBeDefined();
-			expect(
-				(iotaConfig?.options?.config?.gasStation as unknown as { enabled: boolean })?.enabled
-			).toBe(false);
+			expect(iotaConfig?.options?.config?.gasStation?.gasStationUrl).toBe(
+				"https://gas-station.example.com"
+			);
+			expect(iotaConfig?.options?.config?.gasStation?.gasStationAuthToken).toBe("test-auth-token");
 		});
 
 		test("should use default values for gas station configuration", () => {
@@ -92,12 +83,11 @@ describe("Engine Environment Builder", () => {
 			const config = buildEngineConfiguration(envVars as IEngineEnvironmentVariables);
 
 			const iotaConfig = config.types.dltConfig?.[0];
-			expect(
-				(iotaConfig?.options?.config?.gasStation as unknown as { enabled: boolean })?.enabled
-			).toBe(true); // Default
-			expect(
-				(iotaConfig?.options?.config?.gasStation as unknown as { timeoutMs: number })?.timeoutMs
-			).toBe(10000); // Default
+			expect(iotaConfig?.options?.config?.gasStation).toBeDefined();
+			expect(iotaConfig?.options?.config?.gasStation?.gasStationUrl).toBe(
+				"https://gas-station.example.com"
+			);
+			expect(iotaConfig?.options?.config?.gasStation?.gasStationAuthToken).toBe("test-auth-token");
 		});
 
 		test("should not create gas station config when endpoint is missing", () => {
@@ -178,6 +168,47 @@ describe("Engine Environment Builder", () => {
 			expect(iotaConfig?.coinType).toBe(4218);
 			expect(iotaConfig?.gasStation?.gasStationUrl).toBe("https://gas-station.example.com");
 			expect(iotaConfig?.gasStation?.gasStationAuthToken).toBe("test-auth-token");
+		});
+
+		test("should validate gas station configuration field formats", () => {
+			const envVars: Partial<IEngineEnvironmentVariables> = {
+				iotaNodeEndpoint: "https://api.testnet.iota.cafe",
+				iotaGasStationEndpoint: "https://gas-station.example.com",
+				iotaGasStationAuthToken: "dGVzdEF1dGhUb2tlbjEyMw=="
+			};
+
+			const config = buildEngineConfiguration(envVars as IEngineEnvironmentVariables);
+			const iotaConfig = config.types.dltConfig?.[0];
+			const gasStation = iotaConfig?.options?.config?.gasStation;
+
+			expect(gasStation?.gasStationUrl).toMatch(/^https?:\/\/.+/);
+			expect(gasStation?.gasStationAuthToken).toMatch(/^[\d+/=A-Za-z]+$/);
+		});
+
+		test("should use centralized IOTA config for all IOTA-related connectors", () => {
+			const envVars: Partial<IEngineEnvironmentVariables> = {
+				iotaNodeEndpoint: "https://api.testnet.iota.org",
+				iotaNetwork: "testnet",
+				iotaCoinType: "4218",
+				iotaGasStationEndpoint: "https://gasstation.testnet.iota.org",
+				iotaGasStationAuthToken: "dGVzdC1hdXRoLXRva2Vu"
+			};
+
+			const config = buildEngineConfiguration(envVars as IEngineEnvironmentVariables);
+
+			// Verify we have exactly one IOTA DLT config that serves as the centralized source
+			const iotaConfigs = config.types.dltConfig?.filter(
+				dltItem => dltItem.type === DltConfigType.Iota
+			);
+			expect(iotaConfigs).toHaveLength(1);
+			expect(iotaConfigs?.[0]?.isDefault).toBe(true);
+
+			// Verify the centralized config has all required properties
+			const centralizedConfig = iotaConfigs?.[0]?.options?.config;
+			expect(centralizedConfig?.clientOptions?.url).toBeTruthy();
+			expect(centralizedConfig?.network).toBeTruthy();
+			expect(centralizedConfig?.gasStation?.gasStationUrl).toBeTruthy();
+			expect(centralizedConfig?.gasStation?.gasStationAuthToken).toBeTruthy();
 		});
 	});
 });

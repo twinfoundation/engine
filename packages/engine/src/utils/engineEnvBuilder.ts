@@ -626,18 +626,16 @@ function configureFaucet(coreConfig: IEngineConfig, envVars: IEngineEnvironmentV
 		});
 	} else if (envVars.faucetConnector === FaucetConnectorType.Iota) {
 		const iotaConfig = getIotaConfig(coreConfig);
-		if (iotaConfig) {
-			coreConfig.types.faucetConnector.push({
-				type: FaucetConnectorType.Iota,
-				options: {
-					config: {
-						endpoint: envVars.iotaFaucetEndpoint ?? "",
-						clientOptions: iotaConfig.clientOptions,
-						network: iotaConfig.network
-					}
+		coreConfig.types.faucetConnector.push({
+			type: FaucetConnectorType.Iota,
+			options: {
+				config: {
+					endpoint: envVars.iotaFaucetEndpoint ?? "",
+					clientOptions: iotaConfig?.clientOptions ?? { url: "" },
+					network: iotaConfig?.network ?? ""
 				}
-			});
-		}
+			}
+		});
 	}
 }
 
@@ -655,14 +653,12 @@ function configureWallet(coreConfig: IEngineConfig, envVars: IEngineEnvironmentV
 		});
 	} else if (envVars.walletConnector === WalletConnectorType.Iota) {
 		const iotaConfig = getIotaConfig(coreConfig);
-		if (iotaConfig) {
-			coreConfig.types.walletConnector.push({
-				type: WalletConnectorType.Iota,
-				options: {
-					config: iotaConfig
-				}
-			});
-		}
+		coreConfig.types.walletConnector.push({
+			type: WalletConnectorType.Iota,
+			options: {
+				config: iotaConfig ?? ({} as IIotaConfig)
+			}
+		});
 	}
 }
 
@@ -680,14 +676,12 @@ function configureNft(coreConfig: IEngineConfig, envVars: IEngineEnvironmentVari
 		});
 	} else if (envVars.nftConnector === NftConnectorType.Iota) {
 		const iotaConfig = getIotaConfig(coreConfig);
-		if (iotaConfig) {
-			coreConfig.types.nftConnector.push({
-				type: NftConnectorType.Iota,
-				options: {
-					config: iotaConfig
-				}
-			});
-		}
+		coreConfig.types.nftConnector.push({
+			type: NftConnectorType.Iota,
+			options: {
+				config: iotaConfig ?? ({} as IIotaConfig)
+			}
+		});
 	}
 
 	if (coreConfig.types.nftConnector.length > 0) {
@@ -713,14 +707,12 @@ function configureVerifiableStorage(
 		});
 	} else if (envVars.verifiableStorageConnector === VerifiableStorageConnectorType.Iota) {
 		const iotaConfig = getIotaConfig(coreConfig);
-		if (iotaConfig) {
-			coreConfig.types.verifiableStorageConnector.push({
-				type: VerifiableStorageConnectorType.Iota,
-				options: {
-					config: iotaConfig
-				}
-			});
-		}
+		coreConfig.types.verifiableStorageConnector.push({
+			type: VerifiableStorageConnectorType.Iota,
+			options: {
+				config: iotaConfig ?? ({} as IIotaConfig)
+			}
+		});
 	}
 
 	if (coreConfig.types.verifiableStorageConnector.length > 0) {
@@ -765,14 +757,12 @@ function configureIdentity(coreConfig: IEngineConfig, envVars: IEngineEnvironmen
 		});
 	} else if (envVars.identityConnector === IdentityConnectorType.Iota) {
 		const iotaConfig = getIotaConfig(coreConfig);
-		if (iotaConfig) {
-			coreConfig.types.identityConnector.push({
-				type: IdentityConnectorType.Iota,
-				options: {
-					config: iotaConfig
-				}
-			});
-		}
+		coreConfig.types.identityConnector.push({
+			type: IdentityConnectorType.Iota,
+			options: {
+				config: iotaConfig ?? ({} as IIotaConfig)
+			}
+		});
 	}
 
 	if (coreConfig.types.identityConnector.length > 0) {
@@ -798,14 +788,12 @@ function configureIdentityResolver(
 		});
 	} else if (envVars.identityResolverConnector === IdentityResolverConnectorType.Iota) {
 		const iotaConfig = getIotaConfig(coreConfig);
-		if (iotaConfig) {
-			coreConfig.types.identityResolverConnector.push({
-				type: IdentityResolverConnectorType.Iota,
-				options: {
-					config: iotaConfig
-				}
-			});
-		}
+		coreConfig.types.identityResolverConnector.push({
+			type: IdentityResolverConnectorType.Iota,
+			options: {
+				config: iotaConfig ?? ({} as IIotaConfig)
+			}
+		});
 	} else if (envVars.identityResolverConnector === IdentityResolverConnectorType.Universal) {
 		coreConfig.types.identityResolverConnector.push({
 			type: IdentityResolverConnectorType.Universal,
@@ -1046,13 +1034,20 @@ function configureTaskScheduler(
  */
 function configureDlt(coreConfig: IEngineConfig, envVars: IEngineEnvironmentVariables): void {
 	// Create centralized DLT configuration for IOTA if any IOTA-related variables are set
+	// Always create IOTA config when any IOTA-related variables are set to ensure Guards are triggered
 	if (
 		Is.stringValue(envVars.iotaNodeEndpoint) ||
 		Is.stringValue(envVars.iotaFaucetEndpoint) ||
 		Is.stringValue(envVars.iotaNetwork) ||
 		Is.stringValue(envVars.iotaCoinType) ||
 		Is.stringValue(envVars.iotaExplorerEndpoint) ||
-		Is.stringValue(envVars.iotaGasStationEndpoint)
+		Is.stringValue(envVars.iotaGasStationEndpoint) ||
+		envVars.faucetConnector === FaucetConnectorType.Iota ||
+		envVars.walletConnector === WalletConnectorType.Iota ||
+		envVars.nftConnector === NftConnectorType.Iota ||
+		envVars.verifiableStorageConnector === VerifiableStorageConnectorType.Iota ||
+		envVars.identityConnector === IdentityConnectorType.Iota ||
+		envVars.identityResolverConnector === IdentityResolverConnectorType.Iota
 	) {
 		coreConfig.types.dltConfig ??= [];
 
@@ -1061,9 +1056,7 @@ function configureDlt(coreConfig: IEngineConfig, envVars: IEngineEnvironmentVari
 			Is.stringValue(envVars.iotaGasStationAuthToken)
 				? {
 						gasStationUrl: envVars.iotaGasStationEndpoint,
-						gasStationAuthToken: envVars.iotaGasStationAuthToken,
-						enabled: Coerce.boolean(envVars.iotaGasStationEnabled) ?? true,
-						timeoutMs: Coerce.number(envVars.iotaGasStationTimeoutMs) ?? 10000
+						gasStationAuthToken: envVars.iotaGasStationAuthToken
 					}
 				: undefined;
 

@@ -12,6 +12,12 @@ jobs:
   dist-all-packages:
     runs-on: ubuntu-latest
 
+    # Add env vars for tests
+    env:
+      TEST_MNEMONIC: ${{ secrets.TEST_MNEMONIC }}
+      TEST_2_MNEMONIC: ${{ secrets.TEST_2_MNEMONIC }}
+      TEST_NODE_MNEMONIC: ${{ secrets.TEST_NODE_MNEMONIC }}
+
     steps:
       # Get the code
       - name: Checkout
@@ -26,6 +32,8 @@ jobs:
       # Install dependencies
       - name: Install dependencies
         run: npm ci
+
+      # Setup any services required for tests here
 
       # Run Lint and Dist
       - name: Run Lint and Dist

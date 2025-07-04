@@ -684,22 +684,6 @@ IOTA Gas Station Authentication Token.
 
 ***
 
-### iotaGasStationEnabled?
-
-> `optional` **iotaGasStationEnabled**: `string`
-
-Enable IOTA Gas Station.
-
-***
-
-### iotaGasStationTimeoutMs?
-
-> `optional` **iotaGasStationTimeoutMs**: `string`
-
-IOTA Gas Station Timeout in milliseconds.
-
-***
-
 ### universalResolverEndpoint?
 
 > `optional` **universalResolverEndpoint**: `string`

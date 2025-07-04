@@ -431,16 +431,6 @@ export interface IEngineEnvironmentVariables {
 	iotaGasStationAuthToken?: string;
 
 	/**
-	 * Enable IOTA Gas Station.
-	 */
-	iotaGasStationEnabled?: string;
-
-	/**
-	 * IOTA Gas Station Timeout in milliseconds.
-	 */
-	iotaGasStationTimeoutMs?: string;
-
-	/**
 	 * Universal Resolver Endpoint.
 	 */
 	universalResolverEndpoint?: string;
