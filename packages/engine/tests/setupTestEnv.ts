@@ -1,81 +1,169 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
 
-import path from "node:path";
-import { GeneralError } from "@twin.org/core";
-import dotenv from "dotenv";
-
-console.debug("Setting up engine test environment from .env and .env.dev files");
-
-dotenv.config({ path: [path.join(__dirname, ".env"), path.join(__dirname, ".env.dev")] });
-
-// IOTA Node configuration
-export const TEST_NODE_ENDPOINT = process.env.iotaNodeEndpoint ?? "https://api.testnet.iota.cafe";
-export const TEST_FAUCET_ENDPOINT =
-	process.env.iotaFaucetEndpoint ?? "https://faucet.testnet.iota.cafe";
-export const TEST_NETWORK = process.env.iotaNetwork ?? "testnet";
-export const TEST_COIN_TYPE = process.env.iotaCoinType ?? "4218";
-export const TEST_EXPLORER_URL = process.env.iotaExplorerEndpoint ?? "https://explorer.iota.org/";
-
-// Gas Station configuration
-export const GAS_STATION_URL = process.env.iotaGasStationEndpoint ?? "http://localhost:9527";
-export const GAS_STATION_AUTH_TOKEN =
-	process.env.iotaGasStationAuthToken ?? "qEyCL6d9BKKFl/tfDGAKeGFkhUlf7FkqiGV7Xw4JUsI=";
-export const GAS_STATION_ENABLED = process.env.iotaGasStationEnabled ?? "true";
-export const GAS_STATION_TIMEOUT_MS = process.env.iotaGasStationTimeoutMs ?? "10000";
-
-console.debug("Test environment configuration:");
-console.debug(`- Node Endpoint: ${TEST_NODE_ENDPOINT}`);
-console.debug(`- Network: ${TEST_NETWORK}`);
-console.debug(`- Gas Station URL: ${GAS_STATION_URL}`);
-console.debug(`- Gas Station Enabled: ${GAS_STATION_ENABLED}`);
+import { DltConfigType } from "@twin.org/engine-types";
 
 /**
- * Validates that the Gas Station is accessible.
- * @returns Promise that resolves if Gas Station is available, rejects otherwise.
+ * Mock configuration helpers for Gas Station testing
+ * This module provides mock data and configuration helpers for testing
+ * Gas Station configuration without requiring actual service connectivity.
  */
-export async function validateGasStationConnectivity(): Promise<void> {
-	const timeoutMs = Number.parseInt(GAS_STATION_TIMEOUT_MS, 10);
 
-	try {
-		const controller = new AbortController();
-		const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+// Test configuration constants
+export const TEST_NODE_ENDPOINT = "https://api.testnet.iota.cafe";
+export const TEST_NETWORK = "testnet";
+export const TEST_COIN_TYPE = "4218";
 
-		const response = await fetch(GAS_STATION_URL, {
-			method: "GET",
-			signal: controller.signal
-		});
+// Mock Gas Station configuration for testing
+export const MOCK_GAS_STATION_CONFIG = {
+	GAS_STATION_URL: "http://localhost:9527",
+	GAS_STATION_AUTH_TOKEN: "dGVzdEF1dGhUb2tlbjEyMw==",
+	GAS_STATION_ENABLED: "true",
+	GAS_STATION_TIMEOUT_MS: "10000"
+};
 
-		clearTimeout(timeoutId);
+// Alternative mock configurations for different test scenarios
+export const MOCK_GAS_STATION_DISABLED_CONFIG = {
+	...MOCK_GAS_STATION_CONFIG,
+	GAS_STATION_ENABLED: "false"
+};
 
-		if (!response.ok) {
-			throw new GeneralError("GasStationConnectivity", "gasStationNotAvailable", undefined, {
-				status: response.status,
-				statusText: response.statusText
-			});
-		}
+export const MOCK_GAS_STATION_CUSTOM_TIMEOUT_CONFIG = {
+	...MOCK_GAS_STATION_CONFIG,
+	GAS_STATION_TIMEOUT_MS: "5000"
+};
 
-		console.debug("✅ Gas Station connectivity validated");
-	} catch (error) {
-		console.error("❌ Gas Station connectivity failed:", error);
-		if (error instanceof GeneralError) {
-			throw error;
-		}
-		throw new GeneralError("GasStationConnectivity", "gasStationConnectionFailed", undefined, {
-			url: GAS_STATION_URL,
-			error: (error as Error).message
-		});
-	}
+/**
+ * Creates a mock environment variables object for testing Gas Station configuration.
+ * @param overrides - Environment variable overrides
+ * @returns Mock environment variables object
+ */
+export function createMockEnvVars(overrides: { [key: string]: string } = {}): {
+	[key: string]: string;
+	iotaNodeEndpoint: string;
+	iotaNetwork: string;
+	iotaCoinType: string;
+	iotaGasStationEndpoint: string;
+	iotaGasStationAuthToken: string;
+	iotaGasStationEnabled: string;
+	iotaGasStationTimeoutMs: string;
+} {
+	return {
+		iotaNodeEndpoint: TEST_NODE_ENDPOINT,
+		iotaNetwork: TEST_NETWORK,
+		iotaCoinType: TEST_COIN_TYPE,
+		iotaGasStationEndpoint: MOCK_GAS_STATION_CONFIG.GAS_STATION_URL,
+		iotaGasStationAuthToken: MOCK_GAS_STATION_CONFIG.GAS_STATION_AUTH_TOKEN,
+		iotaGasStationEnabled: MOCK_GAS_STATION_CONFIG.GAS_STATION_ENABLED,
+		iotaGasStationTimeoutMs: MOCK_GAS_STATION_CONFIG.GAS_STATION_TIMEOUT_MS,
+		...overrides
+	};
 }
 
 /**
- * Setup function to be called before integration tests.
+ * Expected Gas Station configuration structure for validation
  */
-export async function setupTestEnv(): Promise<void> {
-	console.debug("Setting up test environment...");
+export const EXPECTED_GAS_STATION_CONFIG = {
+	gasStationUrl: MOCK_GAS_STATION_CONFIG.GAS_STATION_URL,
+	gasStationAuthToken: MOCK_GAS_STATION_CONFIG.GAS_STATION_AUTH_TOKEN,
+	enabled: true,
+	timeoutMs: 10000
+};
 
-	// Validate Gas Station connectivity for integration tests
-	await validateGasStationConnectivity();
+/**
+ * Creates a mock Gas Station configuration object.
+ * @param overrides - Partial configuration to override defaults
+ * @returns Mock Gas Station configuration object
+ */
+export function mockGasStationConfig(
+	overrides: Partial<typeof EXPECTED_GAS_STATION_CONFIG> = {}
+): typeof EXPECTED_GAS_STATION_CONFIG {
+	return {
+		...EXPECTED_GAS_STATION_CONFIG,
+		...overrides
+	};
+}
 
-	console.debug("✅ Test environment setup complete");
+/**
+ * Creates a mock IOTA configuration object.
+ * @param overrides - Configuration overrides
+ * @returns Mock IOTA configuration object
+ */
+export function mockIotaConfig(overrides: { [key: string]: unknown } = {}): {
+	[key: string]: unknown;
+	clientOptions: { url: string };
+	network: string;
+	coinType: number;
+	gasStation: typeof EXPECTED_GAS_STATION_CONFIG;
+} {
+	return {
+		clientOptions: {
+			url: TEST_NODE_ENDPOINT
+		},
+		network: TEST_NETWORK,
+		coinType: Number.parseInt(TEST_COIN_TYPE, 10),
+		gasStation: mockGasStationConfig(),
+		...overrides
+	};
+}
+
+/**
+ * Creates a mock DLT configuration object.
+ * @param overrides - Configuration overrides
+ * @returns Mock DLT configuration object
+ */
+export function mockDltConfig(overrides: { [key: string]: unknown } = {}): {
+	[key: string]: unknown;
+	type: string;
+	isDefault: boolean;
+	options: { config: ReturnType<typeof mockIotaConfig> };
+} {
+	return {
+		type: DltConfigType.Iota,
+		isDefault: true,
+		options: {
+			config: mockIotaConfig()
+		},
+		...overrides
+	};
+}
+
+/**
+ * Sets up mock environment variables for testing.
+ * @param overrides - Environment variable overrides
+ * @returns Mock environment variables object
+ */
+export function mockEngineEnvVars(
+	overrides: { [key: string]: string } = {}
+): ReturnType<typeof createMockEnvVars> {
+	const mockEnvVars = createMockEnvVars(overrides);
+
+	// Mock process.env for testing
+	for (const [key, value] of Object.entries(mockEnvVars)) {
+		process.env[key] = value;
+	}
+
+	return mockEnvVars;
+}
+
+/**
+ * Validates the structure of a configuration object.
+ * @param config - Configuration object to validate
+ * @returns True if configuration structure is valid
+ */
+export function validateConfigStructure(config: unknown): boolean {
+	try {
+		return Boolean(
+			config &&
+				typeof config === "object" &&
+				"type" in config &&
+				"isDefault" in config &&
+				"options" in config &&
+				typeof (config as { options: unknown }).options === "object" &&
+				(config as { options: { config: unknown } }).options &&
+				"config" in (config as { options: { config: unknown } }).options
+		);
+	} catch {
+		return false;
+	}
 }

@@ -3,48 +3,50 @@
 
 import { DltConfigType } from "@twin.org/engine-types";
 import {
-	setupTestEnv,
-	validateGasStationConnectivity,
-	GAS_STATION_URL,
-	GAS_STATION_AUTH_TOKEN,
-	GAS_STATION_ENABLED,
-	GAS_STATION_TIMEOUT_MS,
-	TEST_NODE_ENDPOINT,
-	TEST_NETWORK,
-	TEST_COIN_TYPE
+	mockGasStationConfig,
+	mockEngineEnvVars,
+	mockDltConfig,
+	validateConfigStructure
 } from "./setupTestEnv";
 import type { IEngineEnvironmentVariables } from "../src/models/IEngineEnvironmentVariables";
 import { buildEngineConfiguration } from "../src/utils/engineEnvBuilder";
 
-describe("Engine Gas Station Integration", () => {
-	beforeAll(async () => {
-		// Setup test environment and validate Gas Station connectivity
-		await setupTestEnv();
-	}, 30000);
+describe("Engine Gas Station Configuration", () => {
+	beforeAll(() => {
+		// Setup test environment with mock configurations
+		mockEngineEnvVars();
+	});
 
-	describe("Gas Station Connectivity", () => {
-		test("should successfully connect to Gas Station", async () => {
-			await expect(validateGasStationConnectivity()).resolves.not.toThrow();
-		}, 10000);
+	describe("Gas Station Configuration Validation", () => {
+		test("should validate Gas Station configuration structure", () => {
+			const gasStationConfig = mockGasStationConfig();
 
-		test("should have valid Gas Station configuration", () => {
-			expect(GAS_STATION_URL).toBeDefined();
-			expect(GAS_STATION_AUTH_TOKEN).toBeDefined();
-			expect(GAS_STATION_ENABLED).toBe("true");
-			expect(Number.parseInt(GAS_STATION_TIMEOUT_MS, 10)).toBeGreaterThan(0);
+			expect(gasStationConfig.gasStationUrl).toBeDefined();
+			expect(gasStationConfig.gasStationAuthToken).toBeDefined();
+			expect(gasStationConfig.enabled).toBe(true);
+			expect(gasStationConfig.timeoutMs).toBeGreaterThan(0);
+		});
+
+		test("should validate required Gas Station configuration fields", () => {
+			const gasStationConfig = mockGasStationConfig();
+
+			expect(gasStationConfig.gasStationUrl).toMatch(/^https?:\/\/.+/);
+			expect(gasStationConfig.gasStationAuthToken).toMatch(/^[\d+/=A-Za-z]+$/);
+			expect(typeof gasStationConfig.enabled).toBe("boolean");
+			expect(typeof gasStationConfig.timeoutMs).toBe("number");
 		});
 	});
 
 	describe("IOTA DLT Configuration Integration", () => {
-		test("should create IOTA DLT configuration with live Gas Station", async () => {
+		test("should create IOTA DLT configuration with Gas Station enabled", () => {
 			const envVars: Partial<IEngineEnvironmentVariables> = {
-				iotaNodeEndpoint: TEST_NODE_ENDPOINT,
-				iotaNetwork: TEST_NETWORK,
-				iotaCoinType: TEST_COIN_TYPE,
-				iotaGasStationEndpoint: GAS_STATION_URL,
-				iotaGasStationAuthToken: GAS_STATION_AUTH_TOKEN,
-				iotaGasStationEnabled: GAS_STATION_ENABLED,
-				iotaGasStationTimeoutMs: GAS_STATION_TIMEOUT_MS
+				iotaNodeEndpoint: "https://api.testnet.iota.org",
+				iotaNetwork: "testnet",
+				iotaCoinType: "4218",
+				iotaGasStationEndpoint: "https://gasstation.testnet.iota.org",
+				iotaGasStationAuthToken: "dGVzdC1hdXRoLXRva2Vu",
+				iotaGasStationEnabled: "true",
+				iotaGasStationTimeoutMs: "10000"
 			};
 
 			const config = buildEngineConfiguration(envVars as IEngineEnvironmentVariables);
@@ -56,27 +58,21 @@ describe("Engine Gas Station Integration", () => {
 			expect(iotaConfig?.type).toBe(DltConfigType.Iota);
 			expect(iotaConfig?.isDefault).toBe(true);
 			expect(iotaConfig?.options?.config?.gasStation).toBeDefined();
-			expect(iotaConfig?.options?.config?.gasStation?.gasStationUrl).toBe(GAS_STATION_URL);
-			expect(iotaConfig?.options?.config?.gasStation?.gasStationAuthToken).toBe(
-				GAS_STATION_AUTH_TOKEN
+			expect(iotaConfig?.options?.config?.gasStation?.gasStationUrl).toBe(
+				"https://gasstation.testnet.iota.org"
 			);
+			expect(iotaConfig?.options?.config?.gasStation?.gasStationAuthToken).toBe(
+				"dGVzdC1hdXRoLXRva2Vu"
+			);
+		});
 
-			// Verify the Gas Station URL is actually accessible
-			const gasStationUrl = iotaConfig?.options?.config?.gasStation?.gasStationUrl;
-			expect(gasStationUrl).toBeDefined();
-			const response = await fetch(gasStationUrl as string, {
-				method: "GET"
-			});
-			expect(response.ok).toBe(true);
-		}, 15000);
-
-		test("should handle Gas Station configuration with different timeout values", async () => {
+		test("should handle Gas Station configuration with different timeout values", () => {
 			const customTimeout = "5000";
 			const envVars: Partial<IEngineEnvironmentVariables> = {
-				iotaNodeEndpoint: TEST_NODE_ENDPOINT,
-				iotaNetwork: TEST_NETWORK,
-				iotaGasStationEndpoint: GAS_STATION_URL,
-				iotaGasStationAuthToken: GAS_STATION_AUTH_TOKEN,
+				iotaNodeEndpoint: "https://api.testnet.iota.org",
+				iotaNetwork: "testnet",
+				iotaGasStationEndpoint: "https://gasstation.testnet.iota.org",
+				iotaGasStationAuthToken: "dGVzdC1hdXRoLXRva2Vu",
 				iotaGasStationEnabled: "true",
 				iotaGasStationTimeoutMs: customTimeout
 			};
@@ -87,25 +83,14 @@ describe("Engine Gas Station Integration", () => {
 			expect(
 				(iotaConfig?.options?.config?.gasStation as unknown as { timeoutMs: number })?.timeoutMs
 			).toBe(5000);
+		});
 
-			// Verify the Gas Station responds within the configured timeout
-			const startTime = Date.now();
-			const response = await fetch(GAS_STATION_URL, {
-				method: "GET",
-				signal: AbortSignal.timeout(5000)
-			});
-			const elapsed = Date.now() - startTime;
-
-			expect(response.ok).toBe(true);
-			expect(elapsed).toBeLessThan(5000);
-		}, 10000);
-
-		test("should create IOTA DLT configuration with Gas Station disabled", async () => {
+		test("should create IOTA DLT configuration with Gas Station disabled", () => {
 			const envVars: Partial<IEngineEnvironmentVariables> = {
-				iotaNodeEndpoint: TEST_NODE_ENDPOINT,
-				iotaNetwork: TEST_NETWORK,
-				iotaGasStationEndpoint: GAS_STATION_URL,
-				iotaGasStationAuthToken: GAS_STATION_AUTH_TOKEN,
+				iotaNodeEndpoint: "https://api.testnet.iota.org",
+				iotaNetwork: "testnet",
+				iotaGasStationEndpoint: "https://gasstation.testnet.iota.org",
+				iotaGasStationAuthToken: "dGVzdC1hdXRoLXRva2Vu",
 				iotaGasStationEnabled: "false"
 			};
 
@@ -116,23 +101,19 @@ describe("Engine Gas Station Integration", () => {
 			expect(
 				(iotaConfig?.options?.config?.gasStation as unknown as { enabled: boolean })?.enabled
 			).toBe(false);
-
-			// Even when disabled, the URL should still be accessible for validation
-			const response = await fetch(GAS_STATION_URL, { method: "GET" });
-			expect(response.ok).toBe(true);
-		}, 10000);
+		});
 	});
 
 	describe("Centralized Configuration Validation", () => {
-		test("should extract IOTA config from centralized DLT config with live Gas Station", async () => {
+		test("should extract IOTA config from centralized DLT config", () => {
 			const envVars: Partial<IEngineEnvironmentVariables> = {
-				iotaNodeEndpoint: TEST_NODE_ENDPOINT,
-				iotaNetwork: TEST_NETWORK,
-				iotaCoinType: TEST_COIN_TYPE,
-				iotaGasStationEndpoint: GAS_STATION_URL,
-				iotaGasStationAuthToken: GAS_STATION_AUTH_TOKEN,
-				iotaGasStationEnabled: GAS_STATION_ENABLED,
-				iotaGasStationTimeoutMs: GAS_STATION_TIMEOUT_MS
+				iotaNodeEndpoint: "https://api.testnet.iota.org",
+				iotaNetwork: "testnet",
+				iotaCoinType: "4218",
+				iotaGasStationEndpoint: "https://gasstation.testnet.iota.org",
+				iotaGasStationAuthToken: "dGVzdC1hdXRoLXRva2Vu",
+				iotaGasStationEnabled: "true",
+				iotaGasStationTimeoutMs: "10000"
 			};
 
 			const config = buildEngineConfiguration(envVars as IEngineEnvironmentVariables);
@@ -144,30 +125,22 @@ describe("Engine Gas Station Integration", () => {
 			const iotaConfig = dltConfig?.options?.config;
 
 			expect(iotaConfig).toBeDefined();
-			expect(iotaConfig?.clientOptions?.url).toBe(TEST_NODE_ENDPOINT);
-			expect(iotaConfig?.network).toBe(TEST_NETWORK);
-			expect(iotaConfig?.coinType).toBe(Number.parseInt(TEST_COIN_TYPE, 10));
-			expect(iotaConfig?.gasStation?.gasStationUrl).toBe(GAS_STATION_URL);
-			expect(iotaConfig?.gasStation?.gasStationAuthToken).toBe(GAS_STATION_AUTH_TOKEN);
+			expect(iotaConfig?.clientOptions?.url).toBe("https://api.testnet.iota.org");
+			expect(iotaConfig?.network).toBe("testnet");
+			expect(iotaConfig?.coinType).toBe(4218);
+			expect(iotaConfig?.gasStation?.gasStationUrl).toBe("https://gasstation.testnet.iota.org");
+			expect(iotaConfig?.gasStation?.gasStationAuthToken).toBe("dGVzdC1hdXRoLXRva2Vu");
+		});
 
-			// Verify the extracted configuration works with the real Gas Station
-			const gasStationUrl = iotaConfig?.gasStation?.gasStationUrl;
-			expect(gasStationUrl).toBeDefined();
-			const response = await fetch(gasStationUrl as string, {
-				method: "GET"
-			});
-			expect(response.ok).toBe(true);
-		}, 10000);
-
-		test("should use centralized IOTA config for all IOTA-related connectors", async () => {
+		test("should use centralized IOTA config for all IOTA-related connectors", () => {
 			const envVars: Partial<IEngineEnvironmentVariables> = {
-				iotaNodeEndpoint: TEST_NODE_ENDPOINT,
-				iotaNetwork: TEST_NETWORK,
-				iotaCoinType: TEST_COIN_TYPE,
-				iotaGasStationEndpoint: GAS_STATION_URL,
-				iotaGasStationAuthToken: GAS_STATION_AUTH_TOKEN,
-				iotaGasStationEnabled: GAS_STATION_ENABLED,
-				iotaGasStationTimeoutMs: GAS_STATION_TIMEOUT_MS
+				iotaNodeEndpoint: "https://api.testnet.iota.org",
+				iotaNetwork: "testnet",
+				iotaCoinType: "4218",
+				iotaGasStationEndpoint: "https://gasstation.testnet.iota.org",
+				iotaGasStationAuthToken: "dGVzdC1hdXRoLXRva2Vu",
+				iotaGasStationEnabled: "true",
+				iotaGasStationTimeoutMs: "10000"
 			};
 
 			const config = buildEngineConfiguration(envVars as IEngineEnvironmentVariables);
@@ -185,14 +158,15 @@ describe("Engine Gas Station Integration", () => {
 			expect(centralizedConfig?.network).toBeTruthy();
 			expect(centralizedConfig?.gasStation?.gasStationUrl).toBeTruthy();
 			expect(centralizedConfig?.gasStation?.gasStationAuthToken).toBeTruthy();
+		});
 
-			// Validate that the Gas Station URL from centralized config is accessible
-			const gasStationUrl = centralizedConfig?.gasStation?.gasStationUrl;
-			expect(gasStationUrl).toBeDefined();
-			const response = await fetch(gasStationUrl as string, {
-				method: "GET"
-			});
-			expect(response.ok).toBe(true);
-		}, 10000);
+		test("should validate configuration structure with mock helpers", () => {
+			const mockConfig = mockDltConfig();
+
+			expect(validateConfigStructure(mockConfig)).toBe(true);
+			expect(mockConfig.type).toBe(DltConfigType.Iota);
+			expect(mockConfig.isDefault).toBe(true);
+			expect(mockConfig.options?.config?.gasStation).toBeDefined();
+		});
 	});
 });

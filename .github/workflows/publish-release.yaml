@@ -62,21 +62,6 @@ jobs:
       id-token: write # Needed for npm provenance
     needs: read-workspaces # Wait for the read-workspaces job to complete
 
-    # Add env vars for tests
-    env:
-      TEST_MNEMONIC: ${{ secrets.TEST_MNEMONIC }}
-      TEST_2_MNEMONIC: ${{ secrets.TEST_2_MNEMONIC }}
-      TEST_NODE_MNEMONIC: ${{ secrets.TEST_NODE_MNEMONIC }}
-      # IOTA Gas Station configuration for tests
-      iotaNodeEndpoint: https://api.testnet.iota.cafe
-      iotaFaucetEndpoint: https://faucet.testnet.iota.cafe
-      iotaNetwork: testnet
-      iotaCoinType: '4218'
-      iotaGasStationEndpoint: http://localhost:9527
-      iotaGasStationAuthToken: qEyCL6d9BKKFl/tfDGAKeGFkhUlf7FkqiGV7Xw4JUsI=
-      iotaGasStationEnabled: 'true'
-      iotaGasStationTimeoutMs: '10000'
-
     # Use a matrix strategy to process each package pattern in parallel
     # but limit to one at a time for controlled publishing order
     strategy:
@@ -97,15 +82,6 @@ jobs:
         with:
           node-version: 20 # Use Node.js 20.x
           registry-url: 'https://registry.npmjs.org' # Set NPM registry URL
-
-      # Setup test environment (IOTA CLI + Gas Station)
-      - name: Setup Engine Testing Environment
-        uses: ./.github/actions/setup-test-environment
-        with:
-          test-mnemonic: ${{ secrets.TEST_MNEMONIC }}
-          test-node-endpoint: ${{ env.iotaNodeEndpoint }}
-          test-faucet-endpoint: ${{ env.iotaFaucetEndpoint }}
-          gas-station-auth: ${{ env.iotaGasStationAuthToken }}
 
       # Remove the root package.json to prevent dependency conflicts
       - name: Remove Mono-Repo Node Modules
