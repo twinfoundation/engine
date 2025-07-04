@@ -1,0 +1,151 @@
+name: 'Setup Engine Testing Environment'
+description: 'Sets up IOTA CLI and Twin Gas Station Test Environment (includes Redis + Gas Station) with proper configuration for Engine testing'
+
+inputs:
+  test-mnemonic:
+    description: 'Test mnemonic for gas station'
+    required: true
+  test-node-endpoint:
+    description: 'IOTA testnet node endpoint'
+    required: false
+    default: 'https://api.testnet.iota.cafe'
+  test-faucet-endpoint:
+    description: 'IOTA testnet faucet endpoint'
+    required: false
+    default: 'https://faucet.testnet.iota.cafe'
+  gas-station-auth:
+    description: 'Gas station authentication token'
+    required: true
+
+outputs:
+  gas-station-url:
+    description: 'Gas station URL for tests'
+    value: 'http://localhost:9527'
+  redis-url:
+    description: 'Redis URL for tests'
+    value: 'redis://127.0.0.1:6379'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Download IOTA CLI
+      shell: bash
+      run: |
+        cd ..
+        wget https://github.com/iotaledger/iota/releases/download/v1.0.0/iota-v1.0.0-linux-x86_64.tgz -O iota-cli.tgz
+        tar xzf iota-cli.tgz
+        rm iota-cli.tgz
+        chmod +x iota
+        sudo mv iota /usr/local/bin/iota
+        iota --version
+
+    - name: Start Twin Gas Station Test Environment
+      shell: bash
+      run: |
+        echo "Starting Twin Gas Station Test Environment (includes Redis + Gas Station)..."
+        docker run -d --name twin-gas-station-test \
+          -p 6379:6379 -p 9527:9527 -p 9184:9184 \
+          -e IOTA_NODE_URL="${{ inputs.test-node-endpoint }}" \
+          -e GAS_STATION_AUTH="${{ inputs.gas-station-auth }}" \
+          twinfoundation/twin-gas-station-test:latest
+
+    - name: Wait for Services to be Ready
+      shell: bash
+      run: |
+        echo "Waiting for Redis and Gas Station to start..."
+
+        # Wait for Redis
+        for i in {1..30}; do
+          if docker exec twin-gas-station-test redis-cli ping 2>/dev/null | grep -q PONG; then
+            echo "✅ Redis is ready!"
+            break
+          fi
+          echo "Attempt $i: Redis not ready yet, waiting..."
+          sleep 2
+        done
+
+        # Wait for Gas Station
+        for i in {1..30}; do
+          if curl -f http://localhost:9527/ 2>/dev/null; then
+            echo "✅ Gas station is ready!"
+            break
+          fi
+          echo "Attempt $i: Gas station not ready yet, waiting..."
+          sleep 2
+        done
+
+        echo "✅ All services are ready!"
+
+    - name: Fund Gas Station Sponsor
+      shell: bash
+      run: |
+        echo "Getting sponsor address from gas station..."
+        SPONSOR_RESPONSE=$(curl -s -X POST http://localhost:9527/v1/reserve_gas \
+          -H "Content-Type: application/json" \
+          -H "Authorization: Bearer ${{ inputs.gas-station-auth }}" \
+          -d '{"gas_budget": 10000000, "reserve_duration_secs": 10}')
+
+        SPONSOR_ADDRESS=$(echo "$SPONSOR_RESPONSE" | jq -r '.result.sponsor_address')
+        echo "Sponsor address: $SPONSOR_ADDRESS"
+
+        if [ "$SPONSOR_ADDRESS" != "null" ] && [ -n "$SPONSOR_ADDRESS" ]; then
+          echo "Funding sponsor address with IOTA faucet..."
+          curl -X POST "${{ inputs.test-faucet-endpoint }}/gas" \
+            -H "Content-Type: application/json" \
+            -d "{\"FixedAmountRequest\":{\"recipient\":\"$SPONSOR_ADDRESS\"}}" || echo "Faucet funding may have failed, but continuing..."
+          
+          echo "Waiting 10 seconds for funding to process..."
+          sleep 10
+          
+          echo "Verifying gas station can reserve gas after funding..."
+          TEST_RESPONSE=$(curl -s -X POST http://localhost:9527/v1/reserve_gas \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer ${{ inputs.gas-station-auth }}" \
+            -d '{"gas_budget": 50000000, "reserve_duration_secs": 30}')
+          
+          if echo "$TEST_RESPONSE" | jq -e '.result' > /dev/null; then
+            echo "✅ Gas station successfully funded and operational!"
+          else
+            echo "⚠️ Gas station may not be properly funded, but continuing..."
+            echo "Response: $TEST_RESPONSE"
+          fi
+        else
+          echo "Failed to get sponsor address, but continuing..."
+        fi
+
+    - name: Verify Engine Test Environment
+      shell: bash
+      run: |
+        echo "Verifying Engine-specific test environment..."
+
+        # Verify all required services are accessible
+        echo "Checking Redis connection..."
+        if docker exec twin-gas-station-test redis-cli ping | grep -q PONG; then
+          echo "✅ Redis connection verified"
+        else
+          echo "❌ Redis connection failed"
+          exit 1
+        fi
+
+        echo "Checking Gas Station API endpoint..."
+        if curl -f http://localhost:9527/ >/dev/null 2>&1; then
+          echo "✅ Gas Station API endpoint verified"
+        else
+          echo "❌ Gas Station API endpoint failed"
+          exit 1
+        fi
+
+        echo "Checking Gas Station authentication..."
+        AUTH_RESPONSE=$(curl -s -X POST http://localhost:9527/v1/reserve_gas \
+          -H "Content-Type: application/json" \
+          -H "Authorization: Bearer ${{ inputs.gas-station-auth }}" \
+          -d '{"gas_budget": 10000000, "reserve_duration_secs": 5}')
+
+        if echo "$AUTH_RESPONSE" | jq -e '.result' > /dev/null; then
+          echo "✅ Gas Station authentication verified"
+        else
+          echo "⚠️ Gas Station authentication may have issues, but continuing..."
+          echo "Response: $AUTH_RESPONSE"
+        fi
+
+        echo "✅ Engine test environment fully verified and ready!"

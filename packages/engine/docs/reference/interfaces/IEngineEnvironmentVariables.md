@@ -668,6 +668,38 @@ IOTA Explorer Endpoint.
 
 ***
 
+### iotaGasStationEndpoint?
+
+> `optional` **iotaGasStationEndpoint**: `string`
+
+IOTA Gas Station Endpoint.
+
+***
+
+### iotaGasStationAuthToken?
+
+> `optional` **iotaGasStationAuthToken**: `string`
+
+IOTA Gas Station Authentication Token.
+
+***
+
+### iotaGasStationEnabled?
+
+> `optional` **iotaGasStationEnabled**: `string`
+
+Enable IOTA Gas Station.
+
+***
+
+### iotaGasStationTimeoutMs?
+
+> `optional` **iotaGasStationTimeoutMs**: `string`
+
+IOTA Gas Station Timeout in milliseconds.
+
+***
+
 ### universalResolverEndpoint?
 
 > `optional` **universalResolverEndpoint**: `string`
