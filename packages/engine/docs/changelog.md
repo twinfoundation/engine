@@ -1,5 +1,20 @@
 # @twin.org/engine - Changelog
 
+## [0.0.1-next.81](https://github.com/twinfoundation/engine/compare/engine-v0.0.1-next.80...engine-v0.0.1-next.81) (2025-07-07)
+
+
+### Features
+
+* gas station integration ([#17](https://github.com/twinfoundation/engine/issues/17)) ([a3f844a](https://github.com/twinfoundation/engine/commit/a3f844a7fc58c43b4d0700d8d4351062045e66e1))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @twin.org/engine-core bumped from 0.0.1-next.80 to 0.0.1-next.81
+    * @twin.org/engine-types bumped from 0.0.1-next.80 to 0.0.1-next.81
+
 ## [0.0.1-next.80](https://github.com/twinfoundation/engine/compare/engine-v0.0.1-next.79...engine-v0.0.1-next.80) (2025-06-23)
 
 

@@ -1,5 +1,19 @@
 # @twin.org/engine-types - Changelog
 
+## [0.0.1-next.81](https://github.com/twinfoundation/engine/compare/engine-types-v0.0.1-next.80...engine-types-v0.0.1-next.81) (2025-07-07)
+
+
+### Miscellaneous Chores
+
+* **engine-types:** Synchronize repo versions
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @twin.org/engine-models bumped from 0.0.1-next.80 to 0.0.1-next.81
+
 ## [0.0.1-next.80](https://github.com/twinfoundation/engine/compare/engine-types-v0.0.1-next.79...engine-types-v0.0.1-next.80) (2025-06-23)
 
 
