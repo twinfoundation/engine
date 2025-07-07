@@ -1033,22 +1033,8 @@ function configureTaskScheduler(
  * @param envVars The environment variables.
  */
 function configureDlt(coreConfig: IEngineConfig, envVars: IEngineEnvironmentVariables): void {
-	// Create centralized DLT configuration for IOTA if any IOTA-related variables are set
-	// Always create IOTA config when any IOTA-related variables are set to ensure Guards are triggered
-	if (
-		Is.stringValue(envVars.iotaNodeEndpoint) ||
-		Is.stringValue(envVars.iotaFaucetEndpoint) ||
-		Is.stringValue(envVars.iotaNetwork) ||
-		Is.stringValue(envVars.iotaCoinType) ||
-		Is.stringValue(envVars.iotaExplorerEndpoint) ||
-		Is.stringValue(envVars.iotaGasStationEndpoint) ||
-		envVars.faucetConnector === FaucetConnectorType.Iota ||
-		envVars.walletConnector === WalletConnectorType.Iota ||
-		envVars.nftConnector === NftConnectorType.Iota ||
-		envVars.verifiableStorageConnector === VerifiableStorageConnectorType.Iota ||
-		envVars.identityConnector === IdentityConnectorType.Iota ||
-		envVars.identityResolverConnector === IdentityResolverConnectorType.Iota
-	) {
+	// Create centralized DLT configuration for IOTA if essential IOTA variables are set
+	if (Is.stringValue(envVars.iotaNodeEndpoint) && Is.stringValue(envVars.iotaNetwork)) {
 		coreConfig.types.dltConfig ??= [];
 
 		const gasStationConfig =

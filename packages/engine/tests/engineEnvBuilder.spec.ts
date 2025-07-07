@@ -75,6 +75,7 @@ describe("Engine Environment Builder", () => {
 		test("should use default values for gas station configuration", () => {
 			const envVars: Partial<IEngineEnvironmentVariables> = {
 				iotaNodeEndpoint: "https://api.testnet.iota.cafe",
+				iotaNetwork: "testnet",
 				iotaGasStationEndpoint: "https://gas-station.example.com",
 				iotaGasStationAuthToken: "test-auth-token"
 				// No explicit enabled or timeout values
@@ -93,6 +94,7 @@ describe("Engine Environment Builder", () => {
 		test("should not create gas station config when endpoint is missing", () => {
 			const envVars: Partial<IEngineEnvironmentVariables> = {
 				iotaNodeEndpoint: "https://api.testnet.iota.cafe",
+				iotaNetwork: "testnet",
 				iotaGasStationAuthToken: "test-auth-token"
 				// No gasStationEndpoint
 			};
@@ -106,6 +108,7 @@ describe("Engine Environment Builder", () => {
 		test("should not create gas station config when auth token is missing", () => {
 			const envVars: Partial<IEngineEnvironmentVariables> = {
 				iotaNodeEndpoint: "https://api.testnet.iota.cafe",
+				iotaNetwork: "testnet",
 				iotaGasStationEndpoint: "https://gas-station.example.com"
 				// No gasStationAuthToken
 			};
@@ -116,21 +119,16 @@ describe("Engine Environment Builder", () => {
 			expect(iotaConfig?.options?.config?.gasStation).toBeUndefined();
 		});
 
-		test("should create IOTA DLT configuration when only gas station endpoint is set", () => {
+		test("should not create DLT configuration when only optional parameters are set", () => {
 			const envVars: Partial<IEngineEnvironmentVariables> = {
 				iotaGasStationEndpoint: "https://gas-station.example.com"
-				// Only gas station endpoint, no other IOTA config
+				// Only optional parameters, no essential iotaNodeEndpoint or iotaNetwork
 			};
 
 			const config = buildEngineConfiguration(envVars as IEngineEnvironmentVariables);
 
-			expect(config.types.dltConfig).toBeDefined();
-			expect(config.types.dltConfig).toHaveLength(1);
-
-			const iotaConfig = config.types.dltConfig?.[0];
-			expect(iotaConfig?.type).toBe(DltConfigType.Iota);
-			expect(iotaConfig?.options?.config?.clientOptions?.url).toBe(""); // Default empty string
-			expect(iotaConfig?.options?.config?.network).toBe(""); // Default empty string
+			// Should not create DLT config since no essential parameters are provided
+			expect(config.types.dltConfig).toBeUndefined();
 		});
 
 		test("should not create any DLT configuration when no IOTA variables are set", () => {
@@ -173,6 +171,7 @@ describe("Engine Environment Builder", () => {
 		test("should validate gas station configuration field formats", () => {
 			const envVars: Partial<IEngineEnvironmentVariables> = {
 				iotaNodeEndpoint: "https://api.testnet.iota.cafe",
+				iotaNetwork: "testnet",
 				iotaGasStationEndpoint: "https://gas-station.example.com",
 				iotaGasStationAuthToken: "dGVzdEF1dGhUb2tlbjEyMw=="
 			};

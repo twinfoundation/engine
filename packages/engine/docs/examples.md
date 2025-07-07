@@ -25,15 +25,11 @@ The IOTA Gas Station pattern allows for sponsored transactions and improved UX:
 # Gas Station Configuration
 IOTA_GAS_STATION_ENDPOINT="https://gas-station.example.com"
 IOTA_GAS_STATION_AUTH_TOKEN="your-auth-token"
-IOTA_GAS_STATION_ENABLED="true"
-IOTA_GAS_STATION_TIMEOUT_MS="10000"
 ```
 
 **Configuration Options:**
 
 - `IOTA_GAS_STATION_ENDPOINT`: The URL of the gas station service
 - `IOTA_GAS_STATION_AUTH_TOKEN`: Authentication token for the gas station
-- `IOTA_GAS_STATION_ENABLED`: Enable/disable gas station usage (default: true)
-- `IOTA_GAS_STATION_TIMEOUT_MS`: Timeout for gas station requests in milliseconds (default: 10000)
 
 When gas station is configured, all IOTA-related connectors (wallet, nft, verifiable-storage, identity, identity-resolver) will automatically use the centralized configuration and have access to gas station functionality.
