@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0.
 import path from "node:path";
 import { Coerce, Is } from "@twin.org/core";
+import type { IIotaConfig } from "@twin.org/dlt-iota";
 import {
 	AttestationComponentType,
 	AttestationConnectorType,
@@ -13,6 +14,7 @@ import {
 	DataConverterConnectorType,
 	DataExtractorConnectorType,
 	DataProcessingComponentType,
+	DltConfigType,
 	DocumentManagementComponentType,
 	EntityStorageConnectorType,
 	EventBusComponentType,
@@ -72,6 +74,7 @@ export function buildEngineConfiguration(envVars: IEngineEnvironmentVariables): 
 	configureEntityStorage(coreConfig, envVars);
 	configureBlobStorage(coreConfig, envVars);
 	configureVault(coreConfig, envVars);
+	configureDlt(coreConfig, envVars);
 
 	configureLogging(coreConfig, envVars);
 	configureBackgroundTask(coreConfig, envVars);
@@ -97,6 +100,18 @@ export function buildEngineConfiguration(envVars: IEngineEnvironmentVariables): 
 	configureTaskScheduler(coreConfig, envVars);
 
 	return coreConfig;
+}
+
+/**
+ * Helper function to get IOTA configuration from centralized dltConfig.
+ * @param coreConfig The core config.
+ * @returns The IOTA configuration if found, undefined otherwise.
+ */
+function getIotaConfig(coreConfig: IEngineConfig): IIotaConfig | undefined {
+	const dltConfig = coreConfig.types.dltConfig?.find(
+		config => config.type === DltConfigType.Iota && config.isDefault
+	);
+	return dltConfig?.options?.config;
 }
 
 /**
@@ -610,16 +625,14 @@ function configureFaucet(coreConfig: IEngineConfig, envVars: IEngineEnvironmentV
 			type: FaucetConnectorType.EntityStorage
 		});
 	} else if (envVars.faucetConnector === FaucetConnectorType.Iota) {
+		const iotaConfig = getIotaConfig(coreConfig);
 		coreConfig.types.faucetConnector.push({
 			type: FaucetConnectorType.Iota,
 			options: {
 				config: {
 					endpoint: envVars.iotaFaucetEndpoint ?? "",
-					clientOptions: {
-						url: envVars.iotaNodeEndpoint ?? ""
-					},
-					network: envVars.iotaNetwork ?? "",
-					coinType: Coerce.number(envVars.iotaCoinType)
+					clientOptions: iotaConfig?.clientOptions ?? { url: "" },
+					network: iotaConfig?.network ?? ""
 				}
 			}
 		});
@@ -639,16 +652,11 @@ function configureWallet(coreConfig: IEngineConfig, envVars: IEngineEnvironmentV
 			type: WalletConnectorType.EntityStorage
 		});
 	} else if (envVars.walletConnector === WalletConnectorType.Iota) {
+		const iotaConfig = getIotaConfig(coreConfig);
 		coreConfig.types.walletConnector.push({
 			type: WalletConnectorType.Iota,
 			options: {
-				config: {
-					clientOptions: {
-						url: envVars.iotaNodeEndpoint ?? ""
-					},
-					network: envVars.iotaNetwork ?? "",
-					coinType: Coerce.number(envVars.iotaCoinType)
-				}
+				config: iotaConfig ?? ({} as IIotaConfig)
 			}
 		});
 	}
@@ -667,16 +675,11 @@ function configureNft(coreConfig: IEngineConfig, envVars: IEngineEnvironmentVari
 			type: NftConnectorType.EntityStorage
 		});
 	} else if (envVars.nftConnector === NftConnectorType.Iota) {
+		const iotaConfig = getIotaConfig(coreConfig);
 		coreConfig.types.nftConnector.push({
 			type: NftConnectorType.Iota,
 			options: {
-				config: {
-					clientOptions: {
-						url: envVars.iotaNodeEndpoint ?? ""
-					},
-					network: envVars.iotaNetwork ?? "",
-					coinType: Coerce.number(envVars.iotaCoinType)
-				}
+				config: iotaConfig ?? ({} as IIotaConfig)
 			}
 		});
 	}
@@ -703,16 +706,11 @@ function configureVerifiableStorage(
 			type: VerifiableStorageConnectorType.EntityStorage
 		});
 	} else if (envVars.verifiableStorageConnector === VerifiableStorageConnectorType.Iota) {
+		const iotaConfig = getIotaConfig(coreConfig);
 		coreConfig.types.verifiableStorageConnector.push({
 			type: VerifiableStorageConnectorType.Iota,
 			options: {
-				config: {
-					clientOptions: {
-						url: envVars.iotaNodeEndpoint ?? ""
-					},
-					network: envVars.iotaNetwork ?? "",
-					coinType: Coerce.number(envVars.iotaCoinType)
-				}
+				config: iotaConfig ?? ({} as IIotaConfig)
 			}
 		});
 	}
@@ -758,16 +756,11 @@ function configureIdentity(coreConfig: IEngineConfig, envVars: IEngineEnvironmen
 			type: IdentityConnectorType.EntityStorage
 		});
 	} else if (envVars.identityConnector === IdentityConnectorType.Iota) {
+		const iotaConfig = getIotaConfig(coreConfig);
 		coreConfig.types.identityConnector.push({
 			type: IdentityConnectorType.Iota,
 			options: {
-				config: {
-					clientOptions: {
-						url: envVars.iotaNodeEndpoint ?? ""
-					},
-					network: envVars.iotaNetwork ?? "",
-					coinType: Coerce.number(envVars.iotaCoinType)
-				}
+				config: iotaConfig ?? ({} as IIotaConfig)
 			}
 		});
 	}
@@ -794,16 +787,11 @@ function configureIdentityResolver(
 			type: IdentityResolverConnectorType.EntityStorage
 		});
 	} else if (envVars.identityResolverConnector === IdentityResolverConnectorType.Iota) {
+		const iotaConfig = getIotaConfig(coreConfig);
 		coreConfig.types.identityResolverConnector.push({
 			type: IdentityResolverConnectorType.Iota,
 			options: {
-				config: {
-					clientOptions: {
-						url: envVars.iotaNodeEndpoint ?? ""
-					},
-					network: envVars.iotaNetwork ?? "",
-					coinType: Coerce.number(envVars.iotaCoinType)
-				}
+				config: iotaConfig ?? ({} as IIotaConfig)
 			}
 		});
 	} else if (envVars.identityResolverConnector === IdentityResolverConnectorType.Universal) {
@@ -1035,6 +1023,42 @@ function configureTaskScheduler(
 		coreConfig.types.taskSchedulerComponent ??= [];
 		coreConfig.types.taskSchedulerComponent.push({
 			type: TaskSchedulerComponentType.Default
+		});
+	}
+}
+
+/**
+ * Configures the DLT.
+ * @param coreConfig The core config.
+ * @param envVars The environment variables.
+ */
+function configureDlt(coreConfig: IEngineConfig, envVars: IEngineEnvironmentVariables): void {
+	// Create centralized DLT configuration for IOTA if essential IOTA variables are set
+	if (Is.stringValue(envVars.iotaNodeEndpoint) && Is.stringValue(envVars.iotaNetwork)) {
+		coreConfig.types.dltConfig ??= [];
+
+		const gasStationConfig =
+			Is.stringValue(envVars.iotaGasStationEndpoint) &&
+			Is.stringValue(envVars.iotaGasStationAuthToken)
+				? {
+						gasStationUrl: envVars.iotaGasStationEndpoint,
+						gasStationAuthToken: envVars.iotaGasStationAuthToken
+					}
+				: undefined;
+
+		coreConfig.types.dltConfig.push({
+			type: DltConfigType.Iota,
+			isDefault: true,
+			options: {
+				config: {
+					clientOptions: {
+						url: envVars.iotaNodeEndpoint ?? ""
+					},
+					network: envVars.iotaNetwork ?? "",
+					coinType: Coerce.number(envVars.iotaCoinType),
+					gasStation: gasStationConfig
+				}
+			}
 		});
 	}
 }

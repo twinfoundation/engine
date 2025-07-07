@@ -91,8 +91,6 @@ jobs:
 
       # Setup any services required for tests here
 
-      # End setup for tests
-
       # Remove the root package.json to prevent dependency conflicts
       - name: Remove Mono-Repo Node Modules
         run: |

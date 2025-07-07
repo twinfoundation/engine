@@ -21,6 +21,7 @@
 		"abbrev",
 		"bech",
 		"cosmosdb",
+		"devnet",
 		"Fastify",
 		"faucet",
 		"Firestore",

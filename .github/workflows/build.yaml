@@ -35,8 +35,6 @@ jobs:
 
       # Setup any services required for tests here
 
-      # End setup for tests
-
       # Run Lint and Dist
       - name: Run Lint and Dist
         run: |

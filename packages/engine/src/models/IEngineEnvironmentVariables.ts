@@ -421,6 +421,16 @@ export interface IEngineEnvironmentVariables {
 	iotaExplorerEndpoint?: string;
 
 	/**
+	 * IOTA Gas Station Endpoint.
+	 */
+	iotaGasStationEndpoint?: string;
+
+	/**
+	 * IOTA Gas Station Authentication Token.
+	 */
+	iotaGasStationAuthToken?: string;
+
+	/**
 	 * Universal Resolver Endpoint.
 	 */
 	universalResolverEndpoint?: string;
