@@ -1,5 +1,22 @@
 # @twin.org/engine-core - Changelog
 
+## [0.0.1-next.83](https://github.com/twinfoundation/engine/compare/engine-core-v0.0.1-next.82...engine-core-v0.0.1-next.83) (2025-07-10)
+
+
+### Features
+
+* add mimeTypeProcessors and disableNodeIdentity ([bb7e81e](https://github.com/twinfoundation/engine/commit/bb7e81e2036fe042068a5645ec59b22e20d33aad))
+* remove bootstrapped components, component should manage their own state ([5c7e9e4](https://github.com/twinfoundation/engine/commit/5c7e9e419ef26933e49c9c5a21a20a8961244e7f))
+* update dependencies ([97c9f64](https://github.com/twinfoundation/engine/commit/97c9f64b6ef096963bcc5de338a2a9e99bdc1a11))
+* use shared store mechanism ([#2](https://github.com/twinfoundation/engine/issues/2)) ([9eed8d7](https://github.com/twinfoundation/engine/commit/9eed8d7766388479b42f03e2542fe761f2156408))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @twin.org/engine-models bumped from 0.0.1-next.81 to 0.0.1-next.83
+
 ## [0.0.1-next.81](https://github.com/twinfoundation/engine/compare/engine-core-v0.0.1-next.80...engine-core-v0.0.1-next.81) (2025-07-07)
 
 
