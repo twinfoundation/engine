@@ -36,9 +36,7 @@
 		"@twin.org/engine-models": "0.0.1-next.81",
 		"@twin.org/entity": "next",
 		"@twin.org/modules": "next",
-		"@twin.org/nameof": "next"
-	},
-	"peerDependencies": {
+		"@twin.org/nameof": "next",
 		"@twin.org/attestation-models": "next",
 		"@twin.org/attestation-connector-nft": "next",
 		"@twin.org/attestation-service": "next",
