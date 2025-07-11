@@ -1,6 +1,6 @@
 {
 	"name": "@twin.org/engine-server",
-	"version": "0.0.1",
+	"version": "0.0.2-next.0",
 	"description": "Engine implementation for a server.",
 	"repository": {
 		"type": "git",
@@ -30,20 +30,20 @@
 		"prepare": "ts-patch install -s"
 	},
 	"dependencies": {
-		"@twin.org/api-models": "next",
-		"@twin.org/api-server-fastify": "next",
-		"@twin.org/engine-core": "0.0.1",
-		"@twin.org/engine-models": "0.0.1",
-		"@twin.org/engine-server-types": "0.0.1",
-		"@twin.org/core": "next",
-		"@twin.org/modules": "next",
-		"@twin.org/nameof": "next"
+		"@twin.org/api-models": "0.0.1-next.36",
+		"@twin.org/api-server-fastify": "0.0.1-next.36",
+		"@twin.org/engine-core": "0.0.2-next.0",
+		"@twin.org/engine-models": "0.0.2-next.0",
+		"@twin.org/engine-server-types": "0.0.2-next.0",
+		"@twin.org/core": "0.0.1-next.70",
+		"@twin.org/modules": "0.0.1-next.70",
+		"@twin.org/nameof": "0.0.1-next.70"
 	},
 	"devDependencies": {
-		"@twin.org/engine": "0.0.1",
-		"@twin.org/nameof-transformer": "next",
-		"@twin.org/nameof-vitest-plugin": "next",
-		"@twin.org/ts-to-openapi": "next",
+		"@twin.org/engine": "0.0.2-next.0",
+		"@twin.org/nameof-transformer": "0.0.1-next.70",
+		"@twin.org/nameof-vitest-plugin": "0.0.1-next.70",
+		"@twin.org/ts-to-openapi": "0.0.1-next.29",
 		"@vitest/coverage-v8": "3.2.3",
 		"copyfiles": "2.4.1",
 		"nodemon": "3.1.10",
