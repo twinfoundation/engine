@@ -1,5 +1,28 @@
 # @twin.org/engine-server-types - Changelog
 
+## 0.0.1 (2025-07-11)
+
+
+### Features
+
+* add federated catalogue ([1b15dd0](https://github.com/twinfoundation/engine/commit/1b15dd059a11446457651c411a73145fab37f025))
+* add mimeTypeProcessors and disableNodeIdentity ([bb7e81e](https://github.com/twinfoundation/engine/commit/bb7e81e2036fe042068a5645ec59b22e20d33aad))
+* add task scheduler ([0951107](https://github.com/twinfoundation/engine/commit/09511073ad042194a45206303f0ef31d8d6af5db))
+* modifying the engine to run the new services ([#10](https://github.com/twinfoundation/engine/issues/10)) ([6f7141f](https://github.com/twinfoundation/engine/commit/6f7141fe0a6d05c725066b274bcc18b5490e580b))
+* release to production ([3a4acd1](https://github.com/twinfoundation/engine/commit/3a4acd1f6c66b841d80b6fd3bc1a439a77148fa5))
+* release to production ([5559958](https://github.com/twinfoundation/engine/commit/5559958e2128e6ec3a81e779d1ebd3f370bbb081))
+* switch to devDeps ([32832ac](https://github.com/twinfoundation/engine/commit/32832acd934e1e5569474281a527c9b118d30732))
+* update dependencies ([97c9f64](https://github.com/twinfoundation/engine/commit/97c9f64b6ef096963bcc5de338a2a9e99bdc1a11))
+* use shared store mechanism ([#2](https://github.com/twinfoundation/engine/issues/2)) ([9eed8d7](https://github.com/twinfoundation/engine/commit/9eed8d7766388479b42f03e2542fe761f2156408))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @twin.org/engine-models bumped from 0.0.1-next.84 to 0.0.1
+    * @twin.org/engine-types bumped from 0.0.1-next.84 to 0.0.1
+
 ## [0.0.1-next.84](https://github.com/twinfoundation/engine/compare/engine-server-types-v0.0.1-next.83...engine-server-types-v0.0.1-next.84) (2025-07-11)
 
 
