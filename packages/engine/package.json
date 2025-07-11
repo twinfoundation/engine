@@ -1,6 +1,6 @@
 {
 	"name": "@twin.org/engine",
-	"version": "0.0.1-next.84",
+	"version": "0.0.0",
 	"description": "Engine implementation.",
 	"repository": {
 		"type": "git",
@@ -30,15 +30,15 @@
 		"prepare": "ts-patch install -s"
 	},
 	"dependencies": {
-		"@twin.org/core": "next",
-		"@twin.org/engine-core": "0.0.1-next.84",
-		"@twin.org/engine-types": "0.0.1-next.84",
-		"@twin.org/entity": "next"
+		"@twin.org/core": "^0.0.1",
+		"@twin.org/engine-core": "^0.0.0",
+		"@twin.org/engine-types": "^0.0.0",
+		"@twin.org/entity": "^0.0.1"
 	},
 	"devDependencies": {
-		"@twin.org/nameof-transformer": "next",
-		"@twin.org/nameof-vitest-plugin": "next",
-		"@twin.org/ts-to-openapi": "next",
+		"@twin.org/nameof-transformer": "^0.0.1",
+		"@twin.org/nameof-vitest-plugin": "^0.0.1",
+		"@twin.org/ts-to-openapi": "^0.0.1",
 		"@vitest/coverage-v8": "3.2.3",
 		"copyfiles": "2.4.1",
 		"nodemon": "3.1.10",
