@@ -1,5 +1,17 @@
 # @twin.org/engine-models - Changelog
 
+## 0.0.1 (2025-07-11)
+
+
+### Features
+
+* add mimeTypeProcessors and disableNodeIdentity ([bb7e81e](https://github.com/twinfoundation/engine/commit/bb7e81e2036fe042068a5645ec59b22e20d33aad))
+* release to production ([3a4acd1](https://github.com/twinfoundation/engine/commit/3a4acd1f6c66b841d80b6fd3bc1a439a77148fa5))
+* release to production ([5559958](https://github.com/twinfoundation/engine/commit/5559958e2128e6ec3a81e779d1ebd3f370bbb081))
+* remove bootstrapped components, component should manage their own state ([5c7e9e4](https://github.com/twinfoundation/engine/commit/5c7e9e419ef26933e49c9c5a21a20a8961244e7f))
+* update dependencies ([97c9f64](https://github.com/twinfoundation/engine/commit/97c9f64b6ef096963bcc5de338a2a9e99bdc1a11))
+* use shared store mechanism ([#2](https://github.com/twinfoundation/engine/issues/2)) ([9eed8d7](https://github.com/twinfoundation/engine/commit/9eed8d7766388479b42f03e2542fe761f2156408))
+
 ## [0.0.1-next.84](https://github.com/twinfoundation/engine/compare/engine-models-v0.0.1-next.83...engine-models-v0.0.1-next.84) (2025-07-11)
 
 
