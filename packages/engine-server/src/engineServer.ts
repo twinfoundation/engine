@@ -7,7 +7,7 @@ import {
 	SocketRouteProcessorFactory
 } from "@twin.org/api-models";
 import { FastifyWebServer } from "@twin.org/api-server-fastify";
-import { Guards, Is } from "@twin.org/core";
+import { Guards, Is, StringHelper } from "@twin.org/core";
 import type { IEngineCore, IEngineCoreTypeConfig, IEngineServer } from "@twin.org/engine-models";
 import {
 	RestRouteProcessorType,
@@ -331,7 +331,14 @@ export class EngineServer<T extends IEngineServerConfig = IEngineServerConfig>
 				if (Is.string(restPath)) {
 					const serviceType = typeConfig[i].overrideInstanceType ?? defaultEngineTypes[typeKey];
 					if (Is.stringValue(serviceType)) {
-						routes.push(...generateRoutes(restPath, serviceType));
+						const generatedRoutes = generateRoutes(restPath, serviceType);
+						for (const route of generatedRoutes) {
+							// Don't strip trailing slashes from the root path.
+							if (Is.stringValue(route.path) && route.path.length > 1) {
+								route.path = StringHelper.trimTrailingSlashes(route.path);
+							}
+						}
+						routes.push(...generatedRoutes);
 					}
 				}
 			}
