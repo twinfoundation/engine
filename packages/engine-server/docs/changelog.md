@@ -1,5 +1,23 @@
 # @twin.org/engine-server - Changelog
 
+## [0.0.1-next.84](https://github.com/twinfoundation/engine/compare/engine-server-v0.0.1-next.83...engine-server-v0.0.1-next.84) (2025-07-11)
+
+
+### Features
+
+* move environment variable processing to node level ([2223c12](https://github.com/twinfoundation/engine/commit/2223c12f49f3d34051ecec9687351aa5dd094e54))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @twin.org/engine-core bumped from 0.0.1-next.83 to 0.0.1-next.84
+    * @twin.org/engine-models bumped from 0.0.1-next.83 to 0.0.1-next.84
+    * @twin.org/engine-server-types bumped from 0.0.1-next.83 to 0.0.1-next.84
+  * devDependencies
+    * @twin.org/engine bumped from 0.0.1-next.83 to 0.0.1-next.84
+
 ## [0.0.1-next.83](https://github.com/twinfoundation/engine/compare/engine-server-v0.0.1-next.82...engine-server-v0.0.1-next.83) (2025-07-10)
 
 
