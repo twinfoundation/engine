@@ -1,0 +1,42 @@
+{
+	"error": {
+		"engineCore": {
+			"connectorUnknownType": "Unknown connector type \"{type}\" specified for \"{connectorType}\"",
+			"componentUnknownType": "Unknown component type \"{type}\" specified for \"{componentType}\"",
+			"entityStorageCustomMissing": "Entity storage custom \"{typeCustom}\" missing for component \"{storageName}\"",
+			"entityStorageMissing": "Entity storage configuration missing for component \"{storageName}\"",
+			"bootstrapFailed": "Bootstrap failed for component \"{component}\", please check the logs for more information",
+			"componentStopFailed": "Failed to stop component \"{component}\""
+		},
+		"fileStateStorage": {
+			"failedLoading": "Failed to load file state storage from \"{filename}\"",
+			"failedSaving": "Failed to save file state storage to \"{filename}\""
+		}
+	},
+	"engineCore": {
+		"debuggingEnabled": "Debugging is enabled",
+		"starting": "Engine is starting",
+		"started": "Engine has started",
+		"stopping": "Engine is stopping",
+		"stopped": "Engine has stopped",
+		"configuring": "Configuring {element}",
+		"configuringEntityStorage": "Configuring {element} with name \"{storageName}\" using \"{storageType}\" connector",
+		"bootstrapStarted": "Bootstrap started",
+		"bootstrapComplete": "Bootstrap complete",
+		"bootstrapping": "Bootstrap {element}",
+		"componentsStarting": "Components are starting",
+		"componentsComplete": "Components have started",
+		"componentsStopping": "Components are stopping",
+		"componentsStopped": "Components have stopped",
+		"componentStarting": "Starting {element}",
+		"componentStopping": "Stopping {element}"
+	},
+	"fileStateStorage": {
+		"loading": "Loading state from file storage with filename \"{filename}\"",
+		"saving": "Saving state to file storage with filename \"{filename}\""
+	},
+	"memoryStateStorage": {
+		"loading": "Loading state from memory",
+		"saving": "Saving state to memory"
+	}
+}

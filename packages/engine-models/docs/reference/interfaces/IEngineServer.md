@@ -4,23 +4,93 @@ Interface describing the engine server methods.
 
 ## Methods
 
-### start()
+### addRestRouteGenerator()
 
-> **start**(`config`): `Promise`\<`void`\>
+> **addRestRouteGenerator**(`type`, `typeConfig`, `module`, `method`): `void`
 
-Start the engine.
+Add a REST route generator.
 
 #### Parameters
 
-• **config**: [`IEngineServerConfig`](IEngineServerConfig.md)
+##### type
 
-The configuration for the engine.
+`string`
+
+The type to add the generator for.
+
+##### typeConfig
+
+The type config.
+
+`undefined` | [`IEngineCoreTypeConfig`](../type-aliases/IEngineCoreTypeConfig.md)[]
+
+##### module
+
+`string`
+
+The module containing the generator.
+
+##### method
+
+`string`
+
+The method to call on the module.
 
 #### Returns
 
-`Promise`\<`void`\>
+`void`
 
-Nothing.
+***
+
+### addSocketRouteGenerator()
+
+> **addSocketRouteGenerator**(`type`, `typeConfig`, `module`, `method`): `void`
+
+Add a socket route generator.
+
+#### Parameters
+
+##### type
+
+`string`
+
+The type to add the generator for.
+
+##### typeConfig
+
+The type config.
+
+`undefined` | [`IEngineCoreTypeConfig`](../type-aliases/IEngineCoreTypeConfig.md)[]
+
+##### module
+
+`string`
+
+The module containing the generator.
+
+##### method
+
+`string`
+
+The method to call on the module.
+
+#### Returns
+
+`void`
+
+***
+
+### start()
+
+> **start**(): `Promise`\<`boolean`\>
+
+Start the engine server.
+
+#### Returns
+
+`Promise`\<`boolean`\>
+
+True if the start was successful.
 
 ***
 
@@ -28,7 +98,7 @@ Nothing.
 
 > **stop**(): `Promise`\<`void`\>
 
-Stop the engine.
+Stop the engine server.
 
 #### Returns
 
