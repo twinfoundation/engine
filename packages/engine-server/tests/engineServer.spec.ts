@@ -92,6 +92,7 @@ describe("engine-server", () => {
 
 	test("Can start engine server with config", async () => {
 		const config: IEngineServerConfig = {
+			debug: true,
 			types: {
 				loggingConnector: [{ type: LoggingConnectorType.Console }],
 				loggingComponent: [{ type: LoggingComponentType.Service }],
@@ -190,6 +191,7 @@ describe("engine-server", () => {
 
 		addDefaultRestPaths(config);
 		const canContinue = await engineServer.start();
+		expect(canContinue).toEqual(true);
 
 		const buildRestRoutes = engineServer.getRestRoutes();
 		expect(buildRestRoutes.map(r => r.path)).toEqual([
@@ -302,7 +304,6 @@ describe("engine-server", () => {
 		});
 
 		await engineServer.stop();
-		expect(canContinue).toEqual(true);
 		expect(engineServer).toBeDefined();
 	});
 

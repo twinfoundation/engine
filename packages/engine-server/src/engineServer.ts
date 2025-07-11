@@ -388,6 +388,12 @@ export class EngineServer<T extends IEngineServerConfig = IEngineServerConfig>
 		const coreConfig = this._engineCore.getConfig();
 
 		this._engineCore.addTypeInitialiser(
+			"authenticationAdminComponent",
+			coreConfig.types.authenticationAdminComponent,
+			"@twin.org/engine-server-types",
+			"initialiseAuthenticationAdminComponent"
+		);
+		this._engineCore.addTypeInitialiser(
 			"authenticationComponent",
 			coreConfig.types.authenticationComponent,
 			"@twin.org/engine-server-types",

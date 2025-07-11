@@ -344,6 +344,12 @@ Mime type processors options which can be overridden by individual components by
 
 Authentication component options which can be overridden by individual components by specifying types other than default..
 
+##### authenticationAdminComponent?
+
+> `optional` **authenticationAdminComponent**: `IEngineCoreTypeConfig`\<[`AuthenticationAdminComponentConfig`](../type-aliases/AuthenticationAdminComponentConfig.md)\>[]
+
+Authentication admin component options which can be overridden by individual components by specifying types other than default..
+
 #### Overrides
 
 `IEngineConfig.types`

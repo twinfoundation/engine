@@ -1,21 +1,21 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
-import type { IAuthenticationComponent } from "@twin.org/api-auth-entity-storage-models";
+import type { IAuthenticationAdminComponent } from "@twin.org/api-auth-entity-storage-models";
 import {
-	EntityStorageAuthenticationService,
+	EntityStorageAuthenticationAdminService,
 	initSchema as initSchemaAuthEntityStorage,
 	type AuthenticationUser
 } from "@twin.org/api-auth-entity-storage-service";
 import { ComponentFactory, GeneralError, I18n } from "@twin.org/core";
-import type { IEngineCoreContext, IEngineCore } from "@twin.org/engine-models";
+import type { IEngineCore, IEngineCoreContext } from "@twin.org/engine-models";
 import { initialiseEntityStorageConnector } from "@twin.org/engine-types";
 import { nameof } from "@twin.org/nameof";
-import type { AuthenticationComponentConfig } from "../models/config/authenticationComponentConfig";
+import type { AuthenticationAdminComponentConfig } from "../models/config/authenticationAdminComponentConfig";
 import type { IEngineServerConfig } from "../models/IEngineServerConfig";
-import { AuthenticationComponentType } from "../models/types/authenticationComponentType";
+import { AuthenticationAdminComponentType } from "../models/types/authenticationAdminComponentType";
 
 /**
- * Initialise the authentication.
+ * Initialise the authentication admin.
  * @param engineCore The engine core.
  * @param context The context for the engine.
  * @param instanceConfig The instance config.
@@ -23,23 +23,23 @@ import { AuthenticationComponentType } from "../models/types/authenticationCompo
  * @returns The name of the instance created.
  * @throws GeneralError if the component type is unknown.
  */
-export function initialiseAuthenticationComponent(
+export function initialiseAuthenticationAdminComponent(
 	engineCore: IEngineCore<IEngineServerConfig>,
 	context: IEngineCoreContext<IEngineServerConfig>,
-	instanceConfig: AuthenticationComponentConfig,
+	instanceConfig: AuthenticationAdminComponentConfig,
 	overrideInstanceType?: string
 ): string | undefined {
 	engineCore.logInfo(
 		I18n.formatMessage("engineCore.configuring", {
-			element: `Authentication Component: ${instanceConfig.type}`
+			element: `Authentication Admin Component: ${instanceConfig.type}`
 		})
 	);
 
 	const type = instanceConfig.type;
-	let component: IAuthenticationComponent;
+	let component: IAuthenticationAdminComponent;
 	let instanceType: string;
 
-	if (type === AuthenticationComponentType.EntityStorage) {
+	if (type === AuthenticationAdminComponentType.EntityStorage) {
 		initSchemaAuthEntityStorage();
 		initialiseEntityStorageConnector(
 			engineCore,
@@ -48,16 +48,14 @@ export function initialiseAuthenticationComponent(
 			nameof<AuthenticationUser>()
 		);
 
-		component = new EntityStorageAuthenticationService({
-			vaultConnectorType: context.defaultTypes.vaultConnector,
-			authenticationAdminServiceType: context.defaultTypes.authenticationAdminComponent,
+		component = new EntityStorageAuthenticationAdminService({
 			...instanceConfig.options
 		});
-		instanceType = EntityStorageAuthenticationService.NAMESPACE;
+		instanceType = EntityStorageAuthenticationAdminService.NAMESPACE;
 	} else {
 		throw new GeneralError("engineCore", "componentUnknownType", {
 			type,
-			componentType: "authenticationComponent"
+			componentType: "authenticationAdminComponent"
 		});
 	}
 

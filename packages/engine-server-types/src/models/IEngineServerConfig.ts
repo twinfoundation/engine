@@ -3,6 +3,7 @@
 import type { IWebServerOptions } from "@twin.org/api-models";
 import type { IEngineCoreTypeConfig } from "@twin.org/engine-models";
 import type { IEngineConfig } from "@twin.org/engine-types";
+import type { AuthenticationAdminComponentConfig } from "./config/authenticationAdminComponentConfig";
 import type { AuthenticationComponentConfig } from "./config/authenticationComponentConfig";
 import type { InformationComponentConfig } from "./config/informationComponentConfig";
 import type { MimeTypeProcessorConfig } from "./config/mimeTypeProcessorConfig";
@@ -48,5 +49,10 @@ export interface IEngineServerConfig extends IEngineConfig {
 		 * Authentication component options which can be overridden by individual components by specifying types other than default..
 		 */
 		authenticationComponent?: IEngineCoreTypeConfig<AuthenticationComponentConfig>[];
+
+		/**
+		 * Authentication admin component options which can be overridden by individual components by specifying types other than default..
+		 */
+		authenticationAdminComponent?: IEngineCoreTypeConfig<AuthenticationAdminComponentConfig>[];
 	};
 }
