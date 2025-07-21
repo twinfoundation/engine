@@ -9,7 +9,12 @@ export const RightsManagementComponentType = {
 	/**
 	 * Service.
 	 */
-	Service: "service"
+	Service: "service",
+
+	/**
+	 * REST client.
+	 */
+	RestClient: "rest-client"
 } as const;
 
 /**

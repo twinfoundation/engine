@@ -1,6 +1,6 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
-import { ComponentFactory, GeneralError, I18n } from "@twin.org/core";
+import { ComponentFactory, GeneralError, I18n, StringHelper } from "@twin.org/core";
 import type { IEngineCore, IEngineCoreContext } from "@twin.org/engine-models";
 import {
 	AwsMessagingEmailConnector,
@@ -261,7 +261,7 @@ export function initialiseMessagingComponent(
 			messagingPushNotificationConnectorType: context.defaultTypes.messagingNotificationConnector,
 			...instanceConfig.options
 		});
-		instanceType = MessagingService.NAMESPACE;
+		instanceType = StringHelper.kebabCase(nameof(MessagingService));
 	} else {
 		throw new GeneralError("engineCore", "componentUnknownType", {
 			type,

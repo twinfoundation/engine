@@ -1,17 +1,5 @@
 # Type Alias: VerifiableStorageComponentConfig
 
-> **VerifiableStorageComponentConfig** = `object`
+> **VerifiableStorageComponentConfig** = \{ `type`: *typeof* [`Service`](../variables/VerifiableStorageComponentType.md#service); `options?`: `IVerifiableStorageServiceConstructorOptions`; \} \| \{ `type`: *typeof* [`RestClient`](../variables/VerifiableStorageComponentType.md#restclient); `options`: `IBaseRestClientConfig`; \}
 
 Verifiable storage component config types.
-
-## Properties
-
-### type
-
-> **type**: *typeof* [`Service`](../variables/VerifiableStorageComponentType.md#service)
-
-***
-
-### options?
-
-> `optional` **options**: `IVerifiableStorageServiceConstructorOptions`

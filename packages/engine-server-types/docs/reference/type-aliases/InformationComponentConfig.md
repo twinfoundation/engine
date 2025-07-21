@@ -1,17 +1,5 @@
 # Type Alias: InformationComponentConfig
 
-> **InformationComponentConfig** = `object`
+> **InformationComponentConfig** = \{ `type`: *typeof* [`Service`](../variables/InformationComponentType.md#service); `options`: `IInformationServiceConstructorOptions`; \} \| \{ `type`: *typeof* [`RestClient`](../variables/InformationComponentType.md#restclient); `options`: `IBaseRestClientConfig`; \}
 
 Information component config types.
-
-## Properties
-
-### type
-
-> **type**: *typeof* [`Service`](../variables/InformationComponentType.md#service)
-
-***
-
-### options
-
-> **options**: `IInformationServiceConstructorOptions`

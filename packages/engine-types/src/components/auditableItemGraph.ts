@@ -1,13 +1,14 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
 import type { IAuditableItemGraphComponent } from "@twin.org/auditable-item-graph-models";
+import { AuditableItemGraphClient } from "@twin.org/auditable-item-graph-rest-client";
 import {
 	type AuditableItemGraphChangeset,
 	AuditableItemGraphService,
 	type AuditableItemGraphVertex,
 	initSchema as initSchemaAuditableItemGraph
 } from "@twin.org/auditable-item-graph-service";
-import { ComponentFactory, GeneralError, I18n } from "@twin.org/core";
+import { ComponentFactory, GeneralError, I18n, StringHelper } from "@twin.org/core";
 import type { IEngineCore, IEngineCoreContext } from "@twin.org/engine-models";
 import { nameof } from "@twin.org/nameof";
 import { initialiseEntityStorageConnector } from "./entityStorage";
@@ -61,7 +62,10 @@ export function initialiseAuditableItemGraphComponent(
 			eventBusComponentType: context.defaultTypes.eventBusComponent,
 			...instanceConfig.options
 		});
-		instanceType = AuditableItemGraphService.NAMESPACE;
+		instanceType = StringHelper.kebabCase(nameof(AuditableItemGraphService));
+	} else if (type === AuditableItemGraphComponentType.RestClient) {
+		component = new AuditableItemGraphClient(instanceConfig.options);
+		instanceType = StringHelper.kebabCase(nameof(AuditableItemGraphClient));
 	} else {
 		throw new GeneralError("engineCore", "componentUnknownType", {
 			type,

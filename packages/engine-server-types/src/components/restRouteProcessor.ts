@@ -8,8 +8,9 @@ import {
 	RestRouteProcessor,
 	StaticUserIdentityProcessor
 } from "@twin.org/api-processors";
-import { GeneralError, I18n } from "@twin.org/core";
+import { GeneralError, I18n, StringHelper } from "@twin.org/core";
 import type { IEngineCoreContext, IEngineCore } from "@twin.org/engine-models";
+import { nameof } from "@twin.org/nameof";
 import type { RestRouteProcessorConfig } from "../models/config/restRouteProcessorConfig";
 import type { IEngineServerConfig } from "../models/IEngineServerConfig";
 import { RestRouteProcessorType } from "../models/types/restRouteProcessorType";
@@ -46,7 +47,7 @@ export function initialiseRestRouteProcessorComponent(
 				...instanceConfig.options?.config
 			}
 		});
-		instanceType = AuthHeaderProcessor.NAMESPACE;
+		instanceType = StringHelper.kebabCase(nameof(AuthHeaderProcessor));
 	} else if (type === RestRouteProcessorType.Logging) {
 		component = new LoggingProcessor({
 			loggingConnectorType: context.defaultTypes.loggingConnector,
@@ -54,16 +55,16 @@ export function initialiseRestRouteProcessorComponent(
 				...instanceConfig.options?.config
 			}
 		});
-		instanceType = LoggingProcessor.NAMESPACE;
+		instanceType = StringHelper.kebabCase(nameof(LoggingProcessor));
 	} else if (type === RestRouteProcessorType.NodeIdentity) {
 		component = new NodeIdentityProcessor();
-		instanceType = NodeIdentityProcessor.NAMESPACE;
+		instanceType = StringHelper.kebabCase(nameof(NodeIdentityProcessor));
 	} else if (type === RestRouteProcessorType.StaticUserIdentity) {
 		component = new StaticUserIdentityProcessor(instanceConfig.options);
-		instanceType = StaticUserIdentityProcessor.NAMESPACE;
+		instanceType = StringHelper.kebabCase(nameof(StaticUserIdentityProcessor));
 	} else if (type === RestRouteProcessorType.RestRoute) {
 		component = new RestRouteProcessor(instanceConfig.options);
-		instanceType = RestRouteProcessor.NAMESPACE;
+		instanceType = StringHelper.kebabCase(nameof(RestRouteProcessor));
 	} else {
 		throw new GeneralError("engineCore", "componentUnknownType", {
 			type,

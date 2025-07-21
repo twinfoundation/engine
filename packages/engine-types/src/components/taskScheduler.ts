@@ -1,9 +1,10 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
 import type { ITaskSchedulerComponent } from "@twin.org/background-task-models";
-import { TaskSchedulerComponent } from "@twin.org/background-task-scheduler";
-import { ComponentFactory, GeneralError, I18n } from "@twin.org/core";
+import { TaskSchedulerService } from "@twin.org/background-task-scheduler";
+import { ComponentFactory, GeneralError, I18n, StringHelper } from "@twin.org/core";
 import type { IEngineCore, IEngineCoreContext } from "@twin.org/engine-models";
+import { nameof } from "@twin.org/nameof";
 import type { TaskSchedulerComponentConfig } from "../models/config/taskSchedulerComponentConfig";
 import type { IEngineConfig } from "../models/IEngineConfig";
 import { TaskSchedulerComponentType } from "../models/types/taskSchedulerComponentType";
@@ -33,12 +34,12 @@ export function initialiseTaskSchedulerComponent(
 	let component: ITaskSchedulerComponent;
 	let instanceType: string;
 
-	if (type === TaskSchedulerComponentType.Default) {
-		component = new TaskSchedulerComponent({
+	if (type === TaskSchedulerComponentType.Service) {
+		component = new TaskSchedulerService({
 			loggingConnectorType: context.defaultTypes.loggingConnector,
 			...instanceConfig.options
 		});
-		instanceType = TaskSchedulerComponent.NAMESPACE;
+		instanceType = StringHelper.kebabCase(nameof(TaskSchedulerService));
 	} else {
 		throw new GeneralError("engineCore", "componentUnknownType", {
 			type,

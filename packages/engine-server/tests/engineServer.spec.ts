@@ -153,7 +153,7 @@ describe("engine-server", () => {
 				],
 				taskSchedulerComponent: [
 					{
-						type: TaskSchedulerComponentType.Default
+						type: TaskSchedulerComponentType.Service
 					}
 				],
 				informationComponent: [

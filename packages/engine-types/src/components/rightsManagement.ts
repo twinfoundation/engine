@@ -1,8 +1,10 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
-import { ComponentFactory, GeneralError, I18n } from "@twin.org/core";
+import { ComponentFactory, GeneralError, I18n, StringHelper } from "@twin.org/core";
 import type { IEngineCore, IEngineCoreContext } from "@twin.org/engine-models";
+import { nameof } from "@twin.org/nameof";
 import type { IRightsManagementComponent } from "@twin.org/rights-management-models";
+import { RightsManagementClient } from "@twin.org/rights-management-rest-client";
 import { RightsManagementService } from "@twin.org/rights-management-service";
 import type { RightsManagementComponentConfig } from "../models/config/rightsManagementComponentConfig";
 import type { IEngineConfig } from "../models/IEngineConfig";
@@ -38,7 +40,10 @@ export function initialiseRightsManagementComponent(
 			papComponentType: context.defaultTypes.rightsManagementPapComponent,
 			...instanceConfig.options
 		});
-		instanceType = RightsManagementService.NAMESPACE;
+		instanceType = StringHelper.kebabCase(nameof(RightsManagementService));
+	} else if (type === RightsManagementComponentType.RestClient) {
+		component = new RightsManagementClient(instanceConfig.options);
+		instanceType = StringHelper.kebabCase(nameof(RightsManagementClient));
 	} else {
 		throw new GeneralError("engineCore", "componentUnknownType", {
 			type,

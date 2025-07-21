@@ -8,8 +8,9 @@ import {
 	SocketRouteProcessor,
 	StaticUserIdentityProcessor
 } from "@twin.org/api-processors";
-import { GeneralError, I18n } from "@twin.org/core";
+import { GeneralError, I18n, StringHelper } from "@twin.org/core";
 import type { IEngineCore, IEngineCoreContext } from "@twin.org/engine-models";
+import { nameof } from "@twin.org/nameof";
 import type { SocketRouteProcessorConfig } from "../models/config/socketRouteProcessorConfig";
 import type { IEngineServerConfig } from "../models/IEngineServerConfig";
 import { SocketRouteProcessorType } from "../models/types/socketRouteProcessorType";
@@ -46,7 +47,7 @@ export function initialiseSocketRouteProcessorComponent(
 				...instanceConfig.options?.config
 			}
 		});
-		instanceType = AuthHeaderProcessor.NAMESPACE;
+		instanceType = StringHelper.kebabCase(nameof(AuthHeaderProcessor));
 	} else if (type === SocketRouteProcessorType.Logging) {
 		component = new LoggingProcessor({
 			loggingConnectorType: context.defaultTypes.loggingConnector,
@@ -54,16 +55,16 @@ export function initialiseSocketRouteProcessorComponent(
 				...instanceConfig.options?.config
 			}
 		});
-		instanceType = LoggingProcessor.NAMESPACE;
+		instanceType = StringHelper.kebabCase(nameof(LoggingProcessor));
 	} else if (type === SocketRouteProcessorType.NodeIdentity) {
 		component = new NodeIdentityProcessor();
-		instanceType = NodeIdentityProcessor.NAMESPACE;
+		instanceType = StringHelper.kebabCase(nameof(NodeIdentityProcessor));
 	} else if (type === SocketRouteProcessorType.StaticUserIdentity) {
 		component = new StaticUserIdentityProcessor(instanceConfig.options);
-		instanceType = StaticUserIdentityProcessor.NAMESPACE;
+		instanceType = StringHelper.kebabCase(nameof(StaticUserIdentityProcessor));
 	} else if (type === SocketRouteProcessorType.SocketRoute) {
 		component = new SocketRouteProcessor(instanceConfig.options);
-		instanceType = SocketRouteProcessor.NAMESPACE;
+		instanceType = StringHelper.kebabCase(nameof(SocketRouteProcessor));
 	} else {
 		throw new GeneralError("engineCore", "componentUnknownType", {
 			type,

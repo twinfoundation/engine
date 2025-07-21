@@ -8,6 +8,6 @@ import type { TaskSchedulerComponentType } from "../types/taskSchedulerComponent
  */
 // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
 export type TaskSchedulerComponentConfig = {
-	type: typeof TaskSchedulerComponentType.Default;
+	type: typeof TaskSchedulerComponentType.Service;
 	options?: ITaskSchedulerConstructorOptions;
 };

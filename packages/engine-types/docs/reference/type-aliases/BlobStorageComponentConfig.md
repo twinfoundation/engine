@@ -1,17 +1,5 @@
 # Type Alias: BlobStorageComponentConfig
 
-> **BlobStorageComponentConfig** = `object`
+> **BlobStorageComponentConfig** = \{ `type`: *typeof* [`Service`](../variables/BlobStorageComponentType.md#service); `options?`: `IBlobStorageServiceConstructorOptions`; \} \| \{ `type`: *typeof* [`RestClient`](../variables/BlobStorageComponentType.md#restclient); `options`: `IBaseRestClientConfig`; \}
 
 Blob storage component config types.
-
-## Properties
-
-### type
-
-> **type**: *typeof* [`Service`](../variables/BlobStorageComponentType.md#service)
-
-***
-
-### options?
-
-> `optional` **options**: `IBlobStorageServiceConstructorOptions`

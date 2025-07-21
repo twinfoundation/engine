@@ -1,13 +1,14 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
 import type { IAuthenticationComponent } from "@twin.org/api-auth-entity-storage-models";
+import { EntityStorageAuthenticationClient } from "@twin.org/api-auth-entity-storage-rest-client";
 import {
 	EntityStorageAuthenticationService,
 	initSchema as initSchemaAuthEntityStorage,
 	type AuthenticationUser
 } from "@twin.org/api-auth-entity-storage-service";
-import { ComponentFactory, GeneralError, I18n } from "@twin.org/core";
-import type { IEngineCoreContext, IEngineCore } from "@twin.org/engine-models";
+import { ComponentFactory, GeneralError, I18n, StringHelper } from "@twin.org/core";
+import type { IEngineCore, IEngineCoreContext } from "@twin.org/engine-models";
 import { initialiseEntityStorageConnector } from "@twin.org/engine-types";
 import { nameof } from "@twin.org/nameof";
 import type { AuthenticationComponentConfig } from "../models/config/authenticationComponentConfig";
@@ -53,7 +54,10 @@ export function initialiseAuthenticationComponent(
 			authenticationAdminServiceType: context.defaultTypes.authenticationAdminComponent,
 			...instanceConfig.options
 		});
-		instanceType = EntityStorageAuthenticationService.NAMESPACE;
+		instanceType = StringHelper.kebabCase(nameof(EntityStorageAuthenticationService));
+	} else if (type === AuthenticationComponentType.RestClient) {
+		component = new EntityStorageAuthenticationClient(instanceConfig.options);
+		instanceType = StringHelper.kebabCase(nameof(EntityStorageAuthenticationClient));
 	} else {
 		throw new GeneralError("engineCore", "componentUnknownType", {
 			type,

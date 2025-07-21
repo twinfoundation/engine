@@ -9,7 +9,12 @@ export const EventBusComponentType = {
 	/**
 	 * Service.
 	 */
-	Service: "service"
+	Service: "service",
+
+	/**
+	 * Socket client.
+	 */
+	SocketClient: "socket-client"
 } as const;
 
 /**

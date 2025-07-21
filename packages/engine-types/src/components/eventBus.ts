@@ -1,6 +1,6 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
-import { ComponentFactory, GeneralError, I18n } from "@twin.org/core";
+import { ComponentFactory, GeneralError, I18n, StringHelper } from "@twin.org/core";
 import type { IEngineCore, IEngineCoreContext } from "@twin.org/engine-models";
 import { LocalEventBusConnector } from "@twin.org/event-bus-connector-local";
 import {
@@ -9,6 +9,8 @@ import {
 	type IEventBusConnector
 } from "@twin.org/event-bus-models";
 import { EventBusService } from "@twin.org/event-bus-service";
+import { EventBusSocketClient } from "@twin.org/event-bus-socket-client";
+import { nameof } from "@twin.org/nameof";
 import type { EventBusComponentConfig } from "../models/config/eventBusComponentConfig";
 import type { EventBusConnectorConfig } from "../models/config/eventBusConnectorConfig";
 import type { IEngineConfig } from "../models/IEngineConfig";
@@ -89,7 +91,13 @@ export function initialiseEventBusComponent(
 			eventBusConnectorType: context.defaultTypes.eventBusConnector,
 			...instanceConfig.options
 		});
-		instanceType = EventBusService.NAMESPACE;
+		instanceType = StringHelper.kebabCase(nameof(EventBusService));
+	} else if (type === EventBusComponentType.SocketClient) {
+		component = new EventBusSocketClient({
+			loggingComponentType: context.defaultTypes.loggingConnector,
+			...instanceConfig.options
+		});
+		instanceType = StringHelper.kebabCase(nameof(EventBusSocketClient));
 	} else {
 		throw new GeneralError("engineCore", "componentUnknownType", {
 			type,

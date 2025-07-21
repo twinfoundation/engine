@@ -17,7 +17,9 @@ import {
 	type IEntityStorageComponent,
 	type IEntityStorageConnector
 } from "@twin.org/entity-storage-models";
+import { EntityStorageClient } from "@twin.org/entity-storage-rest-client";
 import { EntityStorageService } from "@twin.org/entity-storage-service";
+import { nameof } from "@twin.org/nameof";
 import type { EntityStorageComponentConfig } from "../models/config/entityStorageComponentConfig";
 import type { IEngineConfig } from "../models/IEngineConfig";
 import { EntityStorageComponentType } from "../models/types/entityStorageComponentType";
@@ -194,7 +196,7 @@ export function initialiseEntityStorageComponent(
 
 	const type = instanceConfig.type;
 
-	let connector: IEntityStorageComponent;
+	let component: IEntityStorageComponent;
 	let instanceType: string;
 	if (type === EntityStorageComponentType.Service) {
 		const kebabName = StringHelper.kebabCase(instanceConfig.options.entityStorageType);
@@ -210,13 +212,20 @@ export function initialiseEntityStorageComponent(
 			hasCustom ? kebabName : undefined,
 			instanceConfig.options.entityStorageType
 		);
-		connector = new EntityStorageService({
+		component = new EntityStorageService({
 			entityStorageType: kebabName,
 			config: {
 				...instanceConfig.options.config
 			}
 		});
 		instanceType = StringHelper.kebabCase(instanceConfig.options.entityStorageType);
+	} else if (type === EntityStorageComponentType.RestClient) {
+		const kebabName = StringHelper.kebabCase(instanceConfig.options.entityStorageType);
+		component = new EntityStorageClient({
+			pathPrefix: kebabName,
+			...instanceConfig.options
+		});
+		instanceType = `${StringHelper.kebabCase(nameof(EntityStorageClient))}-${kebabName}`;
 	} else {
 		throw new GeneralError("engineCore", "componentUnknownType", {
 			type,
@@ -227,8 +236,8 @@ export function initialiseEntityStorageComponent(
 	const finalInstanceType = overrideInstanceType ?? instanceType;
 	context.componentInstances.push({
 		instanceType: finalInstanceType,
-		component: connector
+		component
 	});
-	ComponentFactory.register(finalInstanceType, () => connector);
+	ComponentFactory.register(finalInstanceType, () => component);
 	return finalInstanceType;
 }

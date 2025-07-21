@@ -1,17 +1,5 @@
 # Type Alias: LoggingComponentConfig
 
-> **LoggingComponentConfig** = `object`
+> **LoggingComponentConfig** = \{ `type`: *typeof* [`Service`](../variables/LoggingComponentType.md#service); `options?`: `ILoggingServiceConstructorOptions`; \} \| \{ `type`: *typeof* [`RestClient`](../variables/LoggingComponentType.md#restclient); `options`: `IBaseRestClientConfig`; \}
 
 Logging component config types.
-
-## Properties
-
-### type
-
-> **type**: *typeof* [`Service`](../variables/LoggingComponentType.md#service)
-
-***
-
-### options?
-
-> `optional` **options**: `ILoggingServiceConstructorOptions`

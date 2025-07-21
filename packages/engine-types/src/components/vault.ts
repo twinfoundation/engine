@@ -1,7 +1,7 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
 import { GeneralError, I18n } from "@twin.org/core";
-import type { IEngineCoreContext, IEngineCore } from "@twin.org/engine-models";
+import type { IEngineCore, IEngineCoreContext } from "@twin.org/engine-models";
 import { nameof } from "@twin.org/nameof";
 import {
 	EntityStorageVaultConnector,

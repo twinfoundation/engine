@@ -162,7 +162,7 @@ describe("engine", () => {
 					],
 					taskSchedulerComponent: [
 						{
-							type: TaskSchedulerComponentType.Default
+							type: TaskSchedulerComponentType.Service
 						}
 					]
 				}
@@ -174,29 +174,31 @@ describe("engine", () => {
 		});
 
 		const canContinue = await engine.start();
+		expect(canContinue).toEqual(true);
+
 		await engine.stop();
 
 		expect(ComponentFactory.names()).toEqual([
-			"logging",
-			"task-scheduler",
-			"event-bus",
-			"telemetry",
-			"messaging",
-			"blob",
-			"verifiable",
-			"identity",
-			"identity-resolver",
-			"identity-profile",
-			"nft",
-			"immutable-proof",
-			"attestation",
-			"aig",
-			"ais",
-			"data-processing",
-			"documents",
-			"fedcat",
-			"pap",
-			"rights-management"
+			"logging-service",
+			"task-scheduler-service",
+			"event-bus-service",
+			"telemetry-service",
+			"messaging-service",
+			"blob-storage-service",
+			"verifiable-storage-service",
+			"identity-service",
+			"identity-resolver-service",
+			"identity-profile-service",
+			"nft-service",
+			"immutable-proof-service",
+			"attestation-service",
+			"auditable-item-graph-service",
+			"auditable-item-stream-service",
+			"data-processing-service",
+			"document-management-service",
+			"federated-catalogue-service",
+			"policy-administration-point-service",
+			"rights-management-service"
 		]);
 
 		expect(EntitySchemaFactory.names()).toEqual([
@@ -235,7 +237,6 @@ describe("engine", () => {
 		]);
 
 		expect(engine).toBeDefined();
-		expect(canContinue).toEqual(true);
 		expect(calledCustomBootstrap).toBeDefined();
 	});
 
@@ -377,7 +378,7 @@ describe("engine", () => {
 					],
 					taskSchedulerComponent: [
 						{
-							type: TaskSchedulerComponentType.Default
+							type: TaskSchedulerComponentType.Service
 						}
 					]
 				}
@@ -466,7 +467,7 @@ describe("engine", () => {
 				],
 				taskSchedulerComponent: [
 					{
-						type: TaskSchedulerComponentType.Default
+						type: TaskSchedulerComponentType.Service
 					}
 				]
 			}
@@ -491,5 +492,205 @@ describe("engine", () => {
 		expect(clone.getConfig()).toEqual(engine.getConfig());
 		expect(clone.getState()).toEqual(engine.getState());
 		expect(clone.getDefaultTypes()).toEqual(engine.getDefaultTypes());
+	});
+
+	test("Can start engine with REST client config", async () => {
+		let calledCustomBootstrap = false;
+
+		const engine = new Engine({
+			config: {
+				debug: true,
+				types: {
+					loggingConnector: [{ type: LoggingConnectorType.Console }],
+					loggingComponent: [
+						{
+							type: LoggingComponentType.RestClient,
+							options: { endpoint: "http://localhost:3000" }
+						}
+					],
+					entityStorageConnector: [{ type: EntityStorageConnectorType.Memory }],
+					blobStorageConnector: [{ type: BlobStorageConnectorType.Memory }],
+					blobStorageComponent: [
+						{
+							type: BlobStorageComponentType.RestClient,
+							options: { endpoint: "http://localhost:3000" }
+						}
+					],
+					backgroundTaskConnector: [{ type: BackgroundTaskConnectorType.EntityStorage }],
+					eventBusConnector: [{ type: EventBusConnectorType.Local }],
+					eventBusComponent: [
+						{
+							type: EventBusComponentType.SocketClient,
+							options: { config: { endpoint: "http://localhost:3000" } }
+						}
+					],
+					telemetryConnector: [{ type: TelemetryConnectorType.EntityStorage }],
+					telemetryComponent: [
+						{
+							type: TelemetryComponentType.RestClient,
+							options: { endpoint: "http://localhost:3000" }
+						}
+					],
+					messagingEmailConnector: [{ type: MessagingEmailConnectorType.EntityStorage }],
+					messagingSmsConnector: [{ type: MessagingSmsConnectorType.EntityStorage }],
+					messagingPushNotificationConnector: [
+						{ type: MessagingPushNotificationConnectorType.EntityStorage }
+					],
+					messagingComponent: [{ type: MessagingComponentType.Service }],
+					vaultConnector: [{ type: VaultConnectorType.EntityStorage }],
+					verifiableStorageConnector: [{ type: VerifiableStorageConnectorType.EntityStorage }],
+					verifiableStorageComponent: [
+						{
+							type: VerifiableStorageComponentType.RestClient,
+							options: { endpoint: "http://localhost:3000" }
+						}
+					],
+					immutableProofComponent: [
+						{
+							type: ImmutableProofComponentType.RestClient,
+							options: { endpoint: "http://localhost:3000" }
+						}
+					],
+					walletConnector: [{ type: WalletConnectorType.EntityStorage }],
+					faucetConnector: [{ type: FaucetConnectorType.EntityStorage }],
+					identityConnector: [{ type: IdentityConnectorType.EntityStorage }],
+					identityResolverConnector: [{ type: IdentityResolverConnectorType.EntityStorage }],
+					identityProfileConnector: [{ type: IdentityProfileConnectorType.EntityStorage }],
+					identityComponent: [
+						{
+							type: IdentityComponentType.RestClient,
+							options: { endpoint: "http://localhost:3000" }
+						}
+					],
+					identityResolverComponent: [
+						{
+							type: IdentityResolverComponentType.RestClient,
+							options: { endpoint: "http://localhost:3000" }
+						}
+					],
+					identityProfileComponent: [
+						{
+							type: IdentityProfileComponentType.RestClient,
+							options: { endpoint: "http://localhost:3000" }
+						}
+					],
+					nftConnector: [{ type: NftConnectorType.EntityStorage }],
+					nftComponent: [
+						{ type: NftComponentType.RestClient, options: { endpoint: "http://localhost:3000" } }
+					],
+					attestationConnector: [{ type: AttestationConnectorType.Nft }],
+					attestationComponent: [
+						{
+							type: AttestationComponentType.RestClient,
+							options: { endpoint: "http://localhost:3000" }
+						}
+					],
+					auditableItemGraphComponent: [
+						{
+							type: AuditableItemGraphComponentType.RestClient,
+							options: { endpoint: "http://localhost:3000" }
+						}
+					],
+					auditableItemStreamComponent: [
+						{
+							type: AuditableItemStreamComponentType.RestClient,
+							options: { endpoint: "http://localhost:3000" }
+						}
+					],
+					dataConverterConnector: [
+						{ type: DataConverterConnectorType.Json },
+						{ type: DataConverterConnectorType.Xml }
+					],
+					dataExtractorConnector: [{ type: DataExtractorConnectorType.JsonPath }],
+					dataProcessingComponent: [
+						{
+							type: DataProcessingComponentType.RestClient,
+							options: { endpoint: "http://localhost:3000" }
+						}
+					],
+					documentManagementComponent: [
+						{
+							type: DocumentManagementComponentType.RestClient,
+							options: { endpoint: "http://localhost:3000" }
+						}
+					],
+					federatedCatalogueComponent: [
+						{
+							type: FederatedCatalogueComponentType.RestClient,
+							options: { endpoint: "http://localhost:3000" }
+						}
+					],
+					rightsManagementComponent: [
+						{
+							type: RightsManagementComponentType.RestClient,
+							options: { endpoint: "http://localhost:3000" }
+						}
+					],
+					rightsManagementPapComponent: [
+						{
+							type: RightsManagementPapComponentType.Service
+						}
+					],
+					taskSchedulerComponent: [
+						{
+							type: TaskSchedulerComponentType.Service
+						}
+					]
+				}
+			},
+			stateStorage: new MemoryStateStorage(),
+			customBootstrap: async () => {
+				calledCustomBootstrap = true;
+			}
+		});
+
+		const canContinue = await engine.start();
+		await engine.stop();
+
+		expect(ComponentFactory.names()).toEqual([
+			"logging-client",
+			"task-scheduler-service",
+			"event-bus-socket-client",
+			"telemetry-client",
+			"messaging-service",
+			"blob-storage-client",
+			"verifiable-storage-client",
+			"identity-client",
+			"identity-resolver-client",
+			"identity-profile-client",
+			"nft-client",
+			"immutable-proof-client",
+			"attestation-client",
+			"auditable-item-graph-client",
+			"auditable-item-stream-client",
+			"data-processing-client",
+			"document-management-client",
+			"federated-catalogue-client",
+			"policy-administration-point-service",
+			"rights-management-client"
+		]);
+
+		expect(EntitySchemaFactory.names()).toEqual([
+			"BackgroundTask",
+			"TelemetryMetric",
+			"TelemetryMetricValue",
+			"EmailEntry",
+			"SmsEntry",
+			"PushNotificationDeviceEntry",
+			"PushNotificationMessageEntry",
+			"TemplateEntry",
+			"VaultKey",
+			"VaultSecret",
+			"VerifiableItem",
+			"WalletAddress",
+			"IdentityDocument",
+			"IdentityProfile",
+			"Nft",
+			"OdrlPolicy"
+		]);
+
+		expect(engine).toBeDefined();
+		expect(canContinue).toEqual(true);
+		expect(calledCustomBootstrap).toBeDefined();
 	});
 });

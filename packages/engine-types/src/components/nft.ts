@@ -1,6 +1,6 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
-import { ComponentFactory, GeneralError, I18n } from "@twin.org/core";
+import { ComponentFactory, GeneralError, I18n, StringHelper } from "@twin.org/core";
 import type { IEngineCore, IEngineCoreContext } from "@twin.org/engine-models";
 import { nameof } from "@twin.org/nameof";
 import {
@@ -10,6 +10,7 @@ import {
 } from "@twin.org/nft-connector-entity-storage";
 import { IotaNftConnector } from "@twin.org/nft-connector-iota";
 import { NftConnectorFactory, type INftComponent, type INftConnector } from "@twin.org/nft-models";
+import { NftClient } from "@twin.org/nft-rest-client";
 import { NftService } from "@twin.org/nft-service";
 import { initialiseEntityStorageConnector } from "./entityStorage";
 import type { NftComponentConfig } from "../models/config/nftComponentConfig";
@@ -103,7 +104,10 @@ export function initialiseNftComponent(
 
 	if (type === NftComponentType.Service) {
 		component = new NftService(instanceConfig.options);
-		instanceType = NftService.NAMESPACE;
+		instanceType = StringHelper.kebabCase(nameof(NftService));
+	} else if (type === NftComponentType.RestClient) {
+		component = new NftClient(instanceConfig.options);
+		instanceType = StringHelper.kebabCase(nameof(NftClient));
 	} else {
 		throw new GeneralError("engineCore", "componentUnknownType", {
 			type,

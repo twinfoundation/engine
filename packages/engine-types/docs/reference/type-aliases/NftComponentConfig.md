@@ -1,17 +1,5 @@
 # Type Alias: NftComponentConfig
 
-> **NftComponentConfig** = `object`
+> **NftComponentConfig** = \{ `type`: *typeof* [`Service`](../variables/NftComponentType.md#service); `options?`: `INftServiceConstructorOptions`; \} \| \{ `type`: *typeof* [`RestClient`](../variables/NftComponentType.md#restclient); `options`: `IBaseRestClientConfig`; \}
 
 NFT component config types.
-
-## Properties
-
-### type
-
-> **type**: *typeof* [`Service`](../variables/NftComponentType.md#service)
-
-***
-
-### options?
-
-> `optional` **options**: `INftServiceConstructorOptions`

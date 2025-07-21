@@ -1,6 +1,6 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
-import { ComponentFactory, GeneralError, I18n } from "@twin.org/core";
+import { ComponentFactory, GeneralError, I18n, StringHelper } from "@twin.org/core";
 import type { IEngineCore, IEngineCoreContext } from "@twin.org/engine-models";
 import {
 	EntityStorageIdentityResolverConnector,
@@ -14,6 +14,7 @@ import {
 	type IIdentityResolverComponent,
 	type IIdentityResolverConnector
 } from "@twin.org/identity-models";
+import { IdentityResolverClient } from "@twin.org/identity-rest-client";
 import { IdentityResolverService } from "@twin.org/identity-service";
 import { nameof } from "@twin.org/nameof";
 import { initialiseEntityStorageConnector } from "./entityStorage";
@@ -123,7 +124,10 @@ export function initialiseIdentityResolverComponent(
 					: undefined,
 			...instanceConfig.options
 		});
-		instanceType = IdentityResolverService.NAMESPACE;
+		instanceType = StringHelper.kebabCase(nameof(IdentityResolverService));
+	} else if (type === IdentityResolverComponentType.RestClient) {
+		component = new IdentityResolverClient(instanceConfig.options);
+		instanceType = StringHelper.kebabCase(nameof(IdentityResolverClient));
 	} else {
 		throw new GeneralError("engineCore", "componentUnknownType", {
 			type,

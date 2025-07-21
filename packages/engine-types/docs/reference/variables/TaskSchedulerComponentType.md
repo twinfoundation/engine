@@ -6,8 +6,8 @@ Task scheduler component types.
 
 ## Type declaration
 
-### Default
+### Service
 
-> `readonly` **Default**: `"default"` = `"default"`
+> `readonly` **Service**: `"service"` = `"service"`
 
 Task scheduler.

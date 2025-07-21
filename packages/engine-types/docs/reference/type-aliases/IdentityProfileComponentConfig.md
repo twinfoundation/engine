@@ -1,17 +1,5 @@
 # Type Alias: IdentityProfileComponentConfig
 
-> **IdentityProfileComponentConfig** = `object`
+> **IdentityProfileComponentConfig** = \{ `type`: *typeof* [`Service`](../variables/IdentityComponentType.md#service); `options?`: `IIdentityProfileServiceConstructorOptions`; \} \| \{ `type`: *typeof* [`RestClient`](../variables/IdentityComponentType.md#restclient); `options`: `IBaseRestClientConfig`; \}
 
 Identity profile component config types.
-
-## Properties
-
-### type
-
-> **type**: *typeof* [`Service`](../variables/IdentityComponentType.md#service)
-
-***
-
-### options?
-
-> `optional` **options**: `IIdentityProfileServiceConstructorOptions`

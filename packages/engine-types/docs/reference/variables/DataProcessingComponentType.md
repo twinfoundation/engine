@@ -11,3 +11,9 @@ Data processing component types.
 > `readonly` **Service**: `"service"` = `"service"`
 
 Service.
+
+### RestClient
+
+> `readonly` **RestClient**: `"rest-client"` = `"rest-client"`
+
+REST client.

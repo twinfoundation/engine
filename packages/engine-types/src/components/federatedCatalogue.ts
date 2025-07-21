@@ -1,8 +1,9 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
-import { ComponentFactory, GeneralError, I18n } from "@twin.org/core";
+import { ComponentFactory, GeneralError, I18n, StringHelper } from "@twin.org/core";
 import type { IEngineCore, IEngineCoreContext } from "@twin.org/engine-models";
 import type { IFederatedCatalogueComponent } from "@twin.org/federated-catalogue-models";
+import { FederatedCatalogueClient } from "@twin.org/federated-catalogue-rest-client";
 import {
 	type DataResourceEntry,
 	type DataSpaceConnectorEntry,
@@ -75,7 +76,10 @@ export function initialiseFederatedCatalogueComponent(
 			identityResolverComponentType: context.defaultTypes.identityResolverComponent,
 			...instanceConfig.options
 		});
-		instanceType = FederatedCatalogueService.NAMESPACE;
+		instanceType = StringHelper.kebabCase(nameof(FederatedCatalogueService));
+	} else if (type === FederatedCatalogueComponentType.RestClient) {
+		component = new FederatedCatalogueClient(instanceConfig.options);
+		instanceType = StringHelper.kebabCase(nameof(FederatedCatalogueClient));
 	} else {
 		throw new GeneralError("engineCore", "componentUnknownType", {
 			type,

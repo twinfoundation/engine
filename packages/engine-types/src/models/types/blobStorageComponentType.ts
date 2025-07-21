@@ -9,7 +9,12 @@ export const BlobStorageComponentType = {
 	/**
 	 * Service.
 	 */
-	Service: "service"
+	Service: "service",
+
+	/**
+	 * REST client.
+	 */
+	RestClient: "rest-client"
 } as const;
 
 /**

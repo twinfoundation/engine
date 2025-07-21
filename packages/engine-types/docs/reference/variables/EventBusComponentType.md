@@ -11,3 +11,9 @@ Event bus component types.
 > `readonly` **Service**: `"service"` = `"service"`
 
 Service.
+
+### SocketClient
+
+> `readonly` **SocketClient**: `"socket-client"` = `"socket-client"`
+
+Socket client.

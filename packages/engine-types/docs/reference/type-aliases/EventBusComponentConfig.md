@@ -1,17 +1,5 @@
 # Type Alias: EventBusComponentConfig
 
-> **EventBusComponentConfig** = `object`
+> **EventBusComponentConfig** = \{ `type`: *typeof* [`Service`](../variables/EventBusComponentType.md#service); `options?`: `IEventBusServiceConstructorOptions`; \} \| \{ `type`: *typeof* [`SocketClient`](../variables/EventBusComponentType.md#socketclient); `options`: `IEventBusSocketClientConstructorOptions`; \}
 
 Event bus storage component config types.
-
-## Properties
-
-### type
-
-> **type**: *typeof* [`Service`](../variables/EventBusComponentType.md#service)
-
-***
-
-### options?
-
-> `optional` **options**: `IEventBusServiceConstructorOptions`

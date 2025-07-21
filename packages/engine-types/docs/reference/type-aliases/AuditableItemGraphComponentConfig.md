@@ -1,17 +1,5 @@
 # Type Alias: AuditableItemGraphComponentConfig
 
-> **AuditableItemGraphComponentConfig** = `object`
+> **AuditableItemGraphComponentConfig** = \{ `type`: *typeof* [`Service`](../variables/AuditableItemGraphComponentType.md#service); `options?`: `IAuditableItemGraphServiceConstructorOptions`; \} \| \{ `type`: *typeof* [`RestClient`](../variables/AuditableItemGraphComponentType.md#restclient); `options`: `IBaseRestClientConfig`; \}
 
 Auditable item graph component config types.
-
-## Properties
-
-### type
-
-> **type**: *typeof* [`Service`](../variables/AuditableItemGraphComponentType.md#service)
-
-***
-
-### options?
-
-> `optional` **options**: `IAuditableItemGraphServiceConstructorOptions`

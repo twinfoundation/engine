@@ -2,8 +2,9 @@
 // SPDX-License-Identifier: Apache-2.0.
 import { MimeTypeProcessorFactory, type IMimeTypeProcessor } from "@twin.org/api-models";
 import { JwtMimeTypeProcessor } from "@twin.org/api-processors";
-import { GeneralError, I18n } from "@twin.org/core";
+import { GeneralError, I18n, StringHelper } from "@twin.org/core";
 import type { IEngineCore, IEngineCoreContext } from "@twin.org/engine-models";
+import { nameof } from "@twin.org/nameof";
 import type { MimeTypeProcessorConfig } from "../models/config/mimeTypeProcessorConfig";
 import type { IEngineServerConfig } from "../models/IEngineServerConfig";
 import { MimeTypeProcessorType } from "../models/types/mimeTypeProcessorType";
@@ -35,7 +36,7 @@ export function initialiseMimeTypeProcessorComponent(
 
 	if (type === MimeTypeProcessorType.Jwt) {
 		component = new JwtMimeTypeProcessor();
-		instanceType = JwtMimeTypeProcessor.NAMESPACE;
+		instanceType = StringHelper.kebabCase(nameof(JwtMimeTypeProcessor));
 	} else {
 		throw new GeneralError("engineCore", "componentUnknownType", {
 			type,

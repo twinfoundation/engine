@@ -1,5 +1,6 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
+import type { IBaseRestClientConfig } from "@twin.org/api-models";
 import type { IVerifiableStorageServiceConstructorOptions } from "@twin.org/verifiable-storage-service";
 import type { VerifiableStorageComponentType } from "../types/verifiableStorageComponentType";
 
@@ -7,7 +8,12 @@ import type { VerifiableStorageComponentType } from "../types/verifiableStorageC
  * Verifiable storage component config types.
  */
 // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
-export type VerifiableStorageComponentConfig = {
-	type: typeof VerifiableStorageComponentType.Service;
-	options?: IVerifiableStorageServiceConstructorOptions;
-};
+export type VerifiableStorageComponentConfig =
+	| {
+			type: typeof VerifiableStorageComponentType.Service;
+			options?: IVerifiableStorageServiceConstructorOptions;
+	  }
+	| {
+			type: typeof VerifiableStorageComponentType.RestClient;
+			options: IBaseRestClientConfig;
+	  };

@@ -9,7 +9,12 @@ export const AuthenticationComponentType = {
 	/**
 	 * Entity storage.
 	 */
-	EntityStorage: "entity-storage"
+	EntityStorage: "entity-storage",
+
+	/**
+	 * REST client.
+	 */
+	RestClient: "rest-client"
 } as const;
 
 /**

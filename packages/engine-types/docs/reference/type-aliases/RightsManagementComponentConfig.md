@@ -1,17 +1,5 @@
 # Type Alias: RightsManagementComponentConfig
 
-> **RightsManagementComponentConfig** = `object`
+> **RightsManagementComponentConfig** = \{ `type`: *typeof* [`Service`](../variables/RightsManagementComponentType.md#service); `options?`: `IRightsManagementServiceConstructorOptions`; \} \| \{ `type`: *typeof* [`RestClient`](../variables/RightsManagementComponentType.md#restclient); `options`: `IBaseRestClientConfig`; \}
 
 Rights management component config types.
-
-## Properties
-
-### type
-
-> **type**: *typeof* [`Service`](../variables/RightsManagementComponentType.md#service)
-
-***
-
-### options?
-
-> `optional` **options**: `IRightsManagementServiceConstructorOptions`

@@ -1,13 +1,14 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
 import type { IAuditableItemStreamComponent } from "@twin.org/auditable-item-stream-models";
+import { AuditableItemStreamClient } from "@twin.org/auditable-item-stream-rest-client";
 import {
 	type AuditableItemStream,
 	type AuditableItemStreamEntry,
 	AuditableItemStreamService,
 	initSchema as initSchemaAuditableItemStream
 } from "@twin.org/auditable-item-stream-service";
-import { ComponentFactory, GeneralError, I18n } from "@twin.org/core";
+import { ComponentFactory, GeneralError, I18n, StringHelper } from "@twin.org/core";
 import type { IEngineCore, IEngineCoreContext } from "@twin.org/engine-models";
 import { nameof } from "@twin.org/nameof";
 import { initialiseEntityStorageConnector } from "./entityStorage";
@@ -61,7 +62,10 @@ export function initialiseAuditableItemStreamComponent(
 			eventBusComponentType: context.defaultTypes.eventBusComponent,
 			...instanceConfig.options
 		});
-		instanceType = AuditableItemStreamService.NAMESPACE;
+		instanceType = StringHelper.kebabCase(nameof(AuditableItemStreamService));
+	} else if (type === AuditableItemStreamComponentType.RestClient) {
+		component = new AuditableItemStreamClient(instanceConfig.options);
+		instanceType = StringHelper.kebabCase(nameof(AuditableItemStreamClient));
 	} else {
 		throw new GeneralError("engineCore", "componentUnknownType", {
 			type,

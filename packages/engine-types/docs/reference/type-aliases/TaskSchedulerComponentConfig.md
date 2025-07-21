@@ -8,7 +8,7 @@ Background task scheduled component config types.
 
 ### type
 
-> **type**: *typeof* [`Default`](../variables/TaskSchedulerComponentType.md#default)
+> **type**: *typeof* [`Service`](../variables/TaskSchedulerComponentType.md#service)
 
 ***
 

@@ -9,7 +9,7 @@ export const TaskSchedulerComponentType = {
 	/**
 	 * Task scheduler.
 	 */
-	Default: "default"
+	Service: "service"
 } as const;
 
 /**

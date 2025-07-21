@@ -11,3 +11,9 @@ Authentication component types.
 > `readonly` **EntityStorage**: `"entity-storage"` = `"entity-storage"`
 
 Entity storage.
+
+### RestClient
+
+> `readonly` **RestClient**: `"rest-client"` = `"rest-client"`
+
+REST client.

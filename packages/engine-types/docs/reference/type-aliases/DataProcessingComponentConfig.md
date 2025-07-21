@@ -1,17 +1,5 @@
 # Type Alias: DataProcessingComponentConfig
 
-> **DataProcessingComponentConfig** = `object`
+> **DataProcessingComponentConfig** = \{ `type`: *typeof* [`Service`](../variables/DataProcessingComponentType.md#service); `options?`: `IDataProcessingServiceConstructorOptions`; \} \| \{ `type`: *typeof* [`RestClient`](../variables/DataProcessingComponentType.md#restclient); `options`: `IBaseRestClientConfig`; \}
 
 Data processing component config types.
-
-## Properties
-
-### type
-
-> **type**: *typeof* [`Service`](../variables/DataProcessingComponentType.md#service)
-
-***
-
-### options?
-
-> `optional` **options**: `IDataProcessingServiceConstructorOptions`

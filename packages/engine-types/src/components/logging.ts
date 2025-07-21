@@ -1,6 +1,6 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
-import { ComponentFactory, GeneralError, I18n } from "@twin.org/core";
+import { ComponentFactory, GeneralError, I18n, StringHelper } from "@twin.org/core";
 import type { IEngineCore, IEngineCoreContext } from "@twin.org/engine-models";
 import { ConsoleLoggingConnector } from "@twin.org/logging-connector-console";
 import {
@@ -9,11 +9,12 @@ import {
 	type LogEntry
 } from "@twin.org/logging-connector-entity-storage";
 import {
-	type ILoggingComponent,
 	LoggingConnectorFactory,
 	MultiLoggingConnector,
+	type ILoggingComponent,
 	type ILoggingConnector
 } from "@twin.org/logging-models";
+import { LoggingClient } from "@twin.org/logging-rest-client";
 import { LoggingService } from "@twin.org/logging-service";
 import { nameof } from "@twin.org/nameof";
 import { initialiseEntityStorageConnector } from "./entityStorage";
@@ -107,7 +108,10 @@ export function initialiseLoggingComponent(
 			loggingConnectorType: context.defaultTypes.loggingConnector,
 			...instanceConfig.options
 		});
-		instanceType = LoggingService.NAMESPACE;
+		instanceType = StringHelper.kebabCase(nameof(LoggingService));
+	} else if (type === LoggingComponentType.RestClient) {
+		component = new LoggingClient(instanceConfig.options);
+		instanceType = StringHelper.kebabCase(nameof(LoggingClient));
 	} else {
 		throw new GeneralError("engineCore", "componentUnknownType", {
 			type,

@@ -1,17 +1,5 @@
 # Type Alias: DocumentManagementComponentConfig
 
-> **DocumentManagementComponentConfig** = `object`
+> **DocumentManagementComponentConfig** = \{ `type`: *typeof* [`Service`](../variables/DocumentManagementComponentType.md#service); `options?`: `IDocumentManagementServiceConstructorOptions`; \} \| \{ `type`: *typeof* [`RestClient`](../variables/DocumentManagementComponentType.md#restclient); `options`: `IBaseRestClientConfig`; \}
 
-Data processing component config types.
-
-## Properties
-
-### type
-
-> **type**: *typeof* [`Service`](../variables/DocumentManagementComponentType.md#service)
-
-***
-
-### options?
-
-> `optional` **options**: `IDocumentManagementServiceConstructorOptions`
+Document management component config types.
