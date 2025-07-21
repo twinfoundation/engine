@@ -1,5 +1,20 @@
 # @twin.org/engine - Changelog
 
+## [0.0.2-next.2](https://github.com/twinfoundation/engine/compare/engine-v0.0.2-next.1...engine-v0.0.2-next.2) (2025-07-21)
+
+
+### Features
+
+* add rest clients as components ([c6f956a](https://github.com/twinfoundation/engine/commit/c6f956afe4fc22cd552174539c92a109448dc242))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @twin.org/engine-core bumped from 0.0.2-next.1 to 0.0.2-next.2
+    * @twin.org/engine-types bumped from 0.0.2-next.1 to 0.0.2-next.2
+
 ## [0.0.2-next.1](https://github.com/twinfoundation/engine/compare/engine-v0.0.2-next.0...engine-v0.0.2-next.1) (2025-07-11)
 
 
