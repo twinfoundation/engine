@@ -1,6 +1,6 @@
 {
 	"name": "@twin.org/engine-core",
-	"version": "0.0.2-next.1",
+	"version": "0.0.2-next.2",
 	"description": "Engine core.",
 	"repository": {
 		"type": "git",
@@ -33,7 +33,7 @@
 		"@twin.org/core": "next",
 		"@twin.org/crypto": "next",
 		"@twin.org/data-core": "next",
-		"@twin.org/engine-models": "0.0.2-next.1",
+		"@twin.org/engine-models": "0.0.2-next.2",
 		"@twin.org/entity": "next",
 		"@twin.org/logging-connector-console": "next",
 		"@twin.org/logging-models": "next",
