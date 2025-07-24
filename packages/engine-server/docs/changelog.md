@@ -1,5 +1,23 @@
 # @twin.org/engine-server - Changelog
 
+## [0.0.2-next.3](https://github.com/twinfoundation/engine/compare/engine-server-v0.0.2-next.2...engine-server-v0.0.2-next.3) (2025-07-24)
+
+
+### Features
+
+* update includeUserIdentity usage ([d34f597](https://github.com/twinfoundation/engine/commit/d34f597a61f9645a029411d2911bbda20ddc9eb9))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @twin.org/engine-core bumped from 0.0.2-next.2 to 0.0.2-next.3
+    * @twin.org/engine-models bumped from 0.0.2-next.2 to 0.0.2-next.3
+    * @twin.org/engine-server-types bumped from 0.0.2-next.2 to 0.0.2-next.3
+  * devDependencies
+    * @twin.org/engine bumped from 0.0.2-next.2 to 0.0.2-next.3
+
 ## [0.0.2-next.2](https://github.com/twinfoundation/engine/compare/engine-server-v0.0.2-next.1...engine-server-v0.0.2-next.2) (2025-07-21)
 
 
