@@ -64,17 +64,11 @@ The rest path to serve the entity storage from, leave undefined for no endpoints
 
 Additional options.
 
-###### includeNodeIdentity?
+###### partitionPerUser?
 
 `boolean`
 
-Whether to include the node identity in the entity, defaults to true.
-
-###### includeUserIdentity?
-
-`true`
-
-Whether to include the user identity in the entity, defaults to true.
+Whether to partition the user identity in the data, defaults to false.
 
 #### Returns
 

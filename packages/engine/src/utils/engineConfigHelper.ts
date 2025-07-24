@@ -21,8 +21,7 @@ export class EngineConfigHelper {
 	 * @param entitySchema The entity schema.
 	 * @param restPath The rest path to serve the entity storage from, leave undefined for no endpoints.
 	 * @param options Additional options.
-	 * @param options.includeNodeIdentity Whether to include the node identity in the entity, defaults to true.
-	 * @param options.includeUserIdentity Whether to include the user identity in the entity, defaults to true.
+	 * @param options.partitionPerUser Whether to partition the user identity in the data, defaults to false.
 	 */
 	public static addCustomEntityStorage<T>(
 		engineConfig: IEngineConfig,
@@ -30,8 +29,7 @@ export class EngineConfigHelper {
 		entitySchema: IEntitySchema<T>,
 		restPath?: string,
 		options?: {
-			includeNodeIdentity?: boolean;
-			includeUserIdentity?: true;
+			partitionPerUser?: boolean;
 		}
 	): void {
 		Guards.object<IEngineConfig>(EngineConfigHelper.CLASS_NAME, nameof(engineConfig), engineConfig);
@@ -51,8 +49,7 @@ export class EngineConfigHelper {
 			options: {
 				entityStorageType: entityTypeName,
 				config: {
-					includeNodeIdentity: options?.includeNodeIdentity ?? true,
-					includeUserIdentity: options?.includeUserIdentity ?? true
+					partitionPerUser: options?.partitionPerUser
 				}
 			},
 			overrideInstanceType: StringHelper.kebabCase(entityTypeName),

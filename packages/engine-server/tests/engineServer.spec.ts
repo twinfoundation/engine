@@ -401,8 +401,7 @@ describe("engine-server", () => {
 						{
 							type: EntityStorageComponentType.Service,
 							options: {
-								entityStorageType: nameof<TestEntity>(),
-								config: { includeNodeIdentity: false, includeUserIdentity: false }
+								entityStorageType: nameof<TestEntity>()
 							},
 							restPath: "foo"
 						}
