@@ -1,5 +1,19 @@
 # @twin.org/engine-core - Changelog
 
+## [0.0.2-next.4](https://github.com/twinfoundation/engine/compare/engine-core-v0.0.2-next.3...engine-core-v0.0.2-next.4) (2025-07-25)
+
+
+### Features
+
+* add default logging component for web server ([8ad94f0](https://github.com/twinfoundation/engine/commit/8ad94f0d2d9a5241a8854b1e59fb9a55ce310142))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @twin.org/engine-models bumped from 0.0.2-next.3 to 0.0.2-next.4
+
 ## [0.0.2-next.3](https://github.com/twinfoundation/engine/compare/engine-core-v0.0.2-next.2...engine-core-v0.0.2-next.3) (2025-07-24)
 
 
