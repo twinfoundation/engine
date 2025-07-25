@@ -50,7 +50,7 @@ export function initialiseRestRouteProcessorComponent(
 		instanceType = StringHelper.kebabCase(nameof(AuthHeaderProcessor));
 	} else if (type === RestRouteProcessorType.Logging) {
 		component = new LoggingProcessor({
-			loggingConnectorType: context.defaultTypes.loggingConnector,
+			loggingComponentType: context.defaultTypes.loggingComponent,
 			config: {
 				...instanceConfig.options?.config
 			}

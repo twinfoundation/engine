@@ -9,7 +9,8 @@ import {
 	type IComponent,
 	Is,
 	type IError,
-	ObjectHelper
+	ObjectHelper,
+	ComponentFactory
 } from "@twin.org/core";
 import type {
 	EngineTypeInitialiser,
@@ -29,6 +30,7 @@ import {
 	SilentLoggingConnector,
 	type ILoggingConnector
 } from "@twin.org/logging-models";
+import { LoggingService } from "@twin.org/logging-service";
 import { ModuleHelper } from "@twin.org/modules";
 import { nameof } from "@twin.org/nameof";
 import type { IEngineCoreOptions } from "./models/IEngineCoreOptions";
@@ -457,7 +459,7 @@ export class EngineCore<
 	 */
 	private setupEngineLogger(): void {
 		const silent = this._context.config.silent ?? false;
-		const engineLogger = silent
+		const engineLoggerConnector = silent
 			? new SilentLoggingConnector()
 			: new ConsoleLoggingConnector({
 					config: {
@@ -468,13 +470,20 @@ export class EngineCore<
 
 		this._context.componentInstances.push({
 			instanceType: this._loggerTypeName,
-			component: engineLogger
+			component: engineLoggerConnector
 		});
 
-		LoggingConnectorFactory.register(this._loggerTypeName, () => engineLogger);
+		LoggingConnectorFactory.register(this._loggerTypeName, () => engineLoggerConnector);
 
-		this._engineLoggingConnector = engineLogger;
+		this._engineLoggingConnector = engineLoggerConnector;
 		this._context.defaultTypes.loggingConnector = this._loggerTypeName;
+
+		const engineLoggerComponent = new LoggingService({
+			loggingConnectorType: this._loggerTypeName
+		});
+
+		ComponentFactory.register("logging-service", () => engineLoggerComponent);
+		this._context.defaultTypes.loggingComponent = "logging-service";
 	}
 
 	/**

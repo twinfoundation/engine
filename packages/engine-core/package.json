@@ -37,6 +37,7 @@
 		"@twin.org/entity": "next",
 		"@twin.org/logging-connector-console": "next",
 		"@twin.org/logging-models": "next",
+		"@twin.org/logging-service": "next",
 		"@twin.org/modules": "next",
 		"@twin.org/nameof": "next"
 	},

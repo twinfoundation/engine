@@ -50,7 +50,7 @@ export function initialiseSocketRouteProcessorComponent(
 		instanceType = StringHelper.kebabCase(nameof(AuthHeaderProcessor));
 	} else if (type === SocketRouteProcessorType.Logging) {
 		component = new LoggingProcessor({
-			loggingConnectorType: context.defaultTypes.loggingConnector,
+			loggingComponentType: context.defaultTypes.loggingComponent,
 			config: {
 				...instanceConfig.options?.config
 			}

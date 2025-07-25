@@ -63,10 +63,10 @@ export class EngineServer<T extends IEngineServerConfig = IEngineServerConfig>
 	private _webServer?: IWebServer<unknown>;
 
 	/**
-	 * The logging connector type.
+	 * The logging component type.
 	 * @internal
 	 */
-	private _loggingConnectorType?: string;
+	private _loggingComponentType?: string;
 
 	/**
 	 * The REST routes for the application.
@@ -256,10 +256,10 @@ export class EngineServer<T extends IEngineServerConfig = IEngineServerConfig>
 
 		const coreConfig = this._engineCore.getConfig();
 		const defaults = this._engineCore.getDefaultTypes();
-		this._loggingConnectorType = coreConfig.silent ? undefined : defaults.loggingConnector;
+		this._loggingComponentType = coreConfig.silent ? undefined : defaults.loggingComponent;
 
 		this._webServer = new FastifyWebServer({
-			loggingConnectorType: this._loggingConnectorType,
+			loggingComponentType: this._loggingComponentType,
 			mimeTypeProcessors
 		});
 
